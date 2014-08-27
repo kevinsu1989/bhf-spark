@@ -1,0 +1,31 @@
+<div>
+    <!--缩略图列表-->
+    <textarea id="tmpl-assets-thumbnail">
+        <ul>
+            <li ng-repeat="for asset in assets">
+                <div class="thumbnail">
+                    <img src="{{asset.url}}" />
+                    <div class="overlay">
+                        <a href="javascript:void(0)" ng-click="clickPreview()">预览</a>
+                        <a href="javascript:void(0)" ng-click="clickDownload()">下载</a>
+                    </div>
+                </div>
+                <div class="filename">
+                    附件的文件名
+                </div>
+                <div class="description">
+                    <span class="timestamp">上传时间</span>
+                    <span class="creator">创建者</span>
+                </div>
+            </li>
+        </ul>
+    </textarea>
+
+    <!--素材列表-->
+    <textarea id="tmpl-assets-list">
+        <h3>
+            素材库
+        </h3>
+        <assets-thumbnail></assets-thumbnail>
+    </textarea>
+</div>

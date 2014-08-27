@@ -1,0 +1,47 @@
+<div>
+    <!--单个issue-->
+    <textarea id="tmpl-issue-list-cell">
+        <i class="status" ng-click="clickStatus()"></i>
+        <i class="priority" ng-click="clickPriority()"></i>
+        <span class="title">{{title}}</span>
+        <span class="issue-id"></span>
+        <div class="info">
+            <span class="member">王斌</span>
+            <span>{{plan_finish_date | date}}</span>
+        </div>
+    </textarea>
+
+    <!--列表显示issue-->
+    <textarea id="tmpl-issue-list">
+        <div>
+            <header>
+                <h3>我的任务</h3>
+            </header>
+            <div class="details">
+                <h3>待办中/已完成<span class="badge">(1)</span></h3>
+                <ul>
+                    <li ng-repeat="issue in issues">
+                        <issue-item></issue-item>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </textarea>
+
+    <!--issue的编辑器-->
+    <textarea id="tmpl-issue-editor">
+        <div>
+            <div class="title">
+                <input type="text" />
+            </div>
+            <editor></editor>
+            <div class="control">
+                <label class="always-top" ng-show="showAlwaysTop">
+                    <input type="checkbox" />
+                    置顶
+                </label>
+                <button>保存</button>
+            </div>
+        </div>
+    </textarea>
+</div>

@@ -1,0 +1,70 @@
+<article>
+    <!--展示一个issue的所有内容-->
+    <header>
+        <div class="project-name">
+            <i></i>
+            项目名称
+        </div>
+        <div class="ower">
+            <i></i>
+            <label>指派给</label>
+        </div>
+        <div class="finish-date">
+            <i></i>
+            <label>截止日期</label>
+        </div>
+        <div class="priority">
+            <i></i>
+            <label>重要程度</label>
+        </div>
+        <div class="category">
+            <i></i>
+            <label>分类</label>
+        </div>
+    </header>
+
+    <!--标题部分-->
+    <div class="title">
+        <i class="status"></i>
+        <h3>获奖列表返回首页不能获得焦点</h3>
+        <div class="info">
+            <span class="creator">创建者</span>
+            <span class="tag">标签</span>
+            <span class="timestamp">创建时间</span>
+            <span class="id">#1234</span>
+        </div>
+        <div class="content">
+            详细内容
+        </div>
+    </div>
+
+    <!--附件-->
+    <div class="assets">
+        <h3>
+            <i></i>
+            附件
+        </h3>
+        <div>
+            <!--附件缩略图列表-->
+            <assets-thumbnail></assets-thumbnail>
+            <button class="create"></button>
+        </div>
+    </div>
+
+    <!--评论-->
+    <div class="comment">
+        <div ng-repeat="comment in comments">
+            <!--一个完整的评论-->
+            <comment-cell></comment-cell>
+        </div>
+    </div>
+
+    <!--日志-->
+    <div class="log">
+        <h3>
+            <i></i>
+            记录
+        </h3>
+        <issue-log></issue-log>
+    </div>
+</article>
