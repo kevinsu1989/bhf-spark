@@ -8,7 +8,7 @@ module.exports = {
     proxy: {
         forward: {
             //定义代理转发
-            "/api": "http://bhf.hunantv.com:8001/api"
+            "/api": "http://192.168.8.103:8001/api"
         }
     },
     //实时刷新
@@ -21,11 +21,16 @@ module.exports = {
     //路由
     routers: [
         {
-            path: /\/\w+$/i, to: 'main.html', next: false
+            //无扩展名的访问，则直接跳到main
+            path: /.+(\/\w+(\/)?)$/i, to: '/main.html', next: false
         },
         {
-            //所有文件夹都转到main
-            path: /^\/$/, to: 'main.html', next: true
+            //登录页
+            path: /^\/login\.html\/$/, to: '/login.html', next: false
+        },
+        {
+            //首页
+            path: /^(\/)$/, to: '/main.html', next: true
         }
     ],
     //替换掉文件名中的source

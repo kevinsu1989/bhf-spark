@@ -1,9 +1,9 @@
 <div>
-    <textarea id="tmpl-comment-list">
+    <textarea id="tmpl-comment-cell">
         <div>
             <div class="header">
                 <i>个人头像</i>
-                <span class="timestamp"></span>
+                <span class="timestamp">{{data.timestamp | date}}</span>
 
                 <div class="control">
                     <a class="edit">编辑</a>
@@ -11,8 +11,20 @@
                 </div>
             </div>
 
-            <div class="content">
-                评论的内容
+            <div class="content" ng-bind-html="data.content | unsafe">
+            </div>
+        </div>
+    </textarea>
+
+    <textarea id="tmpl-comment-list">
+        <div class="comment">
+            <h3>
+                <i></i>
+                评论
+            </h3>
+            <div ng-repeat="comment in comments.items">
+                <!--一个完整的评论-->
+                <comment-cell data="comment"></comment-cell>
             </div>
         </div>
     </textarea>
