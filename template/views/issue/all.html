@@ -1,13 +1,15 @@
 <div>
     <!--单个issue-->
     <textarea id="tmpl-issue-list-cell">
-        <i class="status" ng-click="clickStatus()"></i>
-        <i class="priority" ng-click="clickPriority()"></i>
-        <span class="title">{{title}}</span>
-        <span class="issue-id"></span>
-        <div class="info">
-            <span class="member">王斌</span>
-            <span>{{plan_finish_date | date}}</span>
+        <div>
+            <i class="status" ng-class="data.status" ng-click="clickStatus()"></i>
+            <i class="priority" ng-class="'priority-' + data.priority" ng-click="clickPriority()"></i>
+            <a class="title" href="/project/{{data.project_id}}/issue/{{data.id}}">{{data.title}}</a>
+            <span class="issue-id">#{{data.id}}</span>
+            <div class="info">
+                <span class="member">{{data.owner_name}}</span>
+                <span>{{data.plan_finish_time | date}}</span>
+            </div>
         </div>
     </textarea>
 
@@ -15,13 +17,19 @@
     <textarea id="tmpl-issue-list">
         <div>
             <header>
-                <h3>我的任务</h3>
+                <h3>{{title}}</h3>
             </header>
             <div class="details">
-                <h3>待办中/已完成<span class="badge">(1)</span></h3>
+                <h3>待办中<span class="badge">({{undoneIssues.pagination.recordCount}})</span></h3>
                 <ul>
-                    <li ng-repeat="issue in issues">
-                        <issue-item></issue-item>
+                    <li ng-repeat="issue in undoneIssues.items">
+                        <issue-list-cell data="issue"></issue-list-cell>
+                    </li>
+                </ul>
+                <h3>已完成<span class="badge">({{doneIssues.pagination.recordCount}})</span></h3>
+                <ul>
+                    <li ng-repeat="issue in doneIssues.items">
+                        <issue-list-cell data="issue"></issue-list-cell>
                     </li>
                 </ul>
             </div>
