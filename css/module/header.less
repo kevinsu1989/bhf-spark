@@ -1,0 +1,74 @@
+body>header{
+  position: fixed;
+  width: 100%;
+  overflow: hidden;
+  background-color: #353d52;
+  display: flex;
+  height: 40px;
+  top: 0;
+
+  >div{
+    margin-top: 8px;
+    width: 40%;
+    overflow: hidden;
+
+    &.logo{
+      width: 19%;
+    }
+  }
+
+  .project{
+    padding-left: 15px;
+    color: #FFF;
+
+    >*{
+      float: left;
+    }
+
+    .home .icon{
+      margin-top: 4px;
+      background-position: -40px -360px;
+    }
+
+    .content{
+
+    }
+  }
+
+  .logo .icon{
+    background-position: -40px -40px;
+    width: 60px;
+    height: 20px;
+//    margin: 0 auto;
+    display: block;
+  }
+
+  .toolbar{
+    text-align: right;
+
+    >*{
+      display: inline-block;
+    }
+
+    .menu{
+      margin-right: 20px;
+      margin-top: 5px;
+      i{
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    }
+
+    i.notify{
+      background-position: -120px -320px;
+    }
+
+    i.help{
+      background-position: -40px -320px;
+    }
+
+    i.profile{
+      background-position: -80px -320px;
+    }
+  }
+}

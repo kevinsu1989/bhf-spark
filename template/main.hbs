@@ -4,7 +4,35 @@
         {{import "module/head"}}
     </head>
     <body>
+        <header class="frame">
+            <!--项目信息-->
+            <div class="project">
+                <a href="/" class="home">
+                    <i class="icon small"></i>
+                </a>
+
+                <div class="content">
+                    <span class="version">V1.0</span>
+                    <span class="title">BHF项目</span>
+                    <i class="drop icon small"></i>
+                </div>
+            </div>
+            <div class="logo">
+                <i class="icon"></i>
+            </div>
+            <!--右边的boolbar-->
+            <div class="toolbar">
+                <div class="search">
+                    <!--<input type="text" placeholder="请输入搜索关键字" />-->
+                </div>
+                <div class="menu">
+                    <i class="notify small icon"></i>
+                    <i class="help small icon"></i>
+                    <i class="profile small icon"></i>
+                </div>
+            </div>
+        </header>
+
         <ng-view></ng-view>
-        {{import "module/footer"}}
     </body>
 </html>

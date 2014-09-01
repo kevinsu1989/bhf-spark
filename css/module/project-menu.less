@@ -1,0 +1,127 @@
+.project-menu{
+  font-size: 16px;
+  background-color: #cbcbcb;
+
+  .master-menu{
+    margin: 8px 2px 0 0;
+  }
+
+  .master-menu>li{
+    overflow: hidden;
+
+    .inner{
+      display: block;
+      padding: 10px 0;
+      overflow: hidden;
+      margin: 0 0 0 10px;
+      border-bottom: 1px solid #949494;
+    }
+
+    i, label{
+      display: block;
+      float: left;
+    }
+
+    label{
+      margin-left: 10px;
+    }
+
+    &.active{
+      background-color: #b6bccd;
+
+      .inner{
+        border-bottom: none;
+      }
+    }
+  }
+
+  .sub-menu{
+    margin-left: 55px;
+    clear: both;
+
+    li{
+      padding: 10px 20px 10px 10px;
+      overflow: hidden;
+      clear: both;
+
+      span{
+        display: block;
+        float: left;
+
+        &.badge{
+          float: right;
+        }
+      }
+    }
+  }
+
+  .myself {
+    .icon{
+      background-position: -40px -80px;
+    }
+
+    &.active .icon{
+      background-position: -80px -80px;
+    }
+  }
+
+  .discussion{
+    .icon{
+      background-position: -40px -120px;
+    }
+
+    &.active .icon{
+      background-position: -80px -120px;
+    }
+  }
+
+  .issue-category{
+    .icon{
+      background-position: -40px -160px;
+    }
+
+    &.active .icon{
+      background-position: -80px -160px;
+    }
+  }
+
+  .member{
+    .icon{
+      background-position: -40px -200px;
+    }
+
+    &.active .icon{
+      background-position: -80px -200px;
+    }
+  }
+
+  .commit{
+    .icon{
+      background-position: -40px -240px;
+    }
+
+    &.active .icon{
+      background-position: -80px -240px;
+    }
+  }
+
+  .report{
+    .icon{
+      background-position: -40px -280px;
+    }
+
+    &.active .icon{
+      background-position: -80px -280px;
+    }
+  }
+
+  .stat{
+    .icon{
+      background-position: -160px -320px;
+    }
+
+    &.active .icon{
+      background-position: -80px -320px;
+    }
+  }
+}

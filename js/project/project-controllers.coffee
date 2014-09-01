@@ -26,6 +26,7 @@ define [
     url = "project/#{$routeParams.project_id}"
 
     API.get(url).then((result)->
+      $scope.project = result
       $rootScope.$broadcast 'project:loaded', result
 
       if $scope.showDetails

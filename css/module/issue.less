@@ -1,0 +1,185 @@
+//评论列表
+.issue-list{
+  h3{
+    padding: 10px 0;
+  }
+
+  h4{
+    font-weight: normal;
+    padding: 10px 0;
+  }
+
+  li{
+    padding: 14px 10px;
+    overflow: hidden;
+    border-bottom: @normal-border;
+
+    &.active, &:hover{
+      background-color: #e9ebf0;
+    }
+  }
+
+  .row{
+    .icon{
+      margin-right: 10px;
+      margin-bottom: -4px;
+    }
+
+    a:link, a:visited{
+      color: #333;
+    }
+
+    .memo{
+      color: #CCC;
+      font-size: 12.5px;
+      padding: 0 4px;
+    }
+
+    .info{
+      float: right;
+    }
+  }
+}
+
+.issue-details{
+  margin-bottom: 40px;
+  header{
+    height: 34px;
+    overflow: hidden;
+    display: flex;
+    border-bottom: @normal-border;
+
+    .icon{
+      margin: 10px 0 0 10px;
+      width: 16px;
+      height: 16px;
+    }
+
+    label{
+      padding-bottom: 10px;
+      vertical-align: middle;
+    }
+
+    .project-name{
+      flex: 1;
+
+      .icon{
+        background-position: -160px -200px;
+      }
+    }
+
+    .owner .icon{
+      background-position: -200px -200px;
+    }
+
+    .priority{
+      .icon{
+        background-position: -160px -280px;
+      }
+      width: 100px;
+    }
+
+    .assets{
+      width: 100px;
+      .icon{
+        background-position: -240px -160px;
+      }
+    }
+
+    .trash{
+      .icon{
+        background-position: -80px -360px;
+      }
+    }
+
+    div{
+      &:hover{
+        background-color: #e9ebf0;
+      }
+
+      cursor: pointer;
+      width: 100px;
+      border-right: @normal-border;
+    }
+  }
+
+  .panel{
+    .title{
+      padding: 10px 0;
+      .icon{
+        margin-right: 6px;
+      }
+
+      h3{
+        display: inline-block;
+        vertical-align: middle;
+        padding-bottom: 10px;
+      }
+    }
+
+    padding: 20px;
+    border-bottom: @normal-border;
+  }
+
+  .issue{
+    .sub-title{
+      color: #CCC;
+      padding: 0 0 10px 30px;
+
+      span{
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .assets{
+    .title .icon{
+      background-position: -120px -360px;
+    }
+
+    button.create{
+      background: url(/images/add-asset.png);
+      width: 102px;
+      height: 82px;
+      border: 0;
+    }
+  }
+
+  .comments{
+    .title .icon{
+      background-position: -240px -120px;
+    }
+
+    .row{
+      overflow: hidden;
+      padding: 20px;
+
+      img{
+        max-width: 90%;
+      }
+
+      .information{
+        color: #CCC;
+        .control{
+          float: right;
+          margin-right: 20px;
+          display: none;
+        }
+      }
+
+      &:hover .control{
+        display: block;
+      }
+
+      &:hover{
+//        background-color: #e9ebf0;
+      }
+    }
+  }
+
+  .log{
+    .title .icon{
+      background-position: -200px -160px;
+    }
+  }
+}

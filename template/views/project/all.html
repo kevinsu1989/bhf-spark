@@ -1,64 +1,84 @@
 <div>
     <textarea id="tmpl-project-menu">
-        <ul class="project-menu">
-            <li class="my">
-                <label>
-                    <i></i>
-                    我的任务
-                </label>
-            </li>
-            <li class="discussion">
-                <label>
-                    <i></i>
-                    讨论
-                </label>
-            </li>
-            <li class="issue-category">
-                <label>
-                    <i></i>
-                    任务
-                </label>
-                <ul>
-                    <li>
-                        需求
-                        <span class="badge">0</span>
-                    </li>
-                    <li>
-                        Bug
-                        <span class="badge">10</span>
-                    </li>
-                </ul>
-            </li>
-            <li class="member">
-                <label>
-                    <i></i>
-                    成员
-                </label>
-            </li>
-            <li class="commit">
-                <label>
-                    <i></i>
-                    Commit
-                </label>
-            </li>
-            <li class="report">
-                <label>
-                    <i></i>
-                    周报
-                </label>
-            </li>
-            <li class="version">
-                <label>
-                    <i></i>
-                    版本
-                </label>
-            </li>
-            <li class="stat">
-                <label>
-                    <i></i>
-                    统计
-                </label>
-            </li>
-        </ul>
+        <div class="project-menu">
+            <ul class="master-menu">
+                <li class="myself active">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/project/{{project.id}}/issue/myself">我的任务</a>
+                        </label>
+                    </div>
+                </li>
+                <li class="discussion">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/project/{{project.id}}/discussion">讨论</a>
+                        </label>
+                    </div>
+                </li>
+                <li class="issue-category">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/project/{{project.id}}/issue">任务</a>
+                        </label>
+                        <ul class="sub-menu">
+                            <li>
+                                <span class="text">
+                                    <a href="/project/{{project.id}}/issue/category/1">需求</a>
+                                </span>
+                                <span class="badge small gray">0</span>
+                            </li>
+                            <li>
+                                <span class="text">Bug</span>
+                                <span class="badge  small gray">10</span>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="member">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/project/{{project.id}}/member">成员</a>
+                        </label>
+                    </div>
+                </li>
+                <li class="commit">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/project/{{project.id}}/commit">Commit</a>
+                        </label>
+                    </div>
+                </li>
+                <li class="report">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/project/{{project.id}}/weekly-report">周报</a>
+                        </label>
+                    </div>
+                </li>
+                <li class="version">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/project/{{project.id}}/version">版本</a>
+                        </label>
+                    </div>
+                </li>
+                <li class="stat">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/project/{{project.id}}/stat">统计</a>
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </textarea>
 </div>

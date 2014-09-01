@@ -25,9 +25,9 @@ define [
   #评论详细
   .directive('commentCell', (API)->
     restrict: 'E'
-    scope: data: '='
+    scope: data: '=', '$index': '='
     replace: true
     template: _utils.extractTemplate '#tmpl-comment-cell', _template
     link: (scope, element, attr)->
-
+      console.log scope
   )

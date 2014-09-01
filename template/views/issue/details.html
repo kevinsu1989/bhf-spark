@@ -1,34 +1,44 @@
-<article>
+<article class="issue-details">
     <!--展示一个issue的所有内容-->
     <header>
         <div class="project-name">
-            <i></i>
-            项目名称
+            <i class="small icon"></i>
+            <label>{{project.title}}</label>
         </div>
-        <div class="ower">
-            <i></i>
-            <label>{{issue.owner_name}}</label>
+        <div class="owner">
+            <i class="icon small"></i>
+            <label>{{issue.owner_name || '指派给'}}</label>
         </div>
         <div class="finish-date">
-            <i></i>
+            <i class="icon small"></i>
             <label>{{issue.plan_finish_time | date}}</label>
         </div>
         <div class="priority">
-            <i></i>
+            <i class="icon small"></i>
             <label>重要程度</label>
         </div>
         <div class="category">
-            <i></i>
+            <i class="icon small"></i>
             <label>分类</label>
+        </div>
+        <div class="assets">
+            <i class="icon small"></i>
+            <label>附件</label>
+        </div>
+        <div class="trash">
+            <i class="icon small"></i>
+            <label>删除</label>
         </div>
     </header>
 
     <!--标题部分-->
-    <div class="title">
-        <i class="status"></i>
-        <h3>{{issue.title}}</h3>
-        <div class="info">
-            <span class="creator">{{issue.creator_name}}</span>
+    <div class="issue panel">
+        <div class="title">
+            <i class="status icon small" ng-class="issue.status"></i>
+            <h3>{{issue.title}}</h3>
+        </div>
+        <div class="sub-title">
+            <span class="creator">{{issue.creator_name || '创建者'}}</span>
             <span class="tag">标签</span>
             <span class="timestamp">{{issue.timestamp | date}}</span>
             <span class="id">#{{issue.id}}</span>
@@ -39,27 +49,38 @@
     </div>
 
     <!--附件-->
-    <div class="assets">
-        <h3>
-            <i></i>
-            附件
-        </h3>
-        <div>
+    <div class="assets panel">
+        <div class="title">
+            <i class="icon small"></i>
+            <h3>附件</h3>
+        </div>
+        <div class="content">
             <!--附件缩略图列表-->
             <assets-thumbnail></assets-thumbnail>
-            <button class="create"></button>
+            <button class="create" ng-click="uploadAsset($event)"></button>
         </div>
     </div>
 
     <!--评论-->
-    <comment-list></comment-list>
+    <div class="comments panel">
+        <div class="title">
+            <i class="icon small"></i>
+            <h3>评论</h3>
+        </div>
+        <div class="content">
+            <comment-list></comment-list>
+        </div>
+    </div>
 
     <!--日志-->
-    <div class="log">
-        <h3>
-            <i></i>
-            记录
-        </h3>
-        <issue-log></issue-log>
+    <div class="log panel">
+        <div class="title">
+            <i class="icon small"></i>
+            <h3>记录</h3>
+        </div>
+
+        <div class="content">
+            <issue-log></issue-log>
+        </div>
     </div>
 </article>
