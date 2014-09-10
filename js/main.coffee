@@ -12,6 +12,8 @@ require.config
     datepicker: 'vendor/bootstrap-datepicker.zh-CN'
     'date-range-picker': 'vendor/date-range-picker'
     echarts: 'vendor/echarts'
+    utils: 'utils'
+    'twins-editor': 'jquery.twins-editor'
   shim:
     'v/noty': ['jquery']
     ng: exports : 'angular'
@@ -20,6 +22,7 @@ require.config
     app: ['ng', 'jquery']
     select2: ['v/select2/select2', 'jquery']
     datepicker: ['vendor/bootstrap-datepicker']
+    'twins-editor': ['jquery', 'v/simditor']
 
 window.name = "NG_DEFER_BOOTSTRAP!";
 

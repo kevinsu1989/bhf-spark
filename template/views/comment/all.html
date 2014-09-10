@@ -7,8 +7,8 @@
                 <span class="timestamp">{{data.timestamp | date: 'yyyy-MM-dd hh:mm:ss'}}</span>
                 说：
                 <div class="control">
-                    <a class="edit" href="javascript:void(0)">编辑</a>
-                    <a class="delete" href="javascript:void(0)">删除</a>
+                    <a class="edit" href="javascript:void(0)" ng-click="onClickEdit($event, data)">编辑</a>
+                    <a class="delete" href="javascript:void(0)" ng-click="onClickDelete($event, data)">删除</a>
                 </div>
             </div>
 
@@ -27,13 +27,18 @@
 
     <!--评论的编辑器-->
     <textarea id="tmpl-comment-editor">
-        <!--操作的编辑器-->
-        <editor></editor>
-        <!--简版的编辑器，供显示用-->
-        <div class="simple">
-            <input type="text" placeholder="来，说点什么？" />
-            <!--点击滚动到顶部-->
-            <div class="top"></div>
+        <div class="comment-editor">
+            <div class="full-editor">
+                <header>添加评论</header>
+                <!--操作的编辑器-->
+                <editor></editor>
+            </div>
+            <!--简版的编辑器，供显示用-->
+            <div class="simple">
+                <input type="text" placeholder="来，说点什么？" ng-focus="onFocusEditor($event)" />
+                <!--点击滚动到顶部-->
+                <div class="top"></div>
+            </div>
         </div>
     </textarea>
 </div>

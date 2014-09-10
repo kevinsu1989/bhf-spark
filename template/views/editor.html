@@ -1,11 +1,30 @@
-<div class="editor tab">
-    <div class="nav">
-        <div class="simditor">Markdown</div>
-        <div class="markdown"></div>
-    </div>
+<div class="editor">
+    <!--
+    <ul class="nav">
+        <li class="simditor" data-field="markdown">Markdown</li>
+        <li class="markdown active" data-field="simditor">HTML</li>
+    </ul>
 
     <div class="panel">
-        <div class="simditor"></div>
-        <div class="markdown"></div>
+        <div class="simditor" data-field="simditor">
+            <textarea rows="10" placeholder="这里输入内容" autofocus></textarea>
+        </div>
+        <div class="markdown" data-field="markdown">
+            <textarea rows="10"></textarea>
+        </div>
+    </div>
+    -->
+    <textarea rows="30" placeholder="这里输入内容" autofocus></textarea>
+    <div class="control">
+        <div class="left">
+            <button class="cancel default" ng-click="clickCancel()">取消</button>
+        </div>
+        <div class="right">
+            <label class="always_top">
+                <input type="checkbox" ng-checked="always_top" />
+                置顶
+            </label>
+            <button class="primary default" ng-click="clickSubmit()">提&nbsp;&nbsp;交</button>
+        </div>
     </div>
 </div>

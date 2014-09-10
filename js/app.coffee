@@ -4,6 +4,7 @@ define [
   "ng"
   "services"
   "filters"
+  './editor-directive'
   "./project/index"
   "./issue/index"
   "./comment/index"

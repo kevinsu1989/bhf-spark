@@ -29,5 +29,30 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-comment-cell', _template
     link: (scope, element, attr)->
-      console.log scope
+      scope.onClickEdit = (event, comment)->
+        alert('编辑')
+
+      scope.onClickDelete = (event, comment)->
+        alert('删除')
+  )
+
+  #评论的编辑框
+  .directive('commentEditor', (API)->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-comment-editor', _template
+    link: (scope, element, attr)->
+      activeClass = 'active'
+      #focus后，弹出大的编辑器
+      scope.onFocusEditor = ()->
+        element.addClass activeClass
+        scope.$broadcast 'editor:show'
+        return true
+
+      scope.$on 'editor:hide', ->
+        element.removeClass activeClass
+
+      scope.$on 'editor:submit', (event, data)->
+        element.removeClass activeClass
+        console.log data
   )

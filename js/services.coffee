@@ -8,7 +8,7 @@ define [
   BASEAPI = '/api/'
 
   _ng.module("mic.services", [])
-  .factory 'API', ($http)->
+  .factory 'API', ($http, $location)->
     api =
       #获取jsonp的数据
       ajax: (options)->
@@ -31,7 +31,7 @@ define [
               message = data.message or data
               Notify.error "你没有权限操作此项功能"
             when 401
-              location.href = "/login"
+              $location.path '/login'
             else
               #以后再考虑不同的处理
               Notify.error "未知错误"

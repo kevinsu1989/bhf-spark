@@ -42,7 +42,10 @@
 }
 
 .issue-details{
-  margin-bottom: 40px;
+  height: 100%;
+  display: box;
+  box-orient: vertical;
+  position: relative;
   header{
     height: 34px;
     overflow: hidden;
@@ -180,6 +183,48 @@
   .log{
     .title .icon{
       background-position: -200px -160px;
+    }
+  }
+}
+
+.comment-editor{
+  bottom: 40px;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  .box-shadow(0 0 4px rgba(0, 0, 0, 0.2));
+  background-color: rgba(233, 235, 240, 0.95);
+
+  .simple{
+    height: 60px;
+    input{
+      width: 97%;
+      font-size: 16px;
+      margin: 12px;
+      height: 33px;
+      border: 1px solid #CCC;
+      .border-radius(4px);
+    }
+  }
+
+  .full-editor{
+    display: none;
+
+    header{
+      font-size: 16px;
+      font-weight: bold;
+      padding: 20px 0 0 10px;
+    }
+  }
+
+  &.active{
+
+    .simple{
+      display: none;
+    }
+
+    .full-editor{
+      display: block;
     }
   }
 }
