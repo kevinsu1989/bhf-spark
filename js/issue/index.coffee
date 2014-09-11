@@ -1,5 +1,5 @@
 define [
   './issue-directives'
-  './issue-list-directive'
+  './issue-list-controller'
   './issue-controller'
 ], ->

@@ -52,4 +52,26 @@
             </div>
         </div>
     </textarea>
+
+    <!--讨论列表-->
+    <textarea id="tmpl-discussion-list">
+        <div class="list discussion-list">
+            <header>
+                <h3>讨论</h3>
+            </header>
+
+            <ul class="details">
+                <li ng-repeat="item in discussion.items" class="row">
+                    <a href="/project/{{item.project_id}}/discussion/{{item.id}}">
+                        <span class="title">{{item.title}}</span>
+                        <span class="badge gray small">{{item.comment_count}}</span>
+                    </a>
+
+                    <p class="content">
+                        <!--{{item.content}}-->
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </textarea>
 </div>

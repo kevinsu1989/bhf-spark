@@ -74,6 +74,32 @@ i.icon{
     padding-bottom: 40px;
     border-right: 2px solid #cfcfcf;
     height: 100%;
+
+    //列表
+    .list{
+      h3{
+        padding: 10px 0;
+      }
+
+
+      .details{
+        li.row {
+          padding: 14px 10px;
+          overflow: hidden;
+          border-bottom: @normal-border;
+
+          &.active, &:hover {
+            background-color: #e9ebf0;
+          }
+
+          &a {
+            &:link, &:visited {
+              color: #333;
+            }
+          }
+        }
+      }
+    }
   }
 
   .details-panel{
@@ -84,6 +110,7 @@ i.icon{
 
 .badge{
   text-align: center;
+  display: inline-block;
 
   &.gray{
     background-color: #9f9f9f;

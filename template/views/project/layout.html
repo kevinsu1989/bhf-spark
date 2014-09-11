@@ -6,12 +6,8 @@
 
     <div class="salve-panel">
         <!--第二栏-->
-        <div class="list-panel">
-            <issue-list></issue-list>
-        </div>
+        <div class="list-panel" ui-view="list-panel"></div>
         <!--第三栏-->
-        <div class="details-panel">
-            <div ui-view="issue-details" style="height: 100%;"></div>
-        </div>
+        <div class="details-panel" ui-view="details-panel"></div>
     </div>
 </div>

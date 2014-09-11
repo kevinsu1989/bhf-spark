@@ -8,6 +8,8 @@ define [
   './project/index'
   './issue/index'
   './comment/index'
+  './member/index'
+  './commit/index'
   'angularRoute'
   'v/ui-router'
 ], (_ng) ->
