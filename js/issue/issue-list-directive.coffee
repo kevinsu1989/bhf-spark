@@ -34,12 +34,12 @@ define [
         #待办中
         API.get(url, _.extend(status: 'undone', params)).then (result)->
           scope.undoneIssues = result
-          scope.$apply()
+#          scope.$apply()
 
         #加载已经完成
         API.get(url, _.extend(status: 'done', pageSize: 10, params)).then (result)->
           scope.doneIssues = result
-          scope.$apply()
+#          scope.$apply()
 
       #单个项目被加载的事件
       scope.$on 'project:loaded', (event, project)-> searchIssue project.id

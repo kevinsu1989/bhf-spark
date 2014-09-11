@@ -1,21 +1,20 @@
 "use strict"
 define [
   'ng'
-  'v/when/when'
   '_'
   './utils'
-], (_ng, _when, _moment, _, _utils) ->
+], (_ng, _moment, _, _utils) ->
   BASEAPI = '/api/'
 
   _ng.module("mic.services", [])
-  .factory 'API', ($http, $location)->
+  .factory 'API', ($http, $location, $q)->
     api =
       #获取jsonp的数据
       ajax: (options)->
         #如果没有baseUrl，则加上
         options.url = "#{BASEAPI}#{options.url}" if options.url.indexOf(BASEAPI) < 0
 
-        deferred = _when.defer()
+        deferred = $q.defer()
         $http(options).success((result)->
           deferred.resolve result
         ).error((data, status) ->
