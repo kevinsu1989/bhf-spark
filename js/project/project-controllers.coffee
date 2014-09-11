@@ -24,14 +24,16 @@ define [
   controller('projectController', ($rootScope, $scope, $routeParams, $location, API, $stateParams)->
     url = "project/#{$stateParams.project_id}"
 
+    #获取项目的信息
     API.get(url).then((result)->
       $scope.project = result
       $rootScope.$broadcast 'project:loaded', result
-
-#      $scope.showDetails = Boolean(issue_id = $routeParams.issue_id)
-#      if $scope.showDetails
-#        $rootScope.$broadcast 'issue:details:load', $routeParams.project_id, issue_id
     )
 
+    #获取项目成员的信息
+    API.get("#{url}/member").then((result)->
+      $scope.projectMember = result
+      $scope.$broadcast 'project:member:loaded', result
+    )
 
   )

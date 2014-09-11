@@ -69,4 +69,18 @@
             </li>
         </ul>
     </textarea>
+
+    <!--项目成员列表-->
+    <textarea id="tmpl-project-member-list">
+        <div class="list member-list">
+            <header>
+                <h3>项目成员</h3>
+            </header>
+            <ul class="details">
+                <li ng-repeat="member in projectMember" class="row">
+                    {{member.username}}
+                </li>
+            </ul>
+        </div>
+    </textarea>
 </div>
