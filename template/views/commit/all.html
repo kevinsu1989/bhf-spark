@@ -1,0 +1,20 @@
+<div>
+    <textarea id="tmpl-commit-list">
+        <div class="commit-list list">
+            <header>
+                <h3>Commit列表</h3>
+            </header>
+            <ul class="details">
+                <li class="row" ng-repeat="item in commit.items">
+                    <a href="/project/{{item.project_id}}/commit/{{item.id}}?url={{item.url}}" ng-click="clickCommit($event, item)">{{item.message}}</a>
+                    <span>{{item.realname}}</span>
+                    <span>{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
+                </li>
+            </ul>
+        </div>
+    </textarea>
+
+    <textarea id="tmpl-commit-details">
+        <iframe frameborder="0" width="100%" src="{{commit_url}}"></iframe>
+    </textarea>
+</div>
