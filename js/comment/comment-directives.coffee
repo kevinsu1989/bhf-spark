@@ -6,20 +6,16 @@ define [
 
   _module.directiveModule
   #评论列表
-  .directive('commentList', (API)->
+  .directive('commentList', ($stateParams, API)->
     restrict: 'E'
     scope: data: '='
     replace: true
     template: _utils.extractTemplate '#tmpl-comment-list', _template
     link: (scope, element, attr)->
-
-      scope.$on 'comment:load', (event, project_id, issue_id)->
-        url = "project/#{project_id}/issue/#{issue_id}/comment"
-
-        API.get(url, pageSize: 20).then((result)->
-          scope.comments = result
-          scope.$apply()
-        )
+      url = "project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/comment"
+      API.get(url, pageSize: 20).then((result)->
+        scope.comments = result
+      )
   )
 
   #评论详细

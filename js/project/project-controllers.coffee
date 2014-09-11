@@ -21,16 +21,16 @@ define [
 ], (_module, _moment, _, _utils, _template) ->
 
   _module.controllerModule.
-  controller('projectController', ($rootScope, $scope, $routeParams, $location, API)->
-    $scope.showDetails = Boolean(issue_id = $routeParams.issue_id)
-    url = "project/#{$routeParams.project_id}"
+  controller('projectController', ($rootScope, $scope, $routeParams, $location, API, $stateParams)->
+    url = "project/#{$stateParams.project_id}"
 
     API.get(url).then((result)->
       $scope.project = result
       $rootScope.$broadcast 'project:loaded', result
 
-      if $scope.showDetails
-        $rootScope.$broadcast 'issue:details:load', $routeParams.project_id, issue_id
+#      $scope.showDetails = Boolean(issue_id = $routeParams.issue_id)
+#      if $scope.showDetails
+#        $rootScope.$broadcast 'issue:details:load', $routeParams.project_id, issue_id
     )
 
 

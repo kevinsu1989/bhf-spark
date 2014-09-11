@@ -3,9 +3,24 @@ define [
   "ng"
   "app"
 ], (_ng, _app) ->
-  _app.config ($routeProvider, $locationProvider) ->
+  _app.config ($routeProvider, $locationProvider, $stateProvider) ->
     $locationProvider.html5Mode true
 
+    $stateProvider
+      .state('project',
+        url: '/project/:project_id'
+        templateUrl: '/views/project/layout.html'
+        controller: 'projectController'
+    )
+    .state('project.issue',
+      url: '/issue/:issue_id'
+      views:
+        'issue-details':
+          templateUrl: '/views/issue/details.html'
+          controller: 'issueDetailsController'
+    )
+
+    return;
     #访问某个项目
     $routeProvider.when("/project/:project_id",
       templateUrl: "/views/project/layout.html"
