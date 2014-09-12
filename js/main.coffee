@@ -34,3 +34,4 @@ require [
 
   _ng.element().ready ->
     _ng.resumeBootstrap [_app.name]
+    $('#loading').fadeOut()
