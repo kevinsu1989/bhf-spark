@@ -15,14 +15,14 @@ require.config
     utils: 'utils'
     'twins-editor': 'jquery.twins-editor'
   shim:
-    'v/noty': ['jquery']
+    'notify': ['jquery', 'v/jquery.noty']
     ng: exports : 'angular'
     angularRoute: deps: ['ng']
     'v/jquery.transit': ['jquery', '_']
     app: ['ng', 'jquery']
     select2: ['v/select2/select2', 'jquery']
     datepicker: ['vendor/bootstrap-datepicker']
-    'twins-editor': ['jquery', 'v/simditor']
+#    'twins-editor': ['jquery', 'v/simditor']
 
 window.name = "NG_DEFER_BOOTSTRAP!";
 

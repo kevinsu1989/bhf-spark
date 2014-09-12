@@ -2,7 +2,7 @@
 
 define [
   'ng'
-  'services'
+  './services/index'
   'filters'
   './editor-directive'
   './project/index'

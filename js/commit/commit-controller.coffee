@@ -2,7 +2,6 @@
 define [
   '../ng-module'
   '../utils'
-  '../services'
 ], (_module, _utils) ->
 
   _module.controllerModule.

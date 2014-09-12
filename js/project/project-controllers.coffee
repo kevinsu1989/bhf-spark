@@ -17,7 +17,6 @@ define [
   'moment'
   '_'
   '../utils'
-  '../services'
 ], (_module, _moment, _, _utils, _template) ->
 
   _module.controllerModule.
