@@ -25,8 +25,8 @@ module.exports = {
             path: /.+(\/\w+(\/)?)$/i, to: '/main.html', next: false
         },
         {
-            //登录页
-            path: /^\/login\.html\/$/, to: '/login.html', next: false
+            //登录页，暂用，应该和上面的正则合并
+            path: /^\/login$/, to: '/main.html', next: false
         },
         {
             //首页

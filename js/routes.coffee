@@ -16,6 +16,14 @@ define [
       controller: 'issueListController'
 
     $stateProvider
+    #登录
+    .state('login',
+      url: '/login?next'
+      templateUrl: '/views/member/login.html'
+      controller: 'loginController'
+
+    )
+
     .state('project',
       url: '/project/:project_id'
       templateUrl: '/views/project/layout.html'

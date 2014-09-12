@@ -1,5 +1,4 @@
 define [
-#  './member-directives'
-#  './member-directive'
-  './member-controller'
+  './member-directives'
+  './member-controllers'
 ], ->
