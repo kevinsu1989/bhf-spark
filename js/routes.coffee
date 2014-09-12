@@ -6,15 +6,43 @@ define [
   't!/views/issue/all.html'
   't!/views/member/all.html'
   't!/views/commit/all.html'
-], (_ng, _app, _utils, _tmplIssue, _tmplMember, _tmplCommit) ->
+  't!/views/assets/all.html'
+], (_ng, _app, _utils, _tmplIssue, _tmplMember, _tmplCommit, _tmplAssets) ->
   _app.config ($routeProvider, $locationProvider, $stateProvider) ->
     $locationProvider.html5Mode true
+
+    issueListView =
+      template: _utils.extractTemplate('#tmpl-issue-list', _tmplIssue)
+      controller: 'issueListController'
 
     $stateProvider
     .state('project',
       url: '/project/:project_id'
       templateUrl: '/views/project/layout.html'
       controller: 'projectController'
+    )
+
+    #issue列表
+    .state('project.issue',
+      url: '/issue'
+      data: baseLink: '/issue/'
+      views:
+        'list-panel': issueListView
+    )
+
+    .state('project.issue-myself',
+      url: '/issue/myself'
+      views:
+        'list-panel': issueListView
+    )
+
+    .state('project.issue-details',
+      url: '/issue/:issue_id'
+      views:
+        'list-panel': issueListView
+        'details-panel':
+          templateUrl: '/views/issue/details.html'
+          controller: 'issueDetailsController'
     )
 
     #成员
@@ -35,12 +63,12 @@ define [
           controller: 'commitListController'
     )
 
-    .state('project.commit.details',
-      url: '/:commit_id?url'
+    .state('project.commit-details',
+      url: '/commit/:commit_id?url'
       views:
         'details-panel':
           template: _utils.extractTemplate('#tmpl-commit-details', _tmplCommit)
-          controller: -> console.log arguments
+          controller: 'commitDetailsController'
     )
 
     #讨论
@@ -52,19 +80,22 @@ define [
           controller: 'discussionListController'
     )
 
-    #issue列表
-    .state('project.issue',
-      url: '/issue'
+    #discussion
+    .state('project.discussion-details',
+      url: '/discussion/:issue_id'
+      data: articleOnly: true
       views:
         'list-panel':
-          template: _utils.extractTemplate('#tmpl-issue-list', _tmplIssue)
-          controller: 'issueListController'
-        'details-panel': {}
+          template: _utils.extractTemplate('#tmpl-discussion-list', _tmplIssue)
+          controller: 'discussionListController'
+        'details-panel':
+          templateUrl: '/views/issue/details.html'
+          controller: 'issueDetailsController'
     )
 
     #标签
-    .state('project.issue.tag',
-      url: '/tag/:tag'
+    .state('project.issue-tag',
+      url: '/issue/tag/:tag'
       data: isTag: true
       views:
         'list-panel':
@@ -72,14 +103,15 @@ define [
           controller: 'issueListController'
     )
 
-    .state('project.issue.details',
-      url: '/:issue_id'
+    #素材
+    .state('project.assets',
+      url: '/assets'
+      data: isTag: true
       views:
-        'details-panel':
-          templateUrl: '/views/issue/details.html'
-          controller: 'issueDetailsController'
+        'list-panel':
+          template: _utils.extractTemplate('#tmpl-assets-list', _tmplAssets)
+          controller: 'assetsListController'
     )
-
     return;
     #访问某个项目
     $routeProvider.when("/project/:project_id",
