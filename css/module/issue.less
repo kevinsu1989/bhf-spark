@@ -117,6 +117,18 @@
   }
 
   .panel{
+    .toolbar{
+      float: right;
+      margin-right: 20px;
+      display: none;
+    }
+
+    &.issue{
+      &:hover .toolbar{
+        display: block;
+      }
+    }
+
     .title{
       padding: 10px 0;
       .icon{
@@ -173,14 +185,9 @@
 
       .information{
         color: #CCC;
-        .control{
-          float: right;
-          margin-right: 20px;
-          display: none;
-        }
       }
 
-      &:hover .control{
+      &:hover .toolbar{
         display: block;
       }
 

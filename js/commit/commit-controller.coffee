@@ -13,3 +13,8 @@ define [
       $scope.commit = result
     )
   )
+
+  #因gitlab的iframe策略，无法被引用
+  .controller('commitDetailsController', ($scope, $sce, $state)->
+    $scope.url = $sce.trustAsResourceUrl($state.params.url)
+  )

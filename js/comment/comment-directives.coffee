@@ -42,10 +42,10 @@ define [
       #focus后，弹出大的编辑器
       scope.onFocusEditor = ()->
         element.addClass activeClass
-        scope.$broadcast 'editor:show'
+        scope.$broadcast 'editor:content', 'comment'
         return true
 
-      scope.$on 'editor:hide', ->
+      scope.$on 'editor:cancel', ->
         element.removeClass activeClass
 
       scope.$on 'editor:submit', (event, data)->

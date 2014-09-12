@@ -6,7 +6,7 @@
                 <span class="owner">{{creator_name}}在</span>
                 <span class="timestamp">{{data.timestamp | date: 'yyyy-MM-dd hh:mm:ss'}}</span>
                 说：
-                <div class="control">
+                <div class="toolbar">
                     <a class="edit" href="javascript:void(0)" ng-click="onClickEdit($event, data)">编辑</a>
                     <a class="delete" href="javascript:void(0)" ng-click="onClickDelete($event, data)">删除</a>
                 </div>
@@ -31,7 +31,7 @@
             <div class="full-editor">
                 <header>添加评论</header>
                 <!--操作的编辑器-->
-                <editor></editor>
+                <editor name="comment"></editor>
             </div>
             <!--简版的编辑器，供显示用-->
             <div class="simple">

@@ -7,7 +7,8 @@ define [
 
   _module.controllerModule.
   #issue明细
-  controller('issueDetailsController', ($scope, $stateParams, API)->
+  controller('issueDetailsController', ($scope, $stateParams, API, $state)->
+    $scope.articleOnly = $state.current.data?.articleOnly
     url = "project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}"
     API.get(url).then((result)->
       $scope.issue = result

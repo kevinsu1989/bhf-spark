@@ -10,6 +10,7 @@ define [
   './comment/index'
   './member/index'
   './commit/index'
+  './assets/index'
   'angularRoute'
   'v/ui-router'
 ], (_ng) ->

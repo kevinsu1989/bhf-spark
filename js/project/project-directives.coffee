@@ -6,9 +6,18 @@ define [
   '../services'
 ], (_module,_utils, _template) ->
 
-  _module.directiveModule.directive('projectMenu', ()->
+  _module.directiveModule
+  .directive('projectMenu', ()->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-menu', _template
     link: (scope, element, attrs)->
+  )
+
+  .directive('projectHeader', ()->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-project-header', _template
+    link: (scope, element, attrs)->
+
   )

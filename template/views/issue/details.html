@@ -1,7 +1,7 @@
-<article class="issue-details">
+<article class="issue-details" issue-details>
     <div style="overflow: auto; height: 100%; position:relative;">
         <!--展示一个issue的所有内容-->
-        <header>
+        <header ng-hide="articleOnly">
             <div class="project-name">
                 <i class="small icon"></i>
                 <label>{{project.title}}</label>
@@ -37,6 +37,11 @@
             <div class="title">
                 <i class="status icon small" ng-class="issue.status"></i>
                 <h3>{{issue.title}}</h3>
+
+                <div class="toolbar">
+                    <a ng-click="onClickEdit($event, data)" href="javascript:void(0)" class="edit">编辑</a>
+                    <a ng-click="onClickDelete($event, data)" href="javascript:void(0)" class="delete">删除</a>
+                </div>
             </div>
             <div class="sub-title">
                 <span class="creator">{{issue.creator_name || '创建者'}}</span>
@@ -44,13 +49,14 @@
                 <span class="timestamp">{{issue.timestamp | date}}</span>
                 <span class="id">#{{issue.id}}</span>
             </div>
-            <div class="content">
-                {{issue.content}}
+            <div class="content" ng-bind-html="issue.content | unsafe" ng-show="!editing"></div>
+            <div ng-show="editing">
+                <editor name="issue"></editor>
             </div>
         </div>
 
         <!--附件-->
-        <div class="assets panel">
+        <div class="assets panel" ng-hide="articleOnly">
             <div class="title">
                 <i class="icon small"></i>
                 <h3>附件</h3>
@@ -58,7 +64,7 @@
             <div class="content">
                 <!--附件缩略图列表-->
                 <assets-thumbnail></assets-thumbnail>
-                <button class="create" ng-click="uploadAsset($event)"></button>
+                <button class="create" ng-click="onClickUpload($event, issue.project_id)" upload-assets></button>
             </div>
         </div>
 
@@ -74,7 +80,7 @@
         </div>
 
         <!--日志-->
-        <div class="log panel">
+        <div class="log panel" ng-hide="articleOnly">
             <div class="title">
                 <i class="icon small"></i>
                 <h3>记录</h3>
