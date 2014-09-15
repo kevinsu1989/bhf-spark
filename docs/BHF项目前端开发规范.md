@@ -3,7 +3,7 @@
 * 文件名以短划线连接多个单词用，如`project-haeder.coffee`
 * 变量采用驼峰式命名，如`fileName`
 * jQuery对象以$开头，如`$this`
-* class字母需要大写，如ClassName
+* css的class字母需要大写，如ClassName
 * require引用的对象以_开头，如 `define(['restful'], function(_restful){})`
 * jquery插件文件名以`jquery.honey.plugin-name.js`命名，如`jquery.honey.pagination.js`
 * jquery插件名称则以`pluginName`的方式，如文件名为：`jquery.honey.plugin-name.js`，插件名为：pluginName，调用方式为：`$(expr).pluginName()`
@@ -17,6 +17,7 @@
 * 本项目基于HTML5/CSS3，不用考虑兼容旧版本浏览器
 * 尽是使用语义化HTML
 * 如果引用了第三方模块，并需要修改第三方模块的css，请不要修改原来的css，而是在hack.less中进行覆盖
+* 
 
 #文件组织
 
