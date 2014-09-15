@@ -15,7 +15,7 @@
 
 # HTML5/CSS3
 * 本项目基于HTML5/CSS3，不用考虑兼容旧版本浏览器
-* 尽是使用语义化HTML
+* 请使用语义化HTML，请使用有意义的class命名
 * 如果引用了第三方模块，并需要修改第三方模块的css，请不要修改原来的css，而是在hack.less中进行覆盖
 * 
 
@@ -43,6 +43,7 @@
 * 路由根据restful的API，请参考后端的API接口文档
 
 # 其它
+* 除非特殊情况，不要在代码中使用callback，callback改用promise的解决方式，本项目中使用$q
 * 推荐使用coffee，但这并不是必需的
 * 插件优先，如果能基于jquery的插件，则尽量封装成jquery的插件，jquery插件要求同时支持amd
 * 事件优先，angular的directive之间基于事件通信，各模块之间松散耦合，彼此不知道对方的存在
