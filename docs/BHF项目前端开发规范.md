@@ -19,7 +19,7 @@
 * 如果引用了第三方模块，并需要修改第三方模块的css，请不要修改原来的css，而是在hack.less中进行覆盖
 * 
 
-#文件组织
+# 文件组织
 
 * 第三方代码放在js/vendor
 * 较大型的第三方包直接放到根目录(一般不会有这个)
@@ -36,7 +36,7 @@
 * 模板中textarea的id命名方式采用`tmpl-<moduleName>-templateName`，如`tmpl-issue-list`表示issue模块下的list模板
 * 需要使用的时候用extractTemplate获得模板的HTML，如`_utils.extractTemplate('#tmpl-issue-list', _tmplIssue)`
 
-#路由与API调用
+# 路由与API调用
 
 * 使用严格模式，即use strict
 * restful API调用需要引用API这个service，使用restful 动词调用即可，如`API.get(url, params).then(yourFunction)`，支持的动词包括get/post/put/delete，同时还支持`API.save(url, data)`的方式调用，此方法会判断是否包含有id，如果有id则调用API.put，否则调用API.post
