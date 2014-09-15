@@ -6,7 +6,7 @@ define [
   BASEAPI = '/api/'
 
   _module.serviceModule
-  .factory 'API', ($http, $location, $q, NOTIFY)->
+  .factory 'API', ($http, $location, $q, NOTIFY, $sce)->
     api =
       #获取jsonp的数据
       ajax: (options)->
@@ -29,7 +29,7 @@ define [
               message = data.message or data
               NOTIFY.error "你没有权限操作此项功能"
             when 401
-              $location.path '/login'
+              $location.path('/login')
             else
             #以后再考虑不同的处理
               NOTIFY.error "未知错误"
