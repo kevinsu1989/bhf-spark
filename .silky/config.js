@@ -48,13 +48,13 @@ module.exports = {
         //是否压缩
         compress: {
             //压缩js，包括coffee
-            js: true,
+            js: false,
             //压缩css，包括less
-            css: true,
+            css: false,
             //压缩html
             html: false,
             //是否压缩internal的js
-            internal: true
+            internal: false
         },
         //将要复制的文件目录，直接复制到目标
         copy: ["images"],
@@ -70,7 +70,7 @@ module.exports = {
             //编译js目录
             "js": {
                 //不编译直接复制的文件
-                copy: /\.min\.js$/i
+                copy: [/\.min\.js$/i, /^vendor/i]
             },
             //编译css目录
             "css": {
