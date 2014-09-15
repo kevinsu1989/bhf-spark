@@ -20,6 +20,7 @@ define [
         remember: $scope.remember
 
       API.post('session', data).then((result)->
-        $location.path $state.params.next || '/'
+        #暂时跳到这个项目
+        $location.path $state.params.next || '/project/1/issue'
       )
   )

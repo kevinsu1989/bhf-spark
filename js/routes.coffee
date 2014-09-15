@@ -8,12 +8,14 @@ define [
   't!/views/commit/all.html'
   't!/views/assets/all.html'
 ], (_ng, _app, _utils, _tmplIssue, _tmplMember, _tmplCommit, _tmplAssets) ->
-  _app.config ($routeProvider, $locationProvider, $stateProvider) ->
+  _app.config ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
 
     issueListView =
       template: _utils.extractTemplate('#tmpl-issue-list', _tmplIssue)
       controller: 'issueListController'
+
+    $urlRouterProvider.otherwise('/project/1/issue');
 
     $stateProvider
     #登录
