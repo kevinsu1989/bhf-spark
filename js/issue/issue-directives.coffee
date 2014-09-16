@@ -14,11 +14,17 @@ define [
 
   )
 
+  .directive('issuePriorityDropdown', ->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-issue-priority-dropdown', _template
+    link: (scope, element, attr)->
+  )
+
   .directive('issueDetails', (API)->
     restrict: 'A'
     replace: true
     link: (scope, element, attr)->
-
       scope.editing = false
       scope.$watch 'issue', ->
         return if not scope.issue
@@ -27,6 +33,7 @@ define [
       scope.$on 'dropdown:selected', (event, type, value)->
         switch type
           when 'issue:owner' then API.put "#{scope.api}/plan", owner: value
+          when 'issue:priority' then API.put "#{scope.api}/priority", priority: value
 
       scope.onClickDelete = ($event)->
         alert('删除issue')

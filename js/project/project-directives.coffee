@@ -30,10 +30,6 @@ define [
     link: (scope, element, attrs)->
       loaded = false
 
-      attrs.$observe('selected', ->
-        scope.selected = attrs.selected
-      )
-
       #获取到数据后，调用dropdown
       attrs.$observe('items', ->
         #异步获取数据时，items可能还没有赋值，也可能被多次赋值

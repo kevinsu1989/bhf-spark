@@ -6,21 +6,19 @@
                 <i class="small icon"></i>
                 <label>{{project.title}}</label>
             </div>
-            <div class="owner" dropdown data-name="issue:owner" data-text-container="label">
+            <div class="owner" dropdown data-name="issue:owner" data-text-container="label" data-selected="{{issue.owner}}">
                 <i class="icon small"></i>
-                <label>{{issue.owner_name || '指派给'}}</label>
-                <project-member-dropdown data-items="{{projectMember}}" data-selected="{{issue.owner}}"></project-member-dropdown>
+                <label>{{issue.owner_name || '不指定'}}</label>
+                <project-member-dropdown data-items="{{projectMember}}"></project-member-dropdown>
             </div>
             <div class="finish-date">
                 <i class="icon small"></i>
                 <label>{{issue.plan_finish_time | date}}</label>
             </div>
-            <div class="priority"
-                 pop-menu data-items='[{"text":"紧急", "value": 1}]'
-                 data-none="未指定优先级"
-            >
+            <div class="priority" dropdown data-name="issue:priority" data-text-container="label" data-selected="{{issue.priority}}">
                 <i class="icon small"></i>
-                <label>重要程度</label>
+                <label>中</label>
+                <issue-priority-dropdown></issue-priority-dropdown>
             </div>
             <div class="category">
                 <i class="icon small"></i>

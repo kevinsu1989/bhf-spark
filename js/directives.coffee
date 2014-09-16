@@ -19,12 +19,14 @@ define [
       $menus.bind 'mouseleave', -> $menus.fadeOut()
       $self.bind 'click', -> $menus.fadeIn()
 
-      scope.$watch 'selected', ->
+      attrs.$observe('selected', ->
         return if not scope.items
-        selected = scope.selected || -1
+        selected = attrs.selected || -1
         $current = $menus.find("a[data-value='#{selected}']")
         $text.text $current.text()
-        scope.$broadcast 'dropdown:selected', attrs.name, selected
+      )
+
+        #scope.$broadcast 'dropdown:selected', attrs.name, selected
 
       $menus.bind 'click', (e)->
         e.stopPropagation()
