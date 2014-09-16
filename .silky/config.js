@@ -8,7 +8,7 @@ module.exports = {
     proxy: {
         forward: {
             //定义代理转发
-            "/api": "http://192.168.8.103:8001/api"
+            "/api": "http://192.168.8.108:8001/api"
         }
     },
     //实时刷新

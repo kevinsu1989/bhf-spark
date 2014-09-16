@@ -1,4 +1,4 @@
-<article class="issue-details" issue-details>
+<article class="issue-details" issue-details id="issue-details">
     <div style="overflow: auto; height: 100%; position:relative;">
         <!--展示一个issue的所有内容-->
         <header ng-hide="articleOnly">
@@ -6,15 +6,19 @@
                 <i class="small icon"></i>
                 <label>{{project.title}}</label>
             </div>
-            <div class="owner">
+            <div class="owner" dropdown data-name="issue:owner" data-text-container="label">
                 <i class="icon small"></i>
                 <label>{{issue.owner_name || '指派给'}}</label>
+                <project-member-dropdown data-items="{{projectMember}}" data-selected="{{issue.owner}}"></project-member-dropdown>
             </div>
             <div class="finish-date">
                 <i class="icon small"></i>
                 <label>{{issue.plan_finish_time | date}}</label>
             </div>
-            <div class="priority">
+            <div class="priority"
+                 pop-menu data-items='[{"text":"紧急", "value": 1}]'
+                 data-none="未指定优先级"
+            >
                 <i class="icon small"></i>
                 <label>重要程度</label>
             </div>

@@ -13,6 +13,7 @@ define [
   './assets/index'
   'angularRoute'
   'v/ui-router'
+  './directives'
 ], (_ng) ->
   _ng.module 'mic', [
     'ngRoute'

@@ -43,7 +43,14 @@ define [
       get: (url, params)-> @ajax url: url, params: params
       post: (url, data)-> @ajax url: url, data: data, method: 'post'
       delete: (url, params)-> @ajax url: url, params: params, method: 'delete'
-      put: (url, data)-> @ajax url: url, data: data, method: 'put'
+      put: (url, id, data)->
+        #如果第二个参数为number，则将id加到url后面
+        if typeof(id) is 'number'
+          url += "/#{id}"
+        else
+          data = id
+
+        @ajax url: url, data: data, method: 'put'
 
       save: (url, data)->
         if data.id

@@ -126,4 +126,15 @@
             </div>
         </header>
     </textarea>
+
+    <textarea id="tmpl-project-member-dropdown">
+        <div class="dropdown dropdown-tip">
+            <ul class="dropdown-menu">
+                <li><a data-value="-1">不指定</a></li>
+                <li ng-repeat="item in items">
+                    <a data-value="{{item.member_id}}">{{item.username}}</a>
+                </li>
+            </ul>
+        </div>
+    </textarea>
 </div>
