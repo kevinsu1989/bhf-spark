@@ -1,7 +1,6 @@
 define [
   'ng-module'
   'utils'
-  'twins-editor'
 ], (_module,_utils) ->
 
   _module.directiveModule.directive('editor', ->
