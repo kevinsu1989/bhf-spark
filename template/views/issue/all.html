@@ -16,22 +16,35 @@
     <!--列表显示issue-->
     <textarea id="tmpl-issue-list">
         <div class="issue-list">
-            <header>
-                <h3>{{title}}</h3>
-            </header>
-            <div class="details">
-                <h4>待办中<span class="badge">({{undoneIssues.pagination.recordCount}})</span></h4>
-                <ul>
-                    <li ng-repeat="issue in undoneIssues.items">
-                        <issue-list-cell data="issue"></issue-list-cell>
-                    </li>
-                </ul>
-                <h4>已完成<span class="badge">({{doneIssues.pagination.recordCount}})</span></h4>
-                <ul>
-                    <li ng-repeat="issue in doneIssues.items">
-                        <issue-list-cell data="issue"></issue-list-cell>
-                    </li>
-                </ul>
+            <h3>{{title}}</h3>
+            <div class="create">
+                <input type="text" placeholder="创建新的任务" autofocus />
+            </div>
+
+            <div>
+                <!--待办中的部分-->
+                <div class="list">
+                    <header>
+                        <h3>待办中<span class="badge">({{undoneIssues.pagination.recordCount}})</span></h3>
+                    </header>
+                    <ul class="details">
+                        <li ng-repeat="issue in undoneIssues.items" class="row">
+                            <issue-list-cell data="issue"></issue-list-cell>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--已经完成的部分-->
+                <div class="list">
+                    <header>
+                      <h3>已完成<span class="badge">({{doneIssues.pagination.recordCount}})</span></h3>
+                    </header>
+                    <ul class="details">
+                        <li ng-repeat="issue in doneIssues.items" class="row">
+                            <issue-list-cell data="issue"></issue-list-cell>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </textarea>
