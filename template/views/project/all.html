@@ -119,9 +119,41 @@
                     <!--<input type="text" placeholder="请输入搜索关键字" />-->
                 </div>
                 <div class="menu">
-                    <i class="notify small icon"></i>
-                    <i class="help small icon"></i>
-                    <i class="profile small icon"></i>
+                    <div  class="notify">
+                        <i class="small icon"></i>
+                    </div>
+                    <div class="help" dropdown>
+                        <i class="small icon"></i>
+                        <div class="dropdown dropdown-tip">
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="help.html">帮助</a>
+                                </li>
+                                <li>
+                                    <a href="feedback.html">反馈建议</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="profile" dropdown>
+                        <i class="small icon"></i>
+                        <div class="dropdown dropdown-tip">
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-value="profile">个人资料</a>
+                                </li>
+                                <li>
+                                    <a data-value="notification">通知设置</a>
+                                </li>
+                                <li>
+                                    <a data-value="changePassword">修改密码</a>
+                                </li>
+                                <li>
+                                    <a data-value="logout">退出</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>

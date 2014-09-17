@@ -33,6 +33,10 @@ define [
         $this = $(e.target)
         $menus.fadeOut()
 
+        #如果没有有指定data-value，则不处理
+        value = $this.attr('data-value')
+        return if not value
+        
         $text.text $this.text()
-        scope.$broadcast 'dropdown:selected', attrs.name, $this.attr('data-value')
+        scope.$broadcast 'dropdown:selected', attrs.name, value
   )
