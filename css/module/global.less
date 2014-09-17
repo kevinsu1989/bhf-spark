@@ -124,41 +124,39 @@ i.icon{
   }
 }
 
-.status.icon.small{
-  &.pause{
-    background-position: -160px -120px;
-  }
-
-  &.new, &.doing{
-    background-position: -160px -80px;
-  }
-
-  &.done{
-    background-position: -160px -160px;
-  }
-}
 
 .tab{
   .nav{
+    background-color: #e2e2e2;
+    overflow: hidden;
     li{
       float: left;
-      padding: 10px;
+      padding: 12px 10px 0 10px;
       cursor: pointer;
-      border-right: 1px solid #CCC;
       text-align: center;
       min-width: 100px;
       font-weight: bold;
 
       &.active, &:hover{
-        color: @link-color;
+        &:after{
+          content: '';
+          background-color: #37aeeb;
+          height: 2px;
+          display: block;
+          width: 120%;
+          position: relative;
+          margin-top: 10px;
+        }
       }
     }
     .clearfix()
   }
 
-  .panel>div{
-    display: none;
+  .content>.panel{
+    overflow: hidden;
+    padding: 10px;
   }
+
 }
 
 button{
@@ -185,6 +183,27 @@ button{
   }
 }
 
+input[type='text'], input[type='password'], input[type='email'], textarea{
+  border: 1px solid #CCC;
+
+  &.small{
+    width: 230px;
+  }
+
+  &.medium{
+    width: 370px;
+  }
+
+  &.large{
+    width: 500px;
+  }
+}
+
+input.text{
+  height: 30px;
+}
+
+
 .right{
   text-align: right;
 }
@@ -195,4 +214,108 @@ button{
 
 .center{
   text-align: center;
+}
+
+.inline{
+  display: inline-block;
+}
+
+.hide{
+  display: none;
+}
+
+.fullscreen{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+//  width: 100%;
+//  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.modal{
+  display: none;
+  position: absolute;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.95);
+  min-width: 200px;
+  width: 600px;
+
+  .inner{
+    position: relative;
+  }
+
+
+  button.close-modal{
+    i{
+      width: 13px;
+      height: 13px;
+      background-position: -200px -360px;
+    }
+
+    position: absolute;
+    right: 0;
+    margin: 13px 10px 0 0;
+    background-color: transparent;
+  }
+
+  .box-shadow(0 0 8px rgba(0, 0, 0, 0.8));
+}
+
+.standard-form{
+  .row{
+    padding: 10px 20px;
+  }
+
+  label.caption{
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 20px;
+  }
+
+  .row.control{
+    padding: 10px 0 10px 145px;
+  }
+
+  .git-list{
+    li{
+      padding: 6px 0;
+      display: flex;
+
+      &.create{
+        padding: 10px 0 0 0;
+
+        &:hover{
+         background-color: transparent;
+        }
+
+        input{
+          height: 34px;
+        }
+      }
+
+      i.remove{
+        background-position: -200px -360px;
+        cursor: pointer;
+      }
+
+      button{
+        background-color: transparent;
+        height: 14px;
+        width: 22px;
+      }
+
+      label{
+        flex: 1;
+      }
+
+      &:hover{
+        background-color: #e9ebf0;
+      }
+    }
+  }
 }

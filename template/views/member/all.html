@@ -83,4 +83,115 @@
             </ul>
         </div>
     </textarea>
+
+    <!--修改密码-->
+    <textarea id="tmpl-member-change-password">
+        <div class="panel">
+            <form class="standard-form">
+                <div class="row">
+                    <label class="caption">
+                        原密码
+                    </label>
+                    <input class="medium text" type="password" placeholder="您的旧密码" />
+                </div>
+
+                <div class="row">
+                    <label class="caption">
+                        新密码
+                    </label>
+                    <input class="medium text" type="password" placeholder="请输入新密码" />
+                </div>
+
+                <div class="row">
+                    <label class="caption">
+                        重复密码
+                    </label>
+                    <input class="medium text" type="password" placeholder="两次输入的密码必需一致" />
+                </div>
+
+                <div class="row control">
+                    <button class="primary default">保存</button>
+                    <button class="cancel default">取消</button>
+                </div>
+            </form>
+        </div>
+    </textarea>
+
+    <!--用户资料修改-->
+    <textarea id="tmpl-member-profie">
+        <div class="panel">
+            <form class="standard-form">
+                <div class="row">
+                    <label class="caption">
+                        用户名
+                    </label>
+                    <input class="medium text" type="text" placeholder="用于登录的用户名" />
+                </div>
+
+                <div class="row">
+                    <label class="caption">
+                        姓名
+                    </label>
+                    <input class="medium text" type="text" placeholder="用户姓名" />
+                </div>
+
+                <div class="row">
+                    <label class="caption">
+                        邮箱
+                    </label>
+                    <input class="medium text" type="text" placeholder="用于接收邮件通知" />
+                </div>
+
+                <div class="row">
+                    <label class="caption">
+                        Git帐号
+                    </label>
+                    <div class="inline">
+                        <ul class="git-list">
+                            <li>
+                                <label>conis.yi@gmail.com</label>
+                                <button ng-click="onClickRemove($event, @index)">
+                                    <i class="icon small remove"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <label>conis.yi@gmail.com</label>
+                                <button ng-click="onClickRemove($event, @index)">
+                                    <i class="icon small remove"></i>
+                                </button>
+                            </li>
+                            <li class="create">
+                                <input type="text" placeholder="输入git地址后回车" class="medium" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row control">
+                    <button class="primary default">保存</button>
+                    <button class="cancel default">取消</button>
+                </div>
+            </form>
+        </div>
+    </textarea>
+
+    <textarea id="tmpl-member-setting">
+        <div class="modal">
+            <div class="inner">
+                <button class="close-modal"><i class="icon"></i></button>
+                <div class="tab">
+                    <ul class="nav">
+                        <li class="active">个人资料</li>
+                        <li>修改密码</li>
+                        <li>通知设置</li>
+                    </ul>
+                    <div class="content">
+                        <member-profile></member-profile>
+                        <member-change-password></member-change-password>
+                        <member-notification-setting></member-notification-setting>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </textarea>
 </div>

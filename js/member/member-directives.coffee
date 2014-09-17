@@ -1,11 +1,13 @@
 define [
   '../ng-module'
   '../utils'
-], (_module,_utils) ->
+  't!/views/member/all.html'
+], (_module,_utils, _template) ->
 
   _module.directiveModule
-#  .directive('login', ($location, API)->
-#    restrict: 'A'
-#    replace: false
-#    link: (scope, element, attr)->
-#  )
+  .directive('memberSetting', ($location, API)->
+    restrict: 'E'
+    replace: false
+    template: _utils.extractTemplate '#tmpl-member-setting', _template
+    link: (scope, element, attr)->
+  )
