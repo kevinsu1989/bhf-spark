@@ -18,7 +18,7 @@
         <div class="issue-list">
             <h3>{{title}}</h3>
             <div class="create">
-                <input type="text" placeholder="创建新的任务" autofocus />
+                <input type="text" placeholder="请输入您将要创建的任务，支持指令" autofocus issue-quick-editor ng-keydown="onKeyDown($event)" data-category="1" />
             </div>
 
             <div>

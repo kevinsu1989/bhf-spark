@@ -7,8 +7,12 @@ define [
   _module.controllerModule
   .controller('issueListController', ($scope, $stateParams, API, $state)->
     #搜索issue
-    searchIssue = (project_id, cond)->
-      url = "project/#{project_id}/issue"
+    searchIssue = ()->
+      #搜索条件
+      cond = {}
+      cond.tag = $state.params.tag if $state.current.data?.isTag
+
+      url = "project/#{$stateParams.project_id}/issue"
       cond = cond || {}
       params = {}
       if cond.keyword #搜索
@@ -38,12 +42,9 @@ define [
         $scope.doneIssues = result
     #          scope.$apply()
 
-    #获取搜索条件
-    searchCond = (->
-      cond = {}
-      cond.tag = $state.params.tag if $state.current.data?.isTag
-      cond
-    )()
 
-    searchIssue $stateParams.project_id, searchCond
+    #收到issue被创建后，检查是否需要显示当前列表
+    $scope.$on 'issue:changed', (event, status, id)-> searchIssue()
+
+    searchIssue()
   )
