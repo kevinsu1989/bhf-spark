@@ -28,15 +28,17 @@ define [
 
         #scope.$broadcast 'dropdown:selected', attrs.name, selected
 
+
       $menus.bind 'click', (e)->
         e.stopPropagation()
         $this = $(e.target)
+        $parent = $this.closest('a')
         $menus.fadeOut()
 
         #如果没有有指定data-value，则不处理
-        value = $this.attr('data-value')
+        value = $parent.attr('data-value')
         return if not value
 
-        $text.text $this.text()
+        $text.text $parent.text()
         scope.$broadcast 'dropdown:selected', attrs.name, value
   )

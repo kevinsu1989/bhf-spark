@@ -11,7 +11,6 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-list-cell', _template
     link: (scope, element, attrs)->
-      console.log scope
       #收到更改状态的通知
       scope.$on 'dropdown:selected', (event, type, value)->
         return if type isnt 'issue:status'
