@@ -49,7 +49,7 @@
     display: flex;
     border-bottom: @normal-border;
 
-    .icon{
+    .icon.cell{
       margin: 10px 0 0 10px;
       width: 16px;
       height: 16px;
@@ -260,4 +260,19 @@
   text-align: center;
   display: inline-block;
   margin-right: 10px;
+}
+
+
+i.icon.small{
+  &.priority-3 {
+    background-position: -160px -280px;
+  }
+
+  &.priority-2 {
+    background: none;
+  }
+
+  &.priority-1{
+    background-position: -120px -280px;
+  }
 }

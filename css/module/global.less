@@ -47,12 +47,18 @@ h1,h2,h3,h4,h5,h6{
 i.icon{
   .sprite();
   display: inline-block;
+
+  &.small{
+    width: 20px;
+    height: 20px;
+  }
+
+  &.small-32{
+    width: 32px;
+    height: 32px;
+  }
 }
 
-.icon.small{
-  width: 20px;
-  height: 20px;
-}
 
 
 .master-panel{
@@ -102,6 +108,25 @@ i.icon{
   .details-panel{
     flex: 1;
     height: 100%;
+    .not-found{
+      width: 100%;
+      height: 100%;
+      background-color: #f7f8f9;
+      overflow: hidden;
+
+      .icon{
+        background-position: -40px -440px;
+        width: 80px;
+        height: 80px;
+      }
+
+      p{
+        margin: 200px auto;
+        text-align: center;
+        font-size: 60px;
+        color: #CCC;
+      }
+    }
   }
 }
 
