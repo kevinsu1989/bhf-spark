@@ -18,7 +18,7 @@
 
   .row{
     .icon{
-      margin-right: 10px;
+//      margin-right: 10px;
       margin-bottom: -4px;
     }
 
@@ -128,10 +128,6 @@
 
     .title{
       padding: 10px 0;
-      .icon{
-        margin-right: 6px;
-      }
-
       h3{
         display: inline-block;
         vertical-align: middle;
@@ -243,16 +239,25 @@
   }
 }
 
-.status.icon.small{
-  &.pause{
-    background-position: -160px -120px;
+.issue-status{
+  i.icon{
+    &.pause{
+      background-position: -160px -120px;
+    }
+
+    &.new, &.doing{
+      background-position: -160px -80px;
+    }
+
+    &.done{
+      background-position: -160px -160px;
+    }
+    margin: 0;
   }
 
-  &.new, &.doing{
-    background-position: -160px -80px;
-  }
-
-  &.done{
-    background-position: -160px -160px;
-  }
+  cursor: pointer;
+  background-color: transparent;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10px;
 }

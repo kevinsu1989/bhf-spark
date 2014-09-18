@@ -2,13 +2,16 @@
     <!--单个issue-->
     <textarea id="tmpl-issue-list-cell">
         <div class="row">
-            <i class="status icon small" ng-class="data.status" ng-click="clickStatus()"></i>
-            <i class="priority" ng-class="'priority-' + data.priority" ng-click="clickPriority()"></i>
-            <a class="title" href="/project/{{data.project_id}}/issue/{{data.id}}">{{data.title}}</a>
-            <span class="issue-id memo">#{{data.id}}</span>
+            <div class="issue-status" dropdown data-selected="{{issue.status}}" data-name="issue:status">
+                <i class="icon small" ng-class="issue.status" ng-click="clickStatus()"></i>
+                <issue-status-dropdown></issue-status-dropdown>
+            </div>
+            <i class="priority" ng-class="'priority-' + issue.priority" ng-click="clickPriority()"></i>
+            <a class="title" href="/project/{{issue.project_id}}/issue/{{issue.id}}">{{issue.title}}</a>
+            <span class="issue-id memo">#{{issue.id}}</span>
             <div class="info">
-                <span class="member memo">{{data.owner_name}}</span>
-                <span class="date memo">{{data.plan_finish_time | date}}</span>
+                <span class="member memo">{{issue.owner_name}}</span>
+                <span class="date memo">{{issue.plan_finish_time | date}}</span>
             </div>
         </div>
     </textarea>
@@ -29,7 +32,7 @@
                     </header>
                     <ul class="details">
                         <li ng-repeat="issue in undoneIssues.items" class="row">
-                            <issue-list-cell data="issue"></issue-list-cell>
+                            <issue-list-cell></issue-list-cell>
                         </li>
                     </ul>
                 </div>
@@ -100,6 +103,23 @@
                 </li>
                 <li>
                     <a data-value="3">紧急</a>
+                </li>
+            </ul>
+        </div>
+    </textarea>
+
+    <!--任务状态-->
+    <textarea id="tmpl-issue-status-dropdown">
+        <div class="dropdown dropdown-tip">
+            <ul class="dropdown-menu">
+                <li>
+                    <a data-value="doing">进行中</a>
+                </li>
+                <li>
+                    <a data-value="pause">暂停</a>
+                </li>
+                <li>
+                    <a data-value="done">已完成</a>
                 </li>
             </ul>
         </div>

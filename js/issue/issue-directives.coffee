@@ -5,44 +5,33 @@ define [
 ], (_module,_utils, _template) ->
 
   _module.directiveModule
-  .directive('issueListCell', ->
+  .directive('issueListCell', (API)->
     restrict: 'E'
-    scope: data: '='
+#    scope: data: '='
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-list-cell', _template
-    link: (scope, element, attr)->
-
+    link: (scope, element, attrs)->
+      console.log scope
+      #收到更改状态的通知
+      scope.$on 'dropdown:selected', (event, type, value)->
+        return if type isnt 'issue:status'
+        api = "project/#{scope.issue.project_id}/issue/#{scope.issue.id}/status"
+        API.put api, status: value
   )
 
-  .directive('issuePriorityDropdown', ->
+  .directive('issuePriorityDropdown', (API)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-priority-dropdown', _template
-    link: (scope, element, attr)->
+    link: (scope, element, attrs)->
   )
 
-  .directive('issueDetails', (API)->
-    restrict: 'A'
+
+  .directive('issueStatusDropdown', (API)->
+    restrict: 'E'
     replace: true
-    link: (scope, element, attr)->
-      scope.editing = false
-      scope.$watch 'issue', ->
-        return if not scope.issue
-        scope.api = "project/#{scope.issue.project_id}/issue/#{scope.issue.id}"
+    template: _utils.extractTemplate '#tmpl-issue-status-dropdown', _template
+    link: (scope, element, attrs)->
+      scope.$on 'dropdown:selected', ->
 
-      scope.$on 'dropdown:selected', (event, type, value)->
-        switch type
-          when 'issue:owner' then API.put "#{scope.api}/plan", owner: value
-          when 'issue:priority' then API.put "#{scope.api}/priority", priority: value
-
-      scope.onClickDelete = ($event)->
-        alert('删除issue')
-
-      scope.onClickEdit = ($event)->
-        scope.editing = true
-        #延时让页面先显示出来，然后初始化editor(仅在第一次初始化)，避免editor获取不到宽度
-        window.setTimeout (->scope.$emit 'editor:content', 'issue'), 1
-
-      scope.$on 'editor:submit', (event, data)->
-        console.log data
   )

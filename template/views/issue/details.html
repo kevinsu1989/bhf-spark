@@ -18,7 +18,7 @@
             <div class="priority" dropdown data-name="issue:priority" data-text-container="label" data-selected="{{issue.priority}}">
                 <i class="icon small"></i>
                 <label>中</label>
-                <issue-priority-dropdown></issue-priority-dropdown>
+                <issue-priority-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.id}}"></issue-priority-dropdown>
             </div>
             <div class="category">
                 <i class="icon small"></i>
@@ -37,7 +37,10 @@
         <!--标题部分-->
         <div class="issue panel">
             <div class="title">
-                <i class="status icon small" ng-class="issue.status"></i>
+                <div class="issue-status" dropdown data-selected="{{issue.status}}" data-name="issue:status">
+                    <i class="issue-status icon small" ng-class="issue.status"></i>
+                    <issue-status-dropdown></issue-status-dropdown>
+                </div>
                 <h3>{{issue.title}}</h3>
 
                 <div class="toolbar">
