@@ -1,6 +1,8 @@
 .project-menu{
   font-size: 16px;
   background-color: #cbcbcb;
+  position: relative;
+  height: 100%;
 
   a:link, a:visited{
     color: #333;
@@ -126,6 +128,41 @@
 
     &.active .icon{
       background-position: -80px -320px;
+    }
+  }
+
+  .menu-bar{
+    background-color: #333333;
+    color: #cbcbcb;
+    position: absolute;
+    bottom: @project-header-height + 10;
+    width: 100%;
+    height: @project-header-height;
+    display: flex;
+
+    .icon{
+      width: 20px;
+      height: 20px;
+    }
+
+    .item{
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      padding-top: 12px;
+
+      .icon, span{
+        vertical-align: middle;
+      }
+
+    }
+
+    .create .icon{
+      background-position: -240px -360px;
+    }
+
+    .setting .icon{
+      background-position: -40px -400px;
     }
   }
 }
