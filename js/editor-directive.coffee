@@ -9,7 +9,7 @@ define [
     replace: true
     scope: {}
     templateUrl: '/views/editor.html'
-    link: (scope, element, attr)->
+    link: (scope, element, attrs)->
       simditor = null
       initEditor = ()->
         options =
@@ -18,22 +18,23 @@ define [
 
         new Simditor options
 
+      scope.showAlwaysTop = attrs.showAlwaysTop in [true, 'true']
       scope.$on 'editor:content', ($event, name, content)->
         #如果有设定name，且当前name和设定的name不一致，则不处理
-        return if attr.name and attr.name isnt name
+        return if attrs.name and attrs.name isnt name
         simditor = initEditor(name) if not simditor
         simditor.focus()
         simditor.setValue content
 
       scope.onClickCancel = ->
-        scope.$emit 'editor:cancel', attr.name
+        scope.$emit 'editor:cancel', attrs.name
 
       scope.onClickSubmit = ->
         data =
           content: simditor.getValue()
           always_top: scope.always_top
 
-        scope.$emit 'editor:submit', attr.name, data
+        scope.$emit 'editor:submit', attrs.name, data
   )
 
   #快速编辑的功能

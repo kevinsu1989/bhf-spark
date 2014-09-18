@@ -65,7 +65,7 @@
                 </div>
                 <div class="content row" ng-bind-html="issue.content | unsafe" ng-show="!editing"></div>
                 <div ng-show="editing">
-                    <editor name="issue"></editor>
+                    <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}"></editor>
                 </div>
             </div>
 
