@@ -3,8 +3,9 @@
 define [
   './ng-module'
   './utils'
+  'v/datetime/datetimepicker'
   '_'
-], (_module,_utils) ->
+], (_module,_utils,_template) ->
 
   _module.directiveModule
 
@@ -40,5 +41,15 @@ define [
         return if not value
 
         $text.text $parent.text()
-        scope.$broadcast 'dropdown:selected', attrs.name, value
+        scope.$emit 'dropdown:selected', attrs.name, value
+  )
+
+  .directive('datetimepicker', ()->
+    restrict: 'A'
+    replace: true
+    template:_utils.extractTemplate '#tmpl-project-datetime-picker', _template
+    link:(scope,element,attr)->
+      console.log 'test'
+      self = $(element)
+      self.datetimepicker()
   )

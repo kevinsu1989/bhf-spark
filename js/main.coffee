@@ -8,21 +8,15 @@ require.config
     t: 'vendor/require.text'
     moment: 'vendor/moment'
     angularRoute: 'vendor/angular-route'
-    select2: 'vendor/select2/select2_locale_zh-CN'
-    datepicker: 'vendor/bootstrap-datepicker.zh-CN'
-    'date-range-picker': 'vendor/date-range-picker'
     echarts: 'vendor/echarts'
     utils: 'utils'
-    'twins-editor': 'jquery.twins-editor'
   shim:
     'notify': ['jquery', 'v/jquery.noty']
     ng: exports : 'angular'
     angularRoute: deps: ['ng']
     'v/jquery.transit': ['jquery', '_']
     app: ['ng', 'jquery']
-    select2: ['v/select2/select2', 'jquery']
-    datepicker: ['vendor/bootstrap-datepicker']
-#    'twins-editor': ['jquery', 'v/simditor']
+    datetimepicker: ['vendor/datetime/datetimepicker']
 
 window.name = "NG_DEFER_BOOTSTRAP!";
 
