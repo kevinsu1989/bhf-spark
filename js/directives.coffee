@@ -60,5 +60,7 @@ define [
     replace: false
     link: (scope, element, attrs)->
       $o = $(element).simpleTab()
+      attrs.$observe 'activeIndex', ()->
+        $o.simpleTab 'change', parseInt(attrs.activeIndex)
   )
 

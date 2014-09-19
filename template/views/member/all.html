@@ -128,7 +128,12 @@
     <textarea id="tmpl-member-notification">
         <div class="panel">
             <form class="standard-form">
-                通知设置
+                <div class="row">
+                    <label class="caption">
+                        通知设置
+                    </label>
+                    此功能即将推出，敬请期待
+                </div>
             </form>
         </div>
     </textarea>
@@ -137,7 +142,7 @@
         <div class="modal">
             <div class="inner">
                 <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
-                <div class="tab" simple-tab>
+                <div class="tab" simple-tab data-active-index="{{activeIndex}}">
                     <ul class="nav" data-field="nav">
                         <li>个人资料</li>
                         <li>修改密码</li>
@@ -146,7 +151,7 @@
                     <div class="content" data-field="content">
                         <member-profile></member-profile>
                         <member-change-password></member-change-password>
-                        <member-notification-setting></member-notification-setting>
+                        <member-notification></member-notification>
                     </div>
                 </div>
             </div>
