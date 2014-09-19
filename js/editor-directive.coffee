@@ -1,41 +1,40 @@
 define [
   'ng-module'
   'utils'
-  ''
+  'v/simditor'
 ], (_module,_utils) ->
 
   _module.directiveModule.directive('editor', ->
     restrict: 'E'
     replace: true
+    scope: {}
     templateUrl: '/views/editor.html'
-    link: (scope, element, attr)->
+    link: (scope, element, attrs)->
       simditor = null
-      initEditor = ->
+      initEditor = ()->
         options =
           textarea: element.find('textarea')
           pasteImage: true
 
-        simditor = new Simditor options
-#        simditor.on 'blur', ()->
-#          scope.$emit 'editor:willHide'
+        new Simditor options
 
+      scope.showAlwaysTop = attrs.showAlwaysTop in [true, 'true']
       scope.$on 'editor:content', ($event, name, content)->
         #如果有设定name，且当前name和设定的name不一致，则不处理
-        return if attr.name and attr.name isnt name
-        initEditor() if not simditor
+        return if attrs.name and attrs.name isnt name
+        simditor = initEditor(name) if not simditor
         simditor.focus()
         simditor.setValue content
 
       scope.onClickCancel = ->
-        scope.$emit 'editor:cancel', attr.name
+        scope.$emit 'editor:cancel', attrs.name
 
       scope.onClickSubmit = ->
-        alert(attr.name)
         data =
           content: simditor.getValue()
           always_top: scope.always_top
 
-        scope.$emit 'editor:submit', attr.name, data
+        scope.$emit 'editor:submit', attrs.name, data
   )
 
   #快速编辑的功能

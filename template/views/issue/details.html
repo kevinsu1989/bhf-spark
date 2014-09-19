@@ -50,7 +50,8 @@
                         <i class="issue-status icon small" ng-class="issue.status"></i>
                         <issue-status-dropdown></issue-status-dropdown>
                     </div>
-                    <h3>{{issue.title}}</h3>
+                    <input type="text" class="text" ng-show="editing" ng-model="issue.title" />
+                    <h3 ng-show="!editing">{{issue.title}}</h3>
 
                     <div class="toolbar">
                         <a ng-click="onClickEdit($event, data)" href="javascript:void(0)" class="edit">编辑</a>
@@ -63,9 +64,9 @@
                     <span class="timestamp">{{issue.timestamp | date}}</span>
                     <span class="id">#{{issue.id}}</span>
                 </div>
-                <div class="content" ng-bind-html="issue.content | unsafe" ng-show="!editing"></div>
+                <div class="content row" ng-bind-html="issue.content | unsafe" ng-show="!editing"></div>
                 <div ng-show="editing">
-                    <editor name="issue"></editor>
+                    <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}"></editor>
                 </div>
             </div>
 

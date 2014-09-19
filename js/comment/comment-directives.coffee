@@ -36,19 +36,23 @@ define [
   .directive('commentEditor', (API)->
     restrict: 'E'
     replace: true
+    scope: {}
     template: _utils.extractTemplate '#tmpl-comment-editor', _template
-    link: (scope, element, attr)->
+    link: (scope, element, attrs)->
       activeClass = 'active'
+      editorKey = 'comment'
       #focus后，弹出大的编辑器
       scope.onFocusEditor = ()->
         element.addClass activeClass
-        scope.$broadcast 'editor:content', 'comment'
+        scope.$broadcast 'editor:content', editorKey
         return true
 
-      scope.$on 'editor:cancel', ->
+      scope.$on 'editor:cancel', (event, name)->
+        return if editorKey isnt name
         element.removeClass activeClass
 
-      scope.$on 'editor:submit', (event, data)->
+      scope.$on 'editor:submit', (event, name, data)->
+        return if editorKey isnt name
         element.removeClass activeClass
-        console.log data
+
   )

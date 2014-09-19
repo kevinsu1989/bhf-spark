@@ -5,7 +5,8 @@ define [
   './utils'
   'v/datetime/datetimepicker'
   '_'
-], (_module,_utils,_template) ->
+  't!/views/global-all.html'
+], (_module,_utils, _, _template) ->
 
   _module.directiveModule
 
@@ -43,8 +44,8 @@ define [
         $text.text $parent.text()
         scope.$emit 'dropdown:selected', attrs.name, value
   )
-
-  .directive('datetimepicker', ()->
+    #日期选择控件
+  .directive('datetimePicker', ()->
     restrict: 'A'
     replace: true
     template:_utils.extractTemplate '#tmpl-project-datetime-picker', _template
@@ -52,4 +53,13 @@ define [
       console.log 'test'
       self = $(element)
       self.datetimepicker()
+
+  )
+
+  #git的列表编辑器
+  .directive('gitListEditor', ->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-global-git-list', _template
+    link: (scope, element, attrs)->
   )

@@ -1,38 +1,4 @@
 <div>
-    <!--修改个人资料-->
-    <textarea id="tmpl-member-profile">
-        <ul>
-            <li>
-                <label class="caption">
-                    姓名
-                </label>
-                <input type="text">
-            </li>
-            <li>
-                <label class="caption">
-                    用户名
-                </label>
-                <input type="text">
-            </li>
-            <li>
-                <label class="caption">
-                    邮箱
-                </label>
-                <input type="text">
-            </li>
-            <li>
-                <label class="caption">
-                    Git帐号
-                </label>
-                <textarea rows="10" placeholder="多个git帐号，请每行一个git地址"></textarea>
-            </li>
-            <li class="control">
-                <button class="primary">保存</button>
-                <button class="cancel">取消</button>
-            </li>
-        </ul>
-    </textarea>
-
     <!--修改用户的密码-->
     <textarea id="tmpl-change-password">
         <ul>
@@ -118,7 +84,7 @@
     </textarea>
 
     <!--用户资料修改-->
-    <textarea id="tmpl-member-profie">
+    <textarea id="tmpl-member-profile">
         <div class="panel">
             <form class="standard-form">
                 <div class="row">
@@ -147,23 +113,7 @@
                         Git帐号
                     </label>
                     <div class="inline">
-                        <ul class="git-list">
-                            <li>
-                                <label>conis.yi@gmail.com</label>
-                                <button ng-click="onClickRemove($event, @index)">
-                                    <i class="icon small remove"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <label>conis.yi@gmail.com</label>
-                                <button ng-click="onClickRemove($event, @index)">
-                                    <i class="icon small remove"></i>
-                                </button>
-                            </li>
-                            <li class="create">
-                                <input type="text" placeholder="输入git地址后回车" class="medium" />
-                            </li>
-                        </ul>
+                        <git-list-editor></git-list-editor>
                     </div>
                 </div>
 
@@ -175,10 +125,18 @@
         </div>
     </textarea>
 
+    <textarea id="tmpl-member-notification">
+        <div class="panel">
+            <form class="standard-form">
+                通知设置
+            </form>
+        </div>
+    </textarea>
+
     <textarea id="tmpl-member-setting">
         <div class="modal">
             <div class="inner">
-                <button class="close-modal"><i class="icon"></i></button>
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
                 <div class="tab">
                     <ul class="nav">
                         <li class="active">个人资料</li>
