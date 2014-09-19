@@ -5,6 +5,7 @@ define [
   './utils'
   '_'
   't!/views/global-all.html'
+  'plugin/jquery.honey.simple-tab'
 ], (_module,_utils, _, _template) ->
 
   _module.directiveModule
@@ -52,3 +53,12 @@ define [
     link: (scope, element, attrs)->
 
   )
+
+  #tab的directive
+  .directive('simpleTab', ->
+    restrict: 'A'
+    replace: false
+    link: (scope, element, attrs)->
+      $o = $(element).simpleTab()
+  )
+

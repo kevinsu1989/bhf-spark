@@ -8,10 +8,10 @@ define [
   _module.directiveModule
   .directive('memberSetting', ($location, API)->
     restrict: 'E'
-    replace: false
+    replace: true
     template: _utils.extractTemplate '#tmpl-member-setting', _template
     link: (scope, element, attr)->
-      $o = $($(element).children()[0])
+      $o = $(element)
       $o.modal showClose: false
 
       #接收事件后，加载数据并显示
@@ -21,21 +21,21 @@ define [
 
   .directive('memberProfile', ($location, API)->
     restrict: 'E'
-    replace: false
+    replace: true
     template: _utils.extractTemplate '#tmpl-member-profile', _template
     link: (scope, element, attr)->
   )
 
   .directive('memberChangePassword', ($location, API)->
     restrict: 'E'
-    replace: false
-#    template: _utils.extractTemplate '#tmpl-member-change-password', _template
+    replace: true
+    template: _utils.extractTemplate '#tmpl-member-change-password', _template
     link: (scope, element, attr)->
   )
 
   .directive('memberNotification', ($location, API)->
     restrict: 'E'
-    replace: false
+    replace: true
     template: _utils.extractTemplate '#tmpl-member-notification', _template
     link: (scope, element, attr)->
   )
