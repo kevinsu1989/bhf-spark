@@ -2,6 +2,7 @@ define [
   '../ng-module'
   '../utils'
   't!/views/member/all.html'
+  'v/jquery.modal'
 ], (_module,_utils, _template) ->
 
   _module.directiveModule
@@ -10,6 +11,12 @@ define [
     replace: false
     template: _utils.extractTemplate '#tmpl-member-setting', _template
     link: (scope, element, attr)->
+      $o = $($(element).children()[0])
+      $o.modal showClose: false
+
+      #接收事件后，加载数据并显示
+      scope.$on 'member:setting:show', ()->
+        $o.modal showClose: false
   )
 
   .directive('memberProfile', ($location, API)->
