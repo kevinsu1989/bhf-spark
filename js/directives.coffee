@@ -4,7 +4,8 @@ define [
   './ng-module'
   './utils'
   '_'
-], (_module,_utils) ->
+  't!/views/global-all.html'
+], (_module,_utils, _, _template) ->
 
   _module.directiveModule
 
@@ -41,4 +42,13 @@ define [
 
         $text.text $parent.text()
         scope.$broadcast 'dropdown:selected', attrs.name, value
+  )
+
+  #git的列表编辑器
+  .directive('gitListEditor', ->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-global-git-list', _template
+    link: (scope, element, attrs)->
+
   )
