@@ -1,8 +1,8 @@
 <div>
     <!--缩略图列表-->
-    <textarea id="tmpl-assets-thumbnail">
+    <textarea id="tmpl-asset-thumbnails">
         <ul>
-            <li ng-repeat="for asset in assets">
+            <li ng-repeat="asset in assets.items">
                 <div class="thumbnail">
                     <img src="{{asset.url}}" />
                     <div class="overlay">
