@@ -5,15 +5,11 @@ define [
   './utils'
   '_'
   't!/views/global-all.html'
-<<<<<<< HEAD
   't!/views/project/all.html'
   'pkg/datetime/datetimepicker'
-], (_module, _utils, _, _template, _directiveTmp) ->
-=======
   'plugin/jquery.honey.simple-tab'
-], (_module,_utils, _, _template) ->
+], (_module, _utils, _, _template, _directiveTmp) ->
 
->>>>>>> yxf/master
   _module.directiveModule
 
   .directive('dropdown', ()->
@@ -60,16 +56,19 @@ define [
         format: 'yyyy-MM-dd'
         startView: 2
         minView: 2
+        showMeridian: true
 
       timeOpt =
         format: 'hh:mm:ss'
         startView: 1
         minView: 0
         maxView: 1
+        showMeridian: true
 
       dateTimeOpt =
         format: 'yyyy-MM-dd HH:mm:ss'
         startView: 2
+        showMeridian: true
 
       name = attr['name']
       type = attr['type']
@@ -82,12 +81,11 @@ define [
       self = $(element);
       self.datetimepicker(dateOpt)
       self.on 'changeDate',(ev)->
-           console.log ev.date.valueOf()
            scope.$emit 'datetime:change', name,ev.date.valueOf()
   )
 
   #git的列表编辑器
-  .directive('gitListEditor', ->
+  .directive('gitListEditor', ()->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-global-git-list', _template
@@ -96,7 +94,7 @@ define [
   )
 
   #tab的directive
-  .directive('simpleTab', ->
+  .directive('simpleTab',()->
     restrict: 'A'
     replace: false
     link: (scope, element, attrs)->

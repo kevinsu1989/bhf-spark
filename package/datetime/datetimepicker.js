@@ -263,7 +263,7 @@
 					]);
 				}
 			}
-			else if (this.element.is('div')) {  // inline datetimepicker
+			else if (this.element.is('div') && this.isInline) {  // inline datetimepicker
 				this.isInline = true;
 			}
 			else {

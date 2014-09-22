@@ -32,7 +32,10 @@ define [
       #保存修改时间
       scope.$on 'datetime:change', (event,name,date)->
         switch name
-            when 'plan_finish_time' then API.put "#{scope.api}/plan", plan_finish_time:date
+            when 'plan_finish_time'
+               API.put("#{scope.api}/plan", plan_finish_time:date).then (result)->
+                 if(result) then scope.issue.plan_finish_time = date
+
 
       scope.onClickDelete = ($event)->
         alert('删除issue')

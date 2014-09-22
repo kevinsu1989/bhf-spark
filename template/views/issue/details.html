@@ -19,9 +19,9 @@
                     <label class="display">{{issue.owner_name || '不指定'}}</label>
                     <project-member-dropdown data-items="{{projectMember}}"></project-member-dropdown>
                 </div>
-                <div class="finish-date" date-time >
+                <div class="finish-date" date-time data-name="plan_finish_time">
                     <i class="icon small cell"></i>
-                    <!--<span class="" data-name="plan_finish_time" date-type="date">　{{issue.plan_finish_time | date:'yyyy-MM-dd' }}</span>-->
+                    <span>　{{issue.plan_finish_time | date:'yyyy-MM-dd' }}</span>
                 </div>
                 <div class="priority" dropdown data-name="issue:priority" data-text-container="label.display" data-selected="{{issue.priority}}">
                     <i class="icon small cell"></i>
