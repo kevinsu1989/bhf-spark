@@ -29,6 +29,11 @@ define [
           when 'issue:owner' then API.put "#{scope.api}/plan", owner: value
           when 'issue:priority' then API.put "#{scope.api}/priority", priority: value
 
+      #保存修改时间
+      scope.$on 'datetime:change', (event,name,date)->
+        switch name
+            when 'plan_finish_time' then API.put "#{scope.api}/plan", plan_finish_time:date
+
       scope.onClickDelete = ($event)->
         alert('删除issue')
 

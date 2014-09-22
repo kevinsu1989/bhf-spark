@@ -10,13 +10,13 @@ require.config
     angularRoute: 'vendor/angular-route'
     echarts: 'vendor/echarts'
     utils: 'utils'
+    pkg:'/package'
   shim:
     'notify': ['jquery', 'v/jquery.noty']
     ng: exports : 'angular'
     angularRoute: deps: ['ng']
     'v/jquery.transit': ['jquery', '_']
     app: ['ng', 'jquery']
-    datetimepicker: ['vendor/datetime/datetimepicker']
 
 window.name = "NG_DEFER_BOOTSTRAP!";
 

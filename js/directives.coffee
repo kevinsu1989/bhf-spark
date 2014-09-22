@@ -3,11 +3,11 @@
 define [
   './ng-module'
   './utils'
-  'v/datetime/datetimepicker'
   '_'
   't!/views/global-all.html'
-], (_module,_utils, _, _template) ->
-
+  't!/views/project/all.html'
+  'pkg/datetime/datetimepicker'
+], (_module, _utils, _, _template, _directiveTmp) ->
   _module.directiveModule
 
   .directive('dropdown', ()->
@@ -18,8 +18,10 @@ define [
       $menus = $self.find 'div.dropdown'
       $text = $self.find attrs.textContainer
 
-      $menus.bind 'mouseleave', -> $menus.fadeOut()
-      $self.bind 'click', -> $menus.fadeIn()
+      $menus.bind 'mouseleave', ->
+        $menus.fadeOut()
+      $self.bind 'click', ->
+        $menus.fadeIn()
 
       attrs.$observe('selected', ->
         return if not scope.items
@@ -28,7 +30,7 @@ define [
         $text.text $current.text()
       )
 
-        #scope.$broadcast 'dropdown:selected', attrs.name, selected
+      #scope.$broadcast 'dropdown:selected', attrs.name, selected
 
 
       $menus.bind 'click', (e)->
@@ -44,16 +46,38 @@ define [
         $text.text $parent.text()
         scope.$emit 'dropdown:selected', attrs.name, value
   )
-    #日期选择控件
-  .directive('datetimePicker', ()->
-    restrict: 'A'
-    replace: true
-    template:_utils.extractTemplate '#tmpl-project-datetime-picker', _template
-    link:(scope,element,attr)->
-      console.log 'test'
-      self = $(element)
-      self.datetimepicker()
+  #日期选择控件
+  .directive('dateTime', ()->
+    restrict: 'AC'
+    link: (scope, element, attr)->
+      dateOpt =
+        format: 'yyyy-MM-dd'
+        startView: 2
+        minView: 2
 
+      timeOpt =
+        format: 'hh:mm:ss'
+        startView: 1
+        minView: 0
+        maxView: 1
+
+      dateTimeOpt =
+        format: 'yyyy-MM-dd HH:mm:ss'
+        startView: 2
+
+      name = attr['name']
+      type = attr['type']
+
+      if type == 'time'
+         dateOpt = timeOpt
+       else if type == 'datetime'
+          dateOpt = dateTimeOpt
+
+      self = $(element);
+      self.datetimepicker(dateOpt)
+      self.on 'changeDate',(ev)->
+           console.log ev.date.valueOf()
+           scope.$emit 'datetime:change', name,ev.date.valueOf()
   )
 
   #git的列表编辑器
