@@ -149,18 +149,18 @@
                     <div class="profile" dropdown>
                         <i class="small icon"></i>
                         <div class="dropdown dropdown-tip">
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" member-menu>
                                 <li>
-                                    <a data-value="profile">个人资料</a>
+                                    <a ng-click="onClickSetting(0)">个人资料</a>
                                 </li>
                                 <li>
-                                    <a data-value="notification">通知设置</a>
+                                    <a ng-click="onClickSetting(2)">通知设置</a>
                                 </li>
                                 <li>
-                                    <a data-value="changePassword">修改密码</a>
+                                    <a ng-click="onClickSetting(1)">修改密码</a>
                                 </li>
                                 <li>
-                                    <a data-value="logout">退出</a>
+                                    <a ng-click="onClickLogout()">退出</a>
                                 </li>
                             </ul>
                         </div>

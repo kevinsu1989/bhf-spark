@@ -5,9 +5,15 @@ define [
   './utils'
   '_'
   't!/views/global-all.html'
+<<<<<<< HEAD
   't!/views/project/all.html'
   'pkg/datetime/datetimepicker'
 ], (_module, _utils, _, _template, _directiveTmp) ->
+=======
+  'plugin/jquery.honey.simple-tab'
+], (_module,_utils, _, _template) ->
+
+>>>>>>> yxf/master
   _module.directiveModule
 
   .directive('dropdown', ()->
@@ -86,4 +92,16 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-global-git-list', _template
     link: (scope, element, attrs)->
+
   )
+
+  #tab的directive
+  .directive('simpleTab', ->
+    restrict: 'A'
+    replace: false
+    link: (scope, element, attrs)->
+      $o = $(element).simpleTab()
+      attrs.$observe 'activeIndex', ()->
+        $o.simpleTab 'change', parseInt(attrs.activeIndex)
+  )
+
