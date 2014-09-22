@@ -51,6 +51,58 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-global-git-list', _template
     link: (scope, element, attrs)->
+      #允许存储的最大git账户数量
+      maxCount =  +attrs.maxcount or 5
+      #保存编辑状态
+      isNowEditing = false
+
+      #绑定git列表
+      bindGitAccounts = (data)-> scope.gitAccounts = data
+
+      #添加一条git账户数据
+      addGitAccount = (account)->
+        return if scope.gitAccounts.length >= maxCount
+        scope.gitAccounts.push account
+
+      #删除一个git账户
+      deleteGitAccount = (index)->
+        isNowEditing = false
+        scope.gitAccounts.splice index, 1
+
+      #编辑一个git账户
+      editGitAccount = (account, index)-> scope.gitAccounts[index] = account
+
+      #给input 赋值
+      bindDataForInput = (value)-> element.find(':text').val value
+
+      #初始化
+      init = ()->
+        scope.gitAccounts = []
+
+      init()
+
+      #回车 动作添加git账户
+      scope.onKeypressAdd = (event)->
+        return if event.keyCode isnt 13
+        event.preventDefault()
+        account = event.currentTarget.value
+        return if /^(\s)*$/.test account
+        addGitAccount account if isNowEditing is false
+        editGitAccount account, isNowEditing if isNowEditing isnt false
+        bindDataForInput ''
+        isNowEditing = false
+
+      scope.onClickRemove = (event, index)-> deleteGitAccount index
+
+      scope.onClickEdit = (event, index, account)->
+        isNowEditing = index
+        bindDataForInput account
+        return
+
+      #监听事件绑定数据
+      scope.$on 'member:profile:bind', (event, data)->
+        event.preventDefault()
+        bindGitAccounts data
 
   )
 
