@@ -3,7 +3,7 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/project/all.html'
+  't!/views/project/project-all.html'
 ], (_module,_utils, _template) ->
 
   _module.directiveModule

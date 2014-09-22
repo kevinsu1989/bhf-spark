@@ -1,7 +1,7 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/comment/all.html'
+  't!/views/comment/comment-all.html'
 ], (_module,_utils, _template) ->
 
   _module.directiveModule

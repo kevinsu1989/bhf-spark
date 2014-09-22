@@ -1,7 +1,7 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/member/all.html'
+  't!/views/member/member-all.html'
   'v/jquery.modal'
 ], (_module,_utils, _template) ->
 

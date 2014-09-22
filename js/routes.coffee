@@ -3,10 +3,10 @@ define [
   "ng"
   "app"
   'utils'
-  't!/views/issue/all.html'
-  't!/views/member/all.html'
-  't!/views/commit/all.html'
-  't!/views/assets/all.html'
+  't!/views/issue/issue-all.html'
+  't!/views/member/member-all.html'
+  't!/views/commit/commit-all.html'
+  't!/views/assets/assets-all.html'
 ], (_ng, _app, _utils, _tmplIssue, _tmplMember, _tmplCommit, _tmplAssets) ->
   _app.config ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
