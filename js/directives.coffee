@@ -9,7 +9,6 @@ define [
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
 ], (_module, _utils, _, _template, _directiveTmp) ->
-
   _module.directiveModule
 
   .directive('dropdown', ()->
@@ -49,39 +48,41 @@ define [
         scope.$emit 'dropdown:selected', attrs.name, value
   )
   #日期选择控件
-  .directive('dateTime', ()->
+  .directive('datetimePicker', ()->
     restrict: 'AC'
-    link: (scope, element, attr)->
+    link: (scope, element, attrs)->
       dateOpt =
         format: 'yyyy-MM-dd'
         startView: 2
         minView: 2
-        showMeridian: true
 
       timeOpt =
         format: 'hh:mm:ss'
         startView: 1
         minView: 0
         maxView: 1
-        showMeridian: true
 
       dateTimeOpt =
         format: 'yyyy-MM-dd HH:mm:ss'
         startView: 2
-        showMeridian: true
 
-      name = attr['name']
-      type = attr['type']
+      name = attrs.name
+      type = attrs.type
+      formart = attrs.formart
 
-      if type == 'time'
-         dateOpt = timeOpt
-       else if type == 'datetime'
-          dateOpt = dateTimeOpt
+      #判断类型
+      switch type
+        when 'time' then dateOpt = timeOpt
+        when 'datetime'then dateOpt = dateTimeOpt
 
-      self = $(element);
-      self.datetimepicker(dateOpt)
-      self.on 'changeDate',(ev)->
-           scope.$emit 'datetime:change', name,ev.date.valueOf()
+      #设定默认值
+      dateOpt.showMeridian = true
+      if formart then dateOpt.formart = formart
+
+      $this = $(element);
+      $this.datetimepicker(dateOpt)
+      $this.on 'changeDate', (ev)->
+        scope.$emit 'datetime:change', name, ev.date.valueOf()
   )
 
   #git的列表编辑器
@@ -90,11 +91,10 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-global-git-list', _template
     link: (scope, element, attrs)->
-
   )
 
   #tab的directive
-  .directive('simpleTab',()->
+  .directive('simpleTab', ()->
     restrict: 'A'
     replace: false
     link: (scope, element, attrs)->

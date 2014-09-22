@@ -1,16 +1,18 @@
 日期控件API
-----
-###使用方式
+====
+使用方式
+---
 支持date datetime  time 三种模式
 
-
-####date
-html:　属性 ``` date-time ``` 　标识　directive
+date
+---
+html:　属性 ``` datetime－picker  ``` 　标识　directive
 ```html 
 <div class="finish-date" 
-     date-time 
+     datetime－picker 
      data-name="plan_finish_time"
      data-type="date|datetime|time"
+     data-formart='yyyy-MM-dd'
  >
          <i class="icon small cell"></i>
 </div>
