@@ -41,10 +41,11 @@ define [
     link: (scope, element, attrs)->
       activeClass = 'active'
       editorKey = 'comment'
+
       #focus后，弹出大的编辑器
       scope.onFocusEditor = ()->
         element.addClass activeClass
-        scope.$broadcast 'editor:content', editorKey
+        scope.$broadcast 'editor:content', editorKey, null, attrs.uploadUrl
         #绑定body的one事件，点击任何地方隐藏当前
         $('body').one 'click', -> scope.$broadcast 'editor:will:cancel', editorKey
         return true

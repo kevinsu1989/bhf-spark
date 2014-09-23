@@ -67,7 +67,7 @@
                 </div>
                 <div class="content row" ng-bind-html="issue.content | unsafe" ng-show="!editing"></div>
                 <div ng-show="editing">
-                    <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}"></editor>
+                    <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}" data-upload-url="{{uploadUrl}}"></editor>
                 </div>
             </div>
 
@@ -107,6 +107,6 @@
                 </div>
             </div>
         </div>
-        <comment-editor></comment-editor>
+        <comment-editor data-upload-url="{{uploadUrl}}"></comment-editor>
     </div>
 </article>
