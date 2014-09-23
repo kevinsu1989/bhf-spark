@@ -364,7 +364,7 @@
     width: 14px;
     height: 14px;
 }
-.dropdown-menu {
+.datetimepicker.dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
@@ -392,8 +392,8 @@
     font-size: 13px;
     line-height: 18px;
 }
-.dropdown-menu th,
-.dropdown-menu td {
+.datetimepicker.dropdown-menu th,
+.datetimepicker.dropdown-menu td {
     padding: 4px 5px;
 }
 .datetimepicker .prev,
