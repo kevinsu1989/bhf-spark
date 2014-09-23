@@ -23,6 +23,39 @@ h1,h2,h3,h4,h5,h6{
   box-shadow: @shadows;
 }
 
+// General linear-gradient
+.linear-gradient(@direction, @color-stop...) {
+  @dir: ~`"@{direction}".replace(/[\[\],]/g, "")`;
+  @is-old-side-or-corner: ~`/^(?:top|right|bottom|left)(?:\s+(?:top|right|bottom|left))?$/.test("@{dir}") ? "true" : "false"`;
+  @is-standard-side-or-corner: ~`/^to\s+(?:top|right|bottom|left)(?:\s+(?:top|right|bottom|left))?$/.test("@{dir}") ? "true" : "false"`;
+  @color-stops: ~`"@{color-stop}".replace(/[\[\]]/g, "")`;
+  .output() when (@is-old-side-or-corner) {
+    @standard-direction: ~`"to @{dir}".replace("top", "b#ottom").replace("right", "l#eft").replace("bottom", "t#op").replace("left", "r#ight").replace(/#/g, "")`;
+    background-image: -webkit-linear-gradient(@dir, @color-stops); // Chrome 10+
+    background-image: -moz-linear-gradient(@dir, @color-stops); // Firefox 3.6+
+    background-image: -moz-linear-gradient(@standard-direction, @color-stops); // Firefox 10+
+    background-image: -o-linear-gradient(@standard-direction, @color-stops); // Opera 11.10+
+    background-image: linear-gradient(@standard-direction, @color-stops); // Chrome 26+, Firefox 16+, Opera 12.10+, IE 10+
+  }
+  .output() when (@is-standard-side-or-corner) {
+    @old-direction: ~`"@{dir}".replace(/^to\s+/, "").replace("top", "b#ottom").replace("right", "l#eft").replace("bottom", "t#op").replace("left", "r#ight").replace(/#/g, "")`;
+    background-image: -webkit-linear-gradient(@old-direction, @color-stops); // Chrome 10+
+    background-image: -moz-linear-gradient(@old-direction, @color-stops); // Firefox 3.6+
+    background-image: -moz-linear-gradient(@dir, @color-stops); // Firefox 10+
+    background-image: -o-linear-gradient(@dir, @color-stops); // Opera 11.10+
+    background-image: linear-gradient(@dir, @color-stops); // Chrome 26+, Firefox 16+, Opera 12.10+, IE 10+
+  }
+  .output() when not (@is-old-side-or-corner) and not (@is-standard-side-or-corner) {
+    background-image: -webkit-linear-gradient(mod(abs(convert(@direction, deg) - 450), 360), @color-stops); // Chrome 10+
+    background-image: -moz-linear-gradient(mod(abs(convert(@direction, deg) - 450), 360), @color-stops); // Firefox 3.6+
+    background-image: -o-linear-gradient(mod(abs(convert(@direction, deg) - 450), 360), @color-stops); // Opera 11.10+
+    background-image: linear-gradient(@direction, @color-stops); // Chrome 26+, Firefox 16+, Opera 12.10+, IE 10+
+  }
+  .output();
+  background-repeat: repeat;
+}
+
+
 
 .clearfix() {
   &:before,

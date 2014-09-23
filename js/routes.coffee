@@ -18,6 +18,11 @@ define [
     $urlRouterProvider.otherwise('/project/1/issue');
 
     $stateProvider
+    .state('home',
+      url: '/'
+      templateUrl: '/views/home.html'
+      controller: 'homeController'
+    )
     #登录
     .state('login',
       url: '/login?next'
