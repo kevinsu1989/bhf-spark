@@ -71,20 +71,28 @@
 
     <!--讨论列表-->
     <textarea id="tmpl-discussion-list">
-        <div class="list discussion-list">
+        <div class="list issue-list">
             <header>
                 <h3>讨论</h3>
             </header>
 
+            <div class="create">
+                <input type="text" placeholder="你想说点什么？" autofocus issue-quick-editor ng-keydown="onKeyDown($event)" data-category="1" />
+            </div>
+
             <ul class="details">
                 <li ng-repeat="item in discussion.items" class="row">
                     <a href="/project/{{item.project_id}}/discussion/{{item.id}}">
-                        <span class="title">{{item.title}}</span>
                         <span class="badge gray small">{{item.comment_count}}</span>
-                    </a>
 
-                    <p class="content">
-                        <!--{{item.content}}-->
+                        <span class="title">{{item.title}}</span>
+                    </a>
+                    <div class="info">
+                        <span class="member memo">{{item.owner_name}}</span>
+                        <span class="date memo">{{item.timestamp | date}}</span>
+                    </div>
+                    <p class="summary" ng-show="item.content">
+                        {{item.content | rawText}}
                     </p>
                 </li>
             </ul>

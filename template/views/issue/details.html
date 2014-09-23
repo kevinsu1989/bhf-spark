@@ -45,7 +45,7 @@
             </header>
 
             <!--标题部分-->
-            <div class="issue panel">
+            <div class="issue panel" ng-click="onClickIssue($event)">
                 <div class="title">
                     <div class="issue-status" dropdown data-selected="{{issue.status}}" data-name="issue:status">
                         <i class="issue-status icon small" ng-class="issue.status"></i>

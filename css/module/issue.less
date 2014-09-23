@@ -8,7 +8,7 @@
     input{
       width: 100%;
       height: 40px;
-      border-width: 1px 0 0 0;
+      border-width: 1px 0 1px 0;
       font-size: 16px;
       background-image: url(/images/simple-editor-watermark.png);
       background-position: right center;
@@ -17,6 +17,16 @@
   }
 
   .row{
+    p.summary{
+      overflow: hidden;
+      color: #CCC;
+      height: 18px;
+      padding: 0;
+      margin: 10px 0 0 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .icon{
 //      margin-right: 10px;
       margin-bottom: -4px;
@@ -44,7 +54,7 @@
   box-orient: vertical;
   position: relative;
   header{
-    height: 34px;
+    height: 30px;
     overflow: hidden;
     display: flex;
     border-bottom: @normal-border;
@@ -148,7 +158,7 @@
       }
 
       .editor{
-        padding-left: 34px;
+        padding-left: 30px;
       }
 
       input.text{

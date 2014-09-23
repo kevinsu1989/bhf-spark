@@ -45,6 +45,8 @@ define [
       scope.onFocusEditor = ()->
         element.addClass activeClass
         scope.$broadcast 'editor:content', editorKey
+        #绑定body的one事件，点击任何地方隐藏当前
+        $('body').one 'click', -> scope.$broadcast 'editor:will:cancel', editorKey
         return true
 
       scope.$on 'editor:cancel', (event, name)->
@@ -55,4 +57,6 @@ define [
         return if editorKey isnt name
         element.removeClass activeClass
 
+      #阻止click的冒泡
+      element.bind 'click', (e)-> e.stopPropagation()
   )

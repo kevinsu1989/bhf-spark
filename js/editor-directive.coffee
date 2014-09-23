@@ -26,6 +26,12 @@ define [
         simditor.focus()
         simditor.setValue content
 
+      #收到cancel的请求
+      scope.$on 'editor:will:cancel', (event, name)->
+        #name不一致不处理
+        return if attrs.name isnt name
+        scope.onClickCancel()
+
       scope.onClickCancel = ->
         scope.$emit 'editor:cancel', attrs.name
 

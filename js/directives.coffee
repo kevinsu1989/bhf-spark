@@ -80,6 +80,7 @@ define [
 
       #设定默认值
       dateOpt.showMeridian = true
+      dateOpt.autoclose = true
       if formart then dateOpt.formart = formart
 
       $this = $(element);
