@@ -20,10 +20,9 @@
                     <project-member-dropdown data-items="{{projectMember}}"></project-member-dropdown>
                 </div>
                 <div class="finish-date">
-                    <!--兼容bootstrap.datetime-->
-                    <button>
+                    <button datetime-picker  data-name="plan_finish_time">
                         <i class="icon small cell"></i>
-                        <label>{{issue.plan_finish_time | date}}</label>
+                        <span>　{{issue.plan_finish_time | date:'yyyy-MM-dd' }}</span>
                     </button>
                 </div>
                 <div class="priority" dropdown data-name="issue:priority" data-text-container="label.display" data-selected="{{issue.priority}}">
