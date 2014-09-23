@@ -19,10 +19,12 @@ define [
       $menus = $self.find 'div.dropdown'
       $text = $self.find attrs.textContainer
 
-      $menus.bind 'mouseleave', ->
-        $menus.fadeOut()
-      $self.bind 'click', ->
+      $menus.bind 'mouseleave', -> $menus.fadeOut()
+      $self.bind 'click', (e)->
         $menus.fadeIn()
+        e.stopPropagation()
+
+        $('body').one 'click', -> $menus.fadeOut()
 
       attrs.$observe('selected', ->
         return if not scope.items
@@ -46,6 +48,7 @@ define [
 
         $text.text $parent.text()
         scope.$emit 'dropdown:selected', attrs.name, value
+
   )
   #日期选择控件
   .directive('datetimePicker', ()->
