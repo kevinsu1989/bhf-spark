@@ -46,64 +46,60 @@ define [
   )
 
   #git的列表编辑器
-  .directive('gitListEditor', ->
+  .directive('gitListEditor', ()->
     restrict: 'E'
     replace: true
+    scope: true
     template: _utils.extractTemplate '#tmpl-global-git-list', _template
     link: (scope, element, attrs)->
       #允许存储的最大git账户数量
-      maxCount =  +attrs.maxcount or 5
-      #保存编辑状态
-      isNowEditing = false
+      maxCount =  parseInt attrs.maxCount
+      #保存编辑状态 -1表示非编辑状态
+      nowEditingIndex = -1
 
-      #绑定git列表
-      bindGitAccounts = (data)-> scope.gitAccounts = data
+      #向上冒泡数据
+      doBroadcastData = ()->
+        scope.$emit 'gitList:update', attrs.name, scope.gitAccounts
 
       #添加一条git账户数据
       addGitAccount = (account)->
         return if scope.gitAccounts.length >= maxCount
         scope.gitAccounts.push account
 
-      #删除一个git账户
-      deleteGitAccount = (index)->
-        isNowEditing = false
-        scope.gitAccounts.splice index, 1
-
-      #编辑一个git账户
-      editGitAccount = (account, index)-> scope.gitAccounts[index] = account
-
       #给input 赋值
       bindDataForInput = (value)-> element.find(':text').val value
 
-      #初始化
-      init = ()->
-        scope.gitAccounts = []
-
-      init()
+      #初始化绑定
+      attrs.$observe('gits', (data)->
+        return if not data? or data is ''
+        scope.gitAccounts = JSON.parse data
+      )
 
       #回车 动作添加git账户
       scope.onKeypressAdd = (event)->
         return if event.keyCode isnt 13
         event.preventDefault()
-        account = event.currentTarget.value
-        return if /^(\s)*$/.test account
-        addGitAccount account if isNowEditing is false
-        editGitAccount account, isNowEditing if isNowEditing isnt false
+        account = _utils.trim event.currentTarget.value
+        return if account is ''
+        if nowEditingIndex is -1
+          addGitAccount account
+        else
+          scope.gitAccounts[nowEditingIndex] = account
         bindDataForInput ''
-        isNowEditing = false
-
-      scope.onClickRemove = (event, index)-> deleteGitAccount index
-
-      scope.onClickEdit = (event, index, account)->
-        isNowEditing = index
-        bindDataForInput account
+        nowEditingIndex = -1
+        doBroadcastData()
         return
 
-      #监听事件绑定数据
-      scope.$on 'member:profile:bind', (event, data)->
-        event.preventDefault()
-        bindGitAccounts data
+      scope.onClickRemove = (event, index)->
+        scope.gitAccounts.splice index, 1
+        nowEditingIndex = -1
+        doBroadcastData()
+        return
 
+      scope.onClickEdit = (event, index, account)->
+        nowEditingIndex = index
+        bindDataForInput account
+        return
   )
 
   #tab的directive

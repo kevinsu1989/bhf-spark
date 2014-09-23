@@ -1,31 +1,31 @@
 <div>
     <!--修改用户的密码-->
-    <textarea id="tmpl-change-password">
-        <ul>
-            <li>
-                <label class="caption">
-                    旧密码
-                </label>
-                <input type="text">
-            </li>
-            <li>
-                <label class="caption">
-                    新密码
-                </label>
-                <input type="text">
-            </li>
-            <li>
-                <label class="caption">
-                    重复密码
-                </label>
-                <input type="text">
-            </li>
-            <li class="control">
-                <button class="primary">保存</button>
-                <button class="cancel">取消</button>
-            </li>
-        </ul>
-    </textarea>
+    <!--<textarea id="tmpl-change-password">-->
+        <!--<ul>-->
+            <!--<li>-->
+                <!--<label class="caption">-->
+                    <!--旧密码-->
+                <!--</label>-->
+                <!--<input type="text">-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label class="caption">-->
+                    <!--新密码-->
+                <!--</label>-->
+                <!--<input type="text">-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label class="caption">-->
+                    <!--重复密码-->
+                <!--</label>-->
+                <!--<input type="text">-->
+            <!--</li>-->
+            <!--<li class="control">-->
+                <!--<button class="primary">保存</button>-->
+                <!--<button class="cancel">取消</button>-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</textarea>-->
 
     <!--用户列表-->
     <textarea id="tmpl-member-list">
@@ -58,26 +58,29 @@
                     <label class="caption">
                         原密码
                     </label>
-                    <input class="medium text" type="password" placeholder="您的旧密码" />
+                    <input class="medium text" type="password" placeholder="您的旧密码"
+                           ng-model="profile.old_password"/>
                 </div>
 
                 <div class="row">
                     <label class="caption">
                         新密码
                     </label>
-                    <input class="medium text" type="password" placeholder="请输入新密码" />
+                    <input class="medium text" type="password" placeholder="请输入新密码"
+                           ng-model="profile.new_password"/>
                 </div>
 
                 <div class="row">
                     <label class="caption">
                         重复密码
                     </label>
-                    <input class="medium text" type="password" placeholder="两次输入的密码必需一致" />
+                    <input class="medium text" type="password" placeholder="两次输入的密码必需一致"
+                           ng-model="profile.new_password2"/>
                 </div>
 
                 <div class="row control">
-                    <button class="primary default">保存</button>
-                    <button class="cancel default">取消</button>
+                    <button class="primary default" ng-click="onClickSave()">保存</button>
+                    <button class="cancel default" ng-click="onClickCancel()">取消</button>
                 </div>
             </form>
         </div>
@@ -91,21 +94,24 @@
                     <label class="caption">
                         用户名
                     </label>
-                    <input class="medium text" type="text" placeholder="用于登录的用户名" />
+                    <input class="medium text" type="text" placeholder="用于登录的用户名"
+                           ng-model="profile.username"/>
                 </div>
 
                 <div class="row">
                     <label class="caption">
                         姓名
                     </label>
-                    <input class="medium text" type="text" placeholder="用户姓名" />
+                    <input class="medium text" type="text" placeholder="用户姓名"
+                           ng-model="profile.realname" />
                 </div>
 
                 <div class="row">
                     <label class="caption">
                         邮箱
                     </label>
-                    <input class="medium text" type="text" placeholder="用于接收邮件通知" />
+                    <input class="medium text" type="text" placeholder="用于接收邮件通知"
+                           ng-model="profile.email"/>
                 </div>
 
                 <div class="row">
@@ -113,13 +119,13 @@
                         Git帐号
                     </label>
                     <div class="inline">
-                        <git-list-editor maxcount="5"></git-list-editor>
+                        <git-list-editor data-name="{{contextName}}" data-max-count="5" data-gits="{{gits}}"></git-list-editor>
                     </div>
                 </div>
 
                 <div class="row control">
-                    <button class="primary default">保存</button>
-                    <button class="cancel default">取消</button>
+                    <button class="primary default" ng-click="onClickSave()">保存</button>
+                    <button class="cancel default" ng-click="onClickCancel()">取消</button>
                 </div>
             </form>
         </div>
