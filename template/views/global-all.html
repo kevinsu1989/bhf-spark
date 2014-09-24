@@ -1,20 +1,14 @@
 <div>
     <textarea id="tmpl-global-git-list">
         <ul class="git-list">
-            <li>
-                <label>conis.yi@gmail.com</label>
-                <button ng-click="onClickRemove($event, $index)">
-                    <i class="icon small remove"></i>
-                </button>
-            </li>
-            <li>
-                <label>conis.yi@gmail.com</label>
+            <li ng-repeat="account in gitAccounts track by $index" ng-click="onClickEdit($event, $index, account)">
+                <label>{{account}}</label>
                 <button ng-click="onClickRemove($event, $index)">
                     <i class="icon small remove"></i>
                 </button>
             </li>
             <li class="create">
-                <input type="text" placeholder="输入git地址后回车" class="medium" />
+                <input type="text" placeholder="输入git地址后回车" class="medium" ng-keypress="onKeypressAdd($event)"/>
             </li>
         </ul>
     </textarea>
