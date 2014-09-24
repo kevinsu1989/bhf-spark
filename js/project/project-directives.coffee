@@ -3,7 +3,7 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/project/all.html'
+  't!/views/project/project-all.html'
 ], (_module,_utils, _template) ->
 
   _module.directiveModule
@@ -12,7 +12,9 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-project-menu', _template
     link: (scope, element, attrs)->
+
   )
+
 
   .directive('projectHeader', ()->
     restrict: 'E'
@@ -36,5 +38,26 @@ define [
         return if loaded or not attrs.items
         loaded = true
         scope.items = JSON.parse(attrs.items)
+      )
+  )
+
+  #项目列表
+  .directive('projectTiles', ($location, API)->
+    restrict: 'E'
+    replace: true
+    scope: {}
+    template: _utils.extractTemplate '#tmpl-project-tiles', _template
+    link: (scope, element, attrs)->
+      url = 'project'
+      params =
+        pageSize: 11
+        special: true
+
+      scope.onClickTile = (event, project)->
+        url = "/project/#{project.id}/issue"
+        $location.path(url)
+
+      API.get(url, params).then((result)->
+        scope.projects = result
       )
   )

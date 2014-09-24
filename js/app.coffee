@@ -14,6 +14,7 @@ define [
   'angularRoute'
   'v/ui-router'
   './directives'
+  './controllers'
 ], (_ng) ->
   _ng.module 'mic', [
     'ngRoute'

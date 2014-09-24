@@ -182,4 +182,29 @@
             </ul>
         </div>
     </textarea>
+
+    <!--项目列表的磁贴-->
+    <textarea id="tmpl-project-tiles">
+        <ul class="project-tiles">
+            <li class="create">
+                <i class="icon"></i>
+            </li>
+
+            <li ng-repeat="project in projects.items" ng-click="onClickTile($event, project)">
+               <div class="title">
+                   {{project.title}}
+               </div>
+
+               <div class="processing">
+                <div class="circle">
+                    <span class="text">100%</span>
+                </div>
+               </div>
+
+               <div class="description">
+                   <span>{{project.description || '无项目说明'}}</span>
+               </div>
+            </li>
+        </ul>
+    </textarea>
 </div>

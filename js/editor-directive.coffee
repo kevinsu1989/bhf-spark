@@ -4,27 +4,48 @@ define [
   'v/simditor'
 ], (_module,_utils) ->
 
-  _module.directiveModule.directive('editor', ->
+  _module.directiveModule.directive('editor', ($location)->
     restrict: 'E'
     replace: true
     scope: {}
     templateUrl: '/views/editor.html'
     link: (scope, element, attrs)->
       simditor = null
-      initEditor = ()->
+      initEditor = (name, uploadUrl)->
+#        用于设置返回的host，不设则为根目录
+        host = "#{$location.protocol()}://#{$location.host()}:#{$location.port()}"
         options =
           textarea: element.find('textarea')
           pasteImage: true
+#          defaultImage: 'images/image.png'
+          params: {}
+          upload:
+            url: uploadUrl
+            params: host: host
+            connectionCount: 3
+            leaveConfirm: '正在上传文件，如果离开上传会自动取消'
+          tabIndent: true
+          toolbar: true
+          toolbarFloat: false
+          pasteImage: true
+          maxImageHeight: 2000
+          maxImageWidth: 2000
 
         new Simditor options
 
       scope.showAlwaysTop = attrs.showAlwaysTop in [true, 'true']
-      scope.$on 'editor:content', ($event, name, content)->
+      scope.$on 'editor:content', ($event, name, content, uploadUrl)->
         #如果有设定name，且当前name和设定的name不一致，则不处理
         return if attrs.name and attrs.name isnt name
-        simditor = initEditor(name) if not simditor
+        simditor = initEditor(name, uploadUrl) if not simditor
         simditor.focus()
         simditor.setValue content
+
+      #收到cancel的请求
+      scope.$on 'editor:will:cancel', (event, name)->
+        #name不一致不处理
+        return if attrs.name isnt name
+        scope.onClickCancel()
 
       scope.onClickCancel = ->
         scope.$emit 'editor:cancel', attrs.name

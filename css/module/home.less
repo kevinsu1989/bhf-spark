@@ -1,0 +1,79 @@
+.home-view{
+  background: url(/images/background.jpg) no-repeat left top;
+  background-size: 100% 100%;
+
+  >header{
+    display: flex;
+    padding: 6px 0;
+    margin-bottom: 20px;
+
+    >*{
+      flex: 1;
+    }
+
+    .logo .icon{
+      background-position: -120px -440px;
+      width: 60px;
+      height: 22px;
+    }
+
+    .toolbar{
+      >div{
+        display: inline-block;
+        cursor: pointer;
+      }
+      padding-right: 10px;
+
+      .help{
+        i{
+          background-position: -40px -320px;
+        }
+
+        .dropdown{
+          &:before{
+            left: 89px;
+          }
+
+          &:after{
+            left: 88px;
+          }
+        }
+      }
+
+      .profile{
+        i{
+          background-position: -80px -320px;
+        }
+
+        .dropdown{
+          &:before{
+            left: 129px;
+          }
+
+          &:after{
+            left: 128px;
+          }
+        }
+      }
+    }
+  }
+
+  .content-view{
+    h3.title{
+      margin-left: 10px;
+      color: #FFF;
+      font-size: 20px;
+    }
+    display: flex;
+    height: 100%;
+  }
+
+  .project{
+    margin-left: 10px;
+    width: (246px + 20px) * 4;
+    overflow: auto;
+    padding-right: 20px;
+    margin-right: 20px;
+    margin-bottom: 44px;
+  }
+}
