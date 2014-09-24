@@ -79,7 +79,7 @@ define [
           NOTIFY.success '任务已经被成功创建'
           event.target.value = null
           #通知issue被创建
-          scope.$emit 'issue:changed', 'new', result.id
+          scope.$emit 'issue:change', 'new', result.id
         )
 
   )
