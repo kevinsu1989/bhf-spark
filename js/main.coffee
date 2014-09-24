@@ -11,6 +11,7 @@ require.config
     echarts: 'vendor/echarts'
     utils: 'utils'
     pkg:'/package'
+    marked: 'vendor/marked'
   shim:
     'notify': ['jquery', 'v/jquery.noty']
     ng: exports : 'angular'

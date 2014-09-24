@@ -20,7 +20,7 @@ define [
 ], (_module, _moment, _, _utils, _template) ->
 
   _module.controllerModule.
-  controller('projectController', ($rootScope, $scope, $routeParams, $location, API, $stateParams)->
+  controller('projectController', ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
     url = "project/#{$stateParams.project_id}"
 
     #获取项目的信息
@@ -34,5 +34,9 @@ define [
       $scope.projectMember = result
       $scope.$broadcast 'project:member:loaded', result
     )
+
+    STORE.initAccountInfo() if STORE.account is null
+    STORE.initProjectMemberList()
+
 
   )
