@@ -18,7 +18,8 @@ define [
         url = "#{scope.api}/comment"
         API.post(url, content: data.content).then (result)->
           NOTIFY.success('评论保存成功')
-          #刷新数据
+          #刷新评论数据
+          scope.$broadcast 'comment:list:reload'
 
       #阻止此区域的事件冒泡，
       scope.onClickIssue = (event)->

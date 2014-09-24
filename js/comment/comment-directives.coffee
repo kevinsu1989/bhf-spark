@@ -13,9 +13,16 @@ define [
     template: _utils.extractTemplate '#tmpl-comment-list', _template
     link: (scope, element, attr)->
       url = "project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/comment"
-      API.get(url, pageSize: 20).then((result)->
-        scope.comments = result
-      )
+
+      searchComment = ()->
+        API.get(url, pageSize: 20).then((result)->
+          scope.comments = result
+        )
+
+      #收到重新加载评论列表的事件
+      scope.$on 'comment:list:reload', -> searchComment()
+
+      searchComment()
   )
 
   #评论详细
