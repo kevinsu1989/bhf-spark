@@ -6,13 +6,24 @@ define [
 
   _module.directiveModule
   #上传素材
-  .directive('uploadAssets', ($stateParams, API)->
+  .directive('uploadAssets', ($stateParams, API,webFileUploadService)->
     restrict: 'A'
     replace: true
     link: (scope, element, attr)->
-      scope.onClickUpload = ($event, project_id)->
+
+      server = "/api/project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/assets"
+
+      file_upload_box = angular.element('.file_upload_box')
+
+      uploader = webFileUploadService.webUploaderInit server:server,file_upload_box
+
+      uploader.on "uploadFinished", ()->
+        scope.$emit "assets:upload:finish"
+        return
+      $(element).click ()->
+          $(file_upload_box.find('label')).trigger('click')
 #       上传路径是：project/:project_id/issue/:issue_id/assets
-        alert('上传素材')
+      return
   )
 
   #素材的缩略图列表
@@ -21,9 +32,17 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-asset-thumbnails', _template
     link: (scope, element, attr)->
+      vm = scope.vm = action:{}
       url = "project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/assets"
       params = pageSize: 5
-      API.get(url, params).then((result)->
-        scope.assets = result
-      )
+      #获得附件列表
+      vm.action.getAssetList = ()->
+        API.get(url, params).then((result)->
+          scope.assets = result
+        )
+      #初次进入直接拉取一次数据
+      vm.action.getAssetList()
+      #监听事件 assets:list:update
+      scope.$on "assets:list:update",()->
+        vm.action.getAssetList()
   )

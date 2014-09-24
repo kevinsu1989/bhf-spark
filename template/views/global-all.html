@@ -18,4 +18,25 @@
             </li>
         </ul>
     </textarea>
+    <textarea id="tmpl-global-web-file-upload-file-list">
+        <div id="uploader" class="file-upload-box">
+            <!--用来存放文件信息-->
+            <div id="uploaderList" class="uploader-list"></div>
+            <div class="btns">
+                <div id="picker">选择文件</div>
+                <button id="ctlBtn" class="file-upload-btn">开始上传</button>
+            </div>
+        </div>
+    </textarea>
+    <textarea id="tmpl-global-web-file-upload-file-item">
+        <div id="$file.id" class="item">
+            <h4 class="info">$file.name</h4>
+            <p class="state">等待上传...</p>
+        </div>
+    </textarea>
+    <textarea id="tmpl-global-web-file-upload-progressbar">
+        <div class="progress progress-striped active">
+            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+        </div>
+    </textarea>
 </div>
