@@ -61,3 +61,13 @@ define [
         scope.projects = result
       )
   )
+
+  #项目编辑器
+  .directive('projectEditor', ['$location', ($location, API)->
+    restrict: 'E'
+    replace: true
+    scope: {}
+    template: _utils.extractTemplate '#tmpl-project-editor', _template
+    link: (scope, element, attrs)->
+      $(element).modal showClose: false
+  ])

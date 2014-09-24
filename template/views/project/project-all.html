@@ -207,4 +207,47 @@
             </li>
         </ul>
     </textarea>
+
+    <!--创建项目，或者修改项目资料-->
+    <textarea id="tmpl-project-editor">
+        <div class="modal">
+            <div class="inner">
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
+                <header>
+                    新建/编辑项目
+                </header>
+                <section>
+                    <form class="standard-form">
+                        <div class="row">
+                            <label class="caption">
+                                项目名称
+                            </label>
+                            <input class="medium text" type="text"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                摘要说明
+                            </label>
+                            <input class="medium text" type="text" placeholder="一句话简单描述项目"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                GitLab
+                            </label>
+                            <div class="inline">
+                                <git-list-editor data-name="project" data-max-count="5" data-gits="{{gits}}"></git-list-editor>
+                            </div>
+                        </div>
+
+                        <div class="row control">
+                            <button class="primary default" ng-click="onClickSave()">保存</button>
+                            <button class="cancel default" ng-click="onClickCancel()">取消</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </textarea>
 </div>
