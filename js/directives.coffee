@@ -67,7 +67,7 @@ define [
         scope.gitAccounts.push account
 
       #给input 赋值
-      bindDataForInput = (value)-> element.find(':text').val value
+      bindDataForInput = (value)-> element.find("input").val value
 
       #初始化绑定
       attrs.$observe('gits', (data)->
