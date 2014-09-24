@@ -15,6 +15,16 @@ h1,h2,h3,h4,h5,h6{
   border-radius: @radius;
 }
 
+/*est / src / compatibility.less*/
+.animation-duration(@duration: 0s, ...) {
+    @durations: ~`"@{arguments}".replace(/[\[\]]/g, "")`;
+    -webkit-animation-duration: @durations;
+       -moz-animation-duration: @durations;
+        -ms-animation-duration: @durations;
+         -o-animation-duration: @durations;
+            animation-duration: @durations;
+}
+
 // Drop shadows
 .box-shadow(@shadow: @default-box-shadow, ...) {
   @shadows: ~`(function() { var args = "@{arguments}".replace(/[[\]]/g, ""); if(!args.match(/[^,]\s+[^,]/)) { args = args.replace(/,(?=[^()]*\))/g, "%est%").replace(/,/g, "").replace(/%est%/g, ","); } return args;})()`;
@@ -111,7 +121,7 @@ i.icon{
     overflow: auto;
     padding-bottom: 40px;
     border-right: 2px solid #cfcfcf;
-    height: 100%;
+    /*height: 100%;*/
 
     //列表
     .list{
@@ -142,7 +152,10 @@ i.icon{
 
   .details-panel{
     flex: 1;
-    height: 100%;
+    /*height: 100%;*/
+    overflow: scroll;
+    height: auto;
+    position: relative;
     .not-found{
       width: 100%;
       height: 100%;

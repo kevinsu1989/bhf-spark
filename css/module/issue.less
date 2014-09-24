@@ -76,7 +76,7 @@
 
     label{
       padding-bottom: 10px;
-      vertical-align: middle;
+      vertical-align: super;
     }
 
     .project-name{
@@ -273,12 +273,17 @@
 }
 
 .comment-editor{
-  bottom: 40px;
+  bottom: 0;
   width: 100%;
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   .box-shadow(0 0 4px rgba(0, 0, 0, 0.2));
   background-color: rgba(233, 235, 240, 0.95);
+  .animation-duration(.5s);
+
+  &:hover{
+    bottom: 0;
+  }
 
   .simple{
     height: 60px;
@@ -289,6 +294,7 @@
       height: 33px;
       border: 1px solid #CCC;
       .border-radius(4px);
+      padding-left: 10px;
     }
   }
 
@@ -298,7 +304,9 @@
     header{
       font-size: 16px;
       font-weight: bold;
-      padding: 20px 0 0 10px;
+      /*padding: 20px 0 0 10px;*/
+      line-height: 40px;
+      padding-left: 10px;
     }
   }
 
