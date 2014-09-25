@@ -12,7 +12,11 @@ require.config
     utils: 'utils'
     pkg:'/package'
     marked: 'vendor/marked'
+    'simditor-mention': 'vendor/simditor-mention'
+    'simditor-marked': 'vendor/simditor-marked'
   shim:
+    'simditor-marked': ['marked', 'v/simditor']
+    'simditor-mention': ['v/simditor']
     'notify': ['jquery', 'v/jquery.noty']
     ng: exports : 'angular'
     angularRoute: deps: ['ng']

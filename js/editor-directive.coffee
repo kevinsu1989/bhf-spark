@@ -1,9 +1,8 @@
 define [
   'ng-module'
   'utils'
-  'v/simditor'
-  'v/simditor-marked'
-  'v/simditor-mention'
+  'simditor-marked'
+  'simditor-mention'
 ], (_module,_utils) ->
 
   _module.directiveModule.directive('editor', ($location, STORE)->
