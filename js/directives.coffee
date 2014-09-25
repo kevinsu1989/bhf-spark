@@ -5,7 +5,7 @@ define [
   './utils'
   '_'
   't!/views/global-all.html'
-  't!/views/project/all.html'
+  't!/views/project/project-all.html'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
 ], (_module, _utils, _, _template, _directiveTmp) ->
