@@ -42,6 +42,9 @@
             <header>
                 <h3>项目成员</h3>
             </header>
+            <div class="create">
+                <input type="text" placeholder="请输入将要添加用户的姓名" autofocus ng-keydown="onKeyDown($event)" />
+            </div>
             <ul class="details">
                 <li ng-repeat="member in projectMember" class="row">
                     {{member.username}}

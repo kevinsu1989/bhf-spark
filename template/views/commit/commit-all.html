@@ -11,6 +11,10 @@
                     <span>{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
                 </li>
             </ul>
+
+            <div class="empty" ng-show="commit.items.length == 0">
+                没有任何Commit，需要了解如何同步到Commit到BHF吗？
+            </div>
         </div>
     </textarea>
 

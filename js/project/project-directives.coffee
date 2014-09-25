@@ -69,5 +69,5 @@ define [
     scope: {}
     template: _utils.extractTemplate '#tmpl-project-editor', _template
     link: (scope, element, attrs)->
-      
+
   ])
