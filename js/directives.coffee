@@ -111,7 +111,7 @@ define [
         scope.gitAccounts.push account
 
       #给input 赋值
-      bindDataForInput = (value)-> element.find(':text').val value
+      bindDataForInput = (value)-> element.find("input").val value
 
       #初始化绑定
       attrs.$observe('gits', (data)->
@@ -125,6 +125,9 @@ define [
         event.preventDefault()
         account = _utils.trim event.currentTarget.value
         return if account is ''
+        if _.indexOf(scope.gitAccounts, account) > -1
+          bindDataForInput ''
+          return
         if nowEditingIndex is -1
           addGitAccount account
         else
