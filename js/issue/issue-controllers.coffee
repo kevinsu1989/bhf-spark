@@ -12,6 +12,9 @@ define [
     API.get(url).then((result)->
       $scope.issue = result
     )
+    $scope.$on "assets:upload:finish", ()->
+      $scope.$broadcast "assets:list:update"
+      return
   )
 
   #讨论列表

@@ -11,4 +11,5 @@ define [
     API.get(url, cond).then((result)->
       $scope.assets = result
     )
+    return
   )

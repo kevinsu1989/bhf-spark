@@ -18,6 +18,7 @@ define [
       $rootScope.$on 'member:setting:show', (event, index)->
         scope.activeIndex = index
         $o.modal showClose: false
+        scope.$broadcast "member:setting:bindAll"
       $rootScope.$on 'member:setting:hide', ()->
         $.modal.close()
   )
@@ -30,12 +31,6 @@ define [
       url = "account/profile"
       #定义下属组件的上下文名称
       scope.contextName = 'memberProfile'
-
-      API.get(url).then((result)->
-        scope.profile = result
-        scope.gits =  _.map result.gits, (item)-> item.git
-      )
-
       scope.onClickSave = ()->
         scope.profile.gits = scope.gits
         API.put(url, scope.profile).then(()->
@@ -52,6 +47,11 @@ define [
         event.preventDefault()
         scope.gits = data
 
+      scope.$on 'member:setting:bindAll', ()->
+        API.get(url).then((result)->
+          scope.profile = result
+          scope.gits =  _.map result.gits, (item)-> item.git
+        )
   )
 
   .directive('memberChangePassword', ($location, API, NOTIFY)->

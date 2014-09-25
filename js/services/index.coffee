@@ -1,4 +1,5 @@
 define [
   './api'
   './services'
+  './store'
 ], ->
