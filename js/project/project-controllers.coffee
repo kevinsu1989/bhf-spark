@@ -35,7 +35,7 @@ define [
       $scope.$broadcast 'project:member:loaded', result
     )
 
-    STORE.initAccountInfo() if STORE.account is null
+    STORE.initSession() if STORE.session is null
     STORE.initProjectMemberList()
 
 

@@ -16,17 +16,17 @@ define [
         service.projectMemberList = result
       )
     #存储账号信息
-    initAccountInfo = ()->
-      url = "account/profile"
+    initSession = ()->
+      url = "session"
       API.get(url).then((result)->
-        service.account = result
+        service.session = result
       )
 
     init = ()->
       initProjectMemberList()
-      initAccountInfo()
+      initSession()
 
     service.init = init
     service.initProjectMemberList = initProjectMemberList
-    service.initAccountInfo = initAccountInfo
+    service.initSession = initSession
     return service

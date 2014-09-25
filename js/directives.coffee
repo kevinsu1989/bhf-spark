@@ -125,6 +125,9 @@ define [
         event.preventDefault()
         account = _utils.trim event.currentTarget.value
         return if account is ''
+        if _.indexOf(scope.gitAccounts, account) > -1
+          bindDataForInput ''
+          return
         if nowEditingIndex is -1
           addGitAccount account
         else
