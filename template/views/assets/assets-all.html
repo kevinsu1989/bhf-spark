@@ -30,7 +30,8 @@
 
             <ul class="details">
                 <li ng-repeat="item in assets.items" class="row">
-                    <a href="/project/{{item.project_id}}/assets/{{item.id}}">
+                    <!--/project/{{item.project_id}}/assets/{{item.id}}-->
+                    <a href="{{item.url}}" target="_blank">
                         <span class="title">{{item.original_name}}</span>
                     </a>
 
