@@ -26,3 +26,8 @@
     opacity: 0.6;
     pointer-events:none;
 }
+.file_upload_box{
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

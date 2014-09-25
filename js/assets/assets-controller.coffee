@@ -11,7 +11,5 @@ define [
     API.get(url, cond).then((result)->
       $scope.assets = result
     )
-    $scope.$on "assets:upload:finish", ()->
-      $scope.$broadcast "assets:list:update"
-
+    return
   )

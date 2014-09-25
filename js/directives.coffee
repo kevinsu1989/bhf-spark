@@ -116,11 +116,10 @@ define [
         id   : '#picker'
         multiple  : true
       auto:true
-
-    webUploaderInit = (opt,warp)->
+    #初始化 WebUploader
+    webUploaderInit = (opt,uploaderWarp)->
       option = angular.extend option, opt
-      option.pick.id = warp
-      console.log option
+      option.pick.id = uploaderWarp
       uploader = _WebUploader.create option
       return uploader
 
