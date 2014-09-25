@@ -37,6 +37,14 @@ define [
 
     STORE.initSession() if STORE.session is null
     STORE.initProjectMemberList()
-
-
   )
+
+  #项目周报的列表
+  .controller('projectWeeklyReportListController', ['API', (API)->
+
+  ])
+
+  #项目周报的详细
+  .controller('projectWeeklyReportDetailsController', ['API', (API)->
+
+  ])
