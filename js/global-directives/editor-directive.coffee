@@ -79,29 +79,3 @@ define [
 
         scope.$emit 'editor:submit', attrs.name, data
   )
-
-  #快速编辑的功能
-  .directive('issueQuickEditor', (API, NOTIFY)->
-    restrict: 'A'
-    replace: true
-    link: (scope, element, attrs)->
-      scope.onKeyDown = (event)->
-        return if event.keyCode isnt 13
-        #处理回车
-        text = _utils.trim(event.target.value)
-        return if not text
-
-        data =
-          title: text
-          tag: '需求' #暂时分到需求下，要根据当前所在分类
-          category: attrs.category
-
-        url = "project/#{scope.project.id}/issue"
-        API.post(url, data).then((result)->
-          NOTIFY.success '任务已经被成功创建'
-          event.target.value = null
-          #通知issue被创建
-          scope.$emit 'issue:change', 'new', result.id
-        )
-
-  )
