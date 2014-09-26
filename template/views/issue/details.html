@@ -1,3 +1,4 @@
+<div>
 <article class="issue-details" issue-details id="issue-details">
     <div class="not-found" ng-show="!issue.id">
         <p>
@@ -16,13 +17,13 @@
                 </div>
                 <div class="owner" dropdown data-name="issue:owner" data-text-container="label.display" data-selected="{{issue.owner}}">
                     <i class="icon small cell"></i>
-                    <label class="display">{{issue.owner_name || '不指定'}}</label>
+                    <label class="display">{{issue.owner_name || '未指定'}}</label>
                     <project-member-dropdown data-items="{{projectMember}}"></project-member-dropdown>
                 </div>
                 <div class="finish-date">
                     <button datetime-picker  data-name="plan_finish_time">
                         <i class="icon small cell"></i>
-                        <span>　{{issue.plan_finish_time | date:'yyyy-MM-dd' }}</span>
+                        <span>　{{(issue.plan_finish_time | date:'yyyy-MM-dd') || '未指定' }}</span>
                     </button>
                 </div>
                 <div class="priority" dropdown data-name="issue:priority" data-text-container="label.display" data-selected="{{issue.priority}}">
@@ -45,7 +46,7 @@
             </header>
 
             <!--标题部分-->
-            <div class="issue panel">
+            <div class="issue panel" ng-click="onClickIssue($event)">
                 <div class="title">
                     <div class="issue-status" dropdown data-selected="{{issue.status}}" data-name="issue:status">
                         <i class="issue-status icon small" ng-class="issue.status"></i>
@@ -62,12 +63,12 @@
                 <div class="sub-title">
                     <span class="creator">{{issue.creator_name || '创建者'}}</span>
                     <span class="tag">标签</span>
-                    <span class="timestamp">{{issue.timestamp | date}}</span>
+                    <span class="timestamp">{{issue.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
                     <span class="id">#{{issue.id}}</span>
                 </div>
                 <div class="content row" ng-bind-html="issue.content | unsafe" ng-show="!editing"></div>
                 <div ng-show="editing">
-                    <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}"></editor>
+                    <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}" data-upload-url="{{uploadUrl}}"></editor>
                 </div>
             </div>
 
@@ -108,6 +109,8 @@
                 </div>
             </div>
         </div>
-        <comment-editor></comment-editor>
+        
     </div>
 </article>
+<comment-editor data-upload-url="{{uploadUrl}}"></comment-editor>
+</div>

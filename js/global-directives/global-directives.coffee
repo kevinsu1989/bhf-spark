@@ -1,54 +1,18 @@
 #全局级的directive，和模块无关
 'use strict'
 define [
-  './ng-module'
-  './utils'
+  './../ng-module'
+  '../utils'
   '_'
   't!/views/global-all.html'
+  't!/views/project/all.html'
+  'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
 ], (_module, _utils, _, _template) ->
+  
+
   _module.directiveModule
-
-  .directive('dropdown', ()->
-    restrict: 'A'
-    replace: true
-    link: (scope, element, attrs)->
-      $self = $(element)
-      $menus = $self.find 'div.dropdown'
-      $text = $self.find attrs.textContainer
-
-      $menus.bind 'mouseleave', -> $menus.fadeOut()
-      $self.bind 'click', (e)->
-        $menus.fadeIn()
-        e.stopPropagation()
-
-        $('body').one 'click', -> $menus.fadeOut()
-
-      attrs.$observe('selected', ->
-        return if not scope.items
-        selected = attrs.selected || -1
-        $current = $menus.find("a[data-value='#{selected}']")
-        $text.text $current.text()
-      )
-
-      #scope.$broadcast 'dropdown:selected', attrs.name, selected
-
-
-      $menus.bind 'click', (e)->
-        e.stopPropagation()
-        $this = $(e.target)
-        $parent = $this.closest('a')
-        $menus.fadeOut()
-
-        #如果没有有指定data-value，则不处理
-        value = $parent.attr('data-value')
-        return if not value
-
-        $text.text $parent.text()
-        scope.$emit 'dropdown:selected', attrs.name, value
-
-  )
   #日期选择控件
   .directive('datetimePicker', ()->
     restrict: 'AC'
@@ -79,20 +43,13 @@ define [
 
       #设定默认值
       dateOpt.showMeridian = true
+      dateOpt.autoclose = true
       if formart then dateOpt.formart = formart
 
       $this = $(element);
       $this.datetimepicker(dateOpt)
       $this.on 'changeDate', (ev)->
         scope.$emit 'datetime:change', name, ev.date.valueOf()
-  )
-
-  #git的列表编辑器
-  .directive('gitListEditor', ()->
-    restrict: 'E'
-    replace: true
-    template: _utils.extractTemplate '#tmpl-global-git-list', _template
-    link: (scope, element, attrs)->
   )
 
   #tab的directive
@@ -104,4 +61,21 @@ define [
       attrs.$observe 'activeIndex', ()->
         $o.simpleTab 'change', parseInt(attrs.activeIndex)
   )
+
+  #header上的toolbar
+  .directive('headerToolbar', ['$rootScope', '$location', 'API', ($rootScope, $location, API)->
+    restrict: 'E'
+    replace: true
+    scope: {}
+    template: _utils.extractTemplate('#tmpl-global-header-toolbar', _tmplGlobal)
+    link: (scope, element, attrs)->
+
+      scope.onClickSetting = (target)->
+        $rootScope.$emit 'member:setting:show', target
+
+      scope.onClickLogout = ()->
+        #不用等返回
+        $location.path('/login')
+        API.delete 'session', ->
+  ])
 

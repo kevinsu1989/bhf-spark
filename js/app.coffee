@@ -4,7 +4,6 @@ define [
   'ng'
   './services/index'
   'filters'
-  './editor-directive'
   './project/index'
   './issue/index'
   './comment/index'
@@ -13,7 +12,7 @@ define [
   './assets/index'
   'angularRoute'
   'v/ui-router'
-  './directives'
+  './global-directives/index'
   './controllers'
 ], (_ng) ->
   _ng.module 'mic', [

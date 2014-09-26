@@ -116,8 +116,8 @@
                 </a>
 
                 <div class="content">
+                    <span class="title">{{project.title}}</span>
                     <span class="version">V1.0</span>
-                    <span class="title">BHF项目</span>
                     <i class="drop icon small"></i>
                 </div>
             </div>
@@ -125,55 +125,14 @@
                 <i class="icon"></i>
             </div>
             <!--右边的boolbar-->
-            <div class="toolbar">
-                <div class="search">
-                    <!--<input type="text" placeholder="请输入搜索关键字" />-->
-                </div>
-                <div class="menu">
-                    <div  class="notify">
-                        <i class="small icon"></i>
-                    </div>
-                    <div class="help" dropdown>
-                        <i class="small icon"></i>
-                        <div class="dropdown dropdown-tip">
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="help.html">帮助</a>
-                                </li>
-                                <li>
-                                    <a href="feedback.html">反馈建议</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="profile" dropdown>
-                        <i class="small icon"></i>
-                        <div class="dropdown dropdown-tip">
-                            <ul class="dropdown-menu" member-menu>
-                                <li>
-                                    <a ng-click="onClickSetting(0)">个人资料</a>
-                                </li>
-                                <li>
-                                    <a ng-click="onClickSetting(2)">通知设置</a>
-                                </li>
-                                <li>
-                                    <a ng-click="onClickSetting(1)">修改密码</a>
-                                </li>
-                                <li>
-                                    <a ng-click="onClickLogout()">退出</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <header-toolbar></header-toolbar>
         </header>
     </textarea>
 
     <textarea id="tmpl-project-member-dropdown">
         <div class="dropdown dropdown-tip">
             <ul class="dropdown-menu">
-                <li><a data-value="-1">不指定</a></li>
+                <li><a data-value="-1">未指定</a></li>
                 <li ng-repeat="item in items">
                     <a data-value="{{item.member_id}}">
                         {{item.username}}
@@ -206,5 +165,220 @@
                </div>
             </li>
         </ul>
+    </textarea>
+
+    <!--创建项目，或者修改项目资料-->
+    <textarea id="tmpl-project-editor">
+        <div class="modal">
+            <div class="inner">
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
+                <header>
+                    新建/编辑项目
+                </header>
+                <section>
+                    <form class="standard-form">
+                        <div class="row">
+                            <label class="caption">
+                                项目名称
+                            </label>
+                            <input class="medium text" type="text"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                摘要说明
+                            </label>
+                            <input class="medium text" type="text" placeholder="一句话简单描述项目"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                GitLab
+                            </label>
+                            <div class="inline">
+                                <git-list-editor data-name="project" data-max-count="5" data-gits="{{gits}}"></git-list-editor>
+                            </div>
+                        </div>
+
+                        <div class="row control">
+                            <button class="primary default" ng-click="onClickSave()">保存</button>
+                            <button class="cancel default" ng-click="onClickCancel()">取消</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </textarea>
+
+    <!--周报-->
+    <textarea id="tmpl-project-weekly-report-list">
+        <div class="list">
+            <header>
+                <h3>项目周报</h3>
+            </header>
+
+            <ul class="details">
+                <li class="row">
+                    <a  class="title" href="/project/1/weekly-report/201410">
+                        2014年第十周
+                    </a>
+
+                    <div class="info">
+                        <span class="memo">2014-01-10 至 2014-01-20</span>
+                    </div>
+                </li>
+                <li class="row">
+                    <a  class="title" href="/project/1/weekly-report/201410">
+                        2014年第十周
+                    </a>
+
+                    <div class="info">
+                        <span class="memo">2014-01-10 至 2014-01-20</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </textarea>
+
+    <!--周报详细-->
+    <textarea id="tmpl-project-weekly-report-details">
+        <div class="weekly-report-details">
+            <header>
+                <div class="title">
+                    2014年第10周周报
+                </div>
+                <div class="export">
+                    <i class="icon small"></i>
+                    <label>导出</label>
+                </div>
+                <div class="print">
+                    <i class="icon small"></i>
+                    <label>打印</label>
+                </div>
+            </header>
+
+            <!--未完成任务-->
+            <section class="undone report-view">
+                <div class="title">
+                    <i class="icon small"></i>
+                    <h3>本周未完成任务(3)</h3>
+                </div>
+
+                <div class="somebody">
+                    <div class="member">小胡</div>
+                    <ul class="tasks">
+                        <li>
+                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
+                            <div class="info">
+                                <span class="plain gray">星期三</span>
+                                <span class="plain gray"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="somebody">
+                    <div class="member">小胡</div>
+                    <ul class="tasks">
+                        <li>
+                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
+                            <div class="info">
+                                <span class="plain gray">星期三</span>
+                                <span class="plain gray"></span>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
+                            <div class="info">
+                                <span class="plain gray">星期三</span>
+                                <span class="plain gray"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <!--完成任务-->
+            <section class="done report-view">
+                <div class="title">
+                    <i class="icon small"></i>
+                    <h3>本周完成任务(3)</h3>
+                </div>
+
+                <div class="somebody">
+                    <div class="member">小胡</div>
+                    <ul class="tasks">
+                        <li>
+                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
+                            <div class="info">
+                                <span class="plain gray">星期三</span>
+                                <span class="plain gray"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
+                            <div class="info">
+                                <span class="plain gray">星期三</span>
+                                <span class="plain gray"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
+                            <div class="info">
+                                <span class="plain gray">星期三</span>
+                                <span class="plain gray"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="somebody">
+                    <div class="member">小胡</div>
+                    <ul class="tasks">
+                        <li>
+                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
+                            <div class="info">
+                                <span class="plain gray">星期三</span>
+                                <span class="plain gray"></span>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
+                            <div class="info">
+                                <span class="plain gray">星期三</span>
+                                <span class="plain gray"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <!--本周无任务和周报记录-->
+            <section class="lazybone report-view">
+                <div class="title">
+                    <i class="icon small"></i>
+                    <h3>本周无任务和周报记录</h3>
+                </div>
+
+                <ul class="member-list">
+                    <li>
+                        <div class="avatar">
+                            李
+                        </div>
+                        <label>张三</label>
+                    </li>
+                    <li>
+                        <div class="avatar">
+                            张
+                        </div>
+                        <label>李四</label>
+                    </li>
+                </ul>
+            </section>
+        </div>
     </textarea>
 </div>

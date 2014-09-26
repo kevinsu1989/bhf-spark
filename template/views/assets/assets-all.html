@@ -23,17 +23,23 @@
 
     <!--素材列表-->
     <textarea id="tmpl-assets-list">
-        <div class="list assets-list">
+        <div class="list">
             <header>
                 <h3>素材库</h3>
             </header>
 
             <ul class="details">
                 <li ng-repeat="item in assets.items" class="row">
-                    <a href="/project/{{item.project_id}}/assets/{{item.id}}">
+                    <!--/project/{{item.project_id}}/assets/{{item.id}}-->
+                    <a href="{{item.url}}" target="_blank">
                         <span class="title">{{item.original_name}}</span>
-                        <span class="badge gray small">{{item.file_size}}</span>
                     </a>
+
+                    <div class="info">
+                        <span class="memo">{{item.file_size | friendlyFileSize}}</span>
+                        <span class="memo">{{item.realname}}</span>
+                        <span class="memo">{{item.timestamp | date}}</span>
+                    </div>
                 </li>
             </ul>
         </div>

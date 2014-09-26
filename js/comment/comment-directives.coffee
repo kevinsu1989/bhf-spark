@@ -13,9 +13,16 @@ define [
     template: _utils.extractTemplate '#tmpl-comment-list', _template
     link: (scope, element, attr)->
       url = "project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/comment"
-      API.get(url, pageSize: 20).then((result)->
-        scope.comments = result
-      )
+
+      searchComment = ()->
+        API.get(url, pageSize: 20).then((result)->
+          scope.comments = result
+        )
+
+      #收到重新加载评论列表的事件
+      scope.$on 'comment:list:reload', -> searchComment()
+
+      searchComment()
   )
 
   #评论详细
@@ -41,10 +48,13 @@ define [
     link: (scope, element, attrs)->
       activeClass = 'active'
       editorKey = 'comment'
+
       #focus后，弹出大的编辑器
       scope.onFocusEditor = ()->
         element.addClass activeClass
-        scope.$broadcast 'editor:content', editorKey
+        scope.$broadcast 'editor:content', editorKey, null, attrs.uploadUrl
+        #绑定body的one事件，点击任何地方隐藏当前
+        $('body').one 'click', -> scope.$broadcast 'editor:will:cancel', editorKey
         return true
 
       scope.$on 'editor:cancel', (event, name)->
@@ -55,4 +65,6 @@ define [
         return if editorKey isnt name
         element.removeClass activeClass
 
+      #阻止click的冒泡
+      element.bind 'click', (e)-> e.stopPropagation()
   )

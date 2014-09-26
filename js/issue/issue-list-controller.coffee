@@ -15,6 +15,8 @@ define [
       url = "project/#{$stateParams.project_id}/issue"
       cond = cond || {}
       params = {}
+
+      $scope.showQuickEditor = false
       if cond.keyword #搜索
         $scope.title = "搜索：#{cond.keyword}"
         params.keyword = cond.keyword
@@ -25,6 +27,7 @@ define [
       else if cond.tag
         $scope.title = "标签：# #{cond.tag} #"
         params.tag = cond.tag
+        $scope.showQuickEditor = true
       else
         $scope.title = "所有任务"
 
@@ -43,8 +46,11 @@ define [
     #          scope.$apply()
 
 
-    #收到issue被创建后，检查是否需要显示当前列表
-    $scope.$on 'issue:changed', (event, status, id)-> searchIssue()
+
+    #强制重新加载数据
+    $scope.$on 'issue:list:reload', (event)-> searchIssue()
+    #某个issue被修改
+    $scope.$on 'issue:change', (event, action, id, data)-> searchIssue()
 
     searchIssue()
   )

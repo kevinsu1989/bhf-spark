@@ -20,7 +20,7 @@ define [
 ], (_module, _moment, _, _utils, _template) ->
 
   _module.controllerModule.
-  controller('projectController', ($rootScope, $scope, $routeParams, $location, API, $stateParams)->
+  controller('projectController', ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
     url = "project/#{$stateParams.project_id}"
 
     #获取项目的信息
@@ -35,4 +35,16 @@ define [
       $scope.$broadcast 'project:member:loaded', result
     )
 
+    STORE.initSession() if STORE.session is null
+    STORE.initProjectMemberList()
   )
+
+  #项目周报的列表
+  .controller('projectWeeklyReportListController', ['API', (API)->
+
+  ])
+
+  #项目周报的详细
+  .controller('projectWeeklyReportDetailsController', ['API', (API)->
+
+  ])

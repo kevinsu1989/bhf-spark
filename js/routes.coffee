@@ -7,7 +7,9 @@ define [
   't!/views/member/member-all.html'
   't!/views/commit/commit-all.html'
   't!/views/assets/assets-all.html'
-], (_ng, _app, _utils, _tmplIssue, _tmplMember, _tmplCommit, _tmplAssets) ->
+  't!/views/project/project-all.html'
+], (_ng, _app, _utils, _tmplIssue, _tmplMember, _tmplCommit, _tmplAssets, _tmplProject) ->
+
   _app.config ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
 
@@ -35,6 +37,26 @@ define [
       url: '/project/:project_id'
       templateUrl: '/views/project/layout.html'
       controller: 'projectController'
+    )
+
+    .state('project.weekly-report',
+      url: '/weekly-report'
+      views:
+        'list-panel':
+          template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
+          controller: 'projectWeeklyReportListController'
+        'details-panel': {}
+    )
+
+    .state('project.weekly-report-details',
+      url: '/weekly-report/:week'
+      views:
+        'list-panel':
+          template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
+          controller: 'projectWeeklyReportListController'
+        'details-panel':
+          template: _utils.extractTemplate('#tmpl-project-weekly-report-details', _tmplProject)
+          controller: 'projectWeeklyReportDetailsController'
     )
 
     #issue列表

@@ -1,20 +1,14 @@
 <div>
     <textarea id="tmpl-global-git-list">
         <ul class="git-list">
-            <li>
-                <label>conis.yi@gmail.com</label>
-                <button ng-click="onClickRemove($event, $index)">
-                    <i class="icon small remove"></i>
-                </button>
-            </li>
-            <li>
-                <label>conis.yi@gmail.com</label>
+            <li ng-repeat="account in gitAccounts track by $index" ng-click="onClickEdit($event, $index, account)">
+                <label>{{account}}</label>
                 <button ng-click="onClickRemove($event, $index)">
                     <i class="icon small remove"></i>
                 </button>
             </li>
             <li class="create">
-                <input type="text" placeholder="输入git地址后回车" class="medium" />
+                <input type="text" placeholder="输入git地址后回车" class="medium" ng-keypress="onKeypressAdd($event)"/>
             </li>
         </ul>
     </textarea>
@@ -37,6 +31,52 @@
     <textarea id="tmpl-global-web-file-upload-progressbar">
         <div class="progress progress-striped active">
             <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+        </div>
+    </textarea>
+
+    <!--header上的toolbar-->
+    <textarea id="tmpl-global-header-toolbar">
+        <div class="header-toolbar">
+            <div class="search">
+                <!--<input type="text" placeholder="请输入搜索关键字" />-->
+            </div>
+            <div class="menu">
+                <div  class="notify">
+                    <i class="small icon"></i>
+                </div>
+                <div class="help" dropdown>
+                    <i class="small icon"></i>
+                    <div class="dropdown dropdown-tip">
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="help.html">帮助</a>
+                            </li>
+                            <li>
+                                <a href="feedback.html">反馈建议</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="profile" dropdown>
+                    <i class="small icon"></i>
+                    <div class="dropdown dropdown-tip">
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a ng-click="onClickSetting(0)">个人资料</a>
+                            </li>
+                            <li>
+                                <a ng-click="onClickSetting(2)">通知设置</a>
+                            </li>
+                            <li>
+                                <a ng-click="onClickSetting(1)">修改密码</a>
+                            </li>
+                            <li>
+                                <a ng-click="onClickLogout()">退出</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </textarea>
 </div>

@@ -23,7 +23,7 @@ module.exports = {
     routers: [
         {
             //无扩展名的访问，则直接跳到main
-            path: /.+(\/\w+(\/)?)$/i, to: '/main.html', next: false
+            path: /.+(\/[^\.]+(\/)?)$/i, to: '/main.html', next: false
         },
         {
             //登录页，暂用，应该和上面的正则合并
@@ -58,7 +58,7 @@ module.exports = {
             internal: false
         },
         //将要复制的文件目录，直接复制到目标
-        copy: ["images"],
+        copy: ["images", "package", "fonts"],
         //将要编译处理的目录，如果存在less/coffee，则会直接编译
         compile: {
             //将template直接输出到目标目录下

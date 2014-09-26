@@ -3,10 +3,8 @@
 define [
   'ng'
   '../ng-module'
-  '_'
   'notify'
-  'pkg/webuploader/webuploader.html5only'
-], (_ng, _module, _, _notify, _webUploader) ->
+], (_ng, _module, _notify) ->
   _module.serviceModule
   .factory 'NOTIFY', ()-> _notify
 

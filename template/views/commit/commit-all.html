@@ -6,11 +6,20 @@
             </header>
             <ul class="details">
                 <li class="row" ng-repeat="item in commit.items">
-                    <a href="/project/{{item.project_id}}/commit/{{item.id}}?url={{item.url}}" ng-click="clickCommit($event, item)">{{item.message}}</a>
-                    <span>{{item.realname}}</span>
-                    <span>{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
+                    <a href="{{item.url}}" target="_blank">{{item.message}}</a>
+                    <div class="info">
+                        <span class="memo">
+                            {{item.sha | limitTo: 10}}
+                        </span>
+                        <span class="memo">{{item.realname}}</span>
+                        <span class="memo">{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
+                    </div>
                 </li>
             </ul>
+
+            <div class="empty" ng-show="commit.items.length == 0">
+                没有任何Commit，需要了解如何同步到Commit到BHF吗？
+            </div>
         </div>
     </textarea>
 

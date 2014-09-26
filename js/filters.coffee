@@ -36,3 +36,11 @@ define [
       else
         Math.round(size * 100 / 1024) / 100 + "GB"
   )
+
+  .filter('rawText', ()->
+    (html)->
+      div = document.createElement('div')
+      div.innerHTML = html
+      #div.innerText
+      $(div).text()
+  )

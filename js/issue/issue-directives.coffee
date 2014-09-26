@@ -2,6 +2,7 @@ define [
   '../ng-module'
   '../utils'
   't!/views/issue/issue-all.html'
+  'v/jquery.transit'
 ], (_module,_utils, _template) ->
 
   _module.directiveModule
@@ -15,7 +16,22 @@ define [
       scope.$on 'dropdown:selected', (event, type, value)->
         return if type isnt 'issue:status'
         api = "project/#{scope.issue.project_id}/issue/#{scope.issue.id}/status"
-        API.put api, status: value
+        API.put(api, status: value).then ()->
+          scope.$emit 'issue:change', 'status', scope.issue.id
+
+#          动画需要考虑多个问题，暂缓
+#          #执行一个动画，完毕后重新加载数据
+#          $obj = $("#issue-list-#{scope.issue.id}")
+#          top = $('#issue-list-done').offset().top
+#
+#          optoins =
+#            y: top
+#            duration: 800
+#            complete: ->
+#              scope.$emit 'issue:list:reload'
+#
+#          $obj.transition(optoins)
+
   )
 
   .directive('issuePriorityDropdown', (API)->
