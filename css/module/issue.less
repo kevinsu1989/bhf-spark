@@ -278,21 +278,19 @@
 
 .comment-editor{
   bottom: 0;
-  width: 100%;
+  z-index: 100;
+  /*width: 100%;*/
   position: fixed;
+  width: 45%;
   overflow: hidden;
   .box-shadow(0 0 4px rgba(0, 0, 0, 0.2));
   background-color: rgba(233, 235, 240, 0.95);
   .animation-duration(.5s);
 
-  &:hover{
-    bottom: 0;
-  }
-
   .simple{
     height: 60px;
     input{
-      width: 97%;
+      width: 95%;
       font-size: 16px;
       margin: 12px;
       height: 33px;
