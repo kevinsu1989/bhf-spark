@@ -23,7 +23,7 @@ module.exports = {
     routers: [
         {
             //无扩展名的访问，则直接跳到main
-            path: /.+(\/\w+(\/)?)$/i, to: '/main.html', next: false
+            path: /.+(\/[^\.]+(\/)?)$/i, to: '/main.html', next: false
         },
         {
             //登录页，暂用，应该和上面的正则合并
