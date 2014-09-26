@@ -5,7 +5,7 @@ define [
 ], (_module, _utils, _template) ->
   _module.directiveModule
   #上传素材
-  .directive('uploadAssets', ($stateParams, API, webFileUploadService)->
+  .directive('uploadAssets', ($stateParams, API, WEBFILEUPLOAD)->
     restrict: 'A'
     replace: true
     link: (scope, element, attr)->
@@ -16,11 +16,10 @@ define [
       file_upload_box = $('.file_upload_box')
 
       #初始化 webFileUpload  input name 为 fileVal: "assets"
-      uploader = webFileUploadService.webUploaderInit {server: server, fileVal: "assets"}, file_upload_box
+      uploader = WEBFILEUPLOAD.webUploaderInit {server: server, fileVal: "assets"}, file_upload_box
 
       #文件上传完 触发更新事件
       uploader.on "uploadFinished", ()->
-        console.log "uploadFinished"
         scope.$emit "assets:upload:finish"
 
       #把当前元素的点击事件代理到input type=file 的label上去 触发文件选择框  这个实现以后可以优化

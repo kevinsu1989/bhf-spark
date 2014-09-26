@@ -5,11 +5,9 @@ define [
   './utils'
   '_'
   't!/views/global-all.html'
-  't!/views/project/all.html'
-  'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
-], (_module, _utils, _, _template, _directiveTmp, _WebUploader) ->
+], (_module, _utils, _, _template) ->
   _module.directiveModule
 
   .directive('dropdown', ()->
@@ -107,21 +105,3 @@ define [
         $o.simpleTab 'change', parseInt(attrs.activeIndex)
   )
 
-  #文件上传组件
-  .factory('webFileUploadService',  ()->
-    option =
-      server : ""
-      # 选择文件的按钮
-      pick:
-        id   : '#picker'
-        multiple  : true
-      auto:true
-    #初始化 WebUploader
-    webUploaderInit = (opt,uploaderWarp)->
-      option = angular.extend option, opt
-      option.pick.id = uploaderWarp
-      uploader = _WebUploader.create option
-      return uploader
-
-    return webUploaderInit: webUploaderInit
-  )
