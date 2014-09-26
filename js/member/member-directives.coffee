@@ -105,11 +105,3 @@ define [
     template: _utils.extractTemplate '#tmpl-member-notification', _template
     link: (scope, element, attr)->
   )
-
-  .directive('memberMenu', ($rootScope)->
-    restrict: 'A'
-    replace: true
-    link: (scope, element, attr)->
-      scope.onClickSetting = (target)->
-        $rootScope.$emit 'member:setting:show', target
-  )

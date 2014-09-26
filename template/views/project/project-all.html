@@ -125,48 +125,7 @@
                 <i class="icon"></i>
             </div>
             <!--右边的boolbar-->
-            <div class="toolbar">
-                <div class="search">
-                    <!--<input type="text" placeholder="请输入搜索关键字" />-->
-                </div>
-                <div class="menu">
-                    <div  class="notify">
-                        <i class="small icon"></i>
-                    </div>
-                    <div class="help" dropdown>
-                        <i class="small icon"></i>
-                        <div class="dropdown dropdown-tip">
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="help.html">帮助</a>
-                                </li>
-                                <li>
-                                    <a href="feedback.html">反馈建议</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="profile" dropdown>
-                        <i class="small icon"></i>
-                        <div class="dropdown dropdown-tip">
-                            <ul class="dropdown-menu" member-menu>
-                                <li>
-                                    <a ng-click="onClickSetting(0)">个人资料</a>
-                                </li>
-                                <li>
-                                    <a ng-click="onClickSetting(2)">通知设置</a>
-                                </li>
-                                <li>
-                                    <a ng-click="onClickSetting(1)">修改密码</a>
-                                </li>
-                                <li>
-                                    <a ng-click="onClickLogout()">退出</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <header-toolbar></header-toolbar>
         </header>
     </textarea>
 

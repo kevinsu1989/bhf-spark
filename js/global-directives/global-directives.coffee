@@ -9,7 +9,7 @@ define [
   'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
-], (_module, _utils, _, _template, _directiveTmp, _WebUploader) ->
+], (_module, _utils, _, _tmplGlobal, _directiveTmp, _WebUploader) ->
 
   _module.directiveModule
   #日期选择控件
@@ -60,6 +60,23 @@ define [
       attrs.$observe 'activeIndex', ()->
         $o.simpleTab 'change', parseInt(attrs.activeIndex)
   )
+
+  #header上的toolbar
+  .directive('headerToolbar', ['$rootScope', '$location', 'API', ($rootScope, $location, API)->
+    restrict: 'E'
+    replace: true
+    scope: {}
+    template: _utils.extractTemplate('#tmpl-global-header-toolbar', _tmplGlobal)
+    link: (scope, element, attrs)->
+
+      scope.onClickSetting = (target)->
+        $rootScope.$emit 'member:setting:show', target
+
+      scope.onClickLogout = ()->
+        #不用等返回
+        $location.path('/login')
+        API.delete 'session', ->
+  ])
 
   #文件上传组件
   .factory('webFileUploadService',  ()->
