@@ -21,6 +21,6 @@ define [
 
       API.post('session', data).then((result)->
         #暂时跳到这个项目
-        $location.path $state.params.next || '/project/1/issue'
+        $location.path $state.params.next || '/'
       )
   )

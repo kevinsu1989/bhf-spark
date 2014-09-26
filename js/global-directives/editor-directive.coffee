@@ -1,5 +1,5 @@
 define [
-  'ng-module'
+  '../ng-module'
   'utils'
   'simditor-marked'
   'simditor-mention'
