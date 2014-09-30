@@ -2,9 +2,9 @@ define [
   '../ng-module'
   '../utils'
   't!/views/member/member-all.html'
+  'pkg/jquery.autocomplete/jquery.autocomplete'
   'v/jquery.modal'
-], (_module,_utils, _template) ->
-
+], (_module, _utils, _template, _autocomplete) ->
   _module.directiveModule
   .directive('memberSetting', ($rootScope, API)->
     restrict: 'E'
@@ -50,8 +50,14 @@ define [
       scope.$on 'member:setting:bindAll', ()->
         API.get(url).then((result)->
           scope.profile = result
-          scope.gits =  _.map result.gits, (item)-> item.git
+          scope.gits = _.map result.gits, (item)->
+            item.git
         )
+      scope.$on('member:creator:bind',(event,data)->
+        scope.profile = data
+        scope.$apply()
+        return
+      )
   )
 
   .directive('memberChangePassword', ($location, API, NOTIFY)->
@@ -99,9 +105,77 @@ define [
       clearInput()
   )
 
-  .directive('memberNotification', ($location, API)->
+  .directive('memberNotification', ($location, API, $stateParams)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-member-notification', _template
     link: (scope, element, attr)->
   )
+  #自动完成
+  .directive('membersLookup', ($stateParams, API)->
+    restrict: 'AC'
+    link: (scope, element, attrs)->
+      url = "member?pageSize=1000"
+      $this = $(element)
+      # API.get "project/#{$stateParams.project_id}"/member (result)->
+      #保存成员
+      saveMember = ()->
+        data = {member_id: scope.selectSuggestion, role: "d"}
+        API.post("project/#{$stateParams.project_id}/member", data).then ()->
+          scope.selectSuggestion = ""
+          scope.$emit 'project:member:request'
+      #创建成员
+      createMember = ()->
+        value = $this.val()
+        scope.$emit('member:creator:toshow',value)
+        #回车事件
+      $this.on "keyup", (event)->
+        if event.keyCode is 13 and scope.selectSuggestion then saveMember()
+        if event.keyCode is 13 and not scope.selectSuggestion then createMember()
+
+      options =
+        lookup: []
+        showNoSuggestionNotice: true
+        noSuggestionNotice: '未找到该用户，按回车键添加该用户'
+        onSelect: (suggestion)->
+          scope.selectSuggestion = suggestion.data
+
+      #处理 auto 数据
+      initLookup = (list) ->
+        result = []
+        projectMember = scope.projectMember
+        _.remove(list, (item)->
+          _.findIndex(projectMember, (pItem)->
+            item.id is pItem.member_id) >= 0
+        )
+        ###forEach(list, (item)->
+          temp = item
+          item.data = temp
+          #item.value = _utils.formatString("姓名:{0}/t邮箱：{1}",[item.realname,if not item.email then "" else item.email])
+          item.value = temp.realname
+          return item
+        )###
+
+        for item in list
+          result.push {value: item.realname, data: item.id}
+        return result
+
+      API.get(url).then (result)->
+        options.lookup = initLookup(result.items)
+        $this.autocomplete(options)
+  )
+  # 添加项目成员
+  .directive('memberCreatorModel', ($location, API)->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-member-creator', _template
+    link: (scope, element, attr)->
+      $o = $(element)
+      #接收事件后，加载数据并显示
+      scope.$on "member:creator:show", (event,data)->
+        scope.$broadcast('member:creator:bind', {username:data,realname:data})
+        $o.modal showClose: false
+      scope.$on 'member:creator:hide', ()->
+        $o.modal.close()
+  )
+

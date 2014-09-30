@@ -9,7 +9,7 @@ define [
   'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
-], (_module, _utils, _, _template) ->
+], (_module, _utils, _, _tmplGlobal, _template) ->
   
 
   _module.directiveModule
