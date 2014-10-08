@@ -10,7 +10,7 @@ define [
   't!/views/project/project-all.html'
 ], (_ng, _app, _utils, _tmplIssue, _tmplMember, _tmplCommit, _tmplAssets, _tmplProject) ->
 
-  _app.config ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
+  _app.config(($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
 
     issueListView =
@@ -149,3 +149,4 @@ define [
           template: _utils.extractTemplate('#tmpl-assets-list', _tmplAssets)
           controller: 'assetsListController'
     )
+  )

@@ -13,3 +13,291 @@ define [
   #提取text中包括规则的模板html，即包含在textarea中的
   extractTemplate: (expr, text)->
     $(text).find(expr).val()
+
+  apis:
+    [
+      {
+        "url": "mine",
+        "methods": {
+          "patch": false
+        }
+      },
+      {
+        "url": "session",
+        "methods": {
+          "put": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "project/:project_id/attachment/(:filename)?",
+        "methods": {}
+      },
+      {
+        "url": "project",
+        "methods": {}
+      },
+      {
+        "url": "project/:project_id/status",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "project/:project_id/deploy",
+        "methods": {
+          "get": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "git/commit",
+        "methods": {
+          "get": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "commit/import/rss",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/git/tags",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/member",
+        "methods": {}
+      },
+      {
+        "url": "project/:project_id(\\d+)/git/commit",
+        "methods": {
+          "get": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/issue/:issue_id(\\d+)/plan",
+        "methods": {
+          "get": false,
+          "delete": false,
+          "patch": false,
+          "post": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/issue/:issue_id(\\d+)/commit",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/assets",
+        "methods": {
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/issue/:issue_id(\\d+)/assets",
+        "methods": {
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id/issue/:issue_id(\\d+)/commit",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id/commit",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "assets/:project_id(\\d+)/:zipfile/unwind",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/issue",
+        "methods": {
+          "delete": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/report",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "report/issue",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/stat",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/report/weekly",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
+      },
+      {
+        "url": "project/:project_id(\\d+)/issue/:issue_id(\\d+)/comment",
+        "methods": {}
+      },
+      {
+        "url": "project/:project_id(\\d+)/discussion",
+        "methods": {
+          "put": false,
+          "post": false,
+          "delete": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "project/:project_id/issue/:issue_id/status",
+        "methods": {
+          "get": false,
+          "delete": false,
+          "post": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "project/:project_id/issue/:issue_id/tag",
+        "methods": {
+          "get": false,
+          "delete": false,
+          "post": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "project/:project_id/issue/:issue_id/priority",
+        "methods": {
+          "get": false,
+          "delete": false,
+          "post": false
+        }
+      },
+      {
+        "url": "account/change-password",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "get": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "member/role",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "get": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "account/token",
+        "methods": {
+          "put": false,
+          "delete": false,
+          "get": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "member",
+        "methods": {
+          "put": false,
+          "delete": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "member/mail",
+        "methods": {
+          "get": false,
+          "put": false,
+          "delete": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "account/profile",
+        "methods": {
+          "delete": false,
+          "post": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "account/avatar/:member_id(\\d+)?",
+        "methods": {
+          "put": false,
+          "delete": false,
+          "post": false,
+          "patch": false
+        }
+      },
+      {
+        "url": "apis",
+        "methods": {}
+      }
+    ]
