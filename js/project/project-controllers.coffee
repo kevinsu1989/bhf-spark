@@ -18,32 +18,35 @@ define [
   '_'
   '../utils'
 ], (_module, _moment, _, _utils, _template) ->
-
   _module.controllerModule.
   controller('projectController', ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
-    apiProject = API.project($stateParams.project_id)
+    url = "project/#{$stateParams.project_id}"
     #获取项目的信息
-    apiProject.retrieve().then((result)->
+    API.get(url).then((result)->
       $scope.project = result
       $rootScope.$broadcast 'project:loaded', result
     )
 
-    #获取项目成员的信息
-    apiProject.member().retrieve().then((result)->
+    #console.log STORE.projectMemberList
+    #初始化获取项目成员的信息
+    STORE.projectMemberList.update(url + "/member").then (result)->
       $scope.projectMember = result
-      $scope.$broadcast 'project:member:loaded', result
+
+    #更新成员列表信息
+    $scope.$on("project:member:request", ()->
+      console.log "project:member:request"
+      STORE.projectMemberList.update(url + "/member").then (result)->
+        $scope.projectMember = result
+    )
+    #展示创建成员窗口
+    $scope.$on("member:creator:toshow", (event,data)->
+      $scope.$broadcast("member:creator:show",data)
     )
 
-    STORE.initSession() if STORE.session is null
-    STORE.initProjectMemberList()
   )
 
   #项目周报的列表
-  .controller('projectWeeklyReportListController', ['API', (API)->
-
-  ])
+  .controller('projectWeeklyReportListController', ['API', (API)-> ])
 
   #项目周报的详细
-  .controller('projectWeeklyReportDetailsController', ['API', (API)->
-
-  ])
+  .controller('projectWeeklyReportDetailsController', ['API', (API)-> ])

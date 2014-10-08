@@ -38,12 +38,13 @@
 
     <!--项目成员列表-->
     <textarea id="tmpl-project-member-list">
+        <member-creator-model></member-creator-model>
         <div class="list member-list">
             <header>
                 <h3>项目成员</h3>
             </header>
             <div class="create">
-                <input type="text" placeholder="请输入将要添加用户的姓名" autofocus ng-keydown="onKeyDown($event)" />
+                <input type="text" placeholder="请输入将要添加用户的姓名" members-lookup autofocus />
             </div>
             <ul class="details">
                 <li ng-repeat="member in projectMember" class="row">
@@ -158,11 +159,25 @@
                         <li>通知设置</li>
                     </ul>
                     <div class="content" data-field="content">
-                        <member-profile></member-profile>
+                        <member-profile action="account-profile"></member-profile>
                         <member-change-password></member-change-password>
                         <member-notification></member-notification>
                     </div>
                 </div>
+            </div>
+        </div>
+    </textarea>
+     <!--创建成员-->
+    <textarea id="tmpl-member-creator">
+        <div class="modal">
+            <div class="inner">
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
+                <header>
+                    创建项目成员
+                </header>
+                <section>
+                    <member-profile action="creat-member"></member-profile>
+                </section>
             </div>
         </div>
     </textarea>

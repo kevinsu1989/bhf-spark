@@ -4,29 +4,24 @@ define [
   '../ng-module'
 ], (_ng, _module) ->
   _module.serviceModule
-  .service 'STORE', ($rootScope, $stateParams, API)->
-    service =
-      projectMemberList: []
-      account: null
+  .service 'STORE', (API, $q)->
 
-    #存储成员列表
-    initProjectMemberList = ()->
-      url = "project/#{$stateParams.project_id}/member"
-      API.get(url).then((result)->
-        service.projectMemberList = result
-      )
-    #存储账号信息
-    initSession = ()->
-      url = "session"
-      API.get(url).then((result)->
-        service.session = result
-      )
+    service = {}
 
-    init = ()->
-      initProjectMemberList()
-      initSession()
+    class CacheData
+      constructor: ()->
+        @data
+      update: (url)->
+        self = @
+        defer = $q.defer()
+        API.get(url).then((result)->
+          self.data = result
+          defer.resolve result
+        )
+        defer.promise
+      get: ()-> @data
+      set:(data)-> @data = data
 
-    service.init = init
-    service.initProjectMemberList = initProjectMemberList
-    service.initSession = initSession
+    service.projectMemberList = new CacheData()
+    service.session = new CacheData()
     return service
