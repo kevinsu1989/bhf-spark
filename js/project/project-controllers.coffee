@@ -21,16 +21,15 @@ define [
 
   _module.controllerModule.
   controller('projectController', ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
-    url = "project/#{$stateParams.project_id}"
-
+    apiProject = API.project($stateParams.project_id)
     #获取项目的信息
-    API.get(url).then((result)->
+    apiProject.retrieve().then((result)->
       $scope.project = result
       $rootScope.$broadcast 'project:loaded', result
     )
 
     #获取项目成员的信息
-    API.get("#{url}/member").then((result)->
+    apiProject.member().retrieve().then((result)->
       $scope.projectMember = result
       $scope.$broadcast 'project:member:loaded', result
     )
