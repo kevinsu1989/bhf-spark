@@ -160,15 +160,23 @@ define [
 
       #处理 lookup 数据
       buildLookupData = (list) ->
-        result = []
         projectMember = scope.projectMember
         _.remove(list, (item)->
-          _.findIndex(projectMember, (pItem)->
+          result = _.findIndex(projectMember, (pItem)->
             item.id is pItem.member_id) >= 0
+
+          if not result
+            item.value = item.realname
+            item.data = item.id
+            delete item.realname
+            delete item.username
+            delete item.id
+            delete item.role
+
+          result
         )
-        for item in list
-          result.push {value: item.realname, data: item.id}
-        return result
+
+        return list
 
       #初始化lookup
       initLookup = ()->
