@@ -1,36 +1,42 @@
+###
+  用更优雅的方式调用RESTful APIs
+  Author: wvv8oo
+  Github: https://github.com/wvv8oo/charm.js
+###
 (->
+  #url中的节点实体
   class SegmentEntity
     constructor: (@parent, @segmentModel)->
       @params = []
       #创建实体时更新成员
-      @updateProperties()
-      @addMethods()
+      @_updateProperties()
+      @_addMethods()
 
     #添加方法
-    addMethod: (key, method)->
+    _addMethod: (verb, funcName)->
       self = @
-      @[key] = (data, cb)->
+      @[funcName] = (data, cb)->
         if typeof data is 'function'
           cb = data
           data = {}
 
-        self.doAction method, data, cb
+        self._doAction verb, data, cb
 
     #批量添加方法
-    addMethods: ->
-      map = create: 'POST', patch: 'PATCH', delete: 'DELETE', update: 'PUT', retrieve: 'GET'
-      @addMethod key, method for key, method of map
+    _addMethods: ->
+      map = post: 'create', put: 'update', patch: 'patch', delete: 'delete', get: 'retrieve', jsonp: 'jsonp'
+      methods = @segmentModel.options.methods || map
 
+      @_addMethod funcName, method for funcName, method of methods
 
     #添加字符与数字形式的param
-    addPlainParam: (param, index)->
+    _addPlainParam: (param, index)->
       placeholder = @segmentModel.placeholders[index]
       return if not placeholder
-
       @params[index] = key: placeholder.key, value: String(param)
 
     #添加对象类型的参数
-    addObjectParam: (param)->
+    _addObjectParam: (param)->
       for key, value of param
         #找到key对应的索引位置
         findIndex = -1
@@ -39,22 +45,17 @@
             findIndex = index
             break
 
-        @addPlainParam value, findIndex
+        @_addPlainParam value, findIndex
 
     #添加params
-    addParams: (params)->
+    _addParams: (params)->
       for param, index in params
         if typeof param in ['string', 'number']
-          @addPlainParam param, index
+          @_addPlainParam param, index
         else
-          @addObjectParam param
+          @_addObjectParam param
 
-    #添加url
-    parse: (urls)->
-      @segmentModel.parse urls
-      @updateProperties()
-
-    currentToString: ()->
+    _currentToString: ()->
       url = @segmentModel.name
 
       #检查是否包括参数
@@ -64,29 +65,23 @@
       url
 
     #提取segment对应的访问我
-    extractMethodName: (name)->
+    _extractMethodName: (name)->
       return name if @segmentModel.options.rawMethodName
 
       name = name.replace /[\-](\w)/, (m, n)-> n.toUpperCase()
       return name
 
     #更新实例成员
-    updateProperties: ()->
+    _updateProperties: ()->
       for child in @segmentModel.children
-        method = @extractMethodName(child.name)
+        method = @_extractMethodName(child.name)
         #跳过已经存在的方法
         continue if @[method]
 
         @[method] = SegmentEntity.create @, child
 
-    #转换为字符串式的url
-    toString: ()->
-      return '' if not @parent
-      url = @parent?.toString() || @segmentModel.options.rootUrl || ''
-      url += "/#{@currentToString()}"
-
     #执行操作
-    doAction: (method, data, cb)->
+    _doAction: (method, data, cb)->
       q = @segmentModel.options.promise
       ajax = @segmentModel.options.ajax
 
@@ -104,15 +99,28 @@
 
       deferred.promise
 
+    #添加url
+    parse: (urls)->
+      @segmentModel.parse urls
+      @_updateProperties()
+
+    #转换为字符串式的url
+    toString: (ignoreSuffix)->
+      return '' if not @parent
+      ops = @segmentModel.options
+      url = @parent?.toString(true) || ops.prefix || ''
+      url += "/#{@_currentToString()}"
+      url += ops.suffix if not ignoreSuffix and ops.suffix
+      url
 
   #根据model，创建一个实体
   SegmentEntity.create = (parent, segmentModel)->
     (args...)->
       entity = new SegmentEntity(parent, segmentModel)
-      entity.addParams args
+      entity._addParams args
       entity
 
-  #url中的每个节点
+  #url中的节点模型
   class SegmentModel
     constructor: (@parent, @name, @options)->
       @children = []
@@ -166,9 +174,12 @@
     #如果没有设置ajax参数，且没有引用jQuery，则提示错误
     return console.error '请设置options.ajax参数或引用jQuery' if not $?.ajax
 
+    dataType = if type is 'jsonp' then 'JSONP' else 'JSON'
+    type = 'GET' if type is 'jsonp'
     $.ajax url,
       type: type
       data: data
+      dataType: dataType
       success: (response)-> cb? response
 
   charm = (options)->
@@ -180,7 +191,7 @@
     return entity
 
 
-  if define and define.amd
+  if typeof define is 'function'
     define [], -> charm
   else if typeof exports is "object"
     module.exports = charm
