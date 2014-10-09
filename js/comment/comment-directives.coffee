@@ -12,10 +12,12 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-comment-list', _template
     link: (scope, element, attr)->
-      url = "project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/comment"
-
       searchComment = ()->
-        API.get(url, pageSize: 20).then((result)->
+        API.project($stateParams.project_id)
+        .issue($stateParams.issue_id)
+        .comment()
+        .retrieve(pageSize: 20)
+        .then((result)->
           scope.comments = result
         )
 

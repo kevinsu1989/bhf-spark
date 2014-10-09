@@ -30,7 +30,7 @@ define [
         }
       },
       {
-        "url": "project/:project_id/attachment/(:filename)?",
+        "url": "project/:project_id/attachment/:filename",
         "methods": {}
       },
       {
@@ -73,7 +73,7 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/git/tags",
+        "url": "project/:project_id/git/tags",
         "methods": {
           "post": false,
           "delete": false,
@@ -82,11 +82,11 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/member",
+        "url": "project/:project_id/member",
         "methods": {}
       },
       {
-        "url": "project/:project_id(\\d+)/git/commit",
+        "url": "project/:project_id/git/commit",
         "methods": {
           "get": false,
           "delete": false,
@@ -95,7 +95,7 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/issue/:issue_id(\\d+)/plan",
+        "url": "project/:project_id/issue/:issue_id/plan",
         "methods": {
           "get": false,
           "delete": false,
@@ -104,7 +104,7 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/issue/:issue_id(\\d+)/commit",
+        "url": "project/:project_id/issue/:issue_id/commit",
         "methods": {
           "post": false,
           "delete": false,
@@ -113,21 +113,21 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/assets",
+        "url": "project/:project_id/assets",
         "methods": {
           "patch": false,
           "put": false
         }
       },
       {
-        "url": "project/:project_id(\\d+)/issue/:issue_id(\\d+)/assets",
+        "url": "project/:project_id/issue/:issue_id/assets",
         "methods": {
           "patch": false,
           "put": false
         }
       },
       {
-        "url": "project/:project_id/issue/:issue_id(\\d+)/commit",
+        "url": "project/:project_id/issue/:issue_id/commit",
         "methods": {
           "post": false,
           "delete": false,
@@ -145,7 +145,7 @@ define [
         }
       },
       {
-        "url": "assets/:project_id(\\d+)/:zipfile/unwind",
+        "url": "assets/:project_id/:zipfile/unwind",
         "methods": {
           "post": false,
           "delete": false,
@@ -154,14 +154,14 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/issue",
+        "url": "project/:project_id/issue",
         "methods": {
           "delete": false,
           "patch": false
         }
       },
       {
-        "url": "project/:project_id(\\d+)/report",
+        "url": "project/:project_id/report",
         "methods": {
           "post": false,
           "delete": false,
@@ -179,7 +179,7 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/stat",
+        "url": "project/:project_id/stat",
         "methods": {
           "post": false,
           "delete": false,
@@ -188,7 +188,7 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/report/weekly",
+        "url": "project/:project_id/report/weekly",
         "methods": {
           "post": false,
           "delete": false,
@@ -197,11 +197,11 @@ define [
         }
       },
       {
-        "url": "project/:project_id(\\d+)/issue/:issue_id(\\d+)/comment",
+        "url": "project/:project_id/issue/:issue_id/comment",
         "methods": {}
       },
       {
-        "url": "project/:project_id(\\d+)/discussion",
+        "url": "project/:project_id/discussion",
         "methods": {
           "put": false,
           "post": false,
@@ -288,7 +288,7 @@ define [
         }
       },
       {
-        "url": "account/avatar/:member_id(\\d+)?",
+        "url": "account/avatar/:member_id",
         "methods": {
           "put": false,
           "delete": false,

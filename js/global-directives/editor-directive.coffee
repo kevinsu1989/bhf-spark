@@ -50,7 +50,7 @@ define [
           maxImageHeight: 2000
           maxImageWidth: 2000
           mention:
-            items: STORE.projectMemberList
+            items: STORE.projectMemberList.data
             nameKey: "username"
 
         new Simditor options

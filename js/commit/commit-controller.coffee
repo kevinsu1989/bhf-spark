@@ -7,8 +7,8 @@ define [
   _module.controllerModule.
   controller('commitListController', ($scope, $stateParams, API)->
     cond = pageSize: 20
-    url = "project/#{$stateParams.project_id}/commit"
-    API.get(url, cond).then((result)->
+    API.project($stateParams.project_id).commit()
+    .retrieve(pageSize: 20).then((result)->
       $scope.commit = result
     )
   )

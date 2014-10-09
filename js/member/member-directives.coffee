@@ -33,7 +33,7 @@ define [
       scope.onClickSave = ()->
         scope.profile.gits = scope.gits
         if attr.action is 'member-profile'
-          API.put('acount/profile', scope.profile).then(()->
+          API.account().profile().update(scope.profile).then(()->
             NOTIFY.success '保存成功！'
             scope.$emit 'member:setting:hide'
           )
@@ -60,11 +60,12 @@ define [
         scope.gits = data
 
       scope.$on 'member:setting:bindAll', ()->
-        API.get(url).then((result)->
+        API.account().profile().retrieve().then((result)->
           scope.profile = result
           scope.gits = _.map result.gits, (item)->
             item.git
         )
+
       scope.$on('member:creator:bindAll', (event, data)->
         scope.profile = data
         scope.$apply()
@@ -78,8 +79,6 @@ define [
     scope: true
     template: _utils.extractTemplate '#tmpl-member-change-password', _template
     link: (scope, element, attr)->
-      url = "account/change-password"
-
       closeModal = ()->
         scope.$emit 'member:setting:hide'
 
@@ -107,7 +106,7 @@ define [
 
       scope.onClickSave = ()->
         return if vertify(scope.profile) isnt true
-        API.put(url, scope.profile).then(()->
+        API.account.cha(url, scope.profile).then(()->
           NOTIFY.success '修改成功！'
           closeModal()
           clearInput()

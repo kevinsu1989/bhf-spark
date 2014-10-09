@@ -8,10 +8,13 @@ define [
   #issue明细
   controller('issueDetailsController', ($scope, $stateParams, API, $state)->
     $scope.articleOnly = $state.current.data?.articleOnly
-    url = "project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}"
-    API.get(url).then((result)->
+
+    API.project($stateParams.project_id)
+    .issue($stateParams.issue_id)
+    .retrieve().then((result)->
       $scope.issue = result
     )
+
     $scope.$on "assets:upload:finish", ()->
       $scope.$broadcast "assets:list:update"
       return
@@ -19,9 +22,7 @@ define [
 
   #讨论列表
   .controller('discussionListController', ($scope, $stateParams, API)->
-    url = "project/#{$stateParams.project_id}/discussion"
-
-    API.get(url).then (result)->
+    API.project($stateParams.project_id).discussion().retrieve().then (result)->
       $scope.discussion = result
   )
 

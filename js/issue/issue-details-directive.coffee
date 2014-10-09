@@ -10,13 +10,14 @@ define [
     replace: true
     link: (scope, element, attr)->
       editorKey = 'issue'
+      issueAPI = null
+
       scope.editing = false
       scope.showAlwaysTop = true
 
       #提交评论
       submitComment = (data)->
-        url = "#{scope.api}/comment"
-        API.post(url, content: data.content).then (result)->
+        issueAPI.comment().create(content: data.content).then (result)->
           NOTIFY.success('评论保存成功')
           #刷新评论数据
           scope.$broadcast 'comment:list:reload'
@@ -28,19 +29,19 @@ define [
 
       scope.$watch 'issue', ->
         return if not scope.issue
-        scope.api = "project/#{scope.issue.project_id}/issue/#{scope.issue.id}"
+        issueAPI = API.project(scope.issue.project_id).issue(scope.issue.id)
         scope.uploadUrl = "/api/project/#{scope.issue.project_id}/attachment"
 
       scope.$on 'dropdown:selected', (event, type, value)->
         switch type
-          when 'issue:owner' then API.put "#{scope.api}/plan", owner: value
-          when 'issue:priority' then API.put "#{scope.api}/priority", priority: value
+          when 'issue:owner' then issueAPI.plan().update(owner: value)
+          when 'issue:priority' then issueAPI.priority().update(priority: value)
 
       #保存修改时间
       scope.$on 'datetime:change', (event,name,date)->
         switch name
             when 'plan_finish_time'
-               API.put("#{scope.api}/plan", plan_finish_time:date).then (result)->
+              issueAPI.plan().update(plan_finish_time:date).then (result)->
                  if(result) then scope.issue.plan_finish_time = date
 
 
@@ -66,7 +67,7 @@ define [
 
         #保存到数据库
         newData = _.pick(scope.issue, ['content', 'title'])
-        API.put(scope.api, newData).then((result)->
+        issueAPI.update(newData).then((result)->
           NOTIFY.success('更新成功')
         )
 

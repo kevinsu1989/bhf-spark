@@ -25,6 +25,8 @@
     #添加字符与数字形式的param
     addPlainParam: (param, index)->
       placeholder = @segmentModel.placeholders[index]
+      return if not placeholder
+
       @params[index] = key: placeholder.key, value: String(param)
 
     #添加对象类型的参数

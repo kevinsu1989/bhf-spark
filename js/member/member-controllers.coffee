@@ -19,7 +19,7 @@ define [
         password: $scope.password
         remember: $scope.remember
 
-      API.post('session', data).then((result)->
+      API.session.create(data).then((result)->
         #暂时跳到这个项目
         $location.path $state.params.next || '/'
       )

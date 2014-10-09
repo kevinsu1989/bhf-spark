@@ -6,9 +6,9 @@ define [
 
   _module.controllerModule.
   controller('assetsListController', ($scope, $stateParams, API)->
-    url = "project/#{$stateParams.project_id}/assets"
     cond = pageSize: 20
-    API.get(url, cond).then((result)->
+    API.project($stateParams.project_id).assets()
+    .retrieve(cond).then((result)->
       $scope.assets = result
     )
     return

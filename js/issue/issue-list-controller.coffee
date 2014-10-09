@@ -12,7 +12,6 @@ define [
       cond = {}
       cond.tag = $state.params.tag if $state.current.data?.isTag
 
-      url = "project/#{$stateParams.project_id}/issue"
       cond = cond || {}
       params = {}
 
@@ -35,12 +34,16 @@ define [
       params.category_id = cond.category_id if cond.category_id
 
       #待办中
-      API.get(url, _.extend(status: 'undone', params)).then (result)->
+      issueAPI = API.project($stateParams.project_id).issue()
+
+      issueAPI.retrieve(_.extend(status: 'undone', params))
+      .then (result)->
         $scope.undoneIssues = result
       #          scope.$apply()
 
       #加载已经完成
-      API.get(url, _.extend(status: 'done', pageSize: 10, params)).then (result)->
+      issueAPI.retrieve(_.extend(status: 'done', pageSize: 10, params))
+      .then (result)->
         $scope.condition = cond
         $scope.doneIssues = result
     #          scope.$apply()

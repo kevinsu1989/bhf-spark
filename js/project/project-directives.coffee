@@ -48,7 +48,6 @@ define [
     scope: {}
     template: _utils.extractTemplate '#tmpl-project-tiles', _template
     link: (scope, element, attrs)->
-      url = 'project'
       params =
         pageSize: 11
         special: true
@@ -57,7 +56,7 @@ define [
         url = "/project/#{project.id}/issue"
         $location.path(url)
 
-      API.get(url, params).then((result)->
+      API.project().retrieve(params).then((result)->
         scope.projects = result
       )
   )

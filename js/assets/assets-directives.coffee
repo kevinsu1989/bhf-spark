@@ -37,14 +37,15 @@ define [
     link: (scope, element, attr)->
       vm = scope.vm =
         action: {}
-      url = "project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/assets"
       params =
         pageSize: 5
       #获得附件列表
       vm.action.getAssetList = ()->
-        API.get(url, params).then((result)->
-          scope.assets = result
-        )
+        API.project($stateParams.project_id)
+        .issue($stateParams.issue_id)
+        .assets(params).retrieve()
+        .then (result)-> scope.assets = result
+
       #初次进入直接拉取一次数据
       vm.action.getAssetList()
       #监听事件 assets:list:update

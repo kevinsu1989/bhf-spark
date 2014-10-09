@@ -20,22 +20,22 @@ define [
 ], (_module, _moment, _, _utils, _template) ->
   _module.controllerModule.
   controller('projectController', ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
-    url = "project/#{$stateParams.project_id}"
+    projectAPI = API.project($stateParams.project_id)
     #获取项目的信息
-    API.get(url).then((result)->
+    projectAPI.retrieve().then((result)->
       $scope.project = result
       $rootScope.$broadcast 'project:loaded', result
     )
 
     #console.log STORE.projectMemberList
     #初始化获取项目成员的信息
-    STORE.projectMemberList.update(url + "/member").then (result)->
+    STORE.projectMemberList.update(projectAPI.toString() + "/member").then (result)->
       $scope.projectMember = result
 
     #更新成员列表信息
     $scope.$on("project:member:request", ()->
       console.log "project:member:request"
-      STORE.projectMemberList.update(url + "/member").then (result)->
+      STORE.projectMemberList.update(projectAPI.toString() + "/member").then (result)->
         $scope.projectMember = result
     )
     #展示创建成员窗口
