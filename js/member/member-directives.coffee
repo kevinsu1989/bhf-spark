@@ -123,7 +123,7 @@ define [
     link: (scope, element, attr)->
   )
   #自动完成
-  .directive('membersLookup', ($stateParams, API, $timeout)->
+  .directive('membersLookup', ($stateParams, API, STORE)->
     restrict: 'AC'
     link: (scope, element, attrs)->
       url = "member?pageSize=1000"
@@ -132,12 +132,12 @@ define [
 
       #保存成员
       saveMember = (member_id)->
-        data = {member_id : member_id, role : "d"}
+        data = {member_id: member_id, role: "d"}
         API.post("project/#{$stateParams.project_id}/member", data).then ()->
           $this.val("")
           scope.selectSuggestion = ""
           scope.$emit 'project:member:request'
-          $timeout(initLookup(),100)
+          $timeout(initLookup(), 100)
 
       #创建成员
       createMember = ()->
@@ -159,22 +159,22 @@ define [
 
       #处理 lookup 数据
       buildLookupData = (list) ->
-        projectMember = scope.projectMember
-        _.remove(list, (item)->
-          result = _.findIndex(projectMember, (pItem)->
-            item.id is pItem.member_id) >= 0
+        STORE.projectMemberList.update(url + "/member").then (result)->
+          _.remove(list, (item)->
+            result = _.findIndex(result, (pItem)->
+              item.id is pItem.member_id) >= 0
 
-          if not result
-            item.value = item.realname
-            item.data = item.id
-            delete item.realname
-            delete item.username
-            delete item.id
-            delete item.role
+            if not result
+              item.value = item.realname
+              item.data = item.id
+              delete item.realname
+              delete item.username
+              delete item.id
+              delete item.role
 
-          result
-        )
-
+            result
+          )
+          
         return list
 
       #初始化lookup
