@@ -37,10 +37,11 @@ define [
             NOTIFY.success '保存成功！'
             scope.$emit 'member:setting:hide'
           )
-        if attr.action is 'creat-member'
+
+        if attr.action is 'create-member'
           scope.profile.password = '888888'
           #创建成员成功后1.关闭弹窗 2.更新本地数据. 3.添加该成员到这个项目中
-          API.post('member', scope.profile).then((result)->
+          API.member().create(scope.profile).then((result)->
             NOTIFY.success '创建成员成功！'
             #1.关闭弹窗
             scope.$emit 'member:creator:hide'
@@ -106,7 +107,7 @@ define [
 
       scope.onClickSave = ()->
         return if vertify(scope.profile) isnt true
-        API.account.cha(url, scope.profile).then(()->
+        API.account().changePassword().put(scope.profile).then(()->
           NOTIFY.success '修改成功！'
           closeModal()
           clearInput()
@@ -122,18 +123,19 @@ define [
     template: _utils.extractTemplate '#tmpl-member-notification', _template
     link: (scope, element, attr)->
   )
+
   #自动完成
   .directive('membersLookup', ($stateParams, API, STORE)->
     restrict: 'AC'
     link: (scope, element, attrs)->
-      url = "member?pageSize=1000"
       $this = $(element)
+      memberAPI = API.project($stateParams.project_id).member()
       # API.get "project/#{$stateParams.project_id}"/member (result)->
 
       #保存成员
       saveMember = (member_id)->
         data = {member_id: member_id, role: "d"}
-        API.post("project/#{$stateParams.project_id}/member", data).then ()->
+        memberAPI.create(data).then ()->
           $this.val("")
           scope.selectSuggestion = ""
           scope.$emit 'project:member:request'
@@ -159,7 +161,7 @@ define [
 
       #处理 lookup 数据
       buildLookupData = (list) ->
-        STORE.projectMemberList.update(url + "/member").then (result)->
+        STORE.projectMemberList.update(memberAPI.toString()).then (result)->
           _.remove(list, (item)->
             result = _.findIndex(result, (pItem)->
               item.id is pItem.member_id) >= 0
@@ -179,7 +181,7 @@ define [
 
       #初始化lookup
       initLookup = ()->
-        API.get(url).then (result)->
+        memberAPI.retrieve(pageSize: 9999).then (result)->
           options.lookup = buildLookupData(result.items)
           $this.autocomplete(options)
 
