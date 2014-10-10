@@ -1,6 +1,6 @@
-.project-view{
+.project-view {
   height: 100%;
-  .container{
+  .container {
     height: 100%;
     display: flex;
     padding: 0;
@@ -10,15 +10,15 @@
   }
 }
 
-.project-tiles{
-  .circle{
+.project-tiles {
+  .circle {
     width: 100px;
     height: 100px;
     border: 6px solid #FFF;
     background-color: transparent;
     border-radius: 100px;
 
-    .text{
+    .text {
       font-size: 20px;
       color: #FFF;
       line-height: 100px;
@@ -28,13 +28,13 @@
     }
   }
 
-  .processing{
+  .processing {
     clear: both;
     margin: 0 auto;
     width: 112px;
   }
 
-  .title{
+  .title {
     font-size: 20px;
     color: #FFF;
     padding: 16px 25px;
@@ -45,8 +45,8 @@
     overflow: hidden;
   }
 
-  li.create{
-    .icon{
+  li.create {
+    .icon {
       background-position: -120px -480px;
       width: 100px;
       height: 100px;
@@ -56,13 +56,13 @@
     text-align: left;
   }
 
-  li{
+  li {
     background-image: -webkit-gradient(
-      linear,
-      left top,
-      left bottom,
-      color-stop(0, #6CDEFA),
-      color-stop(1, #0BB6E1)
+            linear,
+            left top,
+            left bottom,
+            color-stop(0, #6CDEFA),
+            color-stop(1, #0BB6E1)
     );
 
     background-image: -o-linear-gradient(bottom, #6CDEFA 0%, #0BB6E1 100%);
@@ -79,11 +79,11 @@
     position: relative;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       .box-shadow(0 0 5px rgba(255, 255, 255, 1));
     }
 
-    .description{
+    .description {
       background-color: #FFF;
       height: 46px;
       position: absolute;
@@ -91,7 +91,7 @@
       width: 100%;
       overflow: hidden;
 
-      span{
+      span {
         color: #999999;
         font-size: 12px;
         margin: 10px;
@@ -99,6 +99,35 @@
         text-align: center;
         height: 26px;
         vertical-align: baseline;
+      }
+    }
+  }
+}
+
+.project-list-panel {
+  .row {
+    .info {
+      display: none;
+    }
+    &:hover {
+      .info {
+        display: block;
+        cursor: pointer;
+      }
+      .role{
+        cursor: pointer;
+      }
+    }
+    .email{
+      position: absolute;
+      left: 23%;
+    }
+    .role{
+      position: absolute;
+      left: 38%;
+      .icon{
+        float: right;
+        background-position:-115px -393px;
       }
     }
   }

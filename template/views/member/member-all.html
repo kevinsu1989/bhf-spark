@@ -39,7 +39,7 @@
     <!--项目成员列表-->
     <textarea id="tmpl-project-member-list">
         <member-creator-model></member-creator-model>
-        <div class="list member-list">
+        <div class="list project-list-panel member-list">
             <header>
                 <h3>项目成员</h3>
             </header>
@@ -48,7 +48,10 @@
             </div>
             <ul class="details">
                 <li ng-repeat="member in projectMember" class="row">
-                    {{member.username}}
+                    <span class="name">{{member.username}}</span>
+                    <span class="email">XXXXX@bhf.com</span>
+                    <span class="role">开发<i class="small icon cell"></i></span>
+                    <span class="info "  project-member-remove  data-memberid="{{member.member_id}}" ng-click="removeProjectMember()" >删除</span>
                 </li>
             </ul>
         </div>

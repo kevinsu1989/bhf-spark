@@ -133,13 +133,13 @@ define [
       # API.get "project/#{$stateParams.project_id}"/member (result)->
 
       #保存成员
-      saveMember = (member_id)->
+      addMember = (member_id)->
         data = {member_id: member_id, role: "d"}
         memberAPI.create(data).then ()->
           $this.val("")
           scope.selectSuggestion = ""
           scope.$emit 'project:member:request'
-          $timeout(initLookup(), 100)
+          initLookup()
 
       #创建成员
       createMember = ()->
@@ -149,7 +149,7 @@ define [
 
       #回车事件
       $this.on "keyup", (event)->
-        if event.keyCode is 13 and scope.selectSuggestion then saveMember(scope.selectSuggestion)
+        if event.keyCode is 13 and scope.selectSuggestion then addMember(scope.selectSuggestion)
         if event.keyCode is 13 and not scope.selectSuggestion then createMember()
 
       options =
@@ -161,11 +161,11 @@ define [
 
       #处理 lookup 数据
       buildLookupData = (list) ->
-        memberAPI.retrieve().then (result)->
+        console.log list
+        memberAPI.retrieve().then (projectMemberList)->
           _.remove(list, (item)->
-            result = _.findIndex(result, (pItem)->
+            result = _.findIndex(projectMemberList, (pItem)->
               item.id is pItem.member_id) >= 0
-
             if not result
               item.value = item.realname
               item.data = item.id
@@ -181,7 +181,7 @@ define [
 
       #初始化lookup
       initLookup = ()->
-        memberAPI.retrieve(pageSize: 9999).then (result)->
+        API.member().retrieve(pageSize: 9999).then (result)->
           options.lookup = buildLookupData(result.items)
           $this.autocomplete(options)
 
@@ -191,7 +191,7 @@ define [
 
       #当创建新成员后，添加这个成员到该项目
       scope.$on('member:created:save', (event, data)->
-        saveMember(data)
+        addMember(data)
       )
       #进入的时候初始化lookup
       initLookup()
@@ -210,4 +210,12 @@ define [
       scope.$on 'member:creator:hide', ()->
         $.modal.close()
   )
-
+  #删除项目成员
+  .directive('projectMemberRemove', ($stateParams, API)->
+    restrict: 'A'
+    replace: true
+    link:(scope,element,attr)->
+      scope.removeProjectMember = ()->
+        API.project($stateParams.project_id).member(attr.memberid).delete().then ()->
+          scope.$emit 'project:member:request'
+  )

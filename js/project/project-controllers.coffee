@@ -29,7 +29,7 @@ define [
 
     #console.log STORE.projectMemberList
     #初始化获取项目成员的信息
-    updateProjectMember = ->
+    updateProjectMember = ()->
       projectAPI.member().retrieve().then (result)->
         $scope.projectMember = result
         STORE.projectMemberList.data = result
@@ -38,7 +38,7 @@ define [
 #      $scope.projectMember = result
 
     #更新成员列表信息
-    $scope.$on "project:member:request", -> updateProjectMember
+    $scope.$on "project:member:request", -> updateProjectMember()
 
     #展示创建成员窗口
     $scope.$on("member:creator:toshow", (event,data)->
