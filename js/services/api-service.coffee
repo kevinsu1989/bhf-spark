@@ -11,11 +11,11 @@ define [
   .factory 'API', ($http, $location, $q, NOTIFY, $sce, $rootScope)->
 
     options =
-      rootUrl: '/api'
+      prefix: '/api'
       promise: $q
       ajax: (url, method, data, success)->
         ajaxOps = url: url, method: method
-        if method in ['POST', 'PUT', 'PATCH']
+        if method.toLowerCase() in ['post', 'put', 'patch']
           ajaxOps.data = data
         else
           ajaxOps.params = data
