@@ -11,14 +11,18 @@ define [
     class CacheData
       constructor: ()->
         @data
-      update: (url)->
+      update: (entity, params)->
         self = @
-        defer = $q.defer()
-        API.get(url).then((result)->
-          self.data = result
-          defer.resolve result
-        )
-        defer.promise
+
+        if source instanceof SegmentEntity
+          return source.retrieve(params)
+
+#        defer = $q.defer()
+#        API.get(url).then((result)->
+#          self.data = result
+#          defer.resolve result
+#        )
+#        defer.promise
       get: ()-> @data
       set:(data)-> @data = data
 

@@ -161,7 +161,7 @@ define [
 
       #处理 lookup 数据
       buildLookupData = (list) ->
-        STORE.projectMemberList.update(memberAPI.toString()).then (result)->
+        memberAPI.retrieve().then (result)->
           _.remove(list, (item)->
             result = _.findIndex(result, (pItem)->
               item.id is pItem.member_id) >= 0

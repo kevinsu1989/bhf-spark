@@ -29,20 +29,23 @@ define [
 
     #console.log STORE.projectMemberList
     #初始化获取项目成员的信息
-    STORE.projectMemberList.update(projectAPI.toString() + "/member").then (result)->
-      $scope.projectMember = result
+    updateProjectMember = ->
+      projectAPI.member().retrieve().then (result)->
+        $scope.projectMember = result
+        STORE.projectMemberList.data = result
+
+#    STORE.projectMemberList.update(projectAPI.toString() + "/member").then (result)->
+#      $scope.projectMember = result
 
     #更新成员列表信息
-    $scope.$on("project:member:request", ()->
-      console.log "project:member:request"
-      STORE.projectMemberList.update(projectAPI.toString() + "/member").then (result)->
-        $scope.projectMember = result
-    )
+    $scope.$on "project:member:request", -> updateProjectMember
+
     #展示创建成员窗口
     $scope.$on("member:creator:toshow", (event,data)->
       $scope.$broadcast("member:creator:show",data)
     )
 
+    updateProjectMember()
   )
 
   #项目周报的列表
