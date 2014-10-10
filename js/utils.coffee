@@ -82,7 +82,7 @@ define [
         }
       },
       {
-        "url": "project/:project_id/member",
+        "url": "project/:project_id/member/:member_id",
         "methods": {}
       },
       {
