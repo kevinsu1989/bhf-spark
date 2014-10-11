@@ -16,6 +16,8 @@ define [
         d: '开发'
         p: '产品经理'
         l: 'Leader'
+        g: '客人'
+        t: '测试'
       }[role]
   )
 
