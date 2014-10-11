@@ -47,12 +47,33 @@
                 <input type="text" placeholder="请输入将要添加用户的姓名" members-lookup autofocus />
             </div>
             <ul class="details">
-                <li ng-repeat="member in projectMember" class="row">
-                    <span class="name">{{member.username}}</span>
-                    <span class="email">XXXXX@bhf.com</span>
-                    <span class="role">开发<i class="small icon cell"></i></span>
-                    <span class="info "  project-member-remove  data-memberid="{{member.member_id}}" ng-click="removeProjectMember()" >删除</span>
-                </li>
+                <project-member-item></project-member-item>
+            </ul>
+        </div>
+    </textarea>
+
+    <!--项目成员列表 item -->
+    <textarea id="tmpl-project-member-item">
+        <li ng-repeat="member in projectMember" class="row">
+            <span class="name">{{member.username}}</span>
+            <span class="email">XXXXX@bhf.com</span>
+            <span class="role" dropdown data-name="project-member-item">
+                {{ member.role | projectMemberRole }}<i class="small icon cell"></i>
+                <project-member-role-dropdown></project-member-role-dropdown>
+            </span>
+            <span class="info "
+                  ng-click="removeProjectMember(member)" >删除</span>
+        </li>
+    </textarea>
+    <!--项目成员角色 dropdown -->
+    <textarea id="tmpl-project-member-role-dropdown">
+        <div class="dropdown dropdown-tip">
+            <ul class="dropdown-menu">
+                <li><a data-value="d">开发</a></li>
+                <li><a data-value="l">Leader</a></li>
+                <li><a data-value="p">产品</a></li>
+                <li><a data-value="t">测试</a></li>
+                <li><a data-value="g">客人</a></li>
             </ul>
         </div>
     </textarea>

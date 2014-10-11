@@ -161,7 +161,6 @@ define [
 
       #处理 lookup 数据
       buildLookupData = (list) ->
-        console.log list
         memberAPI.retrieve().then (projectMemberList)->
           _.remove(list, (item)->
             result = _.findIndex(projectMemberList, (pItem)->
@@ -210,12 +209,24 @@ define [
       scope.$on 'member:creator:hide', ()->
         $.modal.close()
   )
-  #删除项目成员
-  .directive('projectMemberRemove', ($stateParams, API)->
-    restrict: 'A'
+  #项目成员item project-member-item #api/project/39/member/1
+  .directive('projectMemberItem', ($stateParams, API)->
+    restrict: 'AE'
     replace: true
+    template: _utils.extractTemplate '#tmpl-project-member-item', _template
     link:(scope,element,attr)->
-      scope.removeProjectMember = ()->
-        API.project($stateParams.project_id).member(attr.memberid).delete().then ()->
+      scope.removeProjectMember = (member)->
+        API.project($stateParams.project_id).member(member.member_id).delete().then ()->
           scope.$emit 'project:member:request'
+  )
+  #项目成员角色 project-member-item #api/project/39/member/1/
+  .directive('projectMemberRoleDropdown', ($stateParams, API)->
+    restrict: 'AE'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-project-member-role-dropdown', _template
+    link:(scope,element,attr)->
+      scope.$on 'dropdown:selected', (event,name,value)->
+        if 'project-member-item' is name
+          API.project($stateParams.project_id).member(scope.member.member_id).update(role: value).then ()->
+            scope.$emit 'project:member:request'
   )
