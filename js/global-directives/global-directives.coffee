@@ -5,7 +5,7 @@ define [
   '../utils'
   '_'
   't!/views/global-all.html'
-  't!/views/project/all.html'
+  't!/views/project/project-all.html'
   'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
