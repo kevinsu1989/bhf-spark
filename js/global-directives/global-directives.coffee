@@ -78,4 +78,3 @@ define [
         $location.path('/login')
         API.delete 'session', ->
   ])
-

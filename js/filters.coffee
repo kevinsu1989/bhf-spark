@@ -2,7 +2,8 @@
 define [
   './ng-module'
   './utils'
-], (_module, _utils) ->
+  'moment'
+], (_module, _utils, _moment) ->
 
   _module.filterModule.filter('unsafe', ($sce)->
     (text)->
@@ -46,3 +47,5 @@ define [
       #div.innerText
       $(div).text()
   )
+
+  .filter('timeAgo', -> (date)-> _moment(date).fromNow())

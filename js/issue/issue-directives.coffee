@@ -76,3 +76,19 @@ define [
           scope.$emit 'issue:change', 'new', result.id
         )
   ])
+
+
+  #用户日志
+  .directive('issueLog', ['$stateParams', 'API', ($stateParams, API)->
+      restrict: 'E'
+      replace: true
+      scope: {}
+      template: _utils.extractTemplate '#tmpl-issue-log', _template
+      link: (scope, element, attrs)->
+
+        API.project($stateParams.project_id)
+        .issue($stateParams.issue_id)
+        .log().retrieve().then (result)->
+          scope.logs = result.items
+
+  ])

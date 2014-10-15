@@ -154,6 +154,7 @@
       }
     }
 
+
     &.issue{
       &:hover .toolbar{
         display: block;
@@ -174,6 +175,33 @@
       div.issue-status{
         margin-right: 6px;
       }
+    }
+
+    &.logs{
+      .title .icon{
+        background-position: -200px -160px;
+      }
+
+      .list{
+        li{
+          padding: 4px 0;
+        }
+
+        .realname{
+          color: #CCC;
+          margin-right: 4px;
+        }
+
+        .timestamp{
+          color: #CCC;
+        }
+
+        .content{
+          color: #336699;
+        }
+      }
+
+      margin-bottom: 100px;
     }
 
     .title{
@@ -252,12 +280,6 @@
       &:hover{
 //        background-color: #e9ebf0;
       }
-    }
-  }
-
-  .log{
-    .title .icon{
-      background-position: -200px -160px;
     }
   }
 }

@@ -140,4 +140,16 @@
             </ul>
         </div>
     </textarea>
+
+    <!--操作日志-->
+    <textarea id="tmpl-issue-log">
+        <ul class="list">
+            <li ng-repeat="log in logs" title="{{log.timestamp | date: 'yyyy-MM-dd hh:mm'}}">
+                <span class="realname">{{log.realname}}</span>
+                在
+                <span class="timestamp">{{log.timestamp | timeAgo}}</span>
+                <span class="content">{{log.content}}</span>
+            </li>
+        </ul>
+    </textarea>
 </div>

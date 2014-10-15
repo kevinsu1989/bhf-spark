@@ -299,5 +299,14 @@ define [
       {
         "url": "apis",
         "methods": {}
+      },
+      {
+        "url": "project/:project_id/issue/:issue_id/log",
+        "methods": {
+          "post": false,
+          "delete": false,
+          "patch": false,
+          "put": false
+        }
       }
     ]
