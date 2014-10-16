@@ -46,8 +46,10 @@ define [
                  if(result) then scope.issue.plan_finish_time = date
 
 
-      scope.onClickDelete = ($event)->
-        alert('删除issue')
+      scope.onClickDelete = ()->
+        issueAPI.status().update(status : 'trash').then ()->
+          NOTIFY.success '删除成功'
+          $rootScope.$broadcast 'issue:change'
 
       scope.onClickEdit = ($event)->
         scope.editing = true

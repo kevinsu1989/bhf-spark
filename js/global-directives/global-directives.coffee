@@ -6,11 +6,12 @@ define [
   '_'
   't!/views/global-all.html'
   't!/views/project/project-all.html'
+  'pkg/keybroad/keyboard'
   'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
-], (_module, _utils, _, _tmplGlobal, _template) ->
-  
+], (_module, _utils, _, _tmplGlobal, _template, _keybroad) ->
+
 
   _module.directiveModule
   #日期选择控件
@@ -77,4 +78,20 @@ define [
         #不用等返回
         $location.path('/login')
         API.delete 'session', ->
+  ])
+  #快捷键
+  #<button hot-key  data-key="enter" ng-click="onClickSubmit()">
+  #data-key="keyCombo" 你要绑定快捷键  每次绑定前都会清理该键的相关事件
+  # keyCombo  "a" 绑定a  ;"a,b"|"a b"  a or b; 'a + b' a and b
+  #vist http://robertwhurst.github.io/KeyboardJS/  get more info
+  .directive('hotKey', [()->
+      restrict: 'A'
+      link: (scope, element, attrs)->
+        key = attrs.key
+        #清理事件
+        _keybroad.clear.key(key)
+        onDownCallback = ()->
+        onUpCallback   = ()->
+          $(element).click()
+        _keybroad.on(key, onDownCallback, onUpCallback)
   ])

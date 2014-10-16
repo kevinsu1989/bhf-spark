@@ -15,19 +15,19 @@
                 <span>{{error}}</span>
             </li>
             <li>
-                <input type="text" ng-model="account" class="text" placeholder="E-mail或者用户名" ng-class="account == undefined ? '' : account ? 'success' :  'failure'">
+                <input type="text" autofocus="true" ng-model="account" class="text" placeholder="E-mail或者用户名" ng-class="account == undefined ? '' : account ? 'success' :  'failure'">
             </li>
             <li>
                 <input type="password" maxlength="16" ng-model="password" class="text" placeholder="密码" ng-class="password == undefined ? '' : (password && password.length > 5 ? 'success' :  'failure')">
             </li>
             <li class="additional">
                 <label>
-                    <input type="checkbox" ng-model="remember" />记住密码
+                    <input type="checkbox"  ng-model="remember" />记住密码
                 </label>
                 <a href="javascript:alert('请联系管理员，谢谢~')">忘记密码</a>
             </li>
             <li>
-                <button ng-click="onClickSubmit()">
+                <button hot-key  data-key="enter" ng-click="onClickSubmit()">
                     登&nbsp;&nbsp;&nbsp;&nbsp;录
                 </button>
             </li>
