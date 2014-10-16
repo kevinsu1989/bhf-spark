@@ -79,17 +79,19 @@ define [
         $location.path('/login')
         API.delete 'session', ->
   ])
-  .directive('hotKey', ['$rootScope', ($rootScope)->
+  #快捷键
+  #<button hot-key  data-key="enter" ng-click="onClickSubmit()">
+  #data-key="keyCombo" 你要绑定快捷键  每次绑定前都会清理该键的相关事件
+  # keyCombo  "a" 绑定a  ;"a,b"|"a b"  a or b; 'a + b' a and b
+  #vist http://robertwhurst.github.io/KeyboardJS/  get more info
+  .directive('hotKey', [()->
       restrict: 'A'
       link: (scope, element, attrs)->
         key = attrs.key
-        #清理数据
+        #清理事件
         _keybroad.clear.key(key)
-
         onDownCallback = ()->
         onUpCallback   = ()->
           $(element).click()
-
         _keybroad.on(key, onDownCallback, onUpCallback)
-
   ])
