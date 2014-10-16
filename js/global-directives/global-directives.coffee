@@ -6,11 +6,12 @@ define [
   '_'
   't!/views/global-all.html'
   't!/views/project/project-all.html'
+  'pkg/keybroad/keyboard'
   'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
-], (_module, _utils, _, _tmplGlobal, _template) ->
-  
+], (_module, _utils, _, _tmplGlobal, _template, _keybroad) ->
+
 
   _module.directiveModule
   #日期选择控件
@@ -77,4 +78,18 @@ define [
         #不用等返回
         $location.path('/login')
         API.delete 'session', ->
+  ])
+  .directive('hotKey', ['$rootScope', ($rootScope)->
+      restrict: 'A'
+      link: (scope, element, attrs)->
+        key = attrs.key
+        #清理数据
+        _keybroad.clear.key(key)
+
+        onDownCallback = ()->
+        onUpCallback   = ()->
+          $(element).click()
+
+        _keybroad.on(key, onDownCallback, onUpCallback)
+
   ])
