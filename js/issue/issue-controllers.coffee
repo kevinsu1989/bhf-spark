@@ -13,6 +13,7 @@ define [
     .issue($stateParams.issue_id)
     .retrieve().then((result)->
       $scope.issue = result
+      $scope.notFound = !result
     )
 
     $scope.$on "assets:upload:finish", ()->

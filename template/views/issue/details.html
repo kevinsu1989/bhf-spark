@@ -1,13 +1,12 @@
 <div>
 <article class="issue-details" issue-details id="issue-details">
-    <div class="not-found" ng-show="!issue.id">
+    <div class="not-found" ng-show="notFound">
         <p>
             <i class="icon"></i>
             404 Not Found
         </p>
     </div>
-
-    <div ng-show="issue.id" class="full">
+    <div ng-show="!notFound" class="full">
         <div style="overflow: auto; height: 100%; position:relative;">
             <!--展示一个issue的所有内容-->
             <header ng-hide="articleOnly">

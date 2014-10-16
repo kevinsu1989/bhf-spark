@@ -12,6 +12,7 @@ define [
       editorKey = 'issue'
       issueAPI = null
 
+      scope.notFound = false
       scope.editing = false
       scope.showAlwaysTop = true
 
