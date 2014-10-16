@@ -15,9 +15,9 @@ define [
       #收到更改状态的通知
       scope.$on 'dropdown:selected', (event, type, value)->
         return if type isnt 'issue:status'
-        api = "project/#{scope.issue.project_id}/issue/#{scope.issue.id}/status"
-        API.put(api, status: value).then ()->
-          scope.$emit 'issue:change', 'status', scope.issue.id
+        #"project/#{scope.issue.project_id}/issue/#{scope.issue.id}/status"
+        API.project(scope.issue.project_id).issue(scope.issue.id).status().update(status : value).then ()->
+            scope.$emit 'issue:change', 'status', scope.issue.id
 
 #          动画需要考虑多个问题，暂缓
 #          #执行一个动画，完毕后重新加载数据
@@ -34,22 +34,22 @@ define [
 
   )
 
-  .directive('issuePriorityDropdown', (API)->
+  .directive('issuePriorityDropdown', [()->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-priority-dropdown', _template
     link: (scope, element, attrs)->
-  )
+  ])
 
-
-  .directive('issueStatusDropdown', (API)->
+  #issue 状态下拉列表
+  .directive('issueStatusDropdown',[()->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-status-dropdown', _template
     link: (scope, element, attrs)->
       scope.$on 'dropdown:selected', ->
 
-  )
+  ])
 
   #快速编辑的功能
   .directive('issueQuickEditor', ['$state', '$stateParams', 'API', 'NOTIFY', ($state, $stateParams, API, NOTIFY)->
