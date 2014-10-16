@@ -37,14 +37,14 @@ define [
         "url": "project",
         "methods": {}
       },
-      {
-        "url": "project/:project_id/status",
-        "methods": {
-          "post": false,
-          "delete": false,
-          "patch": false
-        }
-      },
+#      {
+#        "url": "project/:project_id/status",
+#        "methods": {
+#          "post": false,
+#          "delete": false,
+#          "patch": false
+#        }
+#      },
       {
         "url": "project/:project_id/deploy",
         "methods": {
@@ -94,15 +94,15 @@ define [
           "put": false
         }
       },
-      {
-        "url": "project/:project_id/issue/:issue_id/plan",
-        "methods": {
-          "get": false,
-          "delete": false,
-          "patch": false,
-          "post": false
-        }
-      },
+#      {
+#        "url": "project/:project_id/issue/:issue_id/plan",
+#        "methods": {
+#          "get": false,
+#          "delete": false,
+#          "patch": false,
+#          "post": false
+#        }
+#      },
       {
         "url": "project/:project_id/issue/:issue_id/commit",
         "methods": {

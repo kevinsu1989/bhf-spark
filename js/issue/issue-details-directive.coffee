@@ -35,19 +35,19 @@ define [
 
       scope.$on 'dropdown:selected', (event, type, value)->
         switch type
-          when 'issue:owner' then issueAPI.plan().update(owner: value)
-          when 'issue:priority' then issueAPI.priority().update(priority: value)
+          when 'issue:owner' then issueAPI.update(owner: value)
+          when 'issue:priority' then issueAPI.update(priority: value)
 
       #保存修改时间
       scope.$on 'datetime:change', (event,name,date)->
         switch name
             when 'plan_finish_time'
-              issueAPI.plan().update(plan_finish_time:date).then (result)->
+              issueAPI.update(plan_finish_time:date).then (result)->
                  if(result) then scope.issue.plan_finish_time = date
 
 
       scope.onClickDelete = ()->
-        issueAPI.status().update(status : 'trash').then ()->
+        issueAPI.update(status : 'trash').then ()->
           NOTIFY.success '删除成功'
           $rootScope.$broadcast 'issue:change'
 
