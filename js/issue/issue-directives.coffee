@@ -68,13 +68,12 @@ define [
           tag: $stateParams.tag || '需求'
           category: attrs.category
 
-        url = "project/#{scope.project.id}/issue"
-        API.post(url, data).then((result)->
+        #url = "project/#{scope.project.id}/issue"
+        API.project(scope.project.id).issue().create(data).then ()->
           NOTIFY.success '任务已经被成功创建'
           event.target.value = null
           #通知issue被创建
-          scope.$emit 'issue:change', 'new', result.id
-        )
+          scope.$emit 'issue:change', 'new'
   ])
 
 

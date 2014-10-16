@@ -53,7 +53,7 @@ define [
     #强制重新加载数据
     $scope.$on 'issue:list:reload', (event)-> searchIssue()
     #某个issue被修改
-    $scope.$on 'issue:change', (event, action, id, data)-> searchIssue()
+    $scope.$on 'issue:change', ()-> searchIssue()
 
     searchIssue()
   )
