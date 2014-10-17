@@ -20,7 +20,7 @@
                     <project-member-dropdown data-items="{{projectMember}}"></project-member-dropdown>
                 </div>
                 <div class="finish-date">
-                    <button datetime-picker  data-name="plan_finish_time">
+                    <button datetime-picker  data-name="plan_finish_time" data-date="{{issue.plan_finish_time | date:'yyyy-MM-dd'}}">
                         <i class="icon small cell"></i>
                         <span>　{{(issue.plan_finish_time | date:'yyyy-MM-dd') || '未指定' }}</span>
                     </button>
