@@ -6,7 +6,7 @@ define [
   '_'
   't!/views/global-all.html'
   't!/views/project/project-all.html'
-  'pkg/keybroad/keyboard'
+  'v/keyboard'
   'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
@@ -48,9 +48,10 @@ define [
       if formart then dateOpt.formart = formart
 
       $this = $(element);
-      $this.datetimepicker(dateOpt)
-      $this.on 'changeDate', (ev)->
-        scope.$emit 'datetime:change', name, ev.date.valueOf()
+      $this.click ()->
+        $this.datetimepicker(dateOpt)
+        $this.on 'changeDate', (ev)->
+          scope.$emit 'datetime:change', name, ev.date.valueOf()
   )
 
   #tab的directive
