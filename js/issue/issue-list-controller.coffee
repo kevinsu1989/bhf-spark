@@ -5,17 +5,17 @@ define [
 ], (_module, _utils, _template) ->
 
   _module.controllerModule
-  .controller('issueListController', ($scope, $stateParams, API, $state)->
+  .controller('issueListController', ($scope, $stateParams, API, $state, $location)->
     #搜索issue
     searchIssue = ()->
       #搜索条件
-      cond = {}
-      cond.tag = $state.params.tag if $state.current.data?.isTag
+      cond =
+        tag: $state.params.tag
+        category_id: $state.params.category_id
 
       cond = cond || {}
       params = {}
 
-      $scope.showQuickEditor = false
       if cond.keyword #搜索
         $scope.title = "搜索：#{cond.keyword}"
         params.keyword = cond.keyword
@@ -26,12 +26,13 @@ define [
       else if cond.tag
         $scope.title = "标签：# #{cond.tag} #"
         params.tag = cond.tag
-        $scope.showQuickEditor = true
+      else if cond.category_id
+        $scope.title = $location.$$search.title
       else
         $scope.title = "所有任务"
 
       #指定分类id
-      params.category_id = cond.category_id if cond.category_id
+      params.category_id = $state.params.category_id
 
       #待办中
       issueAPI = API.project($stateParams.project_id).issue()
@@ -41,6 +42,7 @@ define [
         $scope.undoneIssues = result
       #          scope.$apply()
 
+      $scope.showQuickEditor = true
       #加载已经完成
       issueAPI.retrieve(_.extend(status: 'done', pageSize: 10, params))
       .then (result)->

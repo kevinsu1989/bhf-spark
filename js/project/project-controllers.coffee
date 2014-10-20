@@ -21,24 +21,30 @@ define [
   _module.controllerModule.
   controller('projectController', ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
     projectAPI = API.project($stateParams.project_id)
-    #获取项目的信息
-    projectAPI.retrieve().then((result)->
-      $scope.project = result
-      $rootScope.$broadcast 'project:loaded', result
-    )
 
-    #console.log STORE.projectMemberList
-    #初始化获取项目成员的信息
-    updateProjectMember = ()->
+    #更新项目信息
+    updateProject = ->
+      #获取项目的信息
+      projectAPI.retrieve().then((result)->
+        $scope.project = result
+        $rootScope.$broadcast 'project:loaded', result
+      )
+
+    #更新项目成员
+    updateProjectMember = ->
       projectAPI.member().retrieve().then (result)->
         $scope.projectMember = result
         STORE.projectMemberList.data = result
 
-#    STORE.projectMemberList.update(projectAPI.toString() + "/member").then (result)->
-#      $scope.projectMember = result
+    #更新issue的分类
+    updateProjectCategory = ->
+      projectAPI.category().retrieve().then (result)->
+        $scope.projectCategory = result
+        STORE.projectCategory.data = result
 
     #更新成员列表信息
     $scope.$on "project:member:request", -> updateProjectMember()
+    $scope.$on "project:category:request", -> updateProjectCategory()
 
     #展示创建成员窗口
     $scope.$on("member:creator:toshow", (event,data)->
@@ -46,6 +52,8 @@ define [
     )
 
     updateProjectMember()
+    updateProjectCategory()
+    updateProject()
   )
 
   #项目周报的列表

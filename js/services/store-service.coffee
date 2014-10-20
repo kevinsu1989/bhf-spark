@@ -28,4 +28,5 @@ define [
 
     service.projectMemberList = new CacheData()
     service.session = new CacheData()
+    service.projectCategory = new CacheData()
     return service

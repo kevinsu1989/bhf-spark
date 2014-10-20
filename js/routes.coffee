@@ -131,9 +131,8 @@ define [
     )
 
     #标签
-    .state('project.issue-tag',
-      url: '/issue/tag/:tag'
-      data: isTag: true
+    .state('project.issue-category',
+      url: '/category/:category_id/issue'
       views:
         'list-panel':
           template: _utils.extractTemplate('#tmpl-issue-list', _tmplIssue)

@@ -70,3 +70,11 @@ define [
     link: (scope, element, attrs)->
 
   ])
+
+  .directive('projectCategoryMenu', ['STORE', ()->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-project-menu-category', _template
+    link: (scope, element, attrs)->
+
+  ])

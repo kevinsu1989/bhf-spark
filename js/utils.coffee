@@ -46,6 +46,14 @@ define [
 #        }
 #      },
       {
+        "url": "project/:project_id/category",
+        "methods": {}
+      },
+      {
+        "url": "project/:project_id/version",
+        "methods": {}
+      },
+      {
         "url": "project/:project_id/deploy",
         "methods": {
           "get": false,
