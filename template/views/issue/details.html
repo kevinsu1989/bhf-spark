@@ -30,10 +30,12 @@
                     <label class="display">中</label>
                     <issue-priority-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.id}}"></issue-priority-dropdown>
                 </div>
-                <div class="category">
+                <div class="category" dropdown data-name="issue:category" data-text-container="label.display" data-selected="{{issue.category_id}}" data-formatter="分类：{0}">
                     <i class="icon small cell"></i>
-                    <label>分类</label>
+                    <label class="display">分类</label>
+                    <project-category-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.category_id}}"></project-category-dropdown>
                 </div>
+                <!--
                 <div class="assets">
                     <i class="icon small cell"></i>
                     <label>附件</label>
@@ -42,6 +44,7 @@
                     <i class="icon small cell"></i>
                     <label>删除</label>
                 </div>
+                -->
             </header>
 
             <!--标题部分-->

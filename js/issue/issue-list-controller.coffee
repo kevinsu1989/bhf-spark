@@ -33,6 +33,8 @@ define [
 
       #指定分类id
       params.category_id = $state.params.category_id
+      #指定版本
+      params.version_id = $state.params.version_id
 
       #待办中
       issueAPI = API.project($stateParams.project_id).issue()

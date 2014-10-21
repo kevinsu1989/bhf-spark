@@ -42,6 +42,13 @@ define [
         $scope.projectCategory = result
         STORE.projectCategory.data = result
 
+    #获取版本信息
+    updateProjectVersion = ->
+      projectAPI.version().retrieve().then (result)->
+        $scope.projectVersion = result
+        STORE.projectVersion.data = result
+        $rootScope.$broadcast 'project:version:loaded', result
+
     #更新成员列表信息
     $scope.$on "project:member:request", -> updateProjectMember()
     $scope.$on "project:category:request", -> updateProjectCategory()
@@ -54,6 +61,7 @@ define [
     updateProjectMember()
     updateProjectCategory()
     updateProject()
+    updateProjectVersion()
   )
 
   #项目周报的列表

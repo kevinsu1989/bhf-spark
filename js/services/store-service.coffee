@@ -29,4 +29,5 @@ define [
     service.projectMemberList = new CacheData()
     service.session = new CacheData()
     service.projectCategory = new CacheData()
+    service.projectVersion = new CacheData()
     return service

@@ -53,7 +53,9 @@ define [
         special: true
 
       scope.onClickTile = (event, project)->
-        url = "/project/#{project.id}/issue"
+        url = "/project/#{project.id}"
+        url += "/version/#{project.active_version}" if project.active_version
+        url += "/issue"
         $location.path(url)
 
       API.project().retrieve(params).then((result)->
@@ -75,6 +77,14 @@ define [
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-menu-category', _template
+    link: (scope, element, attrs)->
+
+  ])
+
+  .directive('projectCategoryDropdown', ['STORE', ()->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-project-category-dropdown', _template
     link: (scope, element, attrs)->
 
   ])

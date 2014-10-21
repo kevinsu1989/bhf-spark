@@ -118,7 +118,7 @@
 
                 <div class="content">
                     <span class="title">{{project.title}}</span>
-                    <span class="version">V1.0</span>
+                    <span class="version">{{projectVersion | currentProjectVersion}}</span>
                     <i class="drop icon small"></i>
                 </div>
             </div>
@@ -130,6 +130,7 @@
         </header>
     </textarea>
 
+    <!--项目成员的下拉-->
     <textarea id="tmpl-project-member-dropdown">
         <div class="dropdown dropdown-tip">
             <ul class="dropdown-menu">
@@ -138,6 +139,17 @@
                     <a data-value="{{item.member_id}}">
                         {{item.username}}
                     </a>
+                </li>
+            </ul>
+        </div>
+    </textarea>
+
+    <!--项目分类的dropdown-->
+    <textarea id="tmpl-project-category-dropdown">
+        <div class="dropdown dropdown-tip">
+            <ul class="dropdown-menu">
+                <li ng-repeat="item in projectCategory">
+                    <a data-value="{{item.id}}"><span>{{item.title}}</span></a>
                 </li>
             </ul>
         </div>

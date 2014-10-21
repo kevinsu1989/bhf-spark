@@ -67,6 +67,12 @@ define [
         'list-panel': issueListView
     )
 
+    .state('project.version-issue',
+      url: '/version/:version_id/issue'
+      views:
+        'list-panel': issueListView
+    )
+
     .state('project.issue-myself',
       url: '/issue/myself'
       views:

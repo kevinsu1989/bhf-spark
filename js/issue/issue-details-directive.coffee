@@ -37,6 +37,7 @@ define [
         switch type
           when 'issue:owner' then issueAPI.update(owner: value)
           when 'issue:priority' then issueAPI.update(priority: value)
+          when 'issue:category' then issueAPI.update(category_id: value)
 
       #保存修改时间
       scope.$on 'datetime:change', (event,name,date)->

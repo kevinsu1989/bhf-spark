@@ -49,3 +49,11 @@ define [
   )
 
   .filter('timeAgo', -> (date)-> _moment(date).fromNow())
+
+  #获取当前项目的版本
+  .filter('currentProjectVersion', ($stateParams)->
+    (versions)->
+      return if not versions or not $stateParams
+      current = _.find versions, id: Number($stateParams.version_id)
+      return current?.title
+  )
