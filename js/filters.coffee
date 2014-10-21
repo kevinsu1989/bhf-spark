@@ -57,3 +57,30 @@ define [
       current = _.find versions, id: Number($stateParams.version_id)
       return current?.title
   )
+
+  #根据url构建项目中间的链接
+  .filter('projectLink', ($stateParams)->
+    (data, type)->
+
+      parts = []
+      parts.push('project')
+      parts.push($stateParams.project_id)
+
+      if type is 'issue' and $stateParams.myself
+        parts.push('issue')
+        parts.push('myself')
+
+      if type in ['issue', 'category-menu', 'menu'] and $stateParams.version_id
+        parts.push('version')
+        parts.push($stateParams.version_id)
+
+      if type is 'issue' and $stateParams.category_id
+        parts.push('category')
+        parts.push($stateParams.category_id)
+
+      #非myself的issue，在后面添加issue目录
+      if type is 'issue' and not $stateParams.myself
+        parts.push('issue')
+
+      parts.join('/')
+  )

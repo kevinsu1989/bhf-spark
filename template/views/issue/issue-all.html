@@ -7,7 +7,7 @@
                 <issue-status-dropdown></issue-status-dropdown>
             </div>
             <i class="priority" ng-class="'priority-' + issue.priority" ng-click="clickPriority()"></i>
-            <a class="title" href="/project/{{issue.project_id}}/issue/{{issue.id}}">{{issue.title}}</a>
+            <a class="title" href="/{{issue | projectLink: 'issue'}}/{{issue.id}}">{{issue.title}}</a>
             <span class="issue-id memo">#{{issue.id}}</span>
             <div class="info">
                 <span class="member memo">{{issue.owner_name}}</span>

@@ -22,7 +22,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/issue">任务</a>
+                            <a href="/{{project | projectLink: 'menu'}}/issue">任务</a>
                         </label>
                         <project-category-menu data-project-id="{{project.id}}"></project-category-menu>
                     </div>
@@ -102,7 +102,7 @@
     <textarea id="tmpl-project-menu-category">
         <ul class="sub-menu">
             <li ng-repeat="item in projectCategory">
-                <a href="/project/{{item.project_id}}/category/{{item.id}}/issue?title={{item.title}}">{{item.title}}</a>
+                <a href="/{{item | projectLink: 'category-menu'}}/category/{{item.id}}/issue?title={{item.title}}">{{item.title}}</a>
                 <span class="badge small gray">0</span>
             </li>
         </ul>
