@@ -6,7 +6,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/issue/myself">我的任务</a>
+                            <a href="/{{project | projectLink: 'menu'}}/issue/myself">我的任务</a>
                         </label>
                     </div>
                 </li>
@@ -14,7 +14,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/discussion">讨论</a>
+                            <a href="/{{project | projectLink: 'menu'}}/discussion">讨论</a>
                         </label>
                     </div>
                 </li>
@@ -118,7 +118,7 @@
 
                 <div class="content">
                     <span class="title">{{project.title}}</span>
-                    <span class="version">{{projectVersion | currentProjectVersion}}</span>
+                    <span class="version">当前版本：{{projectVersion | currentProjectVersion}}</span>
                     <i class="drop icon small"></i>
                 </div>
             </div>

@@ -53,14 +53,17 @@ define [
   #获取当前项目的版本
   .filter('currentProjectVersion', ($stateParams)->
     (versions)->
-      return if not versions or not $stateParams
+      return '所有' if not versions or not $stateParams
       current = _.find versions, id: Number($stateParams.version_id)
-      return current?.title
+      return current?.title || '未知版本'
   )
 
   #根据url构建项目中间的链接
   .filter('projectLink', ($stateParams)->
     (data, type)->
+
+      hasVersion = type in ['issue', 'category-menu', 'menu', 'discussion']
+      hasCategory = type is 'issue'
 
       parts = []
       parts.push('project')
@@ -70,11 +73,11 @@ define [
         parts.push('issue')
         parts.push('myself')
 
-      if type in ['issue', 'category-menu', 'menu'] and $stateParams.version_id
+      if hasVersion and $stateParams.version_id
         parts.push('version')
         parts.push($stateParams.version_id)
 
-      if type is 'issue' and $stateParams.category_id
+      if hasCategory and $stateParams.category_id
         parts.push('category')
         parts.push($stateParams.category_id)
 
