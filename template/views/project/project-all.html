@@ -6,7 +6,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/{{project | projectLink: 'menu'}}/issue/myself">我的任务</a>
+                            <a href="/{{baseLink}}/issue/myself">我的任务</a>
                         </label>
                     </div>
                 </li>
@@ -14,7 +14,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/{{project | projectLink: 'menu'}}/discussion">讨论</a>
+                            <a href="/{{baseLink}}/discussion">讨论</a>
                         </label>
                     </div>
                 </li>
@@ -22,7 +22,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/{{project | projectLink: 'menu'}}/issue">任务</a>
+                            <a href="/{{baseLink}}/issue">任务</a>
                         </label>
                         <project-category-menu data-project-id="{{project.id}}"></project-category-menu>
                     </div>
@@ -31,7 +31,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/assets">素材</a>
+                            <a href="/{{baseLink}}/assets">素材</a>
                         </label>
                     </div>
                 </li>
@@ -39,7 +39,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/member">成员</a>
+                            <a href="/{{baseLink}}/member">成员</a>
                         </label>
                     </div>
                 </li>
@@ -47,7 +47,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/commit">Commit</a>
+                            <a href="/{{baseLink}}/commit">Commit</a>
                         </label>
                     </div>
                 </li>
@@ -55,23 +55,25 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/weekly-report">周报</a>
+                            <a href="/{{baseLink}}/weekly-report">周报</a>
                         </label>
                     </div>
                 </li>
+                <!--
                 <li class="version">
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/version">版本</a>
+                            <a href="/{{baseLink}}/version">版本</a>
                         </label>
                     </div>
                 </li>
+                -->
                 <li class="stat">
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/stat">统计</a>
+                            <a href="/{{baseLink}}/stat">统计</a>
                         </label>
                     </div>
                 </li>
@@ -79,7 +81,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/project/{{project.id}}/plugin">插件</a>
+                            <a href="/{{baseLink}}/plugin">插件</a>
                         </label>
                     </div>
                 </li>
@@ -115,11 +117,19 @@
                 <a href="/" class="home">
                     <i class="icon small"></i>
                 </a>
-
                 <div class="content">
-                    <span class="title">{{project.title}}</span>
-                    <span class="version">当前版本：{{projectVersion | currentProjectVersion}}</span>
-                    <i class="drop icon small"></i>
+                    <div class="title">
+                        <label>{{project.title}}</label>
+                        <i class="small icon"></i>
+                    </div>
+                    <div class="spliter">
+                        ->
+                    </div>
+                    <div class="version" dropdown data-name="project:version" data-text-container="label.display" data-selected="{{projectVersion}}" data-exclude-value="-1">
+                        <label class="display">{{projectVersion | currentProjectVersion}}</label>
+                        <i class="small icon"></i>
+                        <project-version-dropdown data-show-create="true"></project-version-dropdown>
+                    </div>
                 </div>
             </div>
             <div class="logo">
@@ -162,7 +172,10 @@
                 <li ng-repeat="item in projectVersion">
                     <a data-value="{{item.id}}"><span>{{item.title}}</span></a>
                 </li>
-                <li class="create" data-value="-1" ng-show="{{showCreate}}">
+                <li>
+                    <a data-value="all"><span>所有版本</span></a>
+                </li>
+                <li class="create" data-value="-1" ng-show="showCreate">
                     <a data-value="-1"><span>添加新版本</span></a>
                 </li>
             </ul>

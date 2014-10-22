@@ -13,22 +13,63 @@ define [
   _app.config(($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
 
-    issueListView =
-      template: _utils.extractTemplate('#tmpl-issue-list', _tmplIssue)
-      controller: 'issueListController'
+    #issue
+    issueViews =
+      'listPanel':
+        template: _utils.extractTemplate('#tmpl-issue-list', _tmplIssue)
+        controller: 'issueListController'
+      'detailsPanel@project':
+        templateUrl: '/views/issue/details.html'
+        controller: 'issueDetailsController'
 
-    issueDetailsView =
-      templateUrl: '/views/issue/details.html'
-      controller: 'issueDetailsController'
+    issueListOnly =
+      'listPanel@project': issueViews.listPanel
+      detailsPanel: {}
 
-    discussionListView =
-      template: _utils.extractTemplate('#tmpl-discussion-list', _tmplIssue)
-      controller: 'discussionListController'
+    #讨论
+    discussionViews =
+      listPanel:
+        template: _utils.extractTemplate('#tmpl-discussion-list', _tmplIssue)
+        controller: 'discussionListController'
+      'detailsPanel@project':
+        templateUrl: '/views/issue/details.html'
+        controller: 'issueDetailsController'
 
-    discussionDetailsView =
-      templateUrl: '/views/issue/details.html'
-      controller: 'issueDetailsController'
-#    $urlRouterProvider.otherwise('/');
+    discussionListOnly =
+      listPanel: discussionViews.listPanel
+      detailsPanel: {}
+
+
+    weeklyReportViews =
+      listPanel:
+        template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
+        controller: 'projectWeeklyReportListController'
+      'detailsPanel@project':
+        template: _utils.extractTemplate('#tmpl-project-weekly-report-details', _tmplProject)
+        controller: 'projectWeeklyReportDetailsController'
+
+    weeklyReportListOnly =
+      listPanel:
+        template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
+        controller: 'projectWeeklyReportListController'
+      detailsPanel: {}
+
+    memberListOnly =
+      'listPanel@project':
+        template: _utils.extractTemplate('#tmpl-project-member-list', _tmplMember)
+      detailsPanel: {}
+
+    commitListOnly =
+      'listPanel@project':
+        template: _utils.extractTemplate('#tmpl-commit-list', _tmplCommit)
+        controller: 'commitListController'
+      detailsPanel: {}
+
+    assetsListOnly =
+      listPanel:
+        template: _utils.extractTemplate('#tmpl-assets-list', _tmplAssets)
+        controller: 'assetsListController'
+      detailsPanel: {}
 
     $stateProvider
     .state('home',
@@ -56,164 +97,147 @@ define [
     #issue列表
     .state('project.issue',
       url: '/issue'
-      views:
-        'list-panel': issueListView
+      views: issueListOnly
     ).state('project.issue.details',
-      url: '/{issue_id:\\d+}(\\d+)'
-      views:
-        'list-panel': issueListView
-        'details-panel@project': issueDetailsView
+      url: '/{issue_id:\\d+}'
+      views: issueViews
+    )
+
+    .state('project.version',
+      url: '/version/:version_id'
+      abstract: true
     )
 
     #分类->issue
     .state('project.issue_category',
       url: '/category/:category_id/issue'
       views:
-        'list-panel': issueListView
+        listPanel: issueViews.listPanel
     ).state('project.issue_category.details',
       url: '/{issue_id:\\d+}'
-      views:
-        'list-panel': issueListView
-        'details-panel@project': issueDetailsView
+      views: issueViews
     )
 
     #版本->分类->issue
     .state('project.version_category_issue',
       url: '/version/:version_id/category/:category_id/issue'
-      views:
-        'list-panel': issueListView
+      views: issueListOnly
     ).state('project.version_category_issue.details',
       url: '/{issue_id:\\d+}'
-      views:
-        'list-panel': issueListView
-        'details-panel@project': issueDetailsView
+      views: issueViews
     )
 
     #获取版本下的所有issue，但不考虑分类
     .state('project.version_issue',
       url: '/version/:version_id/issue'
-      views: 'list-panel': issueListView
+      views: issueListOnly
     ).state('project.version_issue.details',
-      url: '/{issue_id:\\d+}(\\d+)'
-      views:
-        'list-panel': issueListView
-        'details-panel@project': issueDetailsView
+      url: '/{issue_id:\\d+}'
+      views: issueViews
     )
 
     #用户自己的issue
     .state('project.my_issue',
       url: '/issue/{myself:myself}'
-      views:
-        'list-panel': issueListView
-        'details-panel': {}
+      views: issueListOnly
     ).state('project.my_issue.details',
-      url: '/{issue_id:\\d+}(\\d+)'
-      views:
-        'list-panel': issueListView
-        'details-panel@project': issueDetailsView
+      url: '/{issue_id:\\d+}'
+      views: issueViews
     )
 
     #在指定版本下，用户自己的issue
-    .state('project.version_my_issue',
-      url: '/version/:version_id/issue/{myself:myself}'
-      views:
-        'list-panel': issueListView
-        'details-panel': {}
-    ).state('project.version_my_issue.details',
-      url: '/{issue_id:\\d+}(\\d+)'
-      views:
-        'list-panel': issueListView
-        'details-panel@project': issueDetailsView
+    .state('project.version.my_issue',
+      url: '/issue/{myself:myself}'
+      views: issueListOnly
+    ).state('project.version.my_issue.details',
+      url: '/{issue_id:\\d+}'
+      views: issueViews
     )
 
-    .state('project.weekly-report',
+    #=====================================周报相关=======================================
+    #周报
+    .state('project.weekly_report',
       url: '/weekly-report'
-      views:
-        'list-panel':
-          template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
-          controller: 'projectWeeklyReportListController'
-        'details-panel': {}
+      views: weeklyReportListOnly
     )
 
-    .state('project.weekly-report-details',
+    .state('project.weekly_report.details',
       url: '/weekly-report/:week'
-      views:
-        'list-panel':
-          template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
-          controller: 'projectWeeklyReportListController'
-        'details-panel':
-          template: _utils.extractTemplate('#tmpl-project-weekly-report-details', _tmplProject)
-          controller: 'projectWeeklyReportDetailsController'
+      views: weeklyReportViews
+    )
+
+    .state('project.version_weekly_report',
+      url: '/version/:version_id/weekly-report'
+      views: weeklyReportListOnly
+    )
+
+    .state('project.version_weekly_report.details',
+      url: '/:week'
+      views: weeklyReportViews
     )
 
 
-
-    #项目版本列表
-    .state('project.version',
-      url: '/version'
-      views: 'list-panel': {}
-    )
+#    #项目版本列表
+#    .state('project.version',
+#      url: '/version'
+#      views: 'list-panel': {}
+#    )
 
 
     #成员
     .state('project.member',
       url: '/member'
-      views:
-        'list-panel':
-          template: _utils.extractTemplate('#tmpl-project-member-list', _tmplMember)
-        'details-panel': {}
+      views: memberListOnly
+    ).state('project.version.member',
+      url: '/member'
+      views: memberListOnly
     )
 
     #commit
     .state('project.commit',
       url: '/commit'
-      views:
-        'list-panel':
-          template: _utils.extractTemplate('#tmpl-commit-list', _tmplCommit)
-          controller: 'commitListController'
+      views: commitListOnly
+    ).state('project.version.commit',
+      url: '/commit'
+      views: commitListOnly
     )
 
-    .state('project.commit-details',
-      url: '/commit/:commit_id?url'
-      views:
-        'details-panel':
-          template: _utils.extractTemplate('#tmpl-commit-details', _tmplCommit)
-          controller: 'commitDetailsController'
-    )
+#    .state('project.commit-details',
+#      url: '/commit/:commit_id?url'
+#      views:
+#        'details-panel':
+#          template: _utils.extractTemplate('#tmpl-commit-details', _tmplCommit)
+#          controller: 'commitDetailsController'
+#    )
 
+    #====================================讨论相关=======================================
     #讨论
     .state('project.discussion',
       url: '/discussion'
-      views:
-        'list-panel': discussionListView
+      views: discussionListOnly
     ).state('project.discussion.details',
       url: '/{issue_id:\\d+}'
       data: articleOnly: true
-      views:
-        'list-panel': discussionListView
-        'details-panel@project': discussionDetailsView
+      views: discussionViews
     )
 
     .state('project.version_discussion',
       url: '/version/:version_id/discussion'
-      views:
-        'list-panel': discussionListView
+      views: discussionListOnly
     ).state('project.version_discussion.details',
       url: '/{issue_id:\\d+}'
       data: articleOnly: true
-      views:
-        'list-panel': discussionListView
-        'details-panel@project': discussionDetailsView
+      views: discussionViews
     )
-
 
     #素材
     .state('project.assets',
       url: '/assets'
       data: isTag: true
-      views:
-        'list-panel':
-          template: _utils.extractTemplate('#tmpl-assets-list', _tmplAssets)
-          controller: 'assetsListController'
+      views: assetsListOnly
+    ).state('project.version_assets',
+      url: '/version/:version_id/assets'
+      data: isTag: true
+      views: assetsListOnly
     )
   )
