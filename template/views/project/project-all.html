@@ -155,6 +155,20 @@
         </div>
     </textarea>
 
+    <!--项目版本的dropdown-->
+    <textarea id="tmpl-project-versions-dropdown">
+        <div class="dropdown dropdown-tip">
+            <ul class="dropdown-menu">
+                <li ng-repeat="item in projectVersion">
+                    <a data-value="{{item.id}}"><span>{{item.title}}</span></a>
+                </li>
+                <li class="create" data-value="-1" ng-show="{{showCreate}}">
+                    <a data-value="-1"><span>添加新版本</span></a>
+                </li>
+            </ul>
+        </div>
+    </textarea>
+
     <!--项目列表的磁贴-->
     <textarea id="tmpl-project-tiles">
         <ul class="project-tiles">

@@ -35,9 +35,14 @@ define [
 
       scope.$on 'dropdown:selected', (event, type, value)->
         switch type
-          when 'issue:owner' then issueAPI.update(owner: value)
-          when 'issue:priority' then issueAPI.update(priority: value)
-          when 'issue:category' then issueAPI.update(category_id: value)
+          when 'issue:owner'
+            issueAPI.update(owner: value) if ~~value isnt scope.issue.owner
+          when 'issue:priority'
+            issueAPI.update(priority: value) if ~~value isnt scope.issue.priority
+          when 'issue:category'
+            issueAPI.update(category_id: value) if ~~value isnt scope.issue.category_id
+          when 'issue:version'
+            issueAPI.update(version_id: value) if ~~value isnt scope.issue.version_id
 
       #保存修改时间
       scope.$on 'datetime:change', (event,name,date)->

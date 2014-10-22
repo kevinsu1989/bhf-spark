@@ -88,3 +88,11 @@ define [
     link: (scope, element, attrs)->
 
   ])
+
+  .directive('projectVersionDropdown', ['STORE', ()->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-project-versions-dropdown', _template
+    link: (scope, element, attrs)->
+      scope.showCreate = attrs.showCreate
+  ])
