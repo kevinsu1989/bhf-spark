@@ -13,6 +13,7 @@ define [
       $self = $(element)
       $menus = $self.find 'div.dropdown'
       $text = $self.find attrs.textContainer
+      exclude = (attrs.excludeValue || '').split(',')
 
       setText = (text)->
         text = _utils.formatString attrs.formatter || '{0}', text
@@ -46,7 +47,7 @@ define [
         value = $parent.attr('data-value')
         return if not value
 
-        setText $parent.text()
         scope.$emit 'dropdown:selected', attrs.name, value
 
+        setText $parent.text() if _.indexOf(exclude, value) is -1
   )

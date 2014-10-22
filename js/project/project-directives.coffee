@@ -7,14 +7,18 @@ define [
 ], (_module,_utils, _template) ->
 
   _module.directiveModule
-  .directive('projectMenu', ()->
+  .directive('projectMenu', ($stateParams)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-menu', _template
     link: (scope, element, attrs)->
+      parts = ['project', $stateParams.project_id]
+      if $stateParams.version_id
+        parts.push 'version'
+        parts.push $stateParams.version_id
 
+      scope.baseLink = parts.join('/')
   )
-
 
   .directive('projectHeader', ()->
     restrict: 'E'
@@ -94,5 +98,5 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-project-versions-dropdown', _template
     link: (scope, element, attrs)->
-      scope.showCreate = attrs.showCreate
+      scope.showCreate = attrs.showCreate is 'true'
   ])

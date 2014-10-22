@@ -53,7 +53,7 @@ define [
   #获取当前项目的版本
   .filter('currentProjectVersion', ($stateParams)->
     (versions)->
-      return '所有' if not versions or not $stateParams
+      return '所有版本' if not versions or not $stateParams?.version_id
       current = _.find versions, id: Number($stateParams.version_id)
       return current?.title || '未知版本'
   )
@@ -69,13 +69,14 @@ define [
       parts.push('project')
       parts.push($stateParams.project_id)
 
-      if type is 'issue' and $stateParams.myself
-        parts.push('issue')
-        parts.push('myself')
 
       if hasVersion and $stateParams.version_id
         parts.push('version')
         parts.push($stateParams.version_id)
+
+      if type is 'issue' and $stateParams.myself
+        parts.push('issue')
+        parts.push('myself')
 
       if hasCategory and $stateParams.category_id
         parts.push('category')

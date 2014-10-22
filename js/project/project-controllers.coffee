@@ -49,6 +49,16 @@ define [
         STORE.projectVersion.data = result
         $rootScope.$broadcast 'project:version:loaded', result
 
+    #项目版本被选中
+    projectVersionSelected = (value)->
+
+      return alert('新建版本的功能暂未发') if value is '-1'
+
+      url = "/project/#{$stateParams.project_id}"
+      url += "/version/#{value}" if value isnt 'all'
+      url += "/issue"
+      $scope.$apply -> $location.path url
+
     #更新成员列表信息
     $scope.$on "project:member:request", -> updateProjectMember()
     $scope.$on "project:category:request", -> updateProjectCategory()
@@ -57,6 +67,11 @@ define [
     $scope.$on("member:creator:toshow", (event,data)->
       $scope.$broadcast("member:creator:show",data)
     )
+
+    $scope.$on 'dropdown:selected', (event, type, value)->
+      switch type
+        when 'project:version' then projectVersionSelected value
+
 
     updateProjectMember()
     updateProjectCategory()
