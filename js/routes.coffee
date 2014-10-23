@@ -8,10 +8,17 @@ define [
   't!/views/commit/commit-all.html'
   't!/views/assets/assets-all.html'
   't!/views/project/project-all.html'
-], (_ng, _app, _utils, _tmplIssue, _tmplMember, _tmplCommit, _tmplAssets, _tmplProject) ->
+  't!/views/global-all.html'
+], (_ng, _app, _utils, _tmplIssue, _tmplMember,
+    _tmplCommit, _tmplAssets, _tmplProject, _tmplGlobal) ->
 
   _app.config(($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
+
+    blankDetailsView =
+      template: _utils.extractTemplate '#tmpl-global-blank-page', _tmplGlobal
+      controller: ($state)->
+        console.log $state, 'abc'
 
     #issue
     issueViews =
@@ -24,7 +31,7 @@ define [
 
     issueListOnly =
       'listPanel@project': issueViews.listPanel
-      detailsPanel: {}
+      detailsPanel: blankDetailsView
 
     #讨论
     discussionViews =
@@ -37,7 +44,7 @@ define [
 
     discussionListOnly =
       listPanel: discussionViews.listPanel
-      detailsPanel: {}
+      detailsPanel: blankDetailsView
 
 
     weeklyReportViews =
@@ -52,24 +59,24 @@ define [
       listPanel:
         template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
         controller: 'projectWeeklyReportListController'
-      detailsPanel: {}
+      detailsPanel: blankDetailsView
 
     memberListOnly =
       'listPanel@project':
         template: _utils.extractTemplate('#tmpl-project-member-list', _tmplMember)
-      detailsPanel: {}
+      detailsPanel: blankDetailsView
 
     commitListOnly =
       'listPanel@project':
         template: _utils.extractTemplate('#tmpl-commit-list', _tmplCommit)
         controller: 'commitListController'
-      detailsPanel: {}
+      detailsPanel: blankDetailsView
 
     assetsListOnly =
       listPanel:
         template: _utils.extractTemplate('#tmpl-assets-list', _tmplAssets)
         controller: 'assetsListController'
-      detailsPanel: {}
+      detailsPanel: blankDetailsView
 
     $stateProvider
     .state('home',

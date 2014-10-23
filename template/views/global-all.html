@@ -1,4 +1,14 @@
 <div>
+    <!--空页面-->
+    <textarea id="tmpl-global-blank-page">
+        <div class="blank-page">
+            <div class="inner">
+                <!--<p><i class="small icon"></i></p>-->
+            </div>
+        </div>
+    </textarea>
+
+    <!--git list-->
     <textarea id="tmpl-global-git-list">
         <ul class="git-list">
             <li ng-repeat="account in gitAccounts track by $index" ng-click="onClickEdit($event, $index, account)">

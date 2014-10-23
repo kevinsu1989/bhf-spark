@@ -158,6 +158,8 @@ i.icon{
           }
 
           a {
+            max-width: 60%;
+            display: inline-block;
             &:link, &:visited {
               color: #333;
             }
@@ -202,6 +204,26 @@ i.icon{
         color: #CCC;
       }
     }
+  }
+}
+
+.blank-page{
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+  overflow: hidden;
+
+  .inner{
+    width: 300px;
+    margin: 200px auto;
+  }
+
+  i.icon.small{
+    background-position: -160px -400px;
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    margin-right: 10px;
   }
 }
 
