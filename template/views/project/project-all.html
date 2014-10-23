@@ -128,7 +128,7 @@
                     <div class="version" dropdown data-name="project:version" data-text-container="label.display" data-selected="{{projectVersion}}" data-exclude-value="-1">
                         <label class="display">{{projectVersion | currentProjectVersion}}</label>
                         <i class="small icon"></i>
-                        <project-version-dropdown data-show-create="true"></project-version-dropdown>
+                        <project-version-dropdown data-show-more="true"></project-version-dropdown>
                     </div>
                 </div>
             </div>
@@ -172,10 +172,10 @@
                 <li ng-repeat="item in projectVersion">
                     <a data-value="{{item.id}}"><span>{{item.title}}</span></a>
                 </li>
-                <li>
+                <li ng-show="showMore">
                     <a data-value="all"><span>所有版本</span></a>
                 </li>
-                <li class="create" data-value="-1" ng-show="showCreate">
+                <li class="create" ng-show="showMore">
                     <a data-value="-1"><span>添加新版本</span></a>
                 </li>
             </ul>

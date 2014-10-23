@@ -64,11 +64,9 @@ define [
 
         data =
           title: text
-          #暂时分到需求下，要根据当前所在分类，这个逻辑以后要改 by wvv8oo
-          tag: $stateParams.tag || '需求'
-          category: attrs.category
+          category_id: $stateParams.category_id
+          version_id: $stateParams.version_id
 
-        #url = "project/#{scope.project.id}/issue"
         API.project(scope.project.id).issue().create(data).then ()->
           NOTIFY.success '任务已经被成功创建'
           event.target.value = null

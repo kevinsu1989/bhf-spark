@@ -19,13 +19,10 @@ define [
       if cond.keyword #搜索
         $scope.title = "搜索：#{cond.keyword}"
         params.keyword = cond.keyword
-      else if cond.myself
+      else if $stateParams.myself
         #获取用户自己的任务
         $scope.title = "我的任务"
-        params.owner = 1
-      else if cond.tag
-        $scope.title = "标签：# #{cond.tag} #"
-        params.tag = cond.tag
+        params.myself = true
       else if cond.category_id
         $scope.title = $location.$$search.title
       else

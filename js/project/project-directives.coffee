@@ -98,5 +98,5 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-project-versions-dropdown', _template
     link: (scope, element, attrs)->
-      scope.showCreate = attrs.showCreate is 'true'
+      scope.showMore = attrs.showMore is 'true'
   ])
