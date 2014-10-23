@@ -4,7 +4,8 @@ define [
   '../ng-module'
   'v/charm'
   'utils'
-], (_ng, _module, _charm, _utils) ->
+  '../apis'
+], (_ng, _module, _charm, _utils, _api) ->
   BASEAPI = '/api/'
 
   _module.serviceModule
@@ -47,7 +48,7 @@ define [
       router.parse result
       $rootScope.$broadcast 'api:ready'
     ###
-    router.parse _utils.apis
+    router.parse _api
 
     #获取jsonp的数据
     oldAjax = (ajaxOps)->

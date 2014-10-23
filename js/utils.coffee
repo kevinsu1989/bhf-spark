@@ -13,3 +13,21 @@ define [
   #提取text中包括规则的模板html，即包含在textarea中的
   extractTemplate: (expr, text)->
     $(text).find(expr).val()
+
+  hex2rgba: (hex)->
+    `
+    var rgba = {r: 0, g: 0, b: 0, a: 0}
+    var c, o = [], k = 0, m = hex.match(
+      /^#(([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})|([0-9a-f])([0-9a-f])([0-9a-f]))$/i);
+
+    if (!m) return rgba;
+    for (var i = 2, s = m.length; i < s; i++) {
+      if (undefined === m[i]) continue;
+      c = parseInt(m[i], 16);
+      o[k++] = c + (i > 4 ? c * 16 : 0);
+    }
+    rgba.r = o[0]
+    rgba.g = o[1]
+    rgba.b = o[2]
+    `
+    return rgba;

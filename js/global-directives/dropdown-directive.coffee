@@ -36,7 +36,6 @@ define [
 
       #scope.$broadcast 'dropdown:selected', attrs.name, selected
 
-
       $menus.bind 'click', (e)->
         e.stopPropagation()
         $this = $(e.target)
