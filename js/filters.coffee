@@ -62,7 +62,7 @@ define [
   .filter('projectLink', ($stateParams)->
     (data, type)->
 
-      hasVersion = type in ['issue', 'category-menu', 'menu', 'discussion']
+      hasVersion = type in ['issue', 'category-menu', 'menu', 'discussion', 'commit']
       hasCategory = type is 'issue'
 
       parts = []

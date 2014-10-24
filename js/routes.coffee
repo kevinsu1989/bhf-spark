@@ -209,13 +209,13 @@ define [
       views: commitListOnly
     )
 
-#    .state('project.commit-details',
-#      url: '/commit/:commit_id?url'
-#      views:
-#        'details-panel':
-#          template: _utils.extractTemplate('#tmpl-commit-details', _tmplCommit)
-#          controller: 'commitDetailsController'
-#    )
+    .state('project.version.commit.details',
+      url: '/:commit_id?url'
+      views:
+        'detailsPanel@project':
+          template: _utils.extractTemplate('#tmpl-commit-details', _tmplCommit)
+          controller: 'commitDetailsController'
+    )
 
     #====================================讨论相关=======================================
     #讨论

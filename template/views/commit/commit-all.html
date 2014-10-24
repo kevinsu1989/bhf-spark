@@ -6,7 +6,7 @@
             </header>
             <ul class="details">
                 <li class="row" ng-repeat="item in commit.items">
-                    <a href="{{item.url}}" target="_blank">{{item.message}}</a>
+                    <a href="/{{item | projectLink:'commit'}}/commit/{{item.sha}}?url={{item.url}}">{{item.message}}</a>
                     <div class="info">
                         <span class="memo">
                             {{item.sha | limitTo: 10}}
@@ -24,8 +24,6 @@
     </textarea>
 
     <textarea id="tmpl-commit-details">
-        <div>
-            <iframe frameborder="0" width="100%" height="100%" ng-src="{{url}}"></iframe>
-        </div>
+        <iframe frameborder="0" width="100%" height="100%" ng-src="{{url}}"></iframe>
     </textarea>
 </div>
