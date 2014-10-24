@@ -24,7 +24,7 @@ define [
         $http(ajaxOps).success(success).error((data, status) ->
           switch status
             when 404
-              NOTIFY.error "找不到文件啦"
+              console.error "404 Not Found"
             when 500
               NOTIFY.error "大事不好了，服务器发生错误啦"
             when 406
@@ -37,7 +37,7 @@ define [
               $location.path('/login')
             else
             #以后再考虑不同的处理
-              NOTIFY.error "未知错误"
+              console.error "未知错误"
         )
 
 

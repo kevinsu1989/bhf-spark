@@ -28,6 +28,7 @@
     }
   }
 
+
   .processing {
     clear: both;
     margin: 0 auto;
@@ -56,7 +57,7 @@
     text-align: left;
   }
 
-  li {
+  li.tile {
     background-image: -webkit-gradient(
             linear,
             left top,
@@ -77,28 +78,98 @@
     float: left;
     margin: 10px;
     position: relative;
-    cursor: pointer;
 
     &:hover {
+      .menu{
+        top: 0px !important;
+      }
+
       .box-shadow(0 0 5px rgba(255, 255, 255, 1));
     }
 
-    .description {
-      background-color: #FFF;
-      height: 46px;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      overflow: hidden;
+  }
 
-      span {
-        color: #999999;
-        font-size: 12px;
-        margin: 10px;
-        display: block;
-        text-align: center;
-        height: 26px;
-        vertical-align: baseline;
+  @height: 46px;
+  .tile-toolbar {
+    background-color: #FFF;
+    height: @height;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+
+    span {
+      color: #999999;
+      font-size: 12px;
+      margin: 10px;
+      display: block;
+      text-align: center;
+      height: 26px;
+      vertical-align: baseline;
+    }
+
+    .menu{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: @height;
+      transition-property: top;
+      transition-duration: 600ms;
+      background-color: #FFF;
+
+      li{
+        float: left;
+        height: 100%;
+        width: 2%;
+
+        &.sub-menu{
+          width: 49%;
+          text-align: center;
+          vertical-align: middle;
+        }
+
+        &.spliter{
+          &:before{
+            content: '';
+            width: 1px;
+            left: 1;
+            position: absolute;
+            height: 60%;
+            top: 20%;
+            background-color: #6c6c6c;
+          }
+        }
+      }
+
+      button{
+        height: 100%;
+        width: 100%;
+        color: #666;
+        background-image: none;
+        background-color: #FFF;
+        &:hover{
+          color: #37aeeb;
+
+          &.edit .icon{
+            background-position: -240px -440px;
+          }
+
+          &.remove .icon{
+            background-position: -240px -400px;
+          }
+        }
+
+        .icon{
+          vertical-align: middle;
+        }
+
+        &.edit .icon{
+          background-position: -200px -440px;
+        }
+
+        &.remove .icon{
+          background-position: -200px -400px;
+        }
       }
     }
   }

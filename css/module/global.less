@@ -304,6 +304,10 @@ button{
   &.cancel{
     background-position: -200px -40px;
   }
+
+  &.delete{
+    background-color: red;
+  }
 }
 
 input[type='text'], input[type='password'], input[type='email'], textarea{
@@ -388,7 +392,12 @@ input.text{
 
   .row.control{
     padding: 10px 0 10px 145px;
+    .delete{
+      float: right;
+      margin-right: 85px;
+    }
   }
+
 
   .git-list{
     li{

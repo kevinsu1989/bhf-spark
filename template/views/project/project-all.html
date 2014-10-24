@@ -185,11 +185,11 @@
     <!--项目列表的磁贴-->
     <textarea id="tmpl-project-tiles">
         <ul class="project-tiles">
-            <li class="create">
+            <li class="create tile" ng-click="onClickCreate()">
                 <i class="icon"></i>
             </li>
 
-            <li ng-repeat="project in projects.items" ng-click="onClickTile($event, project)">
+            <li class="tile" ng-repeat="project in projects.items" ng-click="onClickTile($event, project)">
                <div class="title">
                    {{project.title}}
                </div>
@@ -200,8 +200,23 @@
                 </div>
                </div>
 
-               <div class="description">
-                   <span>{{project.description || '无项目说明'}}</span>
+               <div class="tile-toolbar">
+                   <span>{{project.description || '无项目说明' | limitTo: 40}}</span>
+                   <ul class="menu">
+                       <li class="sub-menu">
+                       <button class="default edit" ng-click="onClickEdit($event, project)">
+                        <i class="small icon"></i>
+                           编辑
+                       </button>
+                       </li>
+                       <li class="spliter"></li>
+                       <li class="sub-menu">
+                           <button class="default remove" ng-click="onClickDelete($event, project)">
+                               <i class="small icon"></i>
+                               删除
+                           </button>
+                       </li>
+                   </ul>
                </div>
             </li>
         </ul>
@@ -213,7 +228,7 @@
             <div class="inner">
                 <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
                 <header>
-                    新建/编辑项目
+                    {{editor_title}}项目
                 </header>
                 <section>
                     <form class="standard-form">
@@ -221,14 +236,29 @@
                             <label class="caption">
                                 项目名称
                             </label>
-                            <input class="medium text" type="text"/>
+                            <input class="medium text" type="text" ng-model="data.title" maxlength="40"/>
                         </div>
 
                         <div class="row">
                             <label class="caption">
                                 摘要说明
                             </label>
-                            <input class="medium text" type="text" placeholder="一句话简单描述项目"/>
+                            <input class="medium text" type="text" placeholder="一句话简单描述项目" ng-model="data.description" maxlength="40"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                项目状态
+                            </label>
+                            <div class="inline">
+                                <label>
+                                    <input type="radio" value="active" name="status" ng-model="data.status" /> 活动
+                                </label>
+
+                                <label>
+                                    <input type="radio" value="archive" name="status" ng-model="data.status"/> 存档
+                                </label>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -236,13 +266,18 @@
                                 GitLab
                             </label>
                             <div class="inline">
-                                <git-list-editor data-name="project" data-max-count="5" data-gits="{{gits}}"></git-list-editor>
+                                <git-list-editor data-name="{{contextName}}"
+                                                 data-max-count="10"
+                                                 data-expression="^git@git\.hunantv\.com:.+\/.+\.git$"
+                                                 data-gits="{{data.gits}}">
+                                </git-list-editor>
                             </div>
                         </div>
 
                         <div class="row control">
                             <button class="primary default" ng-click="onClickSave()">保存</button>
                             <button class="cancel default" ng-click="onClickCancel()">取消</button>
+                            <button class="delete default" ng-click="onClickDelete()" ng-show="data.id">删除</button>
                         </div>
                     </form>
                 </section>

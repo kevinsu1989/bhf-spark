@@ -54,7 +54,6 @@ define [
 
     getSeries: (data, color)->
       rgba = _utils.hex2rgba color
-      console.log rgba
       color = _utils.formatString 'rgba({0}, {1}, {2}, {3})', rgba.r, rgba.g, rgba.b, 0.6
 
       name: data.name
