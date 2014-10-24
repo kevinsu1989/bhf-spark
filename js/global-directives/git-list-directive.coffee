@@ -4,15 +4,18 @@ define [
   '../ng-module'
   '../utils'
   '_'
-  't!/views/project/project-all.html'
+  't!/views/global-all.html'
 ], (_module, _utils, _, _tmplGlobal) ->
 
-  _module.directiveModule.directive('gitListEditor', ()->
+  _module.directiveModule.directive('gitListEditor', ['NOTIFY', (NOTIFY)->
     restrict: 'E'
     replace: true
     scope: true
     template: _utils.extractTemplate '#tmpl-global-git-list', _tmplGlobal
     link: (scope, element, attrs)->
+      #校验用户输入的正则表达式
+      testExpr = new RegExp(attrs.expression)
+
       #允许存储的最大git账户数量
       maxCount =  parseInt attrs.maxCount
       #保存编辑状态 -1表示非编辑状态
@@ -41,7 +44,12 @@ define [
         return if event.keyCode isnt 13
         event.preventDefault()
         account = _utils.trim event.currentTarget.value
+
         return if account is ''
+
+        #检测用户输入是否合法
+        return NOTIFY.error('您输入的内容不合法') if not testExpr.test(account)
+
         if _.indexOf(scope.gitAccounts, account) > -1
           bindDataForInput ''
           return
@@ -64,4 +72,4 @@ define [
         nowEditingIndex = index
         bindDataForInput account
         return
-  )
+  ])
