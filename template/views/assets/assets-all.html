@@ -27,11 +27,14 @@
             <header>
                 <h3>素材库</h3>
             </header>
-
             <ul class="details">
                 <li ng-repeat="item in assets.items" class="row">
                     <!--/project/{{item.project_id}}/assets/{{item.id}}-->
-                    <a href="{{item.url}}" target="_blank">
+                    <a href="{{item.url}}" target="_blank" ng-if="!(item.file_name | filenameIsPicture)">
+                        <span class="title">{{item.original_name}}</span>
+                    </a>
+
+                    <a href="/{{item | projectLink: 'normal'}}/assets/previewer/{{item.id}}?url={{item.url}}" ng-if="(item.file_name | filenameIsPicture)">
                         <span class="title">{{item.original_name}}</span>
                     </a>
 
@@ -42,6 +45,15 @@
                     </div>
                 </li>
             </ul>
+        </div>
+    </textarea>
+
+    <!--图片素材的预览-->
+    <textarea id="tmpl-assets-previewer">
+        <div class="asset-previewer full">
+            <a href="{{url}}" target="_blank">
+                <img src="{{url}}" />
+            </a>
         </div>
     </textarea>
 </div>

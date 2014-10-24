@@ -62,7 +62,7 @@ define [
   .filter('projectLink', ($stateParams)->
     (data, type)->
 
-      hasVersion = type in ['issue', 'category-menu', 'menu', 'discussion', 'commit']
+      hasVersion = type in ['issue', 'normal']
       hasCategory = type is 'issue'
 
       parts = []
@@ -87,4 +87,10 @@ define [
         parts.push('issue')
 
       parts.join('/')
+  )
+
+  .filter('filenameIsPicture', ()->
+    (filename)->
+      ext = filename.replace(/.+\.(\w+)$/, '$1')
+      return /^(jpg|jpeg|png|gif|bmp)$/i.test ext
   )

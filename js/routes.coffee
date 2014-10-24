@@ -78,6 +78,12 @@ define [
         controller: 'assetsListController'
       detailsPanel: blankDetailsView
 
+    assetsPreviewerViews =
+      listPanel: assetsListOnly.listPanel
+      'detailsPanel@project':
+        template: _utils.extractTemplate('#tmpl-assets-previewer', _tmplAssets)
+        controller: 'assetsPreviewerController'
+
     $stateProvider
     .state('home',
       url: '/'
@@ -240,11 +246,15 @@ define [
     #素材
     .state('project.assets',
       url: '/assets'
-      data: isTag: true
       views: assetsListOnly
     ).state('project.version_assets',
       url: '/version/:version_id/assets'
-      data: isTag: true
       views: assetsListOnly
+    ).state('project.version_assets.previewer'
+      url: '/previewer/:asset_id'
+      views: assetsPreviewerViews
+    ).state('project.assets.previewer'
+      url: '/previewer/:asset_id'
+      views: assetsPreviewerViews
     )
   )

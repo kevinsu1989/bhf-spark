@@ -13,3 +13,9 @@ define [
     )
     return
   )
+
+  .controller('assetsPreviewerController', ['$scope', '$sce', '$location',
+  ($scope, $sce, $location)->
+    $scope.url = $sce.trustAsResourceUrl($location.$$search.url)
+    return
+  ])

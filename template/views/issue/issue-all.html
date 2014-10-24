@@ -90,7 +90,7 @@
 
             <ul class="details">
                 <li ng-repeat="item in discussion.items" class="row">
-                    <a href="/{{item | projectLink: 'discussion'}}/discussion/{{item.id}}">
+                    <a href="/{{item | projectLink: 'normal'}}/discussion/{{item.id}}">
                         <span class="badge gray small">{{item.comment_count}}</span>
 
                         <span class="title">{{item.title}}</span>

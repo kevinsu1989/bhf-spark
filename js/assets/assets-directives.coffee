@@ -52,3 +52,11 @@ define [
       scope.$on "assets:list:update", ()->
         vm.action.getAssetList()
   )
+
+  .directive('assetPreviewer', ['$sce', '$state', ($sce, $state)->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-assets-previewer', _template
+    link: (scope, element, attrs)->
+      scope.url = $sce.trustAsResourceUrl($state.params.url)
+  ])

@@ -6,7 +6,7 @@
             </header>
             <ul class="details">
                 <li class="row" ng-repeat="item in commit.items">
-                    <a href="/{{item | projectLink:'commit'}}/commit/{{item.sha}}?url={{item.url}}">{{item.message}}</a>
+                    <a href="/{{item | projectLink:'normal'}}/commit/{{item.sha}}?url={{item.url}}">{{item.message}}</a>
                     <div class="info">
                         <span class="memo">
                             {{item.sha | limitTo: 10}}
