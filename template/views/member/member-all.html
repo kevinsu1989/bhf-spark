@@ -56,7 +56,7 @@
     <textarea id="tmpl-project-member-item">
         <li ng-repeat="member in projectMember" class="row">
             <span class="name">{{member.username}}</span>
-            <span class="email">XXXXX@bhf.com</span>
+            <span class="email">{{member.email}}</span>
             <span class="role" dropdown data-name="project-member-item">
                 {{ member.role | projectMemberRole }}<i class="small icon cell"></i>
                 <project-member-role-dropdown></project-member-role-dropdown>
