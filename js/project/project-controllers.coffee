@@ -80,7 +80,20 @@ define [
   )
 
   #项目周报的列表
-  .controller('projectWeeklyReportListController', ['API', (API)-> ])
+  .controller('projectWeeklyReportListController', ['$scope', 'API', 'WEEKLIST',
+  ($scope, API, WEEKLIST)->
+    $scope.weeks = WEEKLIST(30)
+  ])
 
   #项目周报的详细
-  .controller('projectWeeklyReportDetailsController', ['API', (API)-> ])
+  .controller('projectWeeklyReportDetailsController', ['$scope', '$stateParams', 'API',
+  ($scope, $stateParams, API)->
+    cond =
+      start_time: _moment($stateParams.startTime).startOf('week').valueOf()
+      end_time: _moment($stateParams.endTime).endOf('week').valueOf()
+
+    _.extend $scope, cond
+
+    API.report().weekly().retrieve(cond).then (result)->
+      $scope.report = result
+  ])

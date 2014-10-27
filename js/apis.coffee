@@ -312,4 +312,14 @@ define [], ->
         "patch": false
       }
     }
+    {
+      "url": "report/weekly",
+      "methods": {
+        "put": false,
+        "post": false,
+        "path": false,
+        "delete": false,
+        "patch": false
+      }
+    }
 ]

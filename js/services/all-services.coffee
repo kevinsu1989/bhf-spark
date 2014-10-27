@@ -5,7 +5,8 @@ define [
   '../ng-module'
   'notify'
   'pkg/webuploader/webuploader.html5only'
-], (_ng, _module, _notify, _webUploader) ->
+  'moment'
+], (_ng, _module, _notify, _webUploader, _moment) ->
   _module.serviceModule
   .factory 'NOTIFY', ()-> _notify
 
@@ -26,5 +27,21 @@ define [
       return uploader
 
     return webUploaderInit: webUploaderInit
+  )
+
+  #获取周的列表
+  .factory('WEEKLIST', ()->
+    (total)->
+      list = []
+      now = _moment().startOf 'week'
+      for index in [0..total]
+        start = now.clone().subtract(index, 'weeks')
+        end = start.clone().add(6, 'days')
+        list.push
+          text: start.subtract(1, 'days').format('YYYY年第W周')
+          start: start.format('YYYY-MM-DD')
+          end: end.format('YYYY-MM-DD')
+
+      list
   )
 

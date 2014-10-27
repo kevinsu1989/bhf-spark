@@ -175,7 +175,7 @@ define [
     )
 
     .state('project.weekly_report.details',
-      url: '/weekly-report/:week'
+      url: '/{startTime}~{endTime}'
       views: weeklyReportViews
     )
 
@@ -185,10 +185,9 @@ define [
     )
 
     .state('project.version_weekly_report.details',
-      url: '/:week'
+      url: '/{startTime}~{endTime}'
       views: weeklyReportViews
     )
-
 
 #    #项目版本列表
 #    .state('project.version',

@@ -94,3 +94,18 @@ define [
       ext = filename.replace(/.+\.(\w+)$/, '$1')
       return /^(jpg|jpeg|png|gif|bmp)$/i.test ext
   )
+
+  .filter('replace', ->
+    (value, from, to)->
+      value.replace(from, to)
+  )
+
+  .filter('replaceWithRegExp', ->
+    (value, from, to)->
+      reg = new RegExp from
+      value.replace(from, to)
+  )
+
+  .filter('lastName', ->
+    (realname)-> realname.substr(0, 1)
+  )

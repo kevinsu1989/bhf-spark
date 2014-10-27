@@ -293,22 +293,29 @@
             </header>
 
             <ul class="details">
-                <li class="row">
-                    <a  class="title" href="/project/1/weekly-report/201410">
-                        2014年第十周
+                <li class="row" ng-repeat="week in weeks">
+                    <a  class="title" href="/{{null | projectLink: 'normal'}}/weekly-report/{{week.start}}~{{week.end}}">
+                        {{week.text}}
                     </a>
 
                     <div class="info">
-                        <span class="memo">2014-01-10 至 2014-01-20</span>
+                        <span class="memo">{{week.start}} 至 {{week.end}}</span>
                     </div>
                 </li>
-                <li class="row">
-                    <a  class="title" href="/project/1/weekly-report/201410">
-                        2014年第十周
-                    </a>
+            </ul>
+        </div>
+    </textarea>
 
+
+    <textarea id="tmpl-project-report-weekly-member">
+        <div class="somebody" ng-repeat="item in source">
+            <div class="member">{{item.member.username}}</div>
+            <ul class="tasks">
+                <li ng-repeat="issue in item.issue">
+                    <a href="/{{issue | projectLink}}/issue/{{issue.id}}">{{issue.title}} </a>
                     <div class="info">
-                        <span class="memo">2014-01-10 至 2014-01-20</span>
+                        <span class="plain gray">{{(issue.finish_time || issue.timestamp) | date: 'EEEE'}}</span>
+                        <span class="plain gray">{{issue.project_name}}</span>
                     </div>
                 </li>
             </ul>
@@ -320,137 +327,47 @@
         <div class="weekly-report-details">
             <header>
                 <div class="title">
-                    2014年第10周周报
-                </div>
-                <div class="export">
-                    <i class="icon small"></i>
-                    <label>导出</label>
+                    {{start_time | date: 'yyyy年第ww周'}}周报
                 </div>
                 <div class="print">
                     <i class="icon small"></i>
-                    <label>打印</label>
+                    <a href="/{{null | projectLink}}/">打印版</a>
                 </div>
             </header>
-
-            <!--未完成任务-->
-            <section class="undone report-view">
-                <div class="title">
-                    <i class="icon small"></i>
-                    <h3>本周未完成任务(3)</h3>
-                </div>
-
-                <div class="somebody">
-                    <div class="member">小胡</div>
-                    <ul class="tasks">
-                        <li>
-                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
-                            <div class="info">
-                                <span class="plain gray">星期三</span>
-                                <span class="plain gray"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="somebody">
-                    <div class="member">小胡</div>
-                    <ul class="tasks">
-                        <li>
-                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
-                            <div class="info">
-                                <span class="plain gray">星期三</span>
-                                <span class="plain gray"></span>
-                            </div>
-                        </li>
-
-                        <li>
-                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
-                            <div class="info">
-                                <span class="plain gray">星期三</span>
-                                <span class="plain gray"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-            </section>
 
             <!--完成任务-->
             <section class="done report-view">
                 <div class="title">
                     <i class="icon small"></i>
-                    <h3>本周完成任务(3)</h3>
+                    <h3>本周完成任务</h3>
                 </div>
 
-                <div class="somebody">
-                    <div class="member">小胡</div>
-                    <ul class="tasks">
-                        <li>
-                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
-                            <div class="info">
-                                <span class="plain gray">星期三</span>
-                                <span class="plain gray"></span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
-                            <div class="info">
-                                <span class="plain gray">星期三</span>
-                                <span class="plain gray"></span>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
-                            <div class="info">
-                                <span class="plain gray">星期三</span>
-                                <span class="plain gray"></span>
-                            </div>
-                        </li>
-                    </ul>
+                <project-report-weekly-member data-source="report.finished"></project-report-weekly-member>
+            </section>
+
+            <!--未完成任务-->
+            <section class="undone report-view">
+                <div class="title">
+                    <i class="icon small"></i>
+                    <h3>本周未完成任务</h3>
                 </div>
 
-                <div class="somebody">
-                    <div class="member">小胡</div>
-                    <ul class="tasks">
-                        <li>
-                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
-                            <div class="info">
-                                <span class="plain gray">星期三</span>
-                                <span class="plain gray"></span>
-                            </div>
-                        </li>
-
-                        <li>
-                            <a href="#">专辑有部分QQ浏览器无法显示正片模块 </a>
-                            <div class="info">
-                                <span class="plain gray">星期三</span>
-                                <span class="plain gray"></span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
+                <project-report-weekly-member data-source="report.unfinished"></project-report-weekly-member>
             </section>
 
             <!--本周无任务和周报记录-->
-            <section class="lazybone report-view">
+            <section class="lazybone report-view" ng-hide="true">
                 <div class="title">
                     <i class="icon small"></i>
-                    <h3>本周无任务和周报记录</h3>
+                    <h3>本周无任务和周报记录(共{{report.lazybones.length}}人)</h3>
                 </div>
 
                 <ul class="member-list">
-                    <li>
+                    <li ng-repeat="member in report.lazybones">
                         <div class="avatar">
-                            李
+                            {{member.realname | lastName}}
                         </div>
-                        <label>张三</label>
-                    </li>
-                    <li>
-                        <div class="avatar">
-                            张
-                        </div>
-                        <label>李四</label>
+                        <label>{{member.realname}}</label>
                     </li>
                 </ul>
             </section>
