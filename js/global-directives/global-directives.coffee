@@ -96,3 +96,12 @@ define [
           $(element).click()
         _keybroad.on(key, onDownCallback, onUpCallback)
   ])
+
+  .directive('reportWeeklyPrint', ['API', (API)->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate
+    link: (scope, element, attrs)->
+      console.log 'abc'
+
+  ])

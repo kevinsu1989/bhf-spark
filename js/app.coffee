@@ -10,6 +10,7 @@ define [
   './member/index'
   './commit/index'
   './assets/index'
+  './report/index'
   'angularRoute'
   'v/ui-router'
   './global-directives/index'

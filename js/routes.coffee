@@ -8,9 +8,10 @@ define [
   't!/views/commit/commit-all.html'
   't!/views/assets/assets-all.html'
   't!/views/project/project-all.html'
+  't!/views/report/report-all.html'
   't!/views/global-all.html'
 ], (_ng, _app, _utils, _tmplIssue, _tmplMember,
-    _tmplCommit, _tmplAssets, _tmplProject, _tmplGlobal) ->
+    _tmplCommit, _tmplAssets, _tmplProject, _tmplReport, _tmplGlobal) ->
 
   _app.config(($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
@@ -47,19 +48,17 @@ define [
       detailsPanel: blankDetailsView
 
 
-    weeklyReportViews =
-      listPanel:
-        template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
-        controller: 'projectWeeklyReportListController'
-      'detailsPanel@project':
-        template: _utils.extractTemplate('#tmpl-project-weekly-report-details', _tmplProject)
-        controller: 'projectWeeklyReportDetailsController'
-
     weeklyReportListOnly =
       listPanel:
-        template: _utils.extractTemplate('#tmpl-project-weekly-report-list', _tmplProject)
-        controller: 'projectWeeklyReportListController'
+        template: _utils.extractTemplate('#tmpl-report-weekly-list', _tmplReport)
+        controller: 'weeklyReportListController'
       detailsPanel: blankDetailsView
+
+    weeklyReportViews =
+      listPanel: weeklyReportListOnly.listPanel
+      'detailsPanel@project':
+        template: _utils.extractTemplate('#tmpl-report-weekly-details', _tmplReport)
+        controller: 'reportWeeklyDetailsController'
 
     memberListOnly =
       'listPanel@project':
@@ -175,7 +174,7 @@ define [
     )
 
     .state('project.weekly_report.details',
-      url: '/{startTime}~{endTime}'
+      url: '/{start_time}~{end_time}'
       views: weeklyReportViews
     )
 
@@ -185,7 +184,7 @@ define [
     )
 
     .state('project.version_weekly_report.details',
-      url: '/{startTime}~{endTime}'
+      url: '/{start_time}~{end_time}'
       views: weeklyReportViews
     )
 

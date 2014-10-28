@@ -1,23 +1,11 @@
 "use strict"
-###
-  //临时登录用
-  $.ajax({
-  url: '/api/session',
-  type: 'POST',
-  data: {
-    account: '易晓峰',
-    password: '888888',
-    remember: true
-  }
-})
-###
 #合集的controller，如果某个controller很大，则独立出去
 define [
   '../ng-module'
   'moment'
   '_'
   '../utils'
-], (_module, _moment, _, _utils, _template) ->
+], (_module, _moment, _, _utils) ->
   _module.controllerModule.
   controller('projectController', ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
     projectAPI = API.project($stateParams.project_id)
@@ -78,22 +66,3 @@ define [
     updateProject()
     updateProjectVersion()
   )
-
-  #项目周报的列表
-  .controller('projectWeeklyReportListController', ['$scope', 'API', 'WEEKLIST',
-  ($scope, API, WEEKLIST)->
-    $scope.weeks = WEEKLIST(30)
-  ])
-
-  #项目周报的详细
-  .controller('projectWeeklyReportDetailsController', ['$scope', '$stateParams', 'API',
-  ($scope, $stateParams, API)->
-    cond =
-      start_time: _moment($stateParams.startTime).startOf('week').valueOf()
-      end_time: _moment($stateParams.endTime).endOf('week').valueOf()
-
-    _.extend $scope, cond
-
-    API.report().weekly().retrieve(cond).then (result)->
-      $scope.report = result
-  ])

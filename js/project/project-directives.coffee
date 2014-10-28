@@ -170,12 +170,3 @@ define [
     link: (scope, element, attrs)->
       scope.showMore = attrs.showMore is 'true'
   ])
-
-  .directive('projectReportWeeklyMember', [->
-    restrict: 'E'
-    replace: true
-    scope: source: '='
-    template: _utils.extractTemplate '#tmpl-project-report-weekly-member', _template
-    link: (scope, element, attrs)->
-
-  ])

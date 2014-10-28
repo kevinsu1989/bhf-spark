@@ -19,7 +19,7 @@ require.config
     'simditor-mention': ['v/simditor']
     'notify': ['jquery', 'v/jquery.noty']
     ng: exports : 'angular'
-    angularRoute: deps: ['ng']
+    angularRoute: deps: ['ng', 'v/angular-locale_zh-cn']
     'v/jquery.transit': ['jquery', '_']
     app: ['ng', 'jquery']
 
