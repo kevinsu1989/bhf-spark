@@ -21,7 +21,7 @@ define [
         params.keyword = cond.keyword
       else if $stateParams.myself
         #获取用户自己的任务
-        $scope.title = "我的任务"
+        $scope.title = "我相关的任务"
         params.myself = true
       else if cond.category_id
         $scope.title = $location.$$search.title

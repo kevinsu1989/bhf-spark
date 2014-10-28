@@ -6,7 +6,7 @@
                     <div class="inner">
                         <i class="icon small"></i>
                         <label>
-                            <a href="/{{baseLink}}/issue/myself">我的任务</a>
+                            <a href="/{{baseLink}}/issue/myself">我相关的任务</a>
                         </label>
                     </div>
                 </li>
@@ -25,6 +25,14 @@
                             <a href="/{{baseLink}}/issue">任务</a>
                         </label>
                         <project-category-menu data-project-id="{{project.id}}"></project-category-menu>
+                    </div>
+                </li>
+                <li class="document">
+                    <div class="inner">
+                        <i class="icon small"></i>
+                        <label>
+                            <a href="/{{baseLink}}/document">文档</a>
+                        </label>
                     </div>
                 </li>
                 <li class="member">
@@ -173,10 +181,10 @@
                     <a data-value="{{item.id}}"><span>{{item.title}}</span></a>
                 </li>
                 <li ng-show="showMore">
-                    <a data-value="all"><span>所有版本</span></a>
+                    <a data-value="all"><span>不指定版本</span></a>
                 </li>
                 <li class="create" ng-show="showMore">
-                    <a data-value="-1"><span>添加新版本</span></a>
+                    <a data-value="-1"><span>添加/管理版本</span></a>
                 </li>
             </ul>
         </div>
