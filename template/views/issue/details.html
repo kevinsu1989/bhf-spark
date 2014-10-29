@@ -57,9 +57,11 @@
             <!--标题部分-->
             <div class="issue panel" ng-click="onClickIssue($event)">
                 <div class="title">
-                    <div class="issue-status" dropdown data-selected="{{issue.status}}" data-name="issue:status">
+                    <div class="issue-status"
+                         dropdown data-selected="{{issue.status}}"
+                         data-name="issue:status">
                         <i class="issue-status icon small" ng-class="issue.status"></i>
-                        <issue-status-dropdown></issue-status-dropdown>
+                        <issue-status-dropdown ng-hide="articleOnly"></issue-status-dropdown>
                     </div>
                     <input type="text" class="text" ng-show="editing" ng-model="issue.title" />
                     <h3 ng-show="!editing">{{issue.title}}</h3>
@@ -106,7 +108,7 @@
             </div>
 
             <!--日志-->
-            <div class="logs panel" ng-hide="articleOnly">
+            <div class="logs panel">
                 <div class="title">
                     <i class="icon small"></i>
                     <h3>记录</h3>

@@ -18,8 +18,7 @@ define [
 
     blankDetailsView =
       template: _utils.extractTemplate '#tmpl-global-blank-page', _tmplGlobal
-      controller: ($state)->
-        console.log $state, 'abc'
+      controller: ->
 
     #issue
     issueViews =
@@ -33,6 +32,16 @@ define [
     issueListOnly =
       'listPanel@project': issueViews.listPanel
       detailsPanel: blankDetailsView
+
+    documentListOnly =
+      'listPanel@project':
+        template: _utils.extractTemplate '#tmpl-document-list', _tmplIssue
+        controller: 'documentListController'
+      detailsPanel: blankDetailsView
+
+    documentViews =
+      listPanel: documentListOnly['listPanel@project']
+      'detailsPanel@project': issueViews['detailsPanel@project']
 
     #讨论
     discussionViews =
@@ -240,6 +249,25 @@ define [
       data: articleOnly: true
       views: discussionViews
     )
+
+    #====================================文档=======================================
+
+    .state('project.document',
+      url: '/document'
+      views: documentListOnly
+    ).state('project.version.document',
+      url: '/document'
+      views: documentListOnly
+    ).state('project.version.document.details',
+      url: '/:issue_id'
+      data: articleOnly: true
+      views: documentViews
+    ).state('project.document.details',
+      url: '/:issue_id'
+      data: articleOnly: true
+      views: documentViews
+    )
+
 
     #素材
     .state('project.assets',

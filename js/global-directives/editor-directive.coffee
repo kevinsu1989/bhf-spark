@@ -60,8 +60,8 @@ define [
         #如果有设定name，且当前name和设定的name不一致，则不处理
         return if attrs.name and attrs.name isnt name
         simditor = initEditor(name, uploadUrl) if not simditor
-        simditor.focus()
         simditor.setValue content
+        simditor.focus()
 
       #收到cancel的请求
       scope.$on 'editor:will:cancel', (event, name)->

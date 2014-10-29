@@ -5,7 +5,7 @@ define [
 ], (_module,_utils, _) ->
 
   _module.directiveModule
-  .directive('issueDetails', ($rootScope, API, NOTIFY)->
+  .directive('issueDetails', ($rootScope, $location, API, NOTIFY)->
     restrict: 'A'
     replace: true
     link: (scope, element, attr)->
@@ -33,6 +33,9 @@ define [
         issueAPI = API.project(scope.issue.project_id).issue(scope.issue.id)
         scope.uploadUrl = "/api/project/#{scope.issue.project_id}/attachment"
 
+        #是否主动打开编辑器
+        if $location.$$search.editing is 'true' then scope.onClickEdit()
+
       scope.$on 'dropdown:selected', (event, type, value)->
         switch type
           when 'issue:owner'
@@ -53,6 +56,7 @@ define [
 
 
       scope.onClickDelete = ()->
+        return if not confirm('您确定要删除这条记录吗')
         issueAPI.update(status : 'trash').then ()->
           NOTIFY.success '删除成功'
           $rootScope.$broadcast 'issue:change'
@@ -84,4 +88,5 @@ define [
         return if editorKey isnt name
         scope.editing = false
         scope.$apply() if not scope.$$phase
+
   )

@@ -22,13 +22,48 @@ define [
   )
 
   #讨论列表
-  .controller('discussionListController', ($scope, $stateParams, API)->
-    API.project($stateParams.project_id).discussion().retrieve().then (result)->
-      $scope.discussion = result
-  )
+  .controller('discussionListController', ['$scope', '$stateParams', '$location', '$filter', 'API'
+  ($scope, $stateParams, $location, $filter, API)->
+    loadDiscussion = ->
+      API.project($stateParams.project_id).discussion().retrieve().then (result)->
+        $scope.discussion = result
+
+    $scope.$on 'issue:change', (event, data)->
+      loadDiscussion()
+      return if data.status isnt 'new'
+
+      url = "/#{$filter('projectLink')(null, 'normal')}/discussion/#{data.id}"
+      $location.path(url).search('editing', 'true')
+
+    loadDiscussion()
+  ])
 
 
   #评论列表
   .controller('commentListController', ($scope, $stateParams, API)->
 
   )
+
+#  #文档列表
+  .controller('documentListController', ['$scope', '$stateParams', '$location', '$filter', 'API',
+  ($scope, $stateParams, $location, $filter, API)->
+    cond = tag: 'document'
+
+    loadDocument = ->
+      API.project($stateParams.project_id).issue().retrieve(cond).then (result)->
+        $scope.document = result
+
+    $scope.$on 'issue:change', (event, data)->
+      loadDocument()
+      return if data.status isnt 'new'
+      url = "/#{$filter('projectLink')(null, 'normal')}/document/#{data.id}"
+      $location.path(url).search('editing', 'true')
+
+    loadDocument()
+  ])
+
+  .controller('documentDetailsController', ['$state', '$scope', ($state, $scope)->
+
+
+  ])
+

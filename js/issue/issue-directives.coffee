@@ -56,6 +56,11 @@ define [
     restrict: 'A'
     replace: true
     link: (scope, element, attrs)->
+      titleMap =
+        issue: '任务'
+        document: '文档'
+        discussion: '讨论'
+
       scope.onKeyDown = (event)->
         return if event.keyCode isnt 13
         #处理回车
@@ -63,15 +68,16 @@ define [
         return if not text
 
         data =
+          tag: attrs.tag
           title: text
           category_id: $stateParams.category_id
           version_id: $stateParams.version_id
 
-        API.project(scope.project.id).issue().create(data).then ()->
-          NOTIFY.success '任务已经被成功创建'
+        API.project(scope.project.id).issue().create(data).then (result)->
+          NOTIFY.success "创建#{titleMap[attrs.tag]}成功"
           event.target.value = null
           #通知issue被创建
-          scope.$emit 'issue:change', 'new'
+          scope.$emit 'issue:change', {status: 'new', tag: attrs.tag, id: result.id}
   ])
 
 
