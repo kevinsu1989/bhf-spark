@@ -81,9 +81,6 @@ define [
             scope.category = result
             cb?()
 
-        #TODO 测试用，一会儿删除
-        loadIssueCategory()
-
         scope.onClickSave = ()->
           if not scope.editModel.title
             NOTIFY.error('分类名称必需输入')
@@ -119,4 +116,64 @@ define [
           loadIssueCategory -> $element.modal showClose: false
 
         scope.$on 'issue-category:editor.hide', -> $.modal.close()
+  ])
+
+  #版本的管理
+  .directive('projectVersionEditor', ['$stateParams', '$location', 'API', 'NOTIFY',
+    ($stateParams, $location, API, NOTIFY)->
+      restrict: 'E'
+      replace: true
+      scope: {}
+      template: _utils.extractTemplate '#tmpl-project-version-editor', _tmplEditors
+      link: (scope, element, attrs)->
+        scope.editModel = {}
+        projectAPI = API.project($stateParams.project_id)
+
+        $element = $(element)
+        loadProjectVersion = (cb)->
+          projectAPI.version().retrieve().then (result)->
+            scope.version = result
+            cb?()
+
+        scope.onClickSave = ()->
+          if not scope.editModel.title
+            NOTIFY.error('版本名称必需输入')
+            return
+
+          method = if scope.editModel.id then 'update' else 'create'
+          projectAPI.version(scope.editModel.id)[method](scope.editModel).then ->
+            NOTIFY.success '版本保存成功'
+            #更新数据
+            loadProjectVersion()
+            #清除数据
+            scope.editModel = {}
+
+        #修改状态
+        scope.onChangeStatus = (event, data, status)->
+          projectAPI.version(data.id).update(status: status).then ->
+          NOTIFY.success '状态修改成功'
+          loadProjectVersion()
+
+        #删除
+        scope.onClickDelete = (event, data)->
+          return if not confirm('您确定要删除这个版本么？')
+          projectAPI.version(data.id).delete().then ->
+            NOTIFY.success '删除版本成功'
+            loadProjectVersion()
+            #如果这条数据正在编辑，则清空
+            scope.editModel = {} if scope.editModel.id is data.id
+
+        scope.onClickEdit = (event, data)->
+          scope.editModel = _.pick data, 'id', 'title', 'short_title', 'status'
+          return
+
+        scope.onClickCancel = ()->
+          $.modal.close()
+          return
+
+        scope.$on 'project:version:editor:show', (event)->
+          #收到数据再显示弹窗
+          loadProjectVersion -> $element.modal showClose: false
+
+        scope.$on 'project:version:editor.hide', -> $.modal.close()
   ])

@@ -32,7 +32,7 @@ define [
 
     #获取版本信息
     updateProjectVersion = ->
-      projectAPI.version().retrieve().then (result)->
+      projectAPI.version().retrieve(status: 'available').then (result)->
         $scope.projectVersion = result
         STORE.projectVersion.data = result
         $rootScope.$broadcast 'project:version:loaded', result

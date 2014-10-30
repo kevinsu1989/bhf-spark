@@ -121,6 +121,7 @@
             </div>
 
             <issue-category-editor></issue-category-editor>
+            <project-version-editor></project-version-editor>
         </div>
     </textarea>
 
@@ -197,10 +198,7 @@
                     <a data-value="{{item.id}}"><span>{{item.title}}</span></a>
                 </li>
                 <li ng-show="showMore">
-                    <a data-value="all"><span>不指定版本</span></a>
-                </li>
-                <li class="create" ng-show="showMore">
-                    <a data-value="-1"><span>添加/管理版本</span></a>
+                    <a data-value="all"><span>全部版本</span></a>
                 </li>
             </ul>
         </div>

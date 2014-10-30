@@ -449,8 +449,12 @@ input.text{
 }
 
 .standard-table{
-  td{
-    padding: 10px 6px;
+  td, th{
+    padding: 10px;
+  }
+
+  thead{
+    background-color: #e9ebf0;
   }
 
   tr:hover{
@@ -458,7 +462,7 @@ input.text{
   }
 
   &.simple-line{
-    td{
+    td, th{
       border-bottom: 1px solid #CCC;
     }
   }

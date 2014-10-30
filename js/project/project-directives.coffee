@@ -24,6 +24,7 @@ define [
         return if type isnt 'project:menu:manage'
         switch value
           when 'category' then $rootScope.$broadcast 'issue-category:editor:show'
+          when 'version' then $rootScope.$broadcast 'project:version:editor:show'
   )
 
   .directive('projectHeader', ()->

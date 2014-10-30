@@ -91,14 +91,91 @@
                             <label class="caption">
                                 分类名称
                             </label>
-                            <input class="medium text" type="text" ng-model="editModel.title" maxlength="40"/>
+                            <input class="medium text" type="text" ng-model="editModel.title" maxlength="20"/>
                         </div>
 
                         <div class="row">
                             <label class="caption">
                                 简称
                             </label>
-                            <input class="medium text" type="text" ng-model="editModel.short_title" maxlength="40" placeholder="简称用于git commit指令指定分类用"/>
+                            <input class="medium text" type="text" ng-model="editModel.short_title" maxlength="10" placeholder="简称用于git commit指令指定分类用"/>
+                        </div>
+                        <div class="row control">
+                            <button class="primary default" ng-click="onClickSave()">保存</button>
+                            <button class="cancel default" ng-click="onClickCancel()">取消</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </textarea>
+
+    <!--版本管理-->
+    <textarea id="tmpl-project-version-editor">
+        <div class="modal project-version-editor">
+            <div class="inner">
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
+                <header>
+                    版本管理
+                </header>
+                <section>
+                    <table class="standard-table full simple-line">
+                        <thead>
+                        <tr class="left">
+                            <th>名称</th>
+                            <th>简称</th>
+                            <th>状态</th>
+                            <th class="right">操作</th>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="item in version">
+                            <td>{{item.title}}</td>
+                            <td>{{item.short_title}}</td>
+                            <td class="status {{item.status}}">{{item.status}}</td>
+                            <td class="right">
+                                <span ng-show="item.status == 'deactive'">
+                                    <a href="javascript:void(0)"
+                                       title="存档后，将不会显示在版本列表中"
+                                       ng-click="onChangeStatus($event, item, 'archive')">存档</a> |
+                                </span>
+
+                                <span ng-show="item.status == 'deactive'">
+                                    <a href="javascript:void(0)"
+                                       title="将此版本设置为活动版本"
+                                       ng-click="onChangeStatus($event, item, 'active')">激活</a> |
+                                </span>
+
+                                <a href="javascript:void(0)" ng-click="onClickEdit($event, item)">编辑</a> |
+                                <a href="javascript:void(0)" ng-click="onClickDelete($event, item)">删除</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <form class="standard-form">
+                        <div class="row">
+                            <label class="caption">
+                                版本名称
+                            </label>
+                            <input class="medium text" type="text" ng-model="editModel.title" maxlength="20"/>
+                        </div>
+
+                        <!--
+                        <div class="row">
+                            <label class="caption">
+                                版本状态
+                            </label>
+                            <div class="inline">
+                                <label>
+                                    <input type="radio" name="status" value="">
+                                </label>
+                            </div>
+                        </div>
+                        -->
+
+                        <div class="row">
+                            <label class="caption">
+                                简称
+                            </label>
+                            <input class="medium text" type="text" ng-model="editModel.short_title" maxlength="5" placeholder="用于git commit，建议英文或者数字" ng-pattern="\d+"/>
                         </div>
                         <div class="row control">
                             <button class="primary default" ng-click="onClickSave()">保存</button>
