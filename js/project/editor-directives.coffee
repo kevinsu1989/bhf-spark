@@ -1,0 +1,122 @@
+'use strict'
+
+define [
+  '../ng-module'
+  '../utils'
+  't!/views/project/project-editors.html'
+], (_module, _utils, _tmplEditors) ->
+
+  _module.directiveModule
+  #项目编辑器
+  .directive('projectEditor', ['$rootScope', '$location', 'API', 'NOTIFY',
+    ($rootScope, $location, API, NOTIFY)->
+      restrict: 'E'
+      replace: true
+      scope: {}
+      template: _utils.extractTemplate '#tmpl-project-editor', _tmplEditors
+      link: (scope, element, attrs)->
+        #加载项目信息
+        loadProject = (project_id)->
+          API.project(project_id).retrieve().then (result)->
+            scope.editor_title = '编辑'
+
+            scope.data =
+              id: result.id
+              gits: _.pluck result.gits, 'git'
+              title: result.title
+              description: result.description
+              status: result.status
+
+        scope.$on 'gitList:update', (event, name, data)->
+          return if name isnt scope.contextName
+          event.preventDefault()
+          scope.data.gits = data
+
+        scope.onClickDelete = (event, project_id)->
+          return if not confirm('您确定将要删除这个项目吗？')
+          API.project(project_id).update(status: 'trash').then ->
+            $.modal.close()
+            NOTIFY.success('删除成功，刷新项目列表（功能未开发）')
+
+        scope.onClickSave = ->
+          return NOTIFY.error('项目名称必需输入') if not scope.data.title
+          method = if scope.data.id then 'update' else 'create'
+          API.project(scope.data.id)[method](scope.data).then (result)->
+            NOTIFY.success '项目信息保存成功'
+            $.modal.close()
+            #通知项目被改变
+            $rootScope.$broadcast 'project:change', method, scope.data.id || result.id
+
+        scope.onClickCancel = ->
+          $.modal.close()
+          return false
+
+        scope.$on "project:editor:show", (event, project_id)->
+          #初始化项目数据
+          scope.editor_title = '新建'
+          scope.contextName = 'project'
+          scope.data =
+            status: 'active'
+            gits: []
+          loadProject(project_id) if project_id
+          $(element).modal showClose: false
+
+        scope.$on 'project:editor:hide', -> $model.close()
+  ])
+
+  #issue分类的编辑器
+  .directive('issueCategoryEditor', ['$stateParams', '$location', 'API', 'NOTIFY',
+    ($stateParams, $location, API, NOTIFY)->
+      restrict: 'E'
+      replace: true
+      scope: {}
+      template: _utils.extractTemplate '#tmpl-issue-category-editor', _tmplEditors
+      link: (scope, element, attrs)->
+        scope.editModel = {}
+        projectAPI = API.project($stateParams.project_id)
+
+        $element = $(element)
+        loadIssueCategory = (cb)->
+          projectAPI.category().retrieve().then (result)->
+            scope.category = result
+            cb?()
+
+        #TODO 测试用，一会儿删除
+        loadIssueCategory()
+
+        scope.onClickSave = ()->
+          if not scope.editModel.title
+            NOTIFY.error('分类名称必需输入')
+            return
+
+          method = if scope.editModel.id then 'update' else 'create'
+          projectAPI.category(scope.editModel.id)[method](scope.editModel).then ->
+            NOTIFY.success '分类保存成功'
+            #更新数据
+            loadIssueCategory()
+            #清除数据
+            scope.editModel = {}
+
+        #删除
+        scope.onClickDelete = (event, data)->
+          return if not confirm('您确定要删除这个分类么？')
+          projectAPI.category(data.id).delete().then ->
+            NOTIFY.success '删除分类成功'
+            loadIssueCategory()
+            #如果这条数据正在编辑，则清空
+            scope.editModel = {} if scope.editModel.id is data.id
+
+        scope.onClickEdit = (event, data)->
+          scope.editModel = _.pick data, 'id', 'title', 'short_title'
+          return
+
+        scope.onClickCancel = ()->
+          $.modal.close()
+          return
+
+        scope.$on 'issue-category:editor:show', (event)->
+          #收到数据再显示弹窗
+          loadIssueCategory -> $element.modal showClose: false
+
+        scope.$on 'issue-category:editor.hide', -> $.modal.close()
+  ])

@@ -30,11 +30,11 @@ define [], ->
     #        }
     #      },
     {
-      "url": "project/:project_id/category",
+      "url": "project/:project_id/category/:category_id",
       "methods": {}
     },
     {
-      "url": "project/:project_id/version",
+      "url": "project/:project_id/version/:version_id",
       "methods": {}
     },
     {

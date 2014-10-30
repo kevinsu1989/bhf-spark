@@ -1,0 +1,112 @@
+<div>
+    <!--各种与project相关的编辑器-->
+
+    <!--创建项目，或者修改项目资料-->
+    <textarea id="tmpl-project-editor">
+        <div class="modal">
+            <div class="inner">
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
+                <header>
+                    {{editor_title}}项目
+                </header>
+                <section>
+                    <form class="standard-form">
+                        <div class="row">
+                            <label class="caption">
+                                项目名称
+                            </label>
+                            <input class="medium text" type="text" ng-model="data.title" maxlength="40"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                摘要说明
+                            </label>
+                            <input class="medium text" type="text" placeholder="一句话简单描述项目" ng-model="data.description" maxlength="40"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                项目状态
+                            </label>
+                            <div class="inline">
+                                <label>
+                                    <input type="radio" value="active" name="status" ng-model="data.status" /> 活动
+                                </label>
+
+                                <label>
+                                    <input type="radio" value="archive" name="status" ng-model="data.status"/> 存档
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                GitLab
+                            </label>
+                            <div class="inline">
+                                <git-list-editor data-name="{{contextName}}"
+                                                 data-max-count="10"
+                                                 data-expression="^git@git\.hunantv\.com:.+\/.+\.git$"
+                                                 data-gits="{{data.gits}}">
+                                </git-list-editor>
+                            </div>
+                        </div>
+
+                        <div class="row control">
+                            <button class="primary default" ng-click="onClickSave()">保存</button>
+                            <button class="cancel default" ng-click="onClickCancel()">取消</button>
+                            <button class="delete default" ng-click="onClickDelete()" ng-show="data.id">删除</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </textarea>
+
+    <!--issue的分类管理-->
+    <textarea id="tmpl-issue-category-editor">
+        <div class="modal issue-category-editor">
+            <div class="inner">
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
+                <header>
+                    任务分类管理
+                </header>
+                <section>
+                    <form class="standard-form">
+                        <div class="row">
+                            <table class="standard-table full simple-line">
+                                <tr ng-repeat="item in category">
+                                    <td>{{item.title}}</td>
+                                    <td>{{item.short_title}}</td>
+                                    <td>{{item.issue_undone_total}}/{{item.issue_total}}</td>
+                                    <td class="right">
+                                        <a href="javascript:void(0)" ng-click="onClickEdit($event, item)">编辑</a> |
+                                        <a href="javascript:void(0)" ng-click="onClickDelete($event, item)">删除</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <label class="caption">
+                                分类名称
+                            </label>
+                            <input class="medium text" type="text" ng-model="editModel.title" maxlength="40"/>
+                        </div>
+
+                        <div class="row">
+                            <label class="caption">
+                                简称
+                            </label>
+                            <input class="medium text" type="text" ng-model="editModel.short_title" maxlength="40" placeholder="简称用于git commit指令指定分类用"/>
+                        </div>
+                        <div class="row control">
+                            <button class="primary default" ng-click="onClickSave()">保存</button>
+                            <button class="cancel default" ng-click="onClickCancel()">取消</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </textarea>
+</div>
