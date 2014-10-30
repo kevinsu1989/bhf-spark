@@ -21,7 +21,7 @@ require.config
     ng: exports : 'angular'
     angularRoute: deps: ['ng', 'v/angular-locale_zh-cn']
     'v/jquery.transit': ['jquery', '_']
-    app: ['ng', 'jquery']
+    app: ['ng', 'jquery', 'v/jquery.modal']
 
 window.name = "NG_DEFER_BOOTSTRAP!";
 
@@ -32,5 +32,6 @@ require [
 ], (_ng, _app, routes) ->
 
   _ng.element().ready ->
+    $.modal.defaults.zIndex = 1000
     _ng.resumeBootstrap [_app.name]
     $('#loading').fadeOut()
