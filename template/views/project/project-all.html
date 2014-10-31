@@ -224,7 +224,7 @@
 
                <div class="tile-toolbar">
                    <span>{{project.description || '无项目说明' | limitTo: 40}}</span>
-                   <ul class="menu">
+                   <ul class="menu" ng-show="project.role == 'l'">
                        <li class="sub-menu">
                        <button class="default edit" ng-click="onClickEdit($event, project)">
                         <i class="small icon"></i>

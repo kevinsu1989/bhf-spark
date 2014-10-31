@@ -8,24 +8,23 @@ define [
 
   _module.directiveModule
   #项目编辑器
-  .directive('projectEditor', ['$rootScope', '$location', 'API', 'NOTIFY',
-    ($rootScope, $location, API, NOTIFY)->
+  .directive('projectEditor', ['$rootScope', '$location', '$q', 'API', 'NOTIFY',
+    ($rootScope, $location, $q, API, NOTIFY)->
       restrict: 'E'
       replace: true
       scope: {}
       template: _utils.extractTemplate '#tmpl-project-editor', _tmplEditors
       link: (scope, element, attrs)->
+        $element = $(element)
+
         #加载项目信息
         loadProject = (project_id)->
-          API.project(project_id).retrieve().then (result)->
-            scope.editor_title = '编辑'
+          deferred = $q.defer()
 
-            scope.data =
-              id: result.id
-              gits: _.pluck result.gits, 'git'
-              title: result.title
-              description: result.description
-              status: result.status
+          params = get_git: true, get_role: true
+          API.project(project_id).retrieve(params).then (result)-> deferred.resolve result
+
+          deferred.promise
 
         scope.$on 'gitList:update', (event, name, data)->
           return if name isnt scope.contextName
@@ -58,8 +57,25 @@ define [
           scope.data =
             status: 'active'
             gits: []
-          loadProject(project_id) if project_id
-          $(element).modal showClose: false
+
+          #新建项目，直接显示弹窗
+          return $element.modal(showClose: false) if not project_id
+
+          #加载项目资料
+          loadProject(project_id).then (result)->
+            #检查权限，用户必需是leader或者root才能编辑项目
+            return NOTIFY.error('您没有权限修改此项目') if result.role isnt 'l'
+
+            scope.editor_title = '编辑'
+            scope.data =
+              id: result.id
+              gits: _.pluck result.gits, 'git'
+              title: result.title
+              description: result.description
+              status: result.status
+
+            $element.modal(showClose: false)
+
 
         scope.$on 'project:editor:hide', -> $model.close()
   ])
