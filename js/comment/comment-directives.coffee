@@ -28,17 +28,22 @@ define [
   )
 
   #评论详细
-  .directive('commentCell', (API)->
+  .directive('commentCell', ($stateParams, API, NOTIFY)->
     restrict: 'E'
     scope: data: '=', '$index': '='
     replace: true
     template: _utils.extractTemplate '#tmpl-comment-cell', _template
     link: (scope, element, attr)->
       scope.onClickEdit = (event, comment)->
-        alert('编辑')
+        return
 
       scope.onClickDelete = (event, comment)->
-        alert('删除')
+        API.project($stateParams.project_id).issue($stateParams.issue_id)
+        .comment(comment.id).delete().then ->
+          NOTIFY.success '删除评论成功'
+          element.fadeOut()
+
+        return
   )
 
   #评论的编辑框

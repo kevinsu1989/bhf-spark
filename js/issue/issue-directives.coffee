@@ -16,7 +16,7 @@ define [
       scope.$on 'dropdown:selected', (event, type, value)->
         return if type isnt 'issue:status'
         #"project/#{scope.issue.project_id}/issue/#{scope.issue.id}/status"
-        API.project(scope.issue.project_id).issue(scope.issue.id).status().update(status : value).then ()->
+        API.project(scope.issue.project_id).issue(scope.issue.id).update(status : value).then ()->
             scope.$emit 'issue:change', 'status', scope.issue.id
 
 #          动画需要考虑多个问题，暂缓

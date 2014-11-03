@@ -99,7 +99,12 @@ define [
 
         scope.onClickSave = ()->
           if not scope.editModel.title
-            NOTIFY.error('分类名称必需输入')
+            NOTIFY.warn('分类名称必需输入')
+            return
+
+          short_title = scope.editModel.short_title
+          if short_title and not /^[\w\d_]+$/i.test(short_title)
+            NOTIFY.warn('简称只能是英文数字和下划线')
             return
 
           method = if scope.editModel.id then 'update' else 'create'
@@ -153,7 +158,12 @@ define [
 
         scope.onClickSave = ()->
           if not scope.editModel.title
-            NOTIFY.error('版本名称必需输入')
+            NOTIFY.warn('版本名称必需输入')
+            return
+
+          short_title = scope.editModel.short_title
+          if short_title and not /^[\w\d_]+$/i.test(short_title)
+            NOTIFY.warn('简称只能是英文数字和下划线')
             return
 
           method = if scope.editModel.id then 'update' else 'create'

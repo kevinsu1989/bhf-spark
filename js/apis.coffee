@@ -180,7 +180,7 @@ define [], ->
       }
     },
     {
-      "url": "project/:project_id/issue/:issue_id/comment",
+      "url": "project/:project_id/issue/:issue_id/comment/:comment_id",
       "methods": {}
     },
     {
