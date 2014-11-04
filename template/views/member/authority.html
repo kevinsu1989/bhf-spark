@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="body-form">
-                    <div class="inner" authority-switch-panel>
+                    <div class="inner" authority-panel>
                         <sign-in></sign-in>
                         <sign-up></sign-up>
                     </div>
@@ -88,4 +88,28 @@
         </form>
     </textarea>
 
+    <!--邀请成员-->
+    <textarea id="tmpl-member-invite">
+        <div class="modal">
+            <div class="inner">
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
+                <header>
+                    邀请新成员
+                </header>
+                <section>
+                    <form class="standard-form">
+                        <div class="row">
+                            将邀请链接发给其它同事，他们就可以用这个邀请链接注册并加入此项目
+                        </div>
+                        <div class="row" ng-repeat="item in invitedMember">
+                            <input class="text large" value="http://bhf.hunantv.com/invite/{{item.token}}">
+                        </div>
+                        <div class="row">
+                            <button class="primary default" ng-click="onClickInvite()">生成</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </textarea>
 </div>

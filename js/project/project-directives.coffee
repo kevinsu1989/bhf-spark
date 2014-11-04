@@ -25,6 +25,8 @@ define [
         switch value
           when 'category' then $rootScope.$broadcast 'issue-category:editor:show'
           when 'version' then $rootScope.$broadcast 'project:version:editor:show'
+
+      scope.onClickInvite = -> $rootScope.$broadcast 'member:invite:show'
   )
 
   .directive('projectHeader', ()->

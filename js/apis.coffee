@@ -322,4 +322,8 @@ define [], ->
         "patch": false
       }
     }
+    {
+      "url": "project/:project_id/member/invite",
+      "methods": {}
+    }
 ]

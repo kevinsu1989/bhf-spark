@@ -23,17 +23,18 @@ define [
         )
   ])
   #注册
-  .directive('signUp', ['API', (API)->
+  .directive('signUp', ['$stateParams', 'API', 'NOTIFY', ($stateParams, API, NOTIFY)->
     restrict: 'E'
     replace: true
     scope: true
     template: _utils.extractTemplate '#tmpl-member-signup', _template
     link: (scope, element, attr)->
       model = scope.model =
-        realname: '易晓峰'
-        email: 'conis.yi@gmail.com'
-        password: 'password'
-        confirmPassword: 'password'
+        token: $stateParams.token
+#        realname: '易晓峰'
+#        email: 'conis.yi@gmail.com'
+#        password: 'password'
+#        confirmPassword: 'password'
 
       #注册
       scope.onClickSignUp = ->
@@ -42,11 +43,12 @@ define [
         return scope.error = '您两次的密码输入不一致' if scope.model.password isnt scope.model.confirmPassword
 
         API.member().create(model).then ()->
-          alert('注册成功啦')
+          NOTIFY.success "恭喜您注册成功，请登录"
+          scope.onClickSwitchPanel('0px')
 
   ])
 
-  .directive('authoritySwitchPanel', [()->
+  .directive('authorityPanel', ['$stateParams', ($stateParams)->
     restrict: 'A'
     replace: true
     link: (scope, element, attrs)->
@@ -54,4 +56,32 @@ define [
       scope.onClickSwitchPanel = (offset)->
         element.css 'margin-left', offset
         return
+
+      scope.onClickSwitchPanel('-350px') if $stateParams.token
+  ])
+
+  .directive('inviteMember', ['$stateParams', 'NOTIFY', 'API',
+  ($stateParams, NOTIFY, API)->
+    restrict: 'E'
+    replace: true
+    scope: {}
+    template: _utils.extractTemplate '#tmpl-member-invite', _template
+    link: (scope, element, attrs)->
+      inviteAPI = API.project($stateParams.project_id).member().invite()
+
+      loadInvitedMember = ()->
+        inviteAPI.retrieve().then (result)->
+          scope.invitedMember = result
+
+      #生成邀请码
+      scope.onClickInvite = ->
+        inviteAPI.create().then ->
+          NOTIFY.success '您的邀请码已经成功创建，请将链接发给要邀请的同事'
+          loadInvitedMember()
+
+      scope.$on 'member:invite:show', ->
+        element.modal showClose: false
+        loadInvitedMember()
+
+#      scope.onFocusInput = (event)-> event.target.select()
   ])

@@ -102,7 +102,15 @@ define [
 
     #登录
     .state('login',
-      url: '/login?next'
+      url: '/login'
+      template: _utils.extractTemplate '#tmpl-member-authority', _tmplAuthority
+      controller: 'loginController'
+
+    )
+
+    #注册
+    .state('invite',
+      url: '/invite/:token'
       template: _utils.extractTemplate '#tmpl-member-authority', _tmplAuthority
       controller: 'loginController'
 
