@@ -9,18 +9,6 @@ define [
 
   )
 
-  .controller('loginController', ($scope, $state, $location, API)->
-    $scope.onClickSubmit = ()->
-      return $scope.error = '请输入您的E-mail或者用户名' if not $scope.account
-      return $scope.error = '请输入您的密码' if not $scope.password
+  .controller('loginController', ($scope, API)->
 
-      data =
-        account: $scope.account
-        password: $scope.password
-        remember: $scope.remember
-
-      API.session().create(data).then((result)->
-        #暂时跳到这个项目
-        $location.path $state.params.next || '/'
-      )
   )

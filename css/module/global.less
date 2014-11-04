@@ -547,3 +547,15 @@ input.text{
     }
   }
 }
+
+.ng-touched.ng-dirty.ng-invalid{
+  border-color: #eb4e37 !important;
+}
+
+.ng-touched.ng-dirty.ng-valid{
+  border-color: #04ad04 !important;
+}
+
+input:required:invalid, input:focus:invalid {
+  box-shadow:none;
+}

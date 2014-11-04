@@ -51,19 +51,11 @@
 
     input.text{
       height: 35px;
-      width: 252px;
+      width: 240px;
       .border-radius(4px);
       border: 1px solid #bfbfbf;
       font-size: 16px;
       padding: 0 6px;
-
-      &.failure{
-        border-color: #eb4e37;
-      }
-
-      &.success{
-        border-color: #04ad04;
-      }
     }
 
     .additional{
@@ -91,6 +83,20 @@
       &:hover{
         color: #000;
       }
+    }
+  }
+
+  .body-form{
+    overflow: hidden;
+    .inner{
+      width: 720px;
+      transition-property: margin-left;
+      transition-duration: 300ms;
+    }
+
+    ul{
+      width: 350px;
+      float: left;
     }
   }
 }

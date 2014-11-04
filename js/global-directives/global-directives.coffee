@@ -76,9 +76,7 @@ define [
         $rootScope.$emit 'member:setting:show', target
 
       scope.onClickLogout = ()->
-        #不用等返回
-        $location.path('/login')
-        API.delete 'session', ->
+        API.session().delete().then -> $location.path('/login')
   ])
   #快捷键
   #<button hot-key  data-key="enter" ng-click="onClickSubmit()">

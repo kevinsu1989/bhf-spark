@@ -10,8 +10,9 @@ define [
   't!/views/project/project-all.html'
   't!/views/report/report-all.html'
   't!/views/global-all.html'
+  't!/views/member/authority.html'
 ], (_ng, _app, _utils, _tmplIssue, _tmplMember,
-    _tmplCommit, _tmplAssets, _tmplProject, _tmplReport, _tmplGlobal) ->
+    _tmplCommit, _tmplAssets, _tmplProject, _tmplReport, _tmplGlobal, _tmplAuthority) ->
 
   _app.config(($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
@@ -102,7 +103,7 @@ define [
     #登录
     .state('login',
       url: '/login?next'
-      templateUrl: '/views/member/login.html'
+      template: _utils.extractTemplate '#tmpl-member-authority', _tmplAuthority
       controller: 'loginController'
 
     )
