@@ -24,7 +24,7 @@ define [
         $http(ajaxOps).success(success).error((data, status) ->
           switch status
             when 404
-              console.error "404 Not Found"
+              NOTIFY.error "404 Not Found"
             when 500
               NOTIFY.error "大事不好了，服务器发生错误啦"
             when 406

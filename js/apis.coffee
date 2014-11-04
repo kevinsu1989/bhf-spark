@@ -103,7 +103,7 @@ define [], ->
       }
     },
     {
-      "url": "project/:project_id/issue/:issue_id/assets",
+      "url": "project/:project_id/issue/:issue_id/assets/:id",
       "methods": {
         "patch": false,
         "put": false

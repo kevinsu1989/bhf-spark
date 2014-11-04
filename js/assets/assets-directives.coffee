@@ -35,22 +35,27 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-asset-thumbnails', _template
     link: (scope, element, attr)->
+      assetAPI = API.project($stateParams.project_id).issue($stateParams.issue_id)
       vm = scope.vm =
         action: {}
       params =
         pageSize: 5
+
       #获得附件列表
-      vm.action.getAssetList = ()->
-        API.project($stateParams.project_id)
-        .issue($stateParams.issue_id)
-        .assets(params).retrieve()
-        .then (result)-> scope.assets = result
+      getAssetList = ()->
+        assetAPI.assets().retrieve(params).then (result)->
+          scope.assets = result
+
+      #删除素材
+      scope.onClickRemove = (event, asset)->
+        return if not confirm('您确定要删除这个素材吗？')
+        assetAPI.assets(asset.id).delete().then -> getAssetList()
+
+      #监听事件 assets:list:update
+      scope.$on "assets:list:update", ()-> getAssetList()
 
       #初次进入直接拉取一次数据
-      vm.action.getAssetList()
-      #监听事件 assets:list:update
-      scope.$on "assets:list:update", ()->
-        vm.action.getAssetList()
+      getAssetList()
   )
 
   .directive('assetPreviewer', ['$sce', '$state', ($sce, $state)->
