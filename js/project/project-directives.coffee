@@ -55,8 +55,8 @@ define [
   )
 
   #项目列表
-  .directive('projectTiles', ['$location', '$rootScope', 'API', 'NOTIFY',
-  ($location, $rootScope, API, NOTIFY)->
+  .directive('projectTiles', ['$location', '$rootScope', '$timeout', 'API', 'NOTIFY',
+  ($location, $rootScope, $timeout, API, NOTIFY)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -95,9 +95,31 @@ define [
 
       API.project().retrieve(params).then((result)->
         scope.projects = result
+        $timeout (->scope.$emit 'project:tile:loaded'), 0
       )
   ])
 
+  .directive('projectTileResize', [ ->
+    restrict: 'A'
+    link: (scope, element, attrs)->
+      $element = $(element)
+
+      #重新计算tile的宽度
+      caculateTiles = ()->
+        $items = $element.find('>li.tile')
+        boxWidth = $element.width()
+        tileWidth = 250
+        margin = 10
+        #一行最多显示多少个
+        numberOfRow = Math.round(boxWidth / (tileWidth + margin * 2))
+        realWidth = (boxWidth - (margin * numberOfRow * 2) - 10) / numberOfRow
+        $items.css(width: realWidth)
+
+      $(window).on 'onResizeEx', caculateTiles
+      scope.$on 'project:tile:loaded', -> caculateTiles()
+      scope.$on '$destroy', -> $(window).off 'onResizeEx', caculateTiles
+
+  ])
 
   .directive('projectCategoryMenu', ['STORE', ()->
     restrict: 'E'

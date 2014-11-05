@@ -30,7 +30,17 @@ require [
   "ng"
   "app"
   "routes"
+  'jquery'
 ], (_ng, _app, routes) ->
+
+  (->
+    timer = null
+    $window = $(window).resize(->
+      timer = setTimeout(->
+        $window.trigger "onResizeEx"
+      , 100)
+    )
+  )()
 
   _ng.element().ready ->
     _ng.resumeBootstrap [_app.name]
