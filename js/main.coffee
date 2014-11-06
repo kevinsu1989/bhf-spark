@@ -38,7 +38,7 @@ require [
     $window = $(window).resize(->
       timer = setTimeout(->
         $window.trigger "onResizeEx"
-      , 100)
+      , 500)
     )
   )()
 

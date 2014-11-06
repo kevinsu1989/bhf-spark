@@ -69,9 +69,10 @@ define [
     link: (scope, element, attrs)->
       inviteAPI = API.project($stateParams.project_id).member().invite()
 
-      loadInvitedMember = ()->
+      loadInvitedMember = (cb)->
         inviteAPI.retrieve().then (result)->
           scope.invitedMember = result
+          cb?()
 
       #生成邀请码
       scope.onClickInvite = ->
@@ -80,8 +81,7 @@ define [
           loadInvitedMember()
 
       scope.$on 'member:invite:show', ->
-        element.modal showClose: false
-        loadInvitedMember()
+        loadInvitedMember -> element.modal showClose: false
 
 #      scope.onFocusInput = (event)-> event.target.select()
   ])

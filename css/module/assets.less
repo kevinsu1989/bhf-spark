@@ -1,13 +1,70 @@
+
 .asset-thumbnails{
-  li{
+  @width: 120px;
+  >li{
     float: left;
-    padding-right: 20px;
+    margin-right: 10px;
+    width: @width;
+    height: 180px;
+    position: relative;
+
+    .thumbnail{
+      width: 100%;
+      height: 90px;
+      background-position: center center;
+      margin-bottom: 6px;
+      word-wrap:break-word;
+      word-break:break-all
+    }
+
+    .extension{
+      width: 100;
+      height: 90px;
+      background-position: left center;
+      background-repeat: no-repeat;
+    }
+
+    .overlay{
+      &:hover{
+        opacity: 1;
+      }
+
+      transition-property: opacity;
+      transition-duration: 600ms;
+      opacity: 0;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      height: 100%;
+      top: 0;
+
+      a{
+        color: #FFF;
+      }
+
+      ul{
+        margin: 90px 0 0 2px;
+        width: 100%;
+      }
+
+      li{
+        float: left;
+        width: 33%;
+        text-align: center;
+      }
+    }
+
     .filename{
       text-overflow: ellipsis;
-      width: 100px;
-      height: 18px;
+      max-height: 30px;
+      margin-right: 10px;
       display: inline-block;
       overflow: hidden;
+    }
+
+    p{
+      padding: 0;
+      margin: 4px 0 0 0;
     }
   }
 }

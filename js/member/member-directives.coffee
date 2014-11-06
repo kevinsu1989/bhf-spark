@@ -30,9 +30,10 @@ define [
     link: (scope, element, attr)->
       #定义下属组件的上下文名称
       scope.contextName = 'memberProfile'
+
       scope.onClickSave = ()->
         scope.profile.gits = scope.gits
-        if attr.action is 'member-profile'
+        if attr.action is 'account-profile'
           API.account().profile().update(scope.profile).then(()->
             NOTIFY.success '保存成功！'
             scope.$emit 'member:setting:hide'
@@ -80,41 +81,23 @@ define [
     scope: true
     template: _utils.extractTemplate '#tmpl-member-change-password', _template
     link: (scope, element, attr)->
-      closeModal = ()->
-        scope.$emit 'member:setting:hide'
-
-      #校验密码
-      vertify = (profile)->
-        msg = ''
-        if profile.old_password.length is 0
-          msg = '旧密码不能为空'
-        else if profile.new_password.length is 0 or profile.new_password2.length is 0
-          msg = '新密码不能为空'
-        else if profile.new_password isnt profile.new_password2
-          msg = '两次新密码输入不一致'
-        else if profile.new_password.length < 6
-          msg = '密码长度必须等于大于6'
-        return true if msg is ''
-        NOTIFY.warn msg
-
-      clearInput = ()->
-        scope.profile = {}
+      scope.profile = {}
 
       scope.onClickCancel = ()->
-        closeModal()
-        clearInput()
+        scope.$emit 'member:setting:hide'
         return
 
       scope.onClickSave = ()->
-        return if vertify(scope.profile) isnt true
-        API.account().changePassword().put(scope.profile).then(()->
-          NOTIFY.success '修改成功！'
-          closeModal()
-          clearInput()
+        if scope.profile.new_password isnt scope.profile.new_password2
+          NOTIFY.warn '您两次输入的密码不一致'
+          return
+
+        API.account().changePassword().update(scope.profile).then(()->
+          NOTIFY.success '您的密码修改成功！'
+          scope.profile = {}
+          scope.onClickCancel()
         )
         return
-
-      clearInput()
   )
 
   .directive('memberNotification', ($location, API, $stateParams)->

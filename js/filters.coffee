@@ -23,11 +23,21 @@ define [
   )
 
   #根据扩展名，返回对应的图片
-  .filter('extensionImage', ->
-    (url)->
+  .filter('assetThumbnail', ->
+    (asset)->
+      #如果扩展名是图片，则获取缩略图
+      if /\.(png|jpg|jpeg|gif|bmp)$/i.test asset.url
+        url = "/api/project/#{asset.project_id}/asset/#{asset.id}/thumbnail"
+        return url
+
       template = "/images/file-extension/file_extension_{0}.png"
-      ext = if url then url.replace(/.+\.(\w{3,4})/i, '$1') else 'others'
+      ext = if asset.url then asset.url.replace(/.+\.(\w{3,4})/i, '$1') else 'others'
       return _utils.formatString template, ext
+  )
+
+  .filter('getAssetThumbnailClass', ->
+    (url)->
+      if /\.(png|jpg|jpeg|gif|bmp)$/i.test(url) then 'thumbnail' else 'extension'
   )
 
   .filter('friendlyFileSize', ->

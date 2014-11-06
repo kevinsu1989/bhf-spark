@@ -3,20 +3,25 @@
     <textarea id="tmpl-asset-thumbnails">
         <ul class="asset-thumbnails">
             <li ng-repeat="asset in assets.items" title="{{asset.original_name}}">
-                <div class="thumbnail">
-                    <img src="{{asset.url | extensionImage}}" />
-                    <div class="overlay">
-                        <a href="{{asset.url}}" target="_blank">预览</a>
-                        <a href="javascript:void(0)" ng-click="onClickDownload()">下载</a>
-                        <a href="javascript:void(0)" ng-click="onClickRemove($event, asset)">删除</a>
-                    </div>
-                </div>
-                <div class="filename">
-                    {{asset.original_name}}
+                <div ng-class="asset.url | getAssetThumbnailClass" style="background-image: url({{asset | assetThumbnail}})">
                 </div>
                 <div class="description">
-                    <span class="timestamp">{{asset.timestamp | date}}</span>
-                    <span class="creator">{{asset.file_size | friendlyFileSize}}</span>
+                    <p class="filename">
+                        {{asset.original_name}}
+                    </p>
+                    <p class="timestamp">
+                        {{asset.timestamp | date: 'MM月dd日 hh:mm'}}
+                    </p>
+                    <p class="timestamp">
+                        {{asset.realname}}/{{asset.file_size | friendlyFileSize}}
+                    </p>
+                </div>
+                <div class="overlay">
+                    <ul>
+                        <li><a href="{{asset.url}}" target="_blank">预览</a></li>
+                        <li><a href="javascript:void(0)" ng-click="onClickDownload()">下载</a></li>
+                        <li><a href="javascript:void(0)" ng-click="onClickRemove($event, asset)">删除</a></li>
+                    </ul>
                 </div>
             </li>
         </ul>
@@ -53,7 +58,7 @@
     <textarea id="tmpl-assets-previewer">
         <div class="asset-previewer full">
             <a href="{{url}}" target="_blank">
-                <img src="{{url}}" />
+                <img ng-src="{{url}}" />
             </a>
         </div>
     </textarea>

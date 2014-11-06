@@ -81,13 +81,13 @@
     <!--修改密码-->
     <textarea id="tmpl-member-change-password">
         <div class="panel">
-            <form class="standard-form">
+            <form class="standard-form" ng-submit="onClickSave()">
                 <div class="row">
                     <label class="caption">
                         原密码
                     </label>
                     <input class="medium text" type="password" placeholder="您的旧密码"
-                           ng-model="profile.old_password"/>
+                           ng-model="profile.old_password" required/>
                 </div>
 
                 <div class="row">
@@ -95,7 +95,7 @@
                         新密码
                     </label>
                     <input class="medium text" type="password" placeholder="请输入新密码"
-                           ng-model="profile.new_password"/>
+                           ng-model="profile.new_password" required ng-minlength="6"/>
                 </div>
 
                 <div class="row">
@@ -103,11 +103,11 @@
                         重复密码
                     </label>
                     <input class="medium text" type="password" placeholder="两次输入的密码必需一致"
-                           ng-model="profile.new_password2"/>
+                           ng-model="profile.new_password2" required ng-minlength="6"/>
                 </div>
 
                 <div class="row control">
-                    <button class="primary default" ng-click="onClickSave()">保存</button>
+                    <button class="primary default">保存</button>
                     <button class="cancel default" ng-click="onClickCancel()">取消</button>
                 </div>
             </form>
@@ -147,7 +147,10 @@
                         Git帐号
                     </label>
                     <div class="inline">
-                        <git-list-editor data-name="{{contextName}}" data-max-count="5" data-gits="{{gits}}"></git-list-editor>
+                        <git-list-editor
+                                data-name="{{contextName}}"
+                                data-max-count="5"
+                                data-gits="{{gits}}"></git-list-editor>
                     </div>
                 </div>
 
