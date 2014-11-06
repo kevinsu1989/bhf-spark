@@ -9,17 +9,19 @@
                     <p class="filename">
                         {{asset.original_name}}
                     </p>
-                    <p class="timestamp">
+                    <p class="secondary">
                         {{asset.timestamp | date: 'MM月dd日 hh:mm'}}
                     </p>
-                    <p class="timestamp">
+                    <p class="secondary">
                         {{asset.realname}}/{{asset.file_size | friendlyFileSize}}
                     </p>
                 </div>
                 <div class="overlay">
                     <ul>
-                        <li><a href="{{asset.url}}" target="_blank">预览</a></li>
-                        <li><a href="javascript:void(0)" ng-click="onClickDownload()">下载</a></li>
+                        <li ng-show="asset.url | assetIsPicture">
+                            <a href="/api/project/{{asset.project_id}}/issue/{{asset.issue_id}}/assets/{{asset.id}}" ng-click="onPreview($event, asset)">预览</a>
+                        </li>
+                        <li><a href="/api/project/{{asset.project_id}}/issue/{{asset.issue_id}}/assets/{{asset.id}}?download=true" target="_blank">下载</a></li>
                         <li><a href="javascript:void(0)" ng-click="onClickRemove($event, asset)">删除</a></li>
                     </ul>
                 </div>

@@ -35,9 +35,13 @@ define [
       return _utils.formatString template, ext
   )
 
-  .filter('getAssetThumbnailClass', ->
+  .filter('getAssetThumbnailClass', ['$filter', ($filter)->
     (url)->
-      if /\.(png|jpg|jpeg|gif|bmp)$/i.test(url) then 'thumbnail' else 'extension'
+      if $filter('assetIsPicture')(url) then 'thumbnail' else 'extension'
+  ])
+
+  .filter('assetIsPicture', ->
+    (url)-> /\.(png|jpg|jpeg|gif|bmp)$/i.test url
   )
 
   .filter('friendlyFileSize', ->

@@ -2,6 +2,7 @@ define [
   '../ng-module'
   '../utils'
   't!/views/assets/assets-all.html'
+  'pkg/colorbox/jquery.colorbox'
 ], (_module, _utils, _template) ->
   _module.directiveModule
   #上传素材
@@ -36,20 +37,21 @@ define [
     template: _utils.extractTemplate '#tmpl-asset-thumbnails', _template
     link: (scope, element, attr)->
       assetAPI = API.project($stateParams.project_id).issue($stateParams.issue_id)
-      vm = scope.vm =
-        action: {}
-      params =
-        pageSize: 5
 
       #获得附件列表
       getAssetList = ()->
-        assetAPI.assets().retrieve(params).then (result)->
+        assetAPI.assets().retrieve(pageSize: 10).then (result)->
           scope.assets = result
 
       #删除素材
       scope.onClickRemove = (event, asset)->
         return if not confirm('您确定要删除这个素材吗？')
         assetAPI.assets(asset.id).delete().then -> getAssetList()
+
+      scope.onPreview = (event, asset)->
+        $(event.target).colorbox(maxWidth: 1024, photo: true)
+        event.preventDefault()
+        return false
 
       #监听事件 assets:list:update
       scope.$on "assets:list:update", ()-> getAssetList()

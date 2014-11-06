@@ -27,7 +27,7 @@
         <!--</ul>-->
     <!--</textarea>-->
 
-    <!--用户列表-->
+    <!--用户列表
     <textarea id="tmpl-member-list">
         <ul>
             <li ng-repeat="member in members">
@@ -35,6 +35,7 @@
             </li>
         </ul>
     </textarea>
+    -->
 
     <!--项目成员列表-->
     <textarea id="tmpl-project-member-list">
@@ -55,7 +56,7 @@
     <!--项目成员列表 item -->
     <textarea id="tmpl-project-member-item">
         <li ng-repeat="member in projectMember" class="row">
-            <span class="name">{{member.username}}</span>
+            <span class="name">{{member.realname}}</span>
             <span class="email">{{member.email}}</span>
             <span class="role" dropdown data-name="project-member-item">
                 {{ member.role | projectMemberRole }}<i class="small icon cell"></i>
