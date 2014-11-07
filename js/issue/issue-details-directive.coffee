@@ -14,6 +14,7 @@ define [
 
       scope.notFound = false
       scope.editing = false
+      scope.assetPreviewer = show: false
       scope.showAlwaysTop = true
 
       #提交评论
@@ -22,6 +23,10 @@ define [
           NOTIFY.success('评论保存成功')
           #刷新评论数据
           scope.$broadcast 'comment:list:reload'
+
+      #关闭asset的预览
+      scope.onClickCloseAssetPreviewer = ->
+        scope.assetPreviewer.show = false
 
       #阻止此区域的事件冒泡，
       scope.onClickIssue = (event)->
@@ -35,6 +40,12 @@ define [
 
         #是否主动打开编辑器
         if $location.$$search.editing is 'true' then scope.onClickEdit()
+
+      #预览压缩包
+      scope.$on 'asset:bundle:preview', (event, asset_id, bundleName)->
+        scope.assetPreviewer.show = true
+        scope.assetPreviewer.bundleName = bundleName
+        scope.$broadcast 'asset:bundle:load', asset_id
 
       scope.$on 'dropdown:selected', (event, type, value)->
         switch type

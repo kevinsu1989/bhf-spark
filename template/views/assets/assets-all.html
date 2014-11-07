@@ -19,9 +19,14 @@
                 <div class="overlay">
                     <ul>
                         <li ng-show="asset.url | assetIsPicture">
-                            <a href="/api/project/{{asset.project_id}}/issue/{{asset.issue_id}}/assets/{{asset.id}}" ng-click="onPreview($event, asset)">预览</a>
+                            <a href="{{asset | assetLink}}" ng-click="onClickPreviewPicture($event, asset)">预览</a>
                         </li>
-                        <li><a href="/api/project/{{asset.project_id}}/issue/{{asset.issue_id}}/assets/{{asset.id}}?download=true" target="_blank">下载</a></li>
+
+                        <li ng-show="asset.url | assetIsBundle">
+                            <a href="javascript:void(0)" ng-click="onClickPreviewBundle($event, asset)">预览</a>
+                        </li>
+
+                        <li><a href="{{asset | assetLink:true}}" target="_blank">下载</a></li>
                         <li><a href="javascript:void(0)" ng-click="onClickRemove($event, asset)">删除</a></li>
                     </ul>
                 </div>
@@ -38,7 +43,7 @@
             <ul class="details">
                 <li ng-repeat="item in assets.items" class="row">
                     <!--/project/{{item.project_id}}/assets/{{item.id}}-->
-                    <a href="{{item.url}}" target="_blank" ng-if="!(item.file_name | filenameIsPicture)">
+                    <a href="{{item | assetLink:true}}" target="_blank" ng-if="!(item.file_name | filenameIsPicture)">
                         <span class="title">{{item.original_name}}</span>
                     </a>
 
@@ -64,4 +69,34 @@
             </a>
         </div>
     </textarea>
+
+   <textarea id="tmpl-assets-unwind">
+       <div class="full asset-unwind">
+           <nav>
+               <a href="javascript:void(0)" ng-click="onClickNav($event, -1)">根目录</a>
+               <span ng-repeat="item in subdir">->
+                   <a href="javascript:void(0)" ng-click="onClickNav($event, $index)">{{item}}</a>
+               </span>
+           </nav>
+
+           <ul class="list">
+               <li class="title">
+                   <span class="filename">文件名</span>
+                   <span class="size">文件大小</span>
+                   <span class="size">修改日期</span>
+               </li>
+               <li ng-repeat="asset in unwind">
+                   <span class="filename">
+                       <img ng-src="/images/file-extension-small/{{asset.original_name | extensionImage: asset.is_dir}}.png" />
+
+                       <a href="javascript:void(0)" ng-click="onClickAsset($event, asset)" ng-show="asset.is_dir">{{asset.original_name}}</a>
+                       <a href="{{asset.url}}" ng-show="!asset.is_dir" target="_blank">{{asset.original_name}}</a>
+                       <a href="{{asset.url}}&download=true" target="_blank" ng-show="!asset.is_dir" class="download">下载</a>
+                   </span>
+                   <span class="size">{{asset.file_size | friendlyFileSize}}</span>
+                   <span class="mtime">{{asset.timestamp | date: 'medium'}}</span>
+               </li>
+           </ul>
+       </div>
+   </textarea>
 </div>

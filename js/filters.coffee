@@ -35,10 +35,22 @@ define [
       return _utils.formatString template, ext
   )
 
+  .filter('extensionImage', ['$filter', ($filter)->
+    (filename, is_dir)->
+      return 'folder' if is_dir
+      return 'png' if $filter('assetIsPicture')(filename)
+      return 'zip' if $filter('assetIsBundle')(filename)
+      'other'
+  ])
+
   .filter('getAssetThumbnailClass', ['$filter', ($filter)->
     (url)->
       if $filter('assetIsPicture')(url) then 'thumbnail' else 'extension'
   ])
+
+  .filter('assetIsBundle', ->
+    (filename)-> /\.(7z|zip|rar)$/i.test(filename)
+  )
 
   .filter('assetIsPicture', ->
     (url)-> /\.(png|jpg|jpeg|gif|bmp)$/i.test url
@@ -122,4 +134,11 @@ define [
 
   .filter('lastName', ->
     (realname)-> realname.substr(0, 1)
+  )
+
+  .filter('assetLink', ->
+    (asset, download)->
+      url = "/api/project/#{asset.project_id}/issue/#{asset.issue_id}/assets/#{asset.id}"
+      url += '?download=true' if download
+      url
   )

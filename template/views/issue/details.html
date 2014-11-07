@@ -7,6 +7,15 @@
         </p>
     </div>
 
+    <div ng-show="assetPreviewer.show" class="asset-previewer">
+        <h3>{{assetPreviewer.bundleName}}
+            <button class="default transparent" ng-click="onClickCloseAssetPreviewer($event)">
+                <i class="small icon"></i>
+            </button>
+        </h3>
+        <asset-bundle-preview></asset-bundle-preview>
+    </div>
+
     <div ng-show="!notFound" class="full">
         <div style="overflow: auto; height: 100%; position:relative;">
             <!--展示一个issue的所有内容-->

@@ -326,4 +326,14 @@ define [], ->
       "url": "project/:project_id/member/invite",
       "methods": {}
     }
+
+    {
+      "url": "project/:project_id/assets/:asset_id/unwind",
+      "methods": {
+        "post": false,
+        "delete": false,
+        "patch": false,
+        "put": false
+      }
+    }
 ]

@@ -1,9 +1,10 @@
 define [
   '../ng-module'
   '../utils'
+  '_'
   't!/views/assets/assets-all.html'
   'pkg/colorbox/jquery.colorbox'
-], (_module, _utils, _template) ->
+], (_module, _utils, _, _template) ->
   _module.directiveModule
   #上传素材
   .directive('uploadAssets', ($stateParams, API, WEBFILEUPLOAD)->
@@ -48,10 +49,13 @@ define [
         return if not confirm('您确定要删除这个素材吗？')
         assetAPI.assets(asset.id).delete().then -> getAssetList()
 
-      scope.onPreview = (event, asset)->
+      scope.onClickPreviewPicture = (event, asset)->
         $(event.target).colorbox(maxWidth: 1024, photo: true)
         event.preventDefault()
         return false
+
+      scope.onClickPreviewBundle = (event, asset)->
+        scope.$emit 'asset:bundle:preview', asset.id, asset.original_name
 
       #监听事件 assets:list:update
       scope.$on "assets:list:update", ()-> getAssetList()
@@ -66,4 +70,56 @@ define [
     template: _utils.extractTemplate '#tmpl-assets-previewer', _template
     link: (scope, element, attrs)->
       scope.url = $sce.trustAsResourceUrl($state.params.url)
+  ])
+
+  .directive('assetBundlePreview', ['$stateParams', 'API', ($stateParams, API)->
+    restrict: 'E'
+    replace: true
+    scope: {}
+    template: _utils.extractTemplate '#tmpl-assets-unwind', _template
+    link: (scope, element, attrs)->
+      scope.bundleName = ''
+      scope.subdir = []
+
+      scope.onClickNav = (event, index)->
+        scope.subdir = scope.subdir.slice(0, index + 1)
+        loadBundle()
+
+      scope.onClickAsset = (event, asset)->
+        #文件夹
+        if asset.is_dir
+          scope.subdir.push asset.original_name
+          loadBundle()
+          return
+
+        #预览文件或者下载文件
+#        subdir = _.clone(scope.subdir)
+#        subdir.push(asset.original_name)
+
+
+      scope.$on 'asset:bundle:load', (event, asset_id, bundleName)->
+        scope.asset_id = asset_id
+        scope.bundleName = bundleName
+        loadBundle()
+
+      loadBundle = ()->
+        project_id = $stateParams.project_id
+        params =
+          subdir: scope.subdir.join('/')
+
+        API.project($stateParams.project_id).assets(scope.asset_id)
+        .unwind().retrieve(params).then (result)->
+          _.map result, (item)->
+            return if item.is_dir
+            item.url = [
+              '/api/project/'
+              project_id
+              '/issue/0/assets/'
+              scope.asset_id
+              '?dig='
+              scope.subdir.join('/')
+              '/'
+              item.original_name].join('')
+
+          scope.unwind = result
   ])

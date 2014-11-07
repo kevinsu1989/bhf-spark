@@ -39,9 +39,19 @@ require [
       timer = setTimeout(->
         $window.trigger "onResizeEx"
       , 500)
-    )
+  )
   )()
 
-  _ng.element().ready ->
-    _ng.resumeBootstrap [_app.name]
-    $('#loading').fadeOut()
+  #检测不支持的浏览器
+  (->
+    ua = window.navigator.userAgent
+    if /safari|msie/i.test ua
+      $('#loading').fadeOut()
+      alert('很抱歉，我们暂时不能支持您的浏览器')
+      return
+
+    _ng.element().ready ->
+      _ng.resumeBootstrap [_app.name]
+      $('#loading').fadeOut()
+  )()
+

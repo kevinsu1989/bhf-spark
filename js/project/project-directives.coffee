@@ -144,3 +144,13 @@ define [
     link: (scope, element, attrs)->
       scope.showMore = attrs.showMore is 'true'
   ])
+
+  .directive('projectMenuHighlight', ['$stateParams', '$location',
+  ($stateParams, $location)->
+    restrict: 'A'
+    link: (scope, element, attrs)->
+#      klass = null
+#      if $stateParams.myself
+#        klass = 'myself'
+#      console.log $stateParams
+  ])
