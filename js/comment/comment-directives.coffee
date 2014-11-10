@@ -38,6 +38,7 @@ define [
         return
 
       scope.onClickDelete = (event, comment)->
+        return if not confirm('您确定要删除这个评论么，删除将无法恢复')
         API.project($stateParams.project_id).issue($stateParams.issue_id)
         .comment(comment.id).delete().then ->
           NOTIFY.success '删除评论成功'

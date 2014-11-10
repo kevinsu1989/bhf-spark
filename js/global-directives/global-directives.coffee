@@ -95,11 +95,23 @@ define [
         _keybroad.on(key, onDownCallback, onUpCallback)
   ])
 
+  #周报打印
   .directive('reportWeeklyPrint', ['API', (API)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate
     link: (scope, element, attrs)->
-      console.log 'abc'
 
   ])
+
+  #实时搜索
+  .directive('instantSearch', ['$rootScope', ($rootScope)->
+    restrict: 'A'
+    replace: true
+    link: (scope, element, attrs)->
+      element.bind 'keyup', (event)->
+        value = element.val()
+        $rootScope.$broadcast 'instant-search:change', _utils.trim(value)
+  ])
+
+

@@ -7,7 +7,7 @@
                 <span class="timestamp">{{data.timestamp | date: 'yyyy-MM-dd hh:mm:ss'}}</span>
                 说：
                 <div class="toolbar">
-                    <a class="edit" href="javascript:void(0)" ng-click="onClickEdit($event, data)">编辑</a>
+                    <a class="edit" href="javascript:void(0)" ng-click="onClickEdit($event, data)" ng-hide="true">编辑</a>
                     <a class="delete" href="javascript:void(0)" ng-click="onClickDelete($event, data)">删除</a>
                 </div>
             </div>

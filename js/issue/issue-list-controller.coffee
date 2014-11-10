@@ -7,13 +7,15 @@ define [
   _module.controllerModule
   .controller('issueListController', ($scope, $stateParams, API, $state, $location)->
     #搜索issue
-    searchIssue = ()->
+    searchIssue = (condition)->
       #搜索条件
       cond =
-        tag: $state.params.tag
-        category_id: $state.params.category_id
+        _.extend {
+          tag: $state.params.tag
+          category_id: $state.params.category_id
+        }, condition
 
-      cond = cond || {}
+
       params = {}
 
       if cond.keyword #搜索
@@ -36,14 +38,14 @@ define [
       #待办中
       issueAPI = API.project($stateParams.project_id).issue()
 
-      issueAPI.retrieve(_.extend(status: 'undone', params))
+      issueAPI.retrieve(_.extend({status: 'undone', pageSize: 9999}, params))
       .then (result)->
         $scope.undoneIssues = result
       #          scope.$apply()
 
       $scope.showQuickEditor = true
       #加载已经完成
-      issueAPI.retrieve(_.extend(status: 'done', pageSize: 10, params))
+      issueAPI.retrieve(_.extend({status: 'done', pageSize: 20}, params))
       .then (result)->
         $scope.condition = cond
         $scope.doneIssues = result
@@ -55,6 +57,11 @@ define [
     $scope.$on 'issue:list:reload', (event)-> searchIssue()
     #某个issue被修改
     $scope.$on 'issue:change', ()-> searchIssue()
+
+    $scope.$on 'instant-search:change', (event, keyword)->
+      return if $scope.condition.keyword is keyword
+
+      searchIssue keyword: keyword
 
     searchIssue()
   )
