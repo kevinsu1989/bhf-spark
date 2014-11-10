@@ -90,8 +90,8 @@ define [
     assetsPreviewerViews =
       listPanel: assetsListOnly.listPanel
       'detailsPanel@project':
-        template: _utils.extractTemplate('#tmpl-assets-previewer', _tmplAssets)
-        controller: 'assetsPreviewerController'
+        template: _utils.extractTemplate('#tmpl-assets-details', _tmplAssets)
+        controller: 'assetsDetailsController'
 
     $stateProvider
     .state('home',

@@ -31,3 +31,12 @@ define [
     rgba.b = o[2]
     `
     return rgba;
+
+  #根据文件名来探测文件类型
+  detectFileType: (filename)->
+    if /\.(7z|zip|rar)$/i.test(filename) then 'bundle'
+    else if /\.(png|jpg|jpeg|gif|bmp)$/i.test(filename) then 'image'
+    else if /\.(md|markdown|mark|mkd|mark)$/i.test(filename) then 'markdown'
+    else if /\.(js|json|html|htm|less|css|coffee|hbs|xml)/i.test(filename) then 'code'
+    else if /\.(txt)/i.test(filename) then 'text'
+    else 'other'

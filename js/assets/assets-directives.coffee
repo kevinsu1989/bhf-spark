@@ -2,9 +2,12 @@ define [
   '../ng-module'
   '../utils'
   '_'
+  'marked'
   't!/views/assets/assets-all.html'
+  'pkg/highlight/highlight.pack'
   'pkg/colorbox/jquery.colorbox'
-], (_module, _utils, _, _template) ->
+], (_module, _utils, _, _marked, _template) ->
+
   _module.directiveModule
   #上传素材
   .directive('uploadAssets', ($stateParams, API, WEBFILEUPLOAD)->
@@ -64,15 +67,47 @@ define [
       getAssetList()
   )
 
-  .directive('assetPreviewer', ['$sce', '$state', ($sce, $state)->
+  .directive('assetDetailUnwind', ['$sce', '$state', ($sce, $state)->
     restrict: 'E'
     replace: true
-    template: _utils.extractTemplate '#tmpl-assets-previewer', _template
+    template: _utils.extractTemplate '#tmpl-asset-detail-unwind', _template
     link: (scope, element, attrs)->
-      scope.url = $sce.trustAsResourceUrl($state.params.url)
+
   ])
 
-  .directive('assetBundlePreview', ['$stateParams', 'API', ($stateParams, API)->
+  #预览素材文件
+  .directive('assetDetailPreviewer', ['$stateParams', '$http', 'API', ($stateParams, $http, API)->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-asset-detail-previewer', _template
+    link: (scope, element, attrs)->
+
+      #格式化markdown
+      formatMarkdown = (content)->
+        scope.markdownContent = _marked(content)
+
+      formatCode = (content)->
+        obj = element.find('code')
+        obj.text content
+        hljs.highlightBlock obj[0]
+
+      loadAsset = ()->
+#        API.project($stateParams.project_id).assets($stateParams.asset_id).file().
+        url = "/api/project/#{$stateParams.project_id}/asset/#{$stateParams.asset_id}/read"
+        scope.assetUrl = url
+
+        return if scope.assetType is 'image'
+
+        $http.get(url).success (body)->
+          switch scope.assetType
+            when 'markdown' then formatMarkdown body
+            when 'code' then formatCode body
+
+      scope.$watch 'assetType', ->
+        loadAsset() if scope.assetType
+  ])
+
+  .directive('assetBundleUnwind', ['$stateParams', 'API', ($stateParams, API)->
     restrict: 'E'
     replace: true
     scope: {}

@@ -54,7 +54,7 @@ define [
     oldAjax = (ajaxOps)->
       console.warn "警告：此方法已经停用，请使用charm.js调用API，#{ajaxOps.url}"
       #如果没有baseUrl，则加上
-      ajaxOps.url = "#{options.rootUrl}/#{ajaxOps.url}" if ajaxOps.url.indexOf(options.rootUrl) < 0
+      ajaxOps.url = "#{options.prefix}/#{ajaxOps.url}" if ajaxOps.url.indexOf(options.prefix) < 0
       deferred = $q.defer()
       options.ajax(ajaxOps.url, ajaxOps.method, ajaxOps.data || ajaxOps.params, (result)->
         deferred.resolve result
@@ -90,7 +90,6 @@ define [
       ajax: (options)->
         #如果没有baseUrl，则加上
         options.url = "#{BASEAPI}#{options.url}" if options.url.indexOf(BASEAPI) < 0
-
         deferred = $q.defer()
         $http(options).success((result)->
           deferred.resolve result

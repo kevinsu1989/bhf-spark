@@ -7,13 +7,13 @@
         </p>
     </div>
 
-    <div ng-show="assetPreviewer.show" class="asset-previewer">
+    <div ng-show="assetPreviewer.show" class="asset-unwind-container">
         <h3>{{assetPreviewer.bundleName}}
             <button class="default transparent" ng-click="onClickCloseAssetPreviewer($event)">
                 <i class="small icon"></i>
             </button>
         </h3>
-        <asset-bundle-preview></asset-bundle-preview>
+        <asset-bundle-unwind></asset-bundle-unwind>
     </div>
 
     <div ng-show="!notFound" class="full">
