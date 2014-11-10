@@ -138,7 +138,7 @@ define [
 
   .filter('assetLink', ->
     (asset, download)->
-      url = "/api/project/#{asset.project_id}/issue/#{asset.issue_id}/assets/#{asset.id}"
+      url = "/api/project/#{asset.project_id}/asset/#{asset.id}/read"
       url += '?download=true' if download
       url
   )

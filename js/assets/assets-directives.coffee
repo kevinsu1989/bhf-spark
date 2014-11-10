@@ -131,7 +131,6 @@ define [
 #        subdir = _.clone(scope.subdir)
 #        subdir.push(asset.original_name)
 
-
       scope.$on 'asset:bundle:load', (event, asset_id, bundleName)->
         scope.asset_id = asset_id
         scope.bundleName = bundleName
@@ -149,9 +148,10 @@ define [
             item.url = [
               '/api/project/'
               project_id
-              '/issue/0/assets/'
+              '/asset/'
               scope.asset_id
-              '?dig='
+              '/read'
+              '?download=true&dig='
               scope.subdir.join('/')
               '/'
               item.original_name].join('')

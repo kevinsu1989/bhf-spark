@@ -130,7 +130,7 @@
 
                        <a href="javascript:void(0)" ng-click="onClickAsset($event, asset)" ng-show="asset.is_dir">{{asset.original_name}}</a>
                        <a href="{{asset.url}}" ng-show="!asset.is_dir" target="_blank">{{asset.original_name}}</a>
-                       <a href="{{asset.url}}&download=true" target="_blank" ng-show="!asset.is_dir" class="download">下载</a>
+                       <a href="{{asset.url}}" target="_blank" ng-show="!asset.is_dir" class="download">下载</a>
                    </span>
                    <span class="size">{{asset.file_size | friendlyFileSize}}</span>
                    <span class="mtime">{{asset.timestamp | date: 'medium'}}</span>
