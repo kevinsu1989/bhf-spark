@@ -2,16 +2,25 @@
 define [
   '../ng-module'
   '../utils'
-], (_module, _utils) ->
+  '_'
+], (_module, _utils, _) ->
 
   _module.controllerModule.
   controller('assetsListController', ($scope, $stateParams, API)->
-    cond = pageSize: 20
-    API.project($stateParams.project_id).assets()
-    .retrieve(cond).then((result)->
-      $scope.assets = result
-    )
-    return
+    $scope.condition = {}
+
+    searchAssets = (query)->
+      $scope.condition = _.extend {pageSize: 20}, query
+      API.project($stateParams.project_id).assets()
+      .retrieve($scope.condition).then((result)->
+        $scope.assets = result
+      )
+
+    $scope.$on 'instant-search:change', (event, keyword)->
+      return if $scope.condition.keyword is keyword
+      searchAssets keyword: keyword
+
+    searchAssets()
   )
 
   .controller('assetsDetailsController', ['$scope', '$stateParams', '$filter', 'API',

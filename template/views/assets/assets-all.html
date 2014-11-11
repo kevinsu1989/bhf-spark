@@ -38,12 +38,13 @@
     <textarea id="tmpl-assets-list">
         <div class="list">
             <header>
-                <h3>素材库</h3>
+                <h3>素材库({{assets.pagination.recordCount}})</h3>
             </header>
             <ul class="details">
                 <li ng-repeat="item in assets.items" class="row">
-                    <a href="/{{item | projectLink: 'normal'}}/assets/previewer/{{item.id}}">
-                        <span class="title">{{item.original_name}}</span>
+                    <a href="/{{item | projectLink: 'normal'}}/assets/previewer/{{item.id}}"
+                       class="title"
+                       ng-bind-html="item.original_name | highlightKeyword: condition.keyword | unsafe">
                     </a>
 
                     <div class="info">
@@ -53,6 +54,11 @@
                     </div>
                 </li>
             </ul>
+
+            <div ng-show="assets.pagination.recordCount == 0" class="empty">
+                没有任何素材哦
+            </div>
+
         </div>
     </textarea>
 
