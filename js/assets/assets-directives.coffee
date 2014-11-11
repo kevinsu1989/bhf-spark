@@ -67,21 +67,22 @@ define [
       getAssetList()
   )
 
-  .directive('assetDetailUnwind', ['$sce', '$state', ($sce, $state)->
+  .directive('assetUnwindPreviewer', ['$sce', '$state', ($sce, $state)->
     restrict: 'E'
     replace: true
-    template: _utils.extractTemplate '#tmpl-asset-detail-unwind', _template
+    template: _utils.extractTemplate '#tmpl-asset-unwind-previewer', _template
     link: (scope, element, attrs)->
 
   ])
 
   #预览素材文件
-  .directive('assetDetailPreviewer', ['$stateParams', '$http', 'API', ($stateParams, $http, API)->
+  .directive('assetFilePreviewer', ['$stateParams', '$http', 'API', ($stateParams, $http, API)->
     restrict: 'E'
     replace: true
-    template: _utils.extractTemplate '#tmpl-asset-detail-previewer', _template
+    template: _utils.extractTemplate '#tmpl-asset-file-previewer', _template
     link: (scope, element, attrs)->
 
+      console.log scope
       #格式化markdown
       formatMarkdown = (content)->
         scope.markdownContent = _marked(content)
@@ -107,7 +108,16 @@ define [
         loadAsset() if scope.assetType
   ])
 
-  .directive('assetBundleUnwind', ['$stateParams', 'API', ($stateParams, API)->
+  #素材预览的头部
+  .directive('assetPreviewerHeader', [()->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-asset-previewer-header', _template
+    link: (scope, element, attrs)->
+
+  ])
+
+  .directive('assetBundleUnwind', ['$stateParams', '$filter', 'API', ($stateParams, $filter, API)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -131,30 +141,31 @@ define [
 #        subdir = _.clone(scope.subdir)
 #        subdir.push(asset.original_name)
 
-      scope.$on 'asset:bundle:load', (event, asset_id, bundleName)->
-        scope.asset_id = asset_id
-        scope.bundleName = bundleName
+      scope.$on 'asset:bundle:load', (event, asset)->
+        scope.asset = asset
         loadBundle()
 
       loadBundle = ()->
-        project_id = $stateParams.project_id
         params =
           subdir: scope.subdir.join('/')
 
-        API.project($stateParams.project_id).assets(scope.asset_id)
+        API.project($stateParams.project_id).assets(scope.asset.id)
         .unwind().retrieve(params).then (result)->
           _.map result, (item)->
             return if item.is_dir
-            item.url = [
-              '/api/project/'
-              project_id
-              '/asset/'
-              scope.asset_id
-              '/read'
-              '?download=true&dig='
-              scope.subdir.join('/')
-              '/'
-              item.original_name].join('')
+            dig = "?dig=#{scope.subdir.join('/')}/#{item.original_name}"
+            item.url = $filter('assetLink')(scope.asset, false) + dig
+
+#            item.url = [
+#              '/api/project/'
+#              project_id
+#              '/asset/'
+#              scope.asset_id
+#              '/read'
+#              '?download=true&dig='
+#              scope.subdir.join('/')
+#              '/'
+#              item.original_name].join('')
 
           scope.unwind = result
   ])

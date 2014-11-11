@@ -45,7 +45,10 @@ define [
       scope.$on 'asset:bundle:preview', (event, asset_id, bundleName)->
         scope.assetPreviewer.show = true
         scope.assetPreviewer.bundleName = bundleName
-        scope.$broadcast 'asset:bundle:load', asset_id
+
+        #取得素材详细内容才触发事件
+        issueAPI.assets(asset_id).retrieve().then (result)->
+          scope.$broadcast 'asset:bundle:load', result
 
       scope.$on 'dropdown:selected', (event, type, value)->
         switch type

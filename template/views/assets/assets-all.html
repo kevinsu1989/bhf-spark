@@ -65,25 +65,16 @@
     <!--图片素材的预览-->
     <textarea id="tmpl-assets-details">
         <div>
-            <asset-detail-unwind ng-show="assetIsBundle"></asset-detail-unwind>
-            <asset-detail-previewer ng-show="!assetIsBundle" data-type="{{assetType}}" data-asset-id="{{asset.id}}" data-project-id="{{asset.project_id}}"></asset-detail-previewer>
+            <asset-unwind-previewer ng-show="assetIsBundle"></asset-unwind-previewer>
+            <asset-file-previewer ng-show="!assetIsBundle" data-type="{{assetType}}" data-asset-id="{{asset.id}}" data-project-id="{{asset.project_id}}"></asset-file-previewer>
         </div>
     </textarea>
 
     <!--单个文件预览-->
-    <textarea id="tmpl-asset-detail-previewer">
+    <textarea id="tmpl-asset-file-previewer">
         <div class="asset-previewer">
             <div class="previewer">
-                <header>
-                    <h3>{{asset.original_name}}</h3>
-                    <p>
-                        <span>文件大小：{{asset.file_size | friendlyFileSize}}</span>
-                        |
-                        <span>上传日期：{{asset.timestamp | date:'medium'}}</span>
-                        |
-                        <a ng-href="{{assetUrl}}?download=true" target="_blank">下载</a>
-                    </p>
-                </header>
+                <asset-previewer-header></asset-previewer-header>
 
                 <!--无法预览的-->
                 <div class="download" ng-show="assetType == 'other'">
@@ -106,9 +97,9 @@
     </textarea>
 
     <!--展开压缩文件-->
-    <textarea id="tmpl-asset-detail-unwind">
+    <textarea id="tmpl-asset-unwind-previewer">
         <div class="asset-unwind-container">
-            <h3>{{bundleName}}</h3>
+            <asset-previewer-header></asset-previewer-header>
             <asset-bundle-unwind></asset-bundle-unwind>
         </div>
     </textarea>
@@ -136,12 +127,26 @@
 
                        <a href="javascript:void(0)" ng-click="onClickAsset($event, asset)" ng-show="asset.is_dir">{{asset.original_name}}</a>
                        <a href="{{asset.url}}" ng-show="!asset.is_dir" target="_blank">{{asset.original_name}}</a>
-                       <a href="{{asset.url}}" target="_blank" ng-show="!asset.is_dir" class="download">下载</a>
+                       <a href="{{asset.url}}&download=true" target="_blank" ng-show="!asset.is_dir" class="download">下载</a>
                    </span>
                    <span class="size">{{asset.file_size | friendlyFileSize}}</span>
                    <span class="mtime">{{asset.timestamp | date: 'medium'}}</span>
                </li>
            </ul>
        </div>
+   </textarea>
+
+   <!--文件预览的header部分-->
+   <textarea id="tmpl-asset-previewer-header">
+       <header class="asset-previewer-header">
+           <h3>{{asset.original_name}}</h3>
+           <p>
+               <span>文件大小：{{asset.file_size | friendlyFileSize}}</span>
+               |
+               <span>上传日期：{{asset.timestamp | date:'medium'}}</span>
+               |
+               <a ng-href="{{asset | assetLink:true}}" target="_blank">下载</a>
+           </p>
+       </header>
    </textarea>
 </div>

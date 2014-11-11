@@ -26,11 +26,10 @@ define [
   .controller('assetsDetailsController', ['$scope', '$stateParams', '$filter', 'API',
   ($scope, $stateParams, $filter, API)->
     API.project($stateParams.project_id).issue(0).assets($stateParams.asset_id).retrieve().then (result)->
+      $scope.asset = result
       #压缩文件
       if $scope.assetIsBundle = $filter('assetIsBundle')(result.file_name)
-        $scope.bundleName = result.original_name
-        $scope.$broadcast 'asset:bundle:load', result.id, result.original_name
+        $scope.$broadcast 'asset:bundle:load', result
       else
         $scope.assetType = _utils.detectFileType result.original_name
-        $scope.asset = result
   ])
