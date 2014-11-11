@@ -11,8 +11,10 @@ define [
   't!/views/report/report-all.html'
   't!/views/global-all.html'
   't!/views/member/authority.html'
+  't!/views/wiki/wiki-all.html'
 ], (_ng, _app, _utils, _tmplIssue, _tmplMember,
-    _tmplCommit, _tmplAssets, _tmplProject, _tmplReport, _tmplGlobal, _tmplAuthority) ->
+    _tmplCommit, _tmplAssets, _tmplProject,
+    _tmplReport, _tmplGlobal, _tmplAuthority, _tmplWiki) ->
 
   _app.config(($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
@@ -93,6 +95,17 @@ define [
         template: _utils.extractTemplate('#tmpl-assets-details', _tmplAssets)
         controller: 'assetsDetailsController'
 
+    #wiki相关
+    wikiViews =
+      'listPanel':
+        template: _utils.extractTemplate '#tmpl-wiki-list', _tmplWiki
+        controller: 'issueListController'
+      'detailsPanel@wiki': issueViews['detailsPanel@project']
+
+    wikiListOnly =
+      'listPanel': wikiViews.listPanel
+      'detailsPanel@wiki': blankDetailsView
+
     $stateProvider
     .state('home',
       url: '/'
@@ -119,7 +132,7 @@ define [
     .state('project',
       abstract: true
       url: '/project/:project_id'
-      templateUrl: '/views/project/layout.html'
+      template: _utils.extractTemplate '#tmpl-project-layout', _tmplProject
       controller: 'projectController'
     )
 
@@ -292,4 +305,40 @@ define [
       url: '/previewer/:asset_id'
       views: assetsPreviewerViews
     )
+
+    #wiki类，与project本质上来说，是同一个东西
+    #====================================wiki=======================================
+    .state('wiki',
+      abstract: true
+      url: '/wiki/:project_id'
+      template: _utils.extractTemplate '#tmpl-wiki-layout', _tmplWiki
+      #wiki与
+      controller: 'projectController'
+    )
+
+    #空的列表
+    .state('wiki.list',
+      url: '/issue'
+      data: wiki: true
+      views: wikiListOnly
+    )
+
+    .state('wiki.list_category',
+      url: '/category/:category_id/issue'
+      data: wiki: true
+      views: wikiListOnly
+    )
+
+    .state('wiki.list.details',
+      url: '/{issue_id:\\d+}'
+      data: wiki: true, articleOnly: true
+      views: wikiViews
+    )
+
+    .state('wiki.list_category.details',
+      url: '/{issue_id:\\d+}'
+      data: wiki: true, articleOnly: true
+      views: wikiViews
+    )
+
   )

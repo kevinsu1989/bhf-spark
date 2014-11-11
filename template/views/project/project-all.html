@@ -245,4 +245,24 @@
             </li>
         </ul>
     </textarea>
+
+    <!--项目布局-->
+    <textarea id="tmpl-project-layout">
+        <div class="frame project-view">
+            <project-header></project-header>
+            <div class="container">
+                <!--左栏-->
+                <div class="master-panel">
+                    <project-menu></project-menu>
+                </div>
+
+                <div class="salve-panel">
+                    <!--第二栏-->
+                    <div class="list-panel" ui-view="listPanel"></div>
+                    <!--第三栏-->
+                    <div class="details-panel full" ui-view="detailsPanel"></div>
+                </div>
+            </div>
+        </div>
+    </textarea>
 </div>

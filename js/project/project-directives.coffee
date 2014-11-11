@@ -55,8 +55,8 @@ define [
   )
 
   #项目列表
-  .directive('projectTiles', ['$location', '$rootScope', '$timeout', 'API', 'NOTIFY',
-  ($location, $rootScope, $timeout, API, NOTIFY)->
+  .directive('projectTiles', ['$location', '$rootScope', '$timeout', '$filter', 'API', 'NOTIFY', 'ENUM'
+  ($location, $rootScope, $timeout, $filter, API, NOTIFY, ENUM)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -74,6 +74,8 @@ define [
         url = "/project/#{project.id}"
         url += "/version/#{project.active_version}" if project.active_version
         url += "/issue"
+
+        url = "/wiki/#{project.id}/issue" if project.flag is ENUM.projectFlag.wiki
         $location.path(url)
 
       scope.onClickEdit = (event, project)->

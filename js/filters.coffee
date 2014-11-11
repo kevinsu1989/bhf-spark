@@ -84,12 +84,27 @@ define [
       return current?.title || '未知版本'
   )
 
+  .filter('wikiLink', ($stateParams)->
+    (data, type)-> ['wiki', $stateParams.project_id].join('/')
+  )
   #根据url构建项目中间的链接
-  .filter('projectLink', ($stateParams)->
+  .filter('projectLink', ($stateParams, $state)->
     (data, type)->
-
       hasVersion = type in ['issue', 'normal']
       hasCategory = type is 'issue'
+
+      #这里的逻辑有点罗，整个project link相关的代码都考虑要修改
+
+      #wiki类型的
+      if $state.current.data?.wiki
+        parts = ['wiki', $stateParams.project_id]
+
+        if hasCategory and $stateParams.category_id
+          parts.push('category')
+          parts.push($stateParams.category_id)
+
+        parts.push 'issue' if type is 'issue'
+        return parts.join '/'
 
       parts = []
       parts.push('project')

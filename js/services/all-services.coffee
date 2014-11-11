@@ -45,3 +45,12 @@ define [
       list
   )
 
+  #枚举
+  .factory('ENUM', ->
+    return {
+      projectFlag:
+        normal: 0
+        wiki: 1
+    }
+  )
+
