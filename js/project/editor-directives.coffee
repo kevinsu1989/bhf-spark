@@ -104,7 +104,7 @@ define [
 
           short_title = scope.editModel.short_title
           if short_title and not /^[\w\d_]+$/i.test(short_title)
-            NOTIFY.warn('简称只能是英文数字和下划线')
+            NOTIFY.warn('别名只能是英文数字和下划线')
             return
 
           method = if scope.editModel.id then 'update' else 'create'
@@ -163,7 +163,7 @@ define [
 
           short_title = scope.editModel.short_title
           if short_title and not /^[\w\d_]+$/i.test(short_title)
-            NOTIFY.warn('简称只能是英文数字和下划线')
+            NOTIFY.warn('别名只能是英文数字和下划线')
             return
 
           method = if scope.editModel.id then 'update' else 'create'
