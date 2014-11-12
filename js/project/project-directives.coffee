@@ -20,12 +20,6 @@ define [
 
       scope.baseLink = parts.join('/')
 
-      scope.$on 'dropdown:selected', (event, type, value)->
-        return if type isnt 'project:menu:manage'
-        switch value
-          when 'category' then $rootScope.$broadcast 'issue-category:editor:show'
-          when 'version' then $rootScope.$broadcast 'project:version:editor:show'
-
       scope.onClickInvite = -> $rootScope.$broadcast 'member:invite:show'
   )
 
@@ -155,4 +149,16 @@ define [
 #      if $stateParams.myself
 #        klass = 'myself'
 #      console.log $stateParams
+  ])
+
+  .directive('projectMenuBar', ['$rootScope', ($rootScope)->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-project-menu-bar', _tmplAll
+    link: (scope, element, attrs)->
+      scope.$on 'dropdown:selected', (event, type, value)->
+        return if type isnt 'project:menu:manage'
+        switch value
+          when 'category' then $rootScope.$broadcast 'issue-category:editor:show'
+          when 'version' then $rootScope.$broadcast 'project:version:editor:show'
   ])
