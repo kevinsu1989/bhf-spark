@@ -1,48 +1,19 @@
-.project-view {
-  height: 100%;
-  .container {
-    height: 100%;
-    display: flex;
-    padding: 0;
-    margin: 0;
-    margin-top: 40px;
-    overflow: hidden;
-  }
-}
-
-.wiki-view{
-  .project-menu .sub-menu{
-    margin-left: 0;
-
-    .badge{
-      display: none;
-    }
-  }
-}
-
 .project-tiles {
-  .circle {
-    width: 100px;
-    height: 100px;
-    border: 6px solid #FFF;
-    background-color: transparent;
-    border-radius: 100px;
-
-    .text {
-      font-size: 20px;
-      color: #FFF;
-      line-height: 100px;
-      height: 100%;
-      display: block;
-      text-align: center;
-    }
+  .circles-text {
+    font-size: 20px !important;
+    color: #FFF;
+    line-height: 100px;
+    height: 100%;
+    display: block;
+    text-align: center;
   }
-
 
   .processing {
     clear: both;
     margin: 0 auto;
     width: 112px;
+
+
   }
 
   .title {
@@ -69,11 +40,11 @@
 
   li.tile {
     background-image: -webkit-gradient(
-            linear,
-            left top,
-            left bottom,
-            color-stop(0, #6CDEFA),
-            color-stop(1, #0BB6E1)
+      linear,
+      left top,
+      left bottom,
+      color-stop(0, #6CDEFA),
+      color-stop(1, #0BB6E1)
     );
 
     background-image: -o-linear-gradient(bottom, #6CDEFA 0%, #0BB6E1 100%);
@@ -84,7 +55,7 @@
 
     .box-shadow(0 0 5px rgba(0, 0, 0, 0.4));
     width: 246px;
-    height: 273px;
+    height: 300px;
     float: left;
     margin: 10px;
     position: relative;
@@ -182,44 +153,5 @@
         }
       }
     }
-  }
-}
-
-.project-list-panel {
-  .row {
-    .info {
-      display: none;
-    }
-    &:hover {
-      .info {
-        display: block;
-        cursor: pointer;
-      }
-      .role{
-        cursor: pointer;
-      }
-    }
-    .email{
-      position: absolute;
-      left: 23%;
-    }
-    .role{
-      position: absolute;
-      left: 38%;
-      .icon{
-        float: right;
-        background-position:-115px -393px;
-      }
-    }
-  }
-}
-
-.project-version-editor{
-  .status.active{
-    color: #ff56a5;
-  }
-
-  .status.archive{
-    color: #CCC;
   }
 }

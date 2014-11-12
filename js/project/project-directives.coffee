@@ -5,6 +5,7 @@ define [
   '../utils'
   't!/views/project/project-all.html'
   't!/views/project/project-editors.html'
+  'v/circles'
 ], (_module,_utils, _tmplAll, _tmplEditors) ->
 
   _module.directiveModule
@@ -91,6 +92,12 @@ define [
 
       API.project().retrieve(params).then((result)->
         scope.projects = result
+        _.map result.items, (item)->
+          item.finished_rate =
+            if item.undone_task_total is item.task_total
+            then 100
+            else 100 - item.undone_task_total / item.task_total * 100
+
         $timeout (->scope.$emit 'project:tile:loaded'), 0
       )
   ])
@@ -161,4 +168,30 @@ define [
         switch value
           when 'category' then $rootScope.$broadcast 'issue-category:editor:show'
           when 'version' then $rootScope.$broadcast 'project:version:editor:show'
+  ])
+
+  .directive('projectProcessing', ['$timeout', ($timeout)->
+    restrict: 'A'
+    replace: true
+    link: (scope, element, attrs)->
+
+
+      $timeout(
+        ()->
+          console.log $("##{attrs.domId}").length
+
+          Circles.create
+            id: attrs.domId
+            radius:     60,
+            value:      Math.round(scope.project.finished_rate),
+            maxValue:   100,
+            width:      6,
+            text:       (value)->return value + '%'
+            colors:     ['#2d9ab5', '#FFF'],
+            duration:   60,
+            wrpClass:   'circles-wrp',
+            textClass:  'circles-text'
+        0
+      )
+
   ])

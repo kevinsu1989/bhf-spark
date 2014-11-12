@@ -225,10 +225,12 @@
                    {{project.title}}
                </div>
 
-               <div class="processing">
+               <div class="processing" project-processing data-dom-id="project-tile-{{project.id}}" id="project-tile-{{project.id}}">
+                <!--
                 <div class="circle">
-                    <span class="text">100%</span>
+                    <span class="text">{{project.finished_rate | number:0}}%</span>
                 </div>
+                -->
                </div>
 
                <div class="tile-toolbar">
