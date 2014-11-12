@@ -1,0 +1,61 @@
+.project-view {
+  height: 100%;
+  .container {
+    height: 100%;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    margin-top: 40px;
+    overflow: hidden;
+  }
+}
+
+.wiki-view{
+  .project-menu .sub-menu{
+    margin-left: 0;
+
+    .badge{
+      display: none;
+    }
+  }
+}
+
+
+.project-list-panel {
+  .row {
+    .info {
+      display: none;
+    }
+    &:hover {
+      .info {
+        display: block;
+        cursor: pointer;
+      }
+      .role{
+        cursor: pointer;
+      }
+    }
+    .email{
+      position: absolute;
+      left: 23%;
+    }
+    .role{
+      position: absolute;
+      left: 38%;
+      .icon{
+        float: right;
+        background-position:-115px -393px;
+      }
+    }
+  }
+}
+
+.project-version-editor{
+  .status.active{
+    color: #ff56a5;
+  }
+
+  .status.archive{
+    color: #CCC;
+  }
+}
