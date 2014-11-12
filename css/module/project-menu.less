@@ -169,13 +169,18 @@
   }
 
   .menu-bar{
+    @offsetHeight: 8px;
     background-color: #333333;
     color: #cbcbcb;
     position: absolute;
-    bottom: @project-header-height + 8;
+    bottom: @project-header-height + @offsetHeight;
     width: 100%;
     height: @project-header-height;
     display: flex;
+
+    & when (@show-global-message){
+      bottom: @project-header-height + @global-message-height + @offsetHeight;
+    }
 
     .icon{
       width: 20px;

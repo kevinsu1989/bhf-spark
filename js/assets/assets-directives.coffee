@@ -82,7 +82,6 @@ define [
     template: _utils.extractTemplate '#tmpl-asset-file-previewer', _template
     link: (scope, element, attrs)->
 
-      console.log scope
       #格式化markdown
       formatMarkdown = (content)->
         scope.markdownContent = _marked(content)
@@ -143,6 +142,7 @@ define [
 
       scope.$on 'asset:bundle:load', (event, asset)->
         scope.asset = asset
+        scope.unwind = []
         loadBundle()
 
       loadBundle = ()->

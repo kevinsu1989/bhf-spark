@@ -5,6 +5,11 @@
   display: flex;
   height: @project-header-height;
   top: 0;
+
+  & when (@show-global-message){
+    top: 34px;
+  }
+
   z-index: 100;
   
   >div{

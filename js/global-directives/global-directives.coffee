@@ -109,9 +109,21 @@ define [
     restrict: 'A'
     replace: true
     link: (scope, element, attrs)->
+      element.bind 'focus', (event)-> element.css(width: '90%', opacity: 1)
+
+      element.bind 'blur', (event)-> element.css(width: '50%', opacity: 0.8)
+
       element.bind 'keyup', (event)->
         value = element.val()
         $rootScope.$broadcast 'instant-search:change', _utils.trim(value)
+  ])
+
+  .directive('globalMessage', [()->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-global-message', _tmplGlobal
+    link: (scope, element, attrs)->
+
   ])
 
 

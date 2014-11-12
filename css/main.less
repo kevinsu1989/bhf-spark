@@ -45,3 +45,25 @@ a:hover{
 *{
   outline: none;
 }
+
+.global-message{
+
+  & when (@show-global-message = false){
+    display: none;
+  }
+
+  background-color: #52618a;
+  height: @global-message-height;
+  width: 100%;
+
+  color: #FFF;
+  a, span{
+    margin-top: 10px;
+    color: #FFF;
+    display: inline-block;
+  }
+
+  span{
+    margin: 0 10px 0 15px;
+  }
+}
