@@ -48,7 +48,7 @@
     <textarea id="tmpl-global-header-toolbar">
         <div class="header-toolbar">
             <div class="search">
-                <input type="text" placeholder="请输入搜索关键字" class="text small" instant-search />
+                <input type="text" placeholder="请输入搜索关键字" class="text" instant-search />
             </div>
             <div class="menu">
                 <div  class="notify">
@@ -62,7 +62,7 @@
                                 <a href="help.html">帮助</a>
                             </li>
                             <li>
-                                <a href="feedback.html">反馈建议</a>
+                                <a ng-href="/wiki/17/category/30/issue">反馈建议</a>
                             </li>
                         </ul>
                     </div>
@@ -76,7 +76,7 @@
                             </li>
                             <li>
                                 <a ng-click="onClickSetting(2)">通知设置</a>
-                            </li>
+                            </li>to
                             <li>
                                 <a ng-click="onClickSetting(1)">修改密码</a>
                             </li>
@@ -87,6 +87,13 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </textarea>
+
+    <textarea id="tmpl-global-message">
+        <div class="global-message">
+            <span class="">公告</span>
+            <a href="/wiki/17/category/90/issue/2607">BHF 2.0正式发布，新增17项功能</a>
         </div>
     </textarea>
 </div>
