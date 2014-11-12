@@ -57,10 +57,7 @@ define [
     scope: {}
     template: _utils.extractTemplate '#tmpl-project-tiles', _tmplAll
     link: (scope, element, attrs)->
-      params =
-        pageSize: 9999
-        special: true
-
+      condition = {}
       scope.onClickCreate = ->
         #弹出项目编辑器
         $rootScope.$broadcast 'project:editor:show'
@@ -90,16 +87,30 @@ define [
           NOTIFY.success '该项目已经删除成功'
 
 
-      API.project().retrieve(params).then((result)->
-        scope.projects = result
-        _.map result.items, (item)->
-          item.finished_rate =
-            if item.undone_task_total is item.task_total
-            then 100
-            else 100 - item.undone_task_total / item.task_total * 100
+      scope.$on 'instant-search:change', (event, keyword)->
+        return if condition.keyword is keyword
 
-        $timeout (->scope.$emit 'project:tile:loaded'), 0
-      )
+        searchProject keyword: keyword
+
+      #查询项目
+      searchProject = (cond)->
+        params =
+          pageSize: 9999
+          special: true
+        condition = _.extend params, cond
+
+        API.project().retrieve(condition).then((result)->
+          scope.projects = result
+          _.map result.items, (item)->
+            item.finished_rate =
+              if item.undone_task_total is item.task_total
+              then 100
+              else 100 - item.undone_task_total / item.task_total * 100
+
+          $timeout (->scope.$emit 'project:tile:loaded'), 0
+        )
+
+      searchProject()
   ])
 
   .directive('projectTileResize', [ ->
