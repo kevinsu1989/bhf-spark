@@ -219,6 +219,13 @@ define [], ->
       }
     },
     {
+      "url": "project/:project_id/favorite",
+      "methods": {
+        "get": false,
+        "put": false
+      }
+    },
+    {
       "url": "account/change-password",
       "methods": {
         "post": false,

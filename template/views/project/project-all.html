@@ -220,9 +220,10 @@
                 <i class="icon"></i>
             </li>
 
-            <li class="tile" ng-repeat="project in projects.items" ng-click="onClickTile($event, project)">
+            <li class="tile" ng-repeat="project in projects.items" ng-click="onClickTile($event, project)" ng-class="{true: 'favorite'}[project.favorite > 0]">
                <div class="title">
                    {{project.title}}
+                   <i class="icon small favorite"></i>
                </div>
 
                <div class="processing" project-processing data-dom-id="project-tile-{{project.id}}" id="project-tile-{{project.id}}">
@@ -234,17 +235,23 @@
                </div>
 
                <div class="tile-toolbar">
-                   <span>{{project.description || '无项目说明' | limitTo: 40}}</span>
-                   <ul class="menu" ng-show="project.role == 'l'">
-                       <li class="sub-menu">
-                       <button class="default edit" ng-click="onClickEdit($event, project)">
-                        <i class="small icon"></i>
-                           编辑
-                       </button>
+                   <div class="description">{{project.description || '无项目说明' | limitTo: 40}}</div>
+                   <ul class="menu">
+                       <li class="sub-menu favorite">
+                           <button class="default" ng-click="onClickFavorite($event, project)">
+                               <i class="small icon"></i>
+                               <span ng-show="project.favorite == 0">收藏</span>
+                               <span ng-show="project.favorite > 0">取消</span>
+                           </button>
                        </li>
-                       <li class="spliter"></li>
-                       <li class="sub-menu">
-                           <button class="default remove" ng-click="onClickDelete($event, project)">
+                       <li class="sub-menu edit" ng-show="project.role == 'l'">
+                           <button class="default" ng-click="onClickEdit($event, project)">
+                            <i class="small icon"></i>
+                               编辑
+                           </button>
+                       </li>
+                       <li class="sub-menu remove" ng-show="project.role == 'l'">
+                           <button class="default" ng-click="onClickDelete($event, project)">
                                <i class="small icon"></i>
                                删除
                            </button>

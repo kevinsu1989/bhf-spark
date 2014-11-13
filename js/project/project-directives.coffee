@@ -75,6 +75,14 @@ define [
         $rootScope.$broadcast 'project:editor:show', project.id
         return
 
+      scope.onClickFavorite = (event, project)->
+        event.stopPropagation()
+        data = type: 'project', target_id: project.id
+        method = if project.favorite then 'delete' else 'create'
+
+        API.project(project.id).favorite(data)[method](data).then ()-> searchProject()
+        return
+
       scope.onClickDelete = (event, project)->
         event.stopPropagation()
         return if not confirm('您确定要删除该项目吗？')

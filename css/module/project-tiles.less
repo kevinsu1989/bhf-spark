@@ -25,6 +25,14 @@
     height: 60px;
     display: block;
     overflow: hidden;
+
+    i.favorite{
+      background-position: -240px -600px;
+      position: absolute;
+      right: 4px;
+      top: 10px;
+      display: none;
+    }
   }
 
   li.create {
@@ -70,6 +78,18 @@
 
   }
 
+  li.tile.favorite{
+    i.favorite{
+      display: block;
+    }
+
+    .tile-toolbar{
+      li.favorite .icon{
+        background-position: -160px -600px;
+      }
+    }
+  }
+
   @height: 46px;
   .tile-toolbar {
     background-color: #FFF;
@@ -79,14 +99,13 @@
     width: 100%;
     overflow: hidden;
 
-    span {
+    .description {
       color: #999999;
       font-size: 12px;
       margin: 10px;
-      display: block;
       text-align: center;
       height: 26px;
-      vertical-align: baseline;
+      vertical-align: middle;
     }
 
     .menu{
@@ -97,17 +116,18 @@
       transition-property: top;
       transition-duration: 600ms;
       background-color: #FFF;
+      display: flex;
 
       li{
         float: left;
         height: 100%;
-        width: 2%;
+        flex: 2;
 
         &.sub-menu{
-          width: 49%;
           text-align: center;
           vertical-align: middle;
         }
+
 
         &.spliter{
           &:before{
@@ -120,16 +140,30 @@
             background-color: #6c6c6c;
           }
         }
-      }
 
-      button{
-        height: 100%;
-        width: 100%;
-        color: #666;
-        background-image: none;
-        background-color: #FFF;
+
+        &.edit .icon{
+          background-position: -200px -440px;
+        }
+
+        &.remove .icon{
+          background-position: -200px -400px;
+        }
+
+        &.favorite .icon{
+          background-position: -120px -600px;
+        }
+
+
+        &:nth-child(2){
+          border: 1px solid #CCC;
+          border-width: 0 1px;
+        }
+
         &:hover{
-          color: #37aeeb;
+          button{
+            color: #37aeeb;
+          }
 
           &.edit .icon{
             background-position: -240px -440px;
@@ -138,18 +172,22 @@
           &.remove .icon{
             background-position: -240px -400px;
           }
+
+          &.favorite .icon{
+            background-position: -200px -600px;
+          }
         }
+      }
+
+      button{
+        height: 100%;
+        width: 100%;
+        color: #666;
+        background-image: none;
+        background-color: #FFF;
 
         .icon{
           vertical-align: middle;
-        }
-
-        &.edit .icon{
-          background-position: -200px -440px;
-        }
-
-        &.remove .icon{
-          background-position: -200px -400px;
         }
       }
     }

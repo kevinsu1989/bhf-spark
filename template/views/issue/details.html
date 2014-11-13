@@ -41,13 +41,13 @@
                     <issue-priority-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.id}}"></issue-priority-dropdown>
                 </div>
                 <div class="category" dropdown data-name="issue:category" data-text-container="label.display" data-selected="{{issue.category_id}}" data-formatter="分类：{0}">
-                    <i class="icon small cell"></i>
+                    <i class="icon small cell dummy"></i>
                     <label class="display">分类</label>
                     <project-category-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.category_id}}"></project-category-dropdown>
                 </div>
 
                 <div class="version" dropdown data-name="issue:version" data-text-container="label.display" data-selected="{{issue.version_id}}" data-formatter="版本: {0}">
-                    <i class="icon small cell"></i>
+                    <i class="icon small cell dummy"></i>
                     <label class="display">版本</label>
                     <project-version-dropdown data-show-more="false"></project-version-dropdown>
                 </div>
