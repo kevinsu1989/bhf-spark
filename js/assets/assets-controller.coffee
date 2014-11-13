@@ -10,7 +10,7 @@ define [
     $scope.condition = {}
 
     searchAssets = (query)->
-      $scope.condition = _.extend {pageSize: 20}, query
+      $scope.condition = _.extend {pageSize: 40}, query
       API.project($stateParams.project_id).assets()
       .retrieve($scope.condition).then((result)->
         $scope.assets = result

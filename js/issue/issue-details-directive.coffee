@@ -79,7 +79,7 @@ define [
         scope.editing = true
         #延时让页面先显示出来，然后初始化editor(仅在第一次初始化)，避免editor获取不到宽度
         window.setTimeout(->
-          scope.$broadcast 'editor:content', editorKey, scope.issue.content, scope.uploadUrl
+          scope.$broadcast 'editor:content', editorKey, scope.issue.id, scope.issue.content, scope.uploadUrl
         , 1)
 
         $('body').one 'click', -> scope.$broadcast 'editor:will:cancel', editorKey

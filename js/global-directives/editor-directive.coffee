@@ -1,9 +1,10 @@
 define [
   '../ng-module'
   'utils'
+  'v/store2'
   'simditor-marked'
   'simditor-mention'
-], (_module,_utils) ->
+], (_module, _utils, _store) ->
 
   _module.directiveModule.directive('editor', ($location, STORE)->
     restrict: 'E'
@@ -12,6 +13,17 @@ define [
     templateUrl: '/views/editor.html'
     link: (scope, element, attrs)->
       simditor = null
+      currentUUID = null
+
+      #获取缓存的key
+      getCacheKey = (name, uuid)-> "#{name}_#{uuid}"
+      #检查是否有缓存的内容
+      getCache = (name, uuid)-> _store.get getCacheKey(name, uuid)
+      #设置缓存
+      setCache = (name, uuid, content)-> _store.set getCacheKey(name, uuid), content
+      #删除缓存
+      removeCache = (name, uuid)-> _store.remove getCacheKey(name, uuid)
+
       initEditor = (name, uploadUrl)->
 #        用于设置返回的host，不设则为根目录
         host = "#{$location.protocol()}://#{$location.host()}:#{$location.port()}"
@@ -53,23 +65,37 @@ define [
             items: STORE.projectMemberList.data
             nameKey: "username"
 
-        new Simditor options
+        editor = new Simditor options
+
+        editor.on 'valuechanged', (e, src)->
+          content = e.currentTarget.getValue()
+          setCache attrs.name, currentUUID, content
+
+        editor
 
       scope.showAlwaysTop = attrs.showAlwaysTop in [true, 'true']
-      scope.$on 'editor:content', ($event, name, content, uploadUrl)->
+      scope.$on 'editor:content', ($event, name, uuid, content, uploadUrl)->
         #如果有设定name，且当前name和设定的name不一致，则不处理
         return if attrs.name and attrs.name isnt name
+        currentUUID = uuid
+
         simditor = initEditor(name, uploadUrl) if not simditor
-        simditor.setValue content
+        simditor.setValue getCache(name, uuid) || content
         simditor.focus()
 
       #收到cancel的请求
       scope.$on 'editor:will:cancel', (event, name)->
         #name不一致不处理
         return if attrs.name isnt name
-        scope.onClickCancel()
+        #如果是从外部传到的取消请求，则再保存一次数据
+        setCache attrs.name, currentUUID, simditor.getValue()
+
+        scope.$emit 'editor:cancel', attrs.name
 
       scope.onClickCancel = ->
+        #用户自主点击取消的，要移除缓存
+        removeCache attrs.name, currentUUID
+
         scope.$emit 'editor:cancel', attrs.name
 
       scope.onClickSubmit = ->
@@ -77,5 +103,6 @@ define [
           content: simditor.getValue()
           always_top: scope.always_top
 
+        removeCache attrs.name, currentUUID
         scope.$emit 'editor:submit', attrs.name, data
   )
