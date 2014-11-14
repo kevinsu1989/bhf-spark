@@ -79,6 +79,9 @@ define [
         type: 'category'
         data: _.keys originDays
         splitLine: show: false
+        axisLabel:
+          formatter: (text)->
+            text.replace(/\D/, '年第') + '周'
       ]
 
       yAxis = [

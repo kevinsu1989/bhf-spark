@@ -24,10 +24,11 @@ define [
   #讨论列表
   .controller('discussionListController', ['$scope', '$stateParams', '$location', '$filter', 'API'
   ($scope, $stateParams, $location, $filter, API)->
-    condition = {}
+    $scope.condition = {}
 
     loadDiscussion = ()->
-      API.project($stateParams.project_id).discussion().retrieve(condition).then (result)->
+      API.project($stateParams.project_id).discussion()
+      .retrieve($scope.condition).then (result)->
         $scope.discussion = result
 
     $scope.$on 'issue:change', (event, data)->
@@ -38,9 +39,9 @@ define [
       $location.path(url).search('editing', 'true')
 
     $scope.$on 'instant-search:change', (event, value)->
-      return if condition.keyword is value
+      return if $scope.condition.keyword is value
 
-      condition.keyword = value
+      $scope.condition.keyword = value
       loadDiscussion()
 
     loadDiscussion()
