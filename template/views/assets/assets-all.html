@@ -64,7 +64,7 @@
 
     <!--图片素材的预览-->
     <textarea id="tmpl-assets-details">
-        <div>
+        <div class="inner-view">
             <asset-unwind-previewer ng-show="assetIsBundle"></asset-unwind-previewer>
             <asset-file-previewer ng-show="!assetIsBundle" data-type="{{assetType}}" data-asset-id="{{asset.id}}" data-project-id="{{asset.project_id}}"></asset-file-previewer>
         </div>
