@@ -190,26 +190,37 @@
         background-position: -200px -160px;
       }
 
+      .realname{
+        margin-right: 4px;
+      }
+
+      .content{
+        color: #336699;
+      }
+
+      margin-bottom: 100px;
+    }
+
+    &.commits{
+      .title .icon{
+        background-position: -40px -240px;
+      }
+    }
+
+    &.logs, &.commits{
       .list{
         li{
           padding: 4px 0;
         }
 
-        .realname{
+        .gray{
           color: #CCC;
-          margin-right: 4px;
-        }
-
-        .timestamp{
-          color: #CCC;
-        }
-
-        .content{
-          color: #336699;
         }
       }
 
-      margin-bottom: 100px;
+      .content{
+        padding-left: 30px;
+      }
     }
 
     .title{
@@ -219,6 +230,10 @@
         vertical-align: middle;
         padding-bottom: 10px;
       }
+    }
+
+    .empty{
+      color: #CCC;
     }
 
     padding: 20px;

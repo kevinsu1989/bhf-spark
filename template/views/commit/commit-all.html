@@ -26,4 +26,21 @@
     <textarea id="tmpl-commit-details">
         <iframe frameborder="0" width="100%" height="100%" ng-src="{{url}}"></iframe>
     </textarea>
+
+    <!--issue的commit列表-->
+    <textarea id="tmpl-commit-issue-list">
+        <div>
+            <ul class="list">
+                <li ng-repeat="item in commits" class="row">
+                    <span class="timestamp gray">{{item.timestamp | date: 'medium'}}</span>
+                    <span class="realname gray">{{item.realname}}</span>
+                    <a href="{{item.url}}" target="_blank">{{item.message}}</a>
+                </li>
+            </ul>
+
+            <div class="empty" ng-show="commits.length == 0">
+                哟，此任务还没有提交任何代码呢
+            </div>
+        </div>
+    </textarea>
 </div>

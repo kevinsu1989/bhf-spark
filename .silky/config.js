@@ -22,6 +22,12 @@ module.exports = {
     //路由
     routers: [
         {
+            path: /^\/blog\/$/i, to: '/blog/index.html', next: false, static: true
+        },
+        {
+            path: /^\/blog\/(.+)$/i, to: '/blog/$1', next: false, static: true
+        },
+        {
             //无扩展名的访问，则直接跳到main
             path: /.*(\/[^\.]+(\/)?)$/i, to: '/main.html', next: false
         },

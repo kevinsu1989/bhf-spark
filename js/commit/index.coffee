@@ -1,3 +1,4 @@
 define [
-  './commit-controller'
+  './commit-directives'
+  './commit-controllers'
 ], ->
