@@ -35,7 +35,7 @@ define [
     cutTopN: (data)->
       list = (value for key, value of data)
       list.sort (left, right)-> if left.total > right.total then -1 else 1
-      list.splice 0, 5
+      list.splice 0, 3
 
     #准备数据
     prepareSeries: (originDays, data)->
