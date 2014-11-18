@@ -1,6 +1,7 @@
 
 .asset-thumbnails{
   @width: 120px;
+  overflow: hidden;
   >li{
     float: left;
     margin: 0 10px 10px 0;
@@ -186,4 +187,50 @@
       }
     }
   }
+}
+
+.asset-uploader{
+  background: url(/images/add-asset.png);
+  width: 120px;
+  height: 90px;
+  border: 0;
+  position: relative;
+  input{
+    cursor: pointer;
+    font-size: 50px;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+  }
+
+  .mask{
+    display: none;
+    background-color: #666;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    color: #FFF;
+    text-align: center;
+    font-size: 12px;
+
+    .percent-bar{
+      width: 100%;
+      height: 10px;
+      margin: 6px 0;
+      background-color: #ffffff;
+    }
+
+    .percent{
+      background-color: #37aeeb;
+      height: 100%;
+      width: 0;
+    }
+
+    .progress{
+      margin-top: 24px;
+    }
+  }
+
 }

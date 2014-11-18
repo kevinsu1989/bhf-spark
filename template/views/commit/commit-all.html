@@ -34,6 +34,7 @@
                 <li ng-repeat="item in commits" class="row">
                     <span class="timestamp gray">{{item.timestamp | date: 'medium'}}</span>
                     <span class="realname gray">{{item.realname}}</span>
+
                     <a href="{{item.url}}" target="_blank">{{item.message}}</a>
                 </li>
             </ul>

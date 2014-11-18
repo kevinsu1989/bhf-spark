@@ -35,6 +35,8 @@ define [
               NOTIFY.error "你没有权限操作此项功能"
             when 401
               $location.path('/login')
+            when 413
+              NOTIFY.error "呐什么，文件好象太大了点..."
             else
             #以后再考虑不同的处理
               console.error "未知错误"

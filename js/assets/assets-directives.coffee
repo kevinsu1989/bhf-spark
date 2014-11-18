@@ -4,18 +4,68 @@ define [
   '_'
   'marked'
   't!/views/assets/assets-all.html'
+  'v/FileAPI.html5'
   'pkg/highlight/highlight.pack'
   'pkg/colorbox/jquery.colorbox'
-], (_module, _utils, _, _marked, _template) ->
+], (_module, _utils, _, _marked, _template, _FileAPI) ->
 
   _module.directiveModule
   #上传素材
-  .directive('uploadAssets', ($stateParams, API, WEBFILEUPLOAD)->
+  .directive('uploadAssets', ($stateParams, API, NOTIFY)->
     restrict: 'A'
     replace: true
     link: (scope, element, attr)->
-      #上传地址
-      server = "/api/project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/assets"
+      $progress = element.find '.progress'
+      $percent = element.find '.percent'
+      $mask = element.find '.mask'
+
+      filterFn = (file, info)->
+        confirmSize = Math.pow(2, 28)
+        maxSize = Math.pow(2, 30)
+        #超过256M则提示
+        if file.size > confirmSize
+          return confirm('上传大文件浏览器可能会出现卡死的情况，你确定要上传么')
+        else if file.size > maxSize
+          alert("上传文件不能超过#{maxSize / 1024 / 1024}M")
+          return false
+
+        return true
+
+      resetProgress = ()->
+        $progress.text('0%')
+        $percent.css('width', '0')
+        $mask.hide()
+
+      #上传的回调
+      uploadFn = (files, rejected)->
+        if files.length is 0
+          NOTIFY.warn '无可上传的文件'
+          return
+
+        $mask.show()
+        FileAPI.upload
+          url: "/api/project/#{$stateParams.project_id}/issue/#{$stateParams.issue_id}/assets"
+          files: assets: files
+          #完成后的操作
+          complete: (err, xhr)->
+            resetProgress()
+            scope.$emit "assets:upload:finish"
+            return NOTIFY.error '文件上传失败' if err
+
+            NOTIFY.success '所有文件已经上传成功啦'
+
+          #进度
+          progress: (event, file, xhr, options)->
+            percent = (event.loaded / event.total * 100)
+            console.log percent
+            $progress.text percent.toFixed(2) + '%'
+            $percent.css('width', percent + '%')
+
+      target = element[0]
+      FileAPI.event.on target, 'change', (event)->
+        files = FileAPI.getFiles(event)
+        FileAPI.filterFiles files, filterFn, uploadFn
+      return
 
       #用来显示上传ui组件的dom
       file_upload_box = $('.file_upload_box')
