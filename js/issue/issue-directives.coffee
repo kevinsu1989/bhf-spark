@@ -13,7 +13,7 @@ define [
     template: _utils.extractTemplate '#tmpl-issue-list-cell', _template
     link: (scope, element, attrs)->
       scope.getDelayClass = (issue)->
-        if issue.plan_finish_time and issue.plan_finish_time then 'delay' else ''
+        if issue.plan_finish_time and issue.plan_finish_time < new Date().valueOf() then 'delay' else ''
 
       #收到更改状态的通知
       scope.$on 'dropdown:selected', (event, type, value)->
