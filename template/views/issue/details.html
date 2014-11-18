@@ -84,6 +84,8 @@
                         <span class="creator">{{issue.creator_name || '创建者'}}</span> 创建于
                         <span class="timestamp">{{issue.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
                         <span class="id">#{{issue.id}}</span>
+                        <span class="timestamp" ng-show="issue.plan_finish_time">计划完成：{{issue.plan_finish_time | date}}</span>
+                        <span class="timestamp" ng-show="issue.finish_time">实际完成：{{issue.finish_time | date}}</span>
                     </div>
                     <div class="content row editor-style" ng-bind-html="issue.content | unsafe" ng-show="!editing"></div>
                     <div ng-show="editing">

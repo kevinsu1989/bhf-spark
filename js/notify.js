@@ -1,5 +1,6 @@
 "use strict"
-define(['v/socket.io'], function(){
+//'v/socket.io'
+define([], function(){
     var Notify = function(){}
     //======================== web notify start
     var extend = function(source, destination){
@@ -69,6 +70,7 @@ define(['v/socket.io'], function(){
 
     //======================== Desktop notify start
 
+    /*
     Notify.desktop = {}
 
     var so = io.connect("ws://"+window.location.hostname+":8001")
@@ -247,6 +249,6 @@ define(['v/socket.io'], function(){
         realMessage('talk:member', broadcast)
     }
     //======================== Desktop notify end
-
+    */
     return Notify
 })

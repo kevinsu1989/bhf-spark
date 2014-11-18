@@ -1,7 +1,7 @@
 <div>
     <!--单个issue-->
     <textarea id="tmpl-issue-list-cell">
-        <div class="row">
+        <div class="row" ng-class="getDelayClass(issue)">
             <div class="issue-status" dropdown data-selected="{{issue.status}}" data-name="issue:status">
                 <i class="icon small" ng-class="issue.status" ng-click="clickStatus()"></i>
                 <issue-status-dropdown></issue-status-dropdown>
@@ -12,7 +12,8 @@
             <span class="issue-id memo">#{{issue.id}}</span>
             <div class="info">
                 <span class="member memo">{{issue.owner_name}}</span>
-                <span class="date memo">{{issue.plan_finish_time | date}}</span>
+                <span class="date memo" ng-show="issue.status == 'done'" title="实际完成时间">{{issue.finish_time | date}}</span>
+                <span class="date memo" ng-show="issue.status != 'done'" title="计划完成时间">{{issue.plan_finish_time | date}}</span>
             </div>
         </div>
     </textarea>
