@@ -126,4 +126,15 @@ define [
 
   ])
 
+  .directive('equalParentHeight', [->
+    restrict: 'A'
+    link: (scope, element, attrs)->
+
+      resetHeight = ()->
+        element.css('height', element.parent().outerHeight())
+      $(window).on 'onResizeEx', resetHeight
+      scope.$on '$destroy', -> $(window).off 'onResizeEx', resetHeight
+      resetHeight()
+  ])
+
 
