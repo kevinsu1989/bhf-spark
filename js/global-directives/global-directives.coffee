@@ -126,6 +126,7 @@ define [
 
   ])
 
+  #将一个元素设置与它的父元素同样的高度
   .directive('equalParentHeight', [->
     restrict: 'A'
     link: (scope, element, attrs)->
@@ -135,6 +136,18 @@ define [
       $(window).on 'onResizeEx', resetHeight
       scope.$on '$destroy', -> $(window).off 'onResizeEx', resetHeight
       resetHeight()
+  ])
+
+
+  .directive('fullSizeImagePreviewer', [->
+    restrict: 'A'
+    link: (scope, element, attrs)->
+      element.bind 'click', (event)->
+        $this = $(event.target)
+        return if not $this.is('img')
+
+        link = $this.attr('src')
+        window.open link
   ])
 
 
