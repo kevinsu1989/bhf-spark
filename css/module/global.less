@@ -67,7 +67,24 @@ h1,h2,h3,h4,h5,h6{
   background-repeat: repeat;
 }
 
+//测试flex
+.display-flex() {
+  display: flex;
+  display: -ms-flexbox;
+  -ms-box-orient: horizontal;
 
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flexbox;
+}
+
+.display-flex-item(@flex: 1) {
+  -webkit-flex: @flex;
+  -moz-flex: @flex;
+  -ms-flex: @flex;
+  flex: @flex;
+}
 
 .clearfix() {
   &:before,
@@ -114,8 +131,8 @@ i.icon{
 }
 
 .salve-panel{
-  flex: 1;
-  display: flex;
+  .display-flex-item();
+  .display-flex();
 
   .list-panel{
     width: 40%;
@@ -198,7 +215,7 @@ i.icon{
   }
 
   .details-panel{
-    flex: 1;
+    .display-flex-item();
     /*height: 100%;*/
     overflow: scroll;
     height: auto;
@@ -427,7 +444,7 @@ input.text{
   .git-list{
     li{
       padding: 6px 0;
-      display: flex;
+      .display-flex();
 
       &.create{
         padding: 10px 0 0 0;
@@ -453,7 +470,7 @@ input.text{
       }
 
       label{
-        flex: 1;
+        .display-flex-item();
       }
 
       &:hover{

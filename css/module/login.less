@@ -6,7 +6,7 @@
 
 
   .box{
-    display: flex;
+    .display-flex();
 
     margin: 200px auto 0 auto;
     width: 700px;
@@ -25,7 +25,7 @@
     }
 
     >*{
-      flex: 1;
+      .display-flex-item();
     }
 
     .welcome{
@@ -101,15 +101,23 @@
 
   .body-form{
     overflow: hidden;
+
     .inner{
       width: 720px;
+      height: 350px;
+      overflow: hidden;
       transition-property: margin-left;
       transition-duration: 300ms;
     }
 
-    ul{
-      width: 350px;
+    .sign-in, .sign-up{
+      width: 320px;
       float: left;
+      margin-left: 40px;
+    }
+
+    .sign-up{
+      visibility: hidden;
     }
   }
 }

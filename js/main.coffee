@@ -46,7 +46,8 @@ require [
   (->
 #    ua = window.navigator.userAgent
 #    if /safari|msie/i.test(ua) and not /chrome/i.test(ua)
-    if not (browser.firefox or browser.chrome)
+    console.log browser
+    if not (browser.firefox or browser.chrome or browser.webkit)
       $('#loading').fadeOut()
       alert('很抱歉，我们暂时不能支持您的浏览器')
       return

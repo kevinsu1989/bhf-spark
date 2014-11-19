@@ -6,7 +6,7 @@ define [
   'simditor-mention'
 ], (_module, _utils, _store) ->
 
-  _module.directiveModule.directive('editor', ($location, STORE)->
+  _module.directiveModule.directive('editor', ($location, $timeout, STORE)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -79,9 +79,12 @@ define [
         return if attrs.name and attrs.name isnt name
         currentUUID = uuid
 
-        simditor = initEditor(name, uploadUrl) if not simditor
+        if not simditor then simditor = initEditor(name, uploadUrl)
+
         simditor.setValue getCache(name, uuid) || content
-        simditor.focus()
+        #第二打开评论编辑器，如果有focus会报错，暂是不使用这个
+        #simditor.focus()
+        return
 
       #收到cancel的请求
       scope.$on 'editor:will:cancel', (event, name)->

@@ -5,7 +5,7 @@
   >header{
     height: 30px;
     overflow: hidden;
-    display: flex;
+    .display-flex();
     border: @normal-border;
 
     div{
@@ -23,7 +23,7 @@
     }
 
     .title{
-      flex: 1;
+      .display-flex-item();
       padding: 8px 0 0 15px;
     }
 
@@ -36,14 +36,14 @@
     padding: 15px;
     .title{
       height: 34px;
-      display: flex;
+      .display-flex();
       margin-bottom: 15px;
 
       h3{
         display: inline-block;
         vertical-align: top;
         margin-left: 15px;
-        flex: 1;
+        .display-flex-item();
         border-bottom: @normal-border;
       }
     }
@@ -57,7 +57,7 @@
     }
 
     .somebody{
-      display: flex;
+      .display-flex();
       padding-left: 35px;
       margin-bottom: 10px;
 

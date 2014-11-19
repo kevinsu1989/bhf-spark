@@ -54,6 +54,7 @@ define [
     link: (scope, element, attrs)->
 
       scope.onClickSwitchPanel = (offset)->
+        element.find('.sign-up').css('visibility', 'visible')
         element.css 'margin-left', offset
         return
 

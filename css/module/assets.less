@@ -112,14 +112,14 @@
   ul.list{
     li{
       padding: 10px 0;
-      display: flex;
+      .display-flex();
       span{
         display: inline-block;
-        flex: 1;
+        .display-flex-item();
       }
 
       .filename{
-        flex: 2;
+        .display-flex-item(2);
       }
 
       .mtime, .size{
