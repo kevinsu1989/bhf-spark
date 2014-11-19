@@ -57,6 +57,11 @@ define [
       activeClass = 'active'
       editorKey = 'comment'
 
+      #重设编辑器的大小
+      resizeCommentEditor = ()->
+        element.css('width', element.parent().width())
+
+
       #focus后，弹出大的编辑器
       scope.onFocusEditor = ()->
         element.addClass activeClass
@@ -75,4 +80,9 @@ define [
 
       #阻止click的冒泡
       element.bind 'click', (e)-> e.stopPropagation()
+
+      #调整编辑器的大小
+      $(window).on 'onResizeEx', resizeCommentEditor
+      scope.$on '$destroy', -> $(window).off 'onResizeEx', resizeCommentEditor
+      resizeCommentEditor()
   )
