@@ -9,11 +9,11 @@
             <ul class="details">
                 <li class="row" ng-repeat="week in weeks">
                     <a  class="title" href="/{{null | projectLink: 'normal'}}/weekly-report/{{week.start}}~{{week.end}}">
-                        {{week.text}}
+                        {{week.start | date: 'yyyy年第ww周'}}
                     </a>
 
                     <div class="info">
-                        <span class="memo">{{week.start}} 至 {{week.end}}</span>
+                        <span class="memo">{{week.start | date}} 至 {{week.end | date}}</span>
                     </div>
                 </li>
             </ul>
@@ -41,10 +41,11 @@
 
     <!--显示在周报右边的周报详细-->
     <textarea id="tmpl-report-weekly-details">
-        <div class="weekly-report-details">
+        <div class="weekly-report-details inner-view">
             <header>
                 <div class="title">
                     {{start_time | date: 'yyyy年第ww周'}}周报
+                    <em>{{start_time | date: 'yyyy-MM-dd'}} 至 {{end_time | date: 'yyyy-MM-dd'}}</em>
                 </div>
                 <div class="print">
                     <i class="icon small"></i>

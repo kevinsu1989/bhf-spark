@@ -20,11 +20,9 @@ define [
       start_time = $stateParams.start_time || $location.$$search.start_time
       end_time = $stateParams.end_time || $location.$$search.end_time
 
-      console.log start_time
-      console.log(_moment(start_time, 'YYYY-MM-DD').format('YYYY-MM-DD'))
       cond =
-        start_time: _moment(start_time).startOf('week').valueOf()
-        end_time: _moment(end_time).endOf('week').valueOf()
+        start_time: start_time
+        end_time: end_time
 
       _.extend $scope, cond
 

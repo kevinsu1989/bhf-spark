@@ -39,8 +39,8 @@ define [
         end = start.clone().add(6, 'days')
         list.push
           text: start.clone().subtract(1, 'days').format('YYYY年第W周')
-          start: start.format('YYYY-MM-DD')
-          end: end.format('YYYY-MM-DD')
+          start: start.startOf('days').valueOf()
+          end: end.endOf('days').valueOf()
 
       list
   )

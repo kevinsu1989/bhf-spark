@@ -22,12 +22,6 @@ define [
       }[role]
   )
 
-  #任务是否延时
-  .filter('issueIsDelay', ->
-    (issue)->
-      console.log 'abc'
-      return false
-  )
   #根据扩展名，返回对应的图片
   .filter('assetThumbnail', ->
     (asset)->

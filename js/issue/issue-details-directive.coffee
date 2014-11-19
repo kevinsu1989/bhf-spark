@@ -55,7 +55,9 @@ define [
           when 'issue:owner'
             issueAPI.update(owner: value) if ~~value isnt scope.issue.owner
           when 'issue:priority'
-            issueAPI.update(priority: value) if ~~value isnt scope.issue.priority
+            return if ~~value is scope.issue.priority
+            issueAPI.update(priority: value)
+            scope.issue.priority = value
           when 'issue:category'
             issueAPI.update(category_id: value) if ~~value isnt scope.issue.category_id
           when 'issue:version'
