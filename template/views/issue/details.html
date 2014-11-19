@@ -40,15 +40,15 @@
                         <label class="display">中</label>
                         <issue-priority-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.id}}"></issue-priority-dropdown>
                     </div>
-                    <div class="category" dropdown data-name="issue:category" data-text-container="label.display" data-selected="{{issue.category_id}}" data-formatter="分类：{0}">
+                    <div class="category text-only" dropdown data-name="issue:category" data-text-container="label.display" data-selected="{{issue.category_id}}" title="选择分类">
                         <i class="icon small cell dummy"></i>
-                        <label class="display">分类</label>
+                        <label class="display text-overflow">选择分类</label>
                         <project-category-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.category_id}}"></project-category-dropdown>
                     </div>
 
-                    <div class="version" dropdown data-name="issue:version" data-text-container="label.display" data-selected="{{issue.version_id}}" data-formatter="版本: {0}">
+                    <div class="version text-only" dropdown data-name="issue:version" data-text-container="label.display" data-selected="{{issue.version_id}}" title="选择版本">
                         <i class="icon small cell dummy"></i>
-                        <label class="display">版本</label>
+                        <label class="display text-overflow">选择版本</label>
                         <project-version-dropdown data-show-more="false"></project-version-dropdown>
                     </div>
                     <!--
@@ -87,7 +87,7 @@
                         <span class="timestamp" ng-show="issue.plan_finish_time">计划完成：{{issue.plan_finish_time | date}}</span>
                         <span class="timestamp" ng-show="issue.finish_time">实际完成：{{issue.finish_time | date}}</span>
                     </div>
-                    <div class="content row editor-style" ng-bind-html="issue.content | unsafe" ng-show="!editing"></div>
+                    <div class="content row editor-style" ng-bind-html="issue.content | unsafe" ng-show="!editing" full-size-image-previewer></div>
                     <div ng-show="editing">
                         <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}" data-upload-url="{{uploadUrl}}"></editor>
                     </div>

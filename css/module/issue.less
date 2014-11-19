@@ -54,15 +54,26 @@
     .display-flex();
     border-bottom: @normal-border;
 
+    .text-only{
+      .icon {
+        display: none;
+      }
+
+      label.display{
+        display: inline-block;
+        margin-top: 8px;
+        width: 100%;
+        padding: 0 4px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+    }
+
+
     .icon.cell{
       margin: 10px 0 0 10px;
       width: 16px;
       height: 16px;
-    }
-
-    .icon.dummy{
-      width: 1px;
-      margin: 5px 0;
     }
 
     label{
@@ -297,7 +308,9 @@
 
       .information{
         color: #CCC;
+        padding: 10px 0;
       }
+
 
       &:hover .toolbar{
         display: block;
