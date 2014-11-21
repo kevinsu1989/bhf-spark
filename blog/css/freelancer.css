@@ -21,7 +21,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
 }
@@ -76,7 +76,7 @@ header img {
 }
 header .intro-text .name {
   display: block;
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 2em;
@@ -124,7 +124,7 @@ header .intro-text .skills {
   }
 }
 .navbar {
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "微软雅黑", "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
 }
@@ -377,4 +377,54 @@ footer .footer-below {
   -webkit-transform: rotate(90deg);
   /* Safari and Chrome */
   z-index: 1052;
+}
+
+/*后增加的css*/
+
+body{
+    font-family: "微软雅黑", "宋体" !important;
+}
+
+header .container{
+    padding-top: 134px;
+}
+
+
+header .intro-text .name{
+    font-size: 30px;
+    margin-bottom: 25px;
+    font-family: "微软雅黑" !important;
+}
+
+header .intro-text .skills{
+    font-size: 20px;
+}
+
+header .intro-text{
+    /*margin-bottom: 30px;*/
+    margin: 30px 0 30px 0;
+}
+
+#about .col-lg-4 p{
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: normal;
+}
+
+#about .row{
+    margin-bottom: 20px;
+}
+
+.modal-backdrop{
+    display: none;
+}
+
+.modal, .modal-content{
+    background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.modal-body{
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
 }

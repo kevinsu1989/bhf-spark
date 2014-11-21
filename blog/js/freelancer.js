@@ -35,3 +35,11 @@ $('body').scrollspy({
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
+
+//$(document).ready(function(){
+//    $('#tiles a').bind('click', function(event){
+//        event.stopPropagation()
+//        var target = $(this).attr('href')
+//        $(target).modal({close: false})
+//    })
+//});
