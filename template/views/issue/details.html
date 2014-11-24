@@ -19,34 +19,43 @@
         <div ng-show="!notFound" class="full">
             <div style="overflow: auto; height: 100%; position:relative;">
                 <!--展示一个issue的所有内容-->
-                <header ng-hide="articleOnly">
+                <header>
                     <div class="project-name">
                         <i class="small icon cell"></i>
                         <label>{{project.title}}</label>
                     </div>
-                    <div class="owner" dropdown data-name="issue:owner" data-text-container="label.display" data-selected="{{issue.owner}}">
+
+                    <div class="owner" dropdown data-name="issue:owner" data-text-container="label.display" data-selected="{{issue.owner}}" ng-hide="articleOnly">
                         <i class="icon small cell"></i>
                         <label class="display">{{issue.owner_name || '未指定'}}</label>
                         <project-member-dropdown data-items="{{projectMember}}"></project-member-dropdown>
                     </div>
-                    <div class="finish-date">
+                    <div class="finish-date" ng-hide="articleOnly">
                         <button datetime-picker  data-name="plan_finish_time" data-date="{{issue.plan_finish_time | date:'yyyy-MM-dd'}}">
                             <i class="icon small cell"></i>
                             <span>　{{(issue.plan_finish_time | date:'yyyy-MM-dd') || '未指定' }}</span>
                         </button>
                     </div>
-                    <div class="priority" dropdown data-name="issue:priority" data-text-container="label.display" data-selected="{{issue.priority}}">
+
+                    <div class="priority" dropdown data-name="issue:priority" data-text-container="label.display" data-selected="{{issue.priority}}" ng-hide="articleOnly">
                         <i class="icon small cell priority-{{issue.priority}}"></i>
                         <label class="display">中</label>
                         <issue-priority-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.id}}"></issue-priority-dropdown>
                     </div>
+
                     <div class="category text-only" dropdown data-name="issue:category" data-text-container="label.display" data-selected="{{issue.category_id}}" title="选择分类">
                         <i class="icon small cell dummy"></i>
                         <label class="display text-overflow">选择分类</label>
                         <project-category-dropdown data-project-id="{{issue.project_id}}" data-id="{{issue.category_id}}"></project-category-dropdown>
                     </div>
 
-                    <div class="version text-only" dropdown data-name="issue:version" data-text-container="label.display" data-selected="{{issue.version_id}}" title="选择版本">
+                    <div class="category text-only" dropdown data-name="issue:category" data-text-container="label.display" data-selected="{{issue.category_id}}" title="选择类型">
+                        <i class="icon small cell dummy"></i>
+                        <label class="display text-overflow">任务类型</label>
+                        <issue-type-dropdown data-id="{{issue.tag}}"></issue-type-dropdown>
+                    </div>
+
+                    <div class="version text-only" dropdown data-name="issue:version" data-text-container="label.display" data-selected="{{issue.version_id}}" title="选择版本" ng-hide="articleOnly">
                         <i class="icon small cell dummy"></i>
                         <label class="display text-overflow">选择版本</label>
                         <project-version-dropdown data-show-more="false"></project-version-dropdown>
@@ -94,7 +103,7 @@
                 </div>
 
                 <!--附件-->
-                <div class="assets panel" ng-hide="articleOnly">
+                <div class="assets panel">
                     <div class="title">
                         <i class="icon small"></i>
                         <h3>附件</h3>
@@ -117,7 +126,7 @@
                 </div>
 
                 <!--commit-->
-                <div class="commits panel">
+                <div class="commits panel" ng-hide="articleOnly">
                     <div class="title">
                         <i class="icon small"></i>
                         <h3>代码记录</h3>
