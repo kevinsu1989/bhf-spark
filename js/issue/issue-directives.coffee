@@ -100,3 +100,12 @@ define [
           scope.logs = result.items
 
   ])
+
+  #任务标签的下拉列表
+  .directive('issueTagDropdown', [->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-issue-tag-dropdown', _template
+    link: (scope, element, attrs)->
+
+  ])

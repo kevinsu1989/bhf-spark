@@ -6,7 +6,7 @@ define [
 ], (_module, _utils) ->
 
   _module.directiveModule
-  .directive('dropdown', ()->
+  .directive('dropdown', ['$rootScope', ($rootScope)->
     restrict: 'A'
     replace: true
     link: (scope, element, attrs)->
@@ -15,6 +15,12 @@ define [
       $text = $self.find attrs.textContainer
       exclude = (attrs.excludeValue || '').split(',')
 
+      #同一时间只能打开一个dropdown
+      scope.$on 'dropdown:show', (event, source)->
+        return if source is element
+        $menus.fadeOut()
+
+      #设置选中的文本
       setText = (text)->
         text = _utils.formatString attrs.formatter || '{0}', text
         $text.text text
@@ -24,14 +30,19 @@ define [
         $menus.fadeIn()
         e.stopPropagation()
 
+        #广播通知，dropdown显示
+        $rootScope.$broadcast 'dropdown:show', element
+
         $('body').one 'click', -> $menus.fadeOut()
+
 
       attrs.$observe('selected', ->
         return if not scope.items
-        selected = attrs.selected || -1
-        $current = $menus.find("a[data-value='#{selected}']")
-
-        setText $current.text()
+        if attrs.selected
+          $current = $menus.find("a[data-value='#{attrs.selected}']")
+          setText $current.text()
+        else
+          setText attrs.empty || ""
       )
 
       #scope.$broadcast 'dropdown:selected', attrs.name, selected
@@ -49,4 +60,4 @@ define [
         scope.$emit 'dropdown:selected', attrs.name, value
 
         setText $parent.text() if _.indexOf(exclude, value) is -1
-  )
+  ])
