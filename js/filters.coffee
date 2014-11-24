@@ -30,8 +30,10 @@ define [
         url = "/api/project/#{asset.project_id}/asset/#{asset.id}/thumbnail"
         return url
 
+      pattern = /\.(7z|ai|aif|asf|asp|asx|avi|bmp|cab|chm|css|directory|doc|docx|dwg|eps|exe|fla|gz|htm|html|ico|iso|jpeg|jpg|js|log|md|mid|mov|mp3|mp4|mpg|others|pdf|png|ppt|psd|rar|rm|rtf|swf|tif|txt|wav|xls|xml|zip)$/i
+
       template = "/images/file-extension/file_extension_{0}.png"
-      ext = if asset.url then asset.url.replace(/.+\.(\w{3,4})/i, '$1') else 'others'
+      ext = if asset.url and pattern.test(asset.url) then asset.url.replace(/\.(\w)$/i, '$1') else 'others'
       return _utils.formatString template, ext
   )
 

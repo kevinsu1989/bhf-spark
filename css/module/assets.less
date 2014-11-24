@@ -9,6 +9,12 @@
     height: 180px;
     position: relative;
 
+    &:hover{
+      .overlay{
+        opacity: 1;
+      }
+    }
+
     .thumbnail{
       width: 100%;
       height: 90px;
@@ -24,17 +30,13 @@
     }
 
     .overlay{
-      &:hover{
-        opacity: 1;
-      }
-
       transition-property: opacity;
       transition-duration: 600ms;
       opacity: 0;
       position: absolute;
       background-color: rgba(0, 0, 0, 0.6);
       width: 100%;
-      height: 100%;
+      height: 90px;
       top: 0;
 
       a{
@@ -42,7 +44,7 @@
       }
 
       ul{
-        margin: 90px 0 0 2px;
+        margin: 36px 0 0 2px;
         width: 100%;
       }
 
@@ -55,7 +57,7 @@
 
     .filename{
       text-overflow: ellipsis;
-      max-height: 30px;
+      max-height: 40px;
       margin-right: 10px;
       overflow: hidden;
       word-wrap:break-word;
