@@ -106,6 +106,8 @@ define [
       'listPanel': wikiViews.listPanel
       'detailsPanel@wiki': blankDetailsView
 
+    $urlRouterProvider.otherwise('/')
+
     $stateProvider
     .state('home',
       url: '/'
