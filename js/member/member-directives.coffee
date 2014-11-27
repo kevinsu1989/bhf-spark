@@ -202,6 +202,7 @@ define [
         API.project($stateParams.project_id).member(member.member_id).delete().then ()->
           scope.$emit 'project:member:request'
   )
+
   #项目成员角色 project-member-item #api/project/39/member/1/
   .directive('projectMemberRoleDropdown', ($stateParams, API)->
     restrict: 'AE'
@@ -212,4 +213,37 @@ define [
         if 'project-member-item' is name
           API.project($stateParams.project_id).member(scope.member.member_id).update(role: value).then ()->
             scope.$emit 'project:member:request'
+  )
+
+  #读取用户的消息
+  .directive('memberMessageNotifier', ($stateParams, API)->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-member-message-notifier', _template
+    link:(scope, element, attr)->
+      $dropdown = element.find 'div.message-list'
+      $dropdown.bind 'click', (event)-> event.stopPropagation()
+
+      scope.onCloseNotifier = -> $dropdown.fadeOut()
+
+      scope.onClickNotifier = (event)->
+        event.stopPropagation()
+        $dropdown.fadeIn()
+        $('body').one 'click', -> scope.onCloseNotifier()
+        return
+
+      scope.onClickItem = (item, hide)->
+        scope.onCloseNotifier() if hide
+        API.message(item.id).update().then -> loadMessage()
+
+      scope.onClickReadAll = ()->
+        scope.onCloseNotifier()
+        API.message().update().then -> loadMessage()
+
+      #加载消息
+      loadMessage = ()->
+        API.message().retrieve(pageSize: 10, status: 'new').then (result)->
+          scope.message = result
+
+      loadMessage()
   )

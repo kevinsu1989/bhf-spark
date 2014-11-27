@@ -343,4 +343,13 @@ define [], ->
         "put": false
       }
     }
+
+    {
+      "url": "message/:message_id",
+      "methods": {
+        "post": false,
+        "delete": false,
+        "patch": false
+      }
+    }
 ]
