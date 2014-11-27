@@ -1,6 +1,6 @@
 "use strict"
-//'v/socket.io'
-define([], function(){
+
+define(['v/socket.io'], function(){
     var Notify = function(){}
     //======================== web notify start
     var extend = function(source, destination){
@@ -70,7 +70,6 @@ define([], function(){
 
     //======================== Desktop notify start
 
-    /*
     Notify.desktop = {}
 
     var so = io.connect("ws://"+window.location.hostname+":8001")
@@ -96,25 +95,25 @@ define([], function(){
 
     //任务发起人的任务被完成通知
     var doIssueChange = function(response){
+        var title
         if(response.data.issue.status !== 'done'){
-            return;
+            title = '将状态改为->' + response.data.issue.status
+        }else{
+            title = '完成了任务'
         }
-        var title = response.data.issue.tag + ' 任务被完成啦！'
-        var content = " 通关:  " +  response.data.issue.title
+
+        title = response.sender.realname + title
+        var content = response.data.issue.title
         deskShow(title, content, response)
     }
 
     //任务被指定通知
     var doIssueAssigned = function(response){
-        var priority = ['', '火速', '紧急', '', '随机', '梦幻']
-        var title = priority[response.data.issue.priority] + " 通关任务来啦！"
+        var plan_finish_time, title = "您有新任务"
 
-        if(response.data.issue.plan_finish_time){
-            if(new Date().getDate() === new Date(response.data.issue.plan_finish_time).getDate()){
-                title = "今天的" + title
-            }else{
-                title = moment(response.data.issue.plan_finish_time).format("MM月DD日") + "前的" + title
-            }
+        if(plan_finish_time = response.data.issue.plan_finish_time){
+
+            title +=  "，于" + moment(plan_finish_time).format("MM月DD日") + "到期"
         }
 
         var content = response.data.issue.title
@@ -123,15 +122,14 @@ define([], function(){
     //某人被@通知
     var doMemtion = function(response){
         var title = response.data.issue.title
-        console.log(response)
-        var content = "";
-        if(response.data.comment){
-            content = $(response.data.comment.content).text()
-        }
-        if(content.length > 20){
-            content = content.substr(0, 20) + "..."
-        }
-        deskShow(title, content, response)
+//        var content = "";
+//        if(response.data.comment){
+//            content = $(response.data.comment.content).text()
+//        }
+//        if(content.length > 20){
+//            content = content.substr(0, 20) + "..."
+//        }
+        deskShow('有人在提到你了', title, response)
     }
 
     var doEvent = {
@@ -170,7 +168,7 @@ define([], function(){
                 timeout:false,
                 callback: {
                     onClose: function(){
-                        window.open("http://bhf.hunantv.com/#/project/17/issue/1506", "_blank" )
+                        window.open("http://bhf.hunantv.com/project/17/issue/1506", "_blank" )
                     }
                 }
             })
@@ -188,7 +186,7 @@ define([], function(){
         }
         var options = {
             lang: "UTF-8",
-            icon: '/images/logo/desktop.png',
+            icon: '/images/desktop.png',
             body: body
         }
         var cb = function(){
@@ -245,10 +243,10 @@ define([], function(){
         realMessage('talk:project', broadcast)
     }
     Notify.desktop.toMember = function (member_id){
+        console.log('abc')
         broadcast.project_id = project_id
         realMessage('talk:member', broadcast)
     }
     //======================== Desktop notify end
-    */
     return Notify
 })
