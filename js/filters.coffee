@@ -168,3 +168,21 @@ define [
       reg = new RegExp(keyword, 'ig')
       text.replace reg, "<span class='highlight'>#{keyword}</span>"
   )
+
+  .filter('removeTag', ->
+    (text)-> text and text.replace(/(#.+?#)/ig, '')
+  )
+
+  #移除指令
+  .filter('removeCommand', ->
+    (text)->
+      text and
+      text.replace(/#p\-\d+/ig, '')
+      .replace(/#(doing|done|pause)/, '')
+      .replace(/#(.+)/, '')
+  )
+
+  #如果时间为空，则返回当前时间
+  .filter('dateOrNow', ->
+    (date)-> date || new Date()
+  )
