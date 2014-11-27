@@ -30,8 +30,9 @@
                         <label class="display">{{issue.owner_name || '未指定'}}</label>
                         <project-member-dropdown data-items="{{projectMember}}"></project-member-dropdown>
                     </div>
+
                     <div class="finish-date" ng-hide="articleOnly">
-                        <button datetime-picker  data-name="plan_finish_time" data-date="{{issue.plan_finish_time | date:'yyyy-MM-dd'}}">
+                        <button datetime-picker  data-name="plan_finish_time" data-date="{{issue.plan_finish_time}}">
                             <i class="icon small cell"></i>
                             <span>　{{(issue.plan_finish_time | date:'yyyy-MM-dd') || '未指定' }}</span>
                         </button>
@@ -82,7 +83,7 @@
                             <issue-status-dropdown ng-hide="articleOnly"></issue-status-dropdown>
                         </div>
                         <input type="text" class="text" ng-show="editing" ng-model="issue.title" />
-                        <h3 ng-show="!editing">{{issue.title}}</h3>
+                        <h3 ng-show="!editing">{{issue.title | removeCommand | removeTag}}</h3>
 
                         <div class="toolbar">
                             <a ng-click="onClickEdit($event, data)" href="javascript:void(0)" class="edit">编辑</a>

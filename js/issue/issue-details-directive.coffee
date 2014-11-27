@@ -64,7 +64,8 @@ define [
             issueAPI.update(version_id: value) if ~~value isnt scope.issue.version_id
 
       #保存修改时间
-      scope.$on 'datetime:change', (event,name,date)->
+      scope.$on 'datetime:change', (event, name, date)->
+        console.log name
         switch name
             when 'plan_finish_time'
               issueAPI.update(plan_finish_time:date).then (result)->

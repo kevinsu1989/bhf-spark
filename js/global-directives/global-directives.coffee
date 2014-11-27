@@ -48,10 +48,20 @@ define [
       if formart then dateOpt.formart = formart
 
       $this = $(element);
-      $this.click ()->
-        $this.datetimepicker(dateOpt)
-        $this.on 'changeDate', (ev)->
-          scope.$emit 'datetime:change', name, ev.date.valueOf()
+      $this.datetimepicker(dateOpt)
+
+      $this.on 'changeDate', (ev)->
+        scope.$emit 'datetime:change', name, ev.date.valueOf()
+
+      $this.on 'show', ()->
+        current = attrs.date
+        current = new Date(Number(current)) if current
+        $this.datetimepicker 'setDate', current || new Date()
+#      scope.$on '$destroy', ->
+#        alert('a')
+#        $this.datepicker 'destroy'
+
+
   )
 
   #tab的directive
