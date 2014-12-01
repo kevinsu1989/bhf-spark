@@ -30,8 +30,9 @@ require [
   "ng"
   "app"
   "routes"
+  'notify'
   'jquery'
-], (_ng, _app, routes) ->
+], (_ng, _app, routes, _notify) ->
 
   (->
     timer = null
@@ -44,13 +45,14 @@ require [
 
   #检测不支持的浏览器
   (->
+#暂不检测浏览器，避免给用户造成干扰
 #    ua = window.navigator.userAgent
 #    if /safari|msie/i.test(ua) and not /chrome/i.test(ua)
 #    console.log browser
-    if not (browser.firefox or browser.chrome or browser.webkit)
-      $('#loading').fadeOut()
-      alert('很抱歉，我们暂时不能支持您的浏览器')
-      return
+#    if not (browser.firefox or browser.chrome or browser.webkit)
+#      $('#loading').fadeOut()
+#      _notify.error '警告：您的浏览器可能不受支持，建议使用Safari/Firefox/Chrome/Opera/IE 11'
+#      #return
 
     _ng.element().ready ->
       _ng.resumeBootstrap [_app.name]

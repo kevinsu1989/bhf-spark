@@ -151,8 +151,8 @@ define(['v/socket.io'], function(){
 
 
     var isSupport = (function(){
-        if(! "Notification" in window){
-            Notify.warn('该浏览器不支持桌面通知! 建议使用Chrome,Firefox 或者 Safari.\n 技术支持(rtx): 易晓峰(非妹纸勿扰 ^_^)',{timeout: 5 * 1000})
+        if(!("Notification" in window)){
+            Notify.warn('您的浏览器不支持桌面通知，建议使用Chrome,Firefox 或者 Safari',{timeout: 5 * 1000})
             return false
         }
         if (Notification.permission === 'default') {
