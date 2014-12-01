@@ -44,7 +44,7 @@ define [
       .then (result)-> $scope.undoneIssues = result
       #          scope.$apply()
 
-      $scope.showQuickEditor = true
+      $scope.showQuickEditor = Boolean(cond.category_id)
       #加载已经完成
       issueAPI.retrieve(_.extend({status: 'done', pageSize: 20}, params))
       .then (result)-> $scope.doneIssues = result

@@ -24,6 +24,9 @@
             <h3>{{title}}</h3>
             <div class="create">
                 <input type="text" placeholder="请输入您将要创建的任务，支持指令" autofocus issue-quick-editor ng-keydown="onKeyDown($event)" data-category="1" ng-show="showQuickEditor" data-tag="issue" />
+                <div ng-show="!showQuickEditor" class="empty">
+                    您需要切换到具体任务分类下才能创建任务
+                </div>
             </div>
 
             <div>
