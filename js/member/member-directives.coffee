@@ -223,6 +223,7 @@ define [
     link:(scope, element, attr)->
       $dropdown = element.find 'div.message-list'
       $dropdown.bind 'click', (event)-> event.stopPropagation()
+      $dropdown.bind 'mouseleave', -> scope.onCloseNotifier()
 
       scope.onCloseNotifier = -> $dropdown.fadeOut()
 
