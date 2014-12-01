@@ -64,9 +64,9 @@ define [
 
     $scope.$on 'issue:change', (event, data)->
       loadDocument()
-      return if data.status isnt 'new'
-      url = "/#{$filter('projectLink')(null, 'normal')}/document/#{data.id}"
-      $location.path(url).search('editing', 'true')
+#      return if data.status isnt 'new'
+#      url = "/#{$filter('projectLink')(null, 'normal')}/document/#{data.id}"
+#      $location.path(url).search('editing', 'true')
 
     loadDocument()
   ])

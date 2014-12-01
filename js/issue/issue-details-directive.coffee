@@ -73,7 +73,6 @@ define [
 
       #保存修改时间
       scope.$on 'datetime:change', (event, name, date)->
-        console.log name
         switch name
             when 'plan_finish_time'
               issueAPI.update(plan_finish_time:date).then (result)->
@@ -84,9 +83,13 @@ define [
         return if not confirm('您确定要删除这条记录吗')
         issueAPI.update(status : 'trash').then ()->
           NOTIFY.success '删除成功'
+
+          #切换url
+          url = $location.$$path.replace(/(.+)\/\d+$/, '$1')
+          $location.path(url)
           $rootScope.$broadcast 'issue:change'
 
-      scope.onClickEdit = ($event)->
+      scope.onClickEdit = ()->
         scope.editing = true
         #延时让页面先显示出来，然后初始化editor(仅在第一次初始化)，避免editor获取不到宽度
         window.setTimeout(->
@@ -113,5 +116,8 @@ define [
         return if editorKey isnt name
         scope.editing = false
         scope.$apply() if not scope.$$phase
+
+      #强行显示issue的编辑器
+      scope.$on 'issue:editor:show', ()-> scope.onClickEdit()
 
   )

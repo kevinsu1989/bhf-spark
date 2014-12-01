@@ -57,14 +57,26 @@ define [
   ])
 
   #快速编辑的功能
-  .directive('issueQuickEditor', ['$state', '$stateParams', 'API', 'NOTIFY', ($state, $stateParams, API, NOTIFY)->
+  .directive('issueQuickEditor', ['$state', '$stateParams', '$location', '$timeout', '$rootScope', 'API', 'NOTIFY',
+  ($state, $stateParams, $location, $timeout, $rootScope, API, NOTIFY)->
     restrict: 'A'
     replace: true
     link: (scope, element, attrs)->
+      console.log($location)
       titleMap =
         issue: '任务'
         document: '文档'
         discussion: '讨论'
+
+      #跳转到具体的issue
+      gotoIssue = (issue_id)->
+        #替换掉url后面可能存在的id
+        url = $location.$$path.replace(/(.+)(\/\d+)$/, '$1') + '/' + issue_id
+        $location.path(url)
+
+        #延时打开编辑器，但这样做好吗？
+        #这个地方的问题在于，跳转到url后，需要加载完issue，才能显示editor，这样就需要多个事件交互
+        $timeout (-> $rootScope.$broadcast('issue:editor:show')), 1000
 
       scope.onKeyDown = (event)->
         return if event.keyCode isnt 13
@@ -83,6 +95,8 @@ define [
           event.target.value = null
           #通知issue被创建
           scope.$emit 'issue:change', {status: 'new', tag: attrs.tag, id: result.id}
+          #跳转
+          gotoIssue result.id
   ])
 
 
