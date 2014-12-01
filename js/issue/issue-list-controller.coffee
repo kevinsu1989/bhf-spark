@@ -30,6 +30,8 @@ define [
       else
         $scope.title = "所有任务"
 
+      $scope.condition = cond
+
       #指定分类id
       params.category_id = $state.params.category_id
       #指定版本
@@ -39,19 +41,17 @@ define [
       issueAPI = API.project($stateParams.project_id).issue()
 
       issueAPI.retrieve(_.extend({status: 'undone', pageSize: 9999}, params))
-      .then (result)->
-        $scope.undoneIssues = result
+      .then (result)-> $scope.undoneIssues = result
       #          scope.$apply()
 
       $scope.showQuickEditor = true
       #加载已经完成
       issueAPI.retrieve(_.extend({status: 'done', pageSize: 20}, params))
-      .then (result)->
-        $scope.condition = cond
-        $scope.doneIssues = result
+      .then (result)-> $scope.doneIssues = result
     #          scope.$apply()
 
-
+      issueAPI.retrieve(_.extend({status: 'testing', pageSize: 9999}, params))
+      .then (result)-> $scope.testingIssues = result
 
     #强制重新加载数据
     $scope.$on 'issue:list:reload', (event)-> searchIssue()

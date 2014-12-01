@@ -51,17 +51,25 @@ define [
           scope.$broadcast 'asset:bundle:load', result
 
       scope.$on 'dropdown:selected', (event, type, value)->
+        field = null
         switch type
           when 'issue:owner'
-            issueAPI.update(owner: value) if ~~value isnt scope.issue.owner
+            field = 'owner' if ~~value isnt scope.issue.owner
           when 'issue:priority'
-            return if ~~value is scope.issue.priority
-            issueAPI.update(priority: value)
-            scope.issue.priority = value
+            field = 'priority' if ~~value isnt scope.issue.priority
           when 'issue:category'
-            issueAPI.update(category_id: value) if ~~value isnt scope.issue.category_id
+            field = 'category_id' if ~~value isnt scope.issue.category_id
           when 'issue:version'
-            issueAPI.update(version_id: value) if ~~value isnt scope.issue.version_id
+            field = 'version_id' if ~~value isnt scope.issue.version_id
+          when 'issue:status'
+            field = 'status' if ~~value isnt scope.issue.status
+
+        return if not field
+        data = {}
+        data[field] = value
+        issueAPI.update(data).then ->
+          scope.issue[field] = value
+          $rootScope.$broadcast 'issue:list:reload'
 
       #保存修改时间
       scope.$on 'datetime:change', (event, name, date)->

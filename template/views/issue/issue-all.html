@@ -43,6 +43,18 @@
                     </div>
                 </div>
 
+                <!--进入测试中-->
+                <div class="list" ng-show="testingIssues.items.length > 0">
+                    <header>
+                        <h3>测试中<span class="badge">({{testingIssues.pagination.recordCount}})</span></h3>
+                    </header>
+                    <ul class="details">
+                        <li ng-repeat="issue in testingIssues.items" class="row" id="issue-list-{{issue.id}}">
+                            <issue-list-cell></issue-list-cell>
+                        </li>
+                    </ul>
+                </div>
+
                 <!--已经完成的部分-->
                 <div class="list" id="issue-list-done">
                     <header>
@@ -135,6 +147,9 @@
                 </li>
                 <li>
                     <a data-value="pause"><i class="icon small pause"></i><span>暂停</span></a>
+                </li>
+                <li>
+                    <a data-value="testing"><i class="icon small testing"></i><span>进入测试</span></a>
                 </li>
                 <li>
                     <a data-value="done"><i class="icon small done"></i><span>已完成</span></a>
