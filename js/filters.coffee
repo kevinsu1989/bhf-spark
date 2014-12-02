@@ -164,7 +164,7 @@ define [
   .filter('highlightKeyword', ->
     (text, keyword)->
       return text if not keyword
-      console.log keyword
+#      console.log keyword
       reg = new RegExp(keyword, 'ig')
       text.replace reg, "<span class='highlight'>#{keyword}</span>"
   )

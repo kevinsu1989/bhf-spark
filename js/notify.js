@@ -243,7 +243,7 @@ define(['v/socket.io'], function(){
         realMessage('talk:project', broadcast)
     }
     Notify.desktop.toMember = function (member_id){
-        console.log('abc')
+//        console.log('abc')
         broadcast.project_id = project_id
         realMessage('talk:member', broadcast)
     }

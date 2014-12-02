@@ -62,7 +62,7 @@ define [
     restrict: 'A'
     replace: true
     link: (scope, element, attrs)->
-      console.log($location)
+#      console.log($location)
       titleMap =
         issue: '任务'
         document: '文档'

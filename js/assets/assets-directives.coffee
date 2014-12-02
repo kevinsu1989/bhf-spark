@@ -57,7 +57,7 @@ define [
           #进度
           progress: (event, file, xhr, options)->
             percent = (event.loaded / event.total * 100)
-            console.log percent
+#            console.log percent
             $progress.text percent.toFixed(2) + '%'
             $percent.css('width', percent + '%')
 

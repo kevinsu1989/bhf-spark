@@ -198,7 +198,7 @@ define [
 
       $timeout(
         ()->
-          console.log $("##{attrs.domId}").length
+#          console.log $("##{attrs.domId}").length
 
           Circles.create
             id: attrs.domId
