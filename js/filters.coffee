@@ -5,10 +5,10 @@ define [
   'moment'
 ], (_module, _utils, _moment) ->
 
-  _module.filterModule.filter('unsafe', ($sce)->
+  _module.filterModule.filter('unsafe', ['$sce', ($sce)->
     (text)->
       $sce.trustAsHtml(text)
-  )
+  ])
 
   .filter('projectMemberRole', ()->
     (role)->
@@ -79,18 +79,18 @@ define [
   .filter('timeAgo', -> (date)-> _moment(date).fromNow())
 
   #获取当前项目的版本
-  .filter('currentProjectVersion', ($stateParams)->
+  .filter('currentProjectVersion', ['$stateParams', ($stateParams)->
     (versions)->
       return '所有版本' if not versions or not $stateParams?.version_id
       current = _.find versions, id: Number($stateParams.version_id)
       return current?.title || '未知版本'
-  )
+  ])
 
-  .filter('wikiLink', ($stateParams)->
+  .filter('wikiLink', ['$stateParams', ($stateParams)->
     (data, type)-> ['wiki', $stateParams.project_id].join('/')
-  )
+  ])
   #根据url构建项目中间的链接
-  .filter('projectLink', ($stateParams, $state)->
+  .filter('projectLink', ['$stateParams', '$state', ($stateParams, $state)->
     (data, type)->
       hasVersion = type in ['issue', 'normal']
       hasCategory = type is 'issue'
@@ -130,7 +130,7 @@ define [
         parts.push('issue')
 
       parts.join('/')
-  )
+  ])
 
   .filter('filenameIsPicture', ()->
     (filename)->
