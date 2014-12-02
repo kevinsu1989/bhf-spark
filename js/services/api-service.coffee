@@ -9,7 +9,8 @@ define [
   BASEAPI = '/api/'
 
   _module.serviceModule
-  .factory 'API', ($http, $location, $q, NOTIFY, $sce, $rootScope)->
+  .factory('API', ['$http', '$location', '$q', 'NOTIFY', '$sce', '$rootScope',
+  ($http, $location, $q, NOTIFY, $sce, $rootScope)->
 
     options =
       prefix: '/api'
@@ -139,3 +140,4 @@ define [
         @ajax url: url, data: data
 
     api
+  ])

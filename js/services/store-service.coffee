@@ -4,7 +4,7 @@ define [
   '../ng-module'
 ], (_ng, _module) ->
   _module.serviceModule
-  .service 'STORE', (API, $q)->
+  .service('STORE', ['$q', 'API', ($q, API)->
 
     service = {}
 
@@ -31,3 +31,4 @@ define [
     service.projectCategory = new CacheData()
     service.projectVersion = new CacheData()
     return service
+  ])

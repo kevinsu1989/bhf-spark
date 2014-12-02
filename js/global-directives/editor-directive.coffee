@@ -6,7 +6,8 @@ define [
   'simditor-mention'
 ], (_module, _utils, _store) ->
 
-  _module.directiveModule.directive('editor', ($location, $timeout, STORE)->
+  _module.directiveModule.directive('editor', ['$location', '$timeout', 'STORE',
+  ($location, $timeout, STORE)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -108,4 +109,4 @@ define [
 
         removeCache attrs.name, currentUUID
         scope.$emit 'editor:submit', attrs.name, data
-  )
+  ])

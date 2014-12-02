@@ -6,7 +6,7 @@ define [
 ], (_module,_utils, _template) ->
 
   _module.directiveModule
-  .directive('issueListCell', (API)->
+  .directive('issueListCell', ['API', (API)->
     restrict: 'E'
 #    scope: data: '='
     replace: true
@@ -37,7 +37,7 @@ define [
 #
 #          $obj.transition(optoins)
 
-  )
+  ])
 
   .directive('issuePriorityDropdown', [()->
     restrict: 'E'

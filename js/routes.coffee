@@ -16,7 +16,8 @@ define [
     _tmplCommit, _tmplAssets, _tmplProject,
     _tmplReport, _tmplGlobal, _tmplAuthority, _tmplWiki) ->
 
-  _app.config(($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
+  _app.config(['$routeProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider',
+  ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
     $locationProvider.html5Mode true
 
     blankDetailsView =
@@ -343,4 +344,4 @@ define [
       views: wikiViews
     )
 
-  )
+  ])

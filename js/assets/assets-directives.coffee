@@ -11,7 +11,7 @@ define [
 
   _module.directiveModule
   #上传素材
-  .directive('uploadAssets', ($stateParams, API, NOTIFY)->
+  .directive('uploadAssets', ['$stateParams', 'API', 'NOTIFY', ($stateParams, API, NOTIFY)->
     restrict: 'A'
     replace: true
     link: (scope, element, attr)->
@@ -65,27 +65,10 @@ define [
       FileAPI.event.on target, 'change', (event)->
         files = FileAPI.getFiles(event)
         FileAPI.filterFiles files, filterFn, uploadFn
-      return
-
-      #用来显示上传ui组件的dom
-      file_upload_box = $('.file_upload_box')
-
-      #初始化 webFileUpload  input name 为 fileVal: "assets"
-      uploader = WEBFILEUPLOAD.webUploaderInit {server: server, fileVal: "assets"}, file_upload_box
-
-      #文件上传完 触发更新事件
-      uploader.on "uploadFinished", ()->
-        scope.$emit "assets:upload:finish"
-
-      #把当前元素的点击事件代理到input type=file 的label上去 触发文件选择框  这个实现以后可以优化
-      $(element).click ()->
-        $(file_upload_box.find('label')).trigger('click')
-      #       上传路径是：project/:project_id/issue/:issue_id/assets
-      return
-  )
+  ])
 
   #素材的缩略图列表
-  .directive('assetThumbnails', ($stateParams, API)->
+  .directive('assetThumbnails', ['$stateParams', 'API', ($stateParams, API)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-asset-thumbnails', _template
@@ -115,7 +98,7 @@ define [
 
       #初次进入直接拉取一次数据
       getAssetList()
-  )
+  ])
 
   .directive('assetUnwindPreviewer', ['$sce', '$state', ($sce, $state)->
     restrict: 'E'

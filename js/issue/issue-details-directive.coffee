@@ -5,7 +5,8 @@ define [
 ], (_module,_utils, _) ->
 
   _module.directiveModule
-  .directive('issueDetails', ($rootScope, $location, API, NOTIFY)->
+  .directive('issueDetails', ['$rootScope', '$location', 'API', 'NOTIFY',
+  ($rootScope, $location, API, NOTIFY)->
     restrict: 'A'
     replace: true
     link: (scope, element, attr)->
@@ -120,4 +121,4 @@ define [
       #强行显示issue的编辑器
       scope.$on 'issue:editor:show', ()-> scope.onClickEdit()
 
-  )
+  ])

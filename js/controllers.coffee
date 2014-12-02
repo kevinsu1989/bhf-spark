@@ -8,6 +8,7 @@ define [
 
   _module.controllerModule
 
-  .controller('homeController', ($scope, $stateParams, API)->
+  .controller('homeController', ['$scope', '$stateParams', 'API',
+  ($scope, $stateParams, API)->
 
-  )
+  ])

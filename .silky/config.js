@@ -55,9 +55,9 @@ module.exports = {
         //是否压缩
         compress: {
             //压缩js，包括coffee
-            js: false,
+            js: true,
             //压缩css，包括less
-            css: false,
+            css: true,
             //压缩html
             html: false,
             //是否压缩internal的js

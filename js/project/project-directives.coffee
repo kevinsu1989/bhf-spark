@@ -9,7 +9,7 @@ define [
 ], (_module,_utils, _tmplAll, _tmplEditors) ->
 
   _module.directiveModule
-  .directive('projectMenu', ($rootScope, $stateParams)->
+  .directive('projectMenu', ['$rootScope', '$stateParams', ($rootScope, $stateParams)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-menu', _tmplAll
@@ -22,7 +22,7 @@ define [
       scope.baseLink = parts.join('/')
 
       scope.onClickInvite = -> $rootScope.$broadcast 'member:invite:show'
-  )
+  ])
 
   .directive('projectHeader', ()->
     restrict: 'E'
@@ -50,7 +50,8 @@ define [
   )
 
   #项目列表
-  .directive('projectTiles', ['$location', '$rootScope', '$timeout', '$filter', 'API', 'NOTIFY', 'ENUM'
+  .directive('projectTiles', ['$location', '$rootScope',
+  '$timeout', '$filter', 'API', 'NOTIFY', 'ENUM'
   ($location, $rootScope, $timeout, $filter, API, NOTIFY, ENUM)->
     restrict: 'E'
     replace: true

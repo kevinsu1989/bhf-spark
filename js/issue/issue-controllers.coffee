@@ -6,7 +6,8 @@ define [
 
   _module.controllerModule.
   #issue明细
-  controller('issueDetailsController', ($scope, $stateParams, API, $state)->
+  controller('issueDetailsController', ['$scope', '$stateParams', 'API', '$state',
+  ($scope, $stateParams, API, $state)->
     $scope.articleOnly = $state.current.data?.articleOnly
 
     API.project($stateParams.project_id)
@@ -19,7 +20,7 @@ define [
     $scope.$on "assets:upload:finish", ()->
       $scope.$broadcast "assets:list:update"
       return
-  )
+  ])
 
   #讨论列表
   .controller('discussionListController', ['$scope', '$stateParams', '$location', '$filter', 'API'
@@ -49,9 +50,10 @@ define [
 
 
   #评论列表
-  .controller('commentListController', ($scope, $stateParams, API)->
+  .controller('commentListController', ['$scope', '$stateParams', 'API',
+  ($scope, $stateParams, API)->
 
-  )
+  ])
 
 #  #文档列表
   .controller('documentListController', ['$scope', '$stateParams', '$location', '$filter', 'API',

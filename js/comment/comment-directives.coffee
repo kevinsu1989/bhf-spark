@@ -6,7 +6,7 @@ define [
 
   _module.directiveModule
   #评论列表
-  .directive('commentList', ($stateParams, API)->
+  .directive('commentList', ['$stateParams', 'API', ($stateParams, API)->
     restrict: 'E'
     scope: data: '='
     replace: true
@@ -25,10 +25,10 @@ define [
       scope.$on 'comment:list:reload', -> searchComment()
 
       searchComment()
-  )
+  ])
 
   #评论详细
-  .directive('commentCell', ($stateParams, API, NOTIFY)->
+  .directive('commentCell', ['$stateParams', 'API', 'NOTIFY', ($stateParams, API, NOTIFY)->
     restrict: 'E'
     scope: data: '=', '$index': '='
     replace: true
@@ -45,10 +45,10 @@ define [
           element.fadeOut()
 
         return
-  )
+  ])
 
   #评论的编辑框
-  .directive('commentEditor', (API)->
+  .directive('commentEditor', ['API', (API)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -85,4 +85,4 @@ define [
       $(window).on 'onResizeEx', resizeCommentEditor
       scope.$on '$destroy', -> $(window).off 'onResizeEx', resizeCommentEditor
       resizeCommentEditor()
-  )
+  ])

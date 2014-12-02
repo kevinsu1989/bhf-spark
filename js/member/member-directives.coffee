@@ -6,7 +6,7 @@ define [
   'v/jquery.modal'
 ], (_module, _utils, _template, _autocomplete) ->
   _module.directiveModule
-  .directive('memberSetting', ($rootScope, API)->
+  .directive('memberSetting', ['$rootScope', 'API', ($rootScope, API)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -21,9 +21,10 @@ define [
         scope.$broadcast "member:setting:bindAll"
       $rootScope.$on 'member:setting:hide', ()->
         $.modal.close()
-  )
+  ])
 
-  .directive('memberProfile', ($location, API, NOTIFY, $rootScope)->
+  .directive('memberProfile', ['$location', 'API', 'NOTIFY', '$rootScope',
+  ($location, API, NOTIFY, $rootScope)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-member-profile', _template
@@ -73,9 +74,10 @@ define [
         scope.$apply()
         return
       )
-  )
+  ])
 
-  .directive('memberChangePassword', ($location, API, NOTIFY)->
+  .directive('memberChangePassword', ['$location', 'API', 'NOTIFY',
+  ($location, API, NOTIFY)->
     restrict: 'E'
     replace: true
     scope: true
@@ -98,17 +100,19 @@ define [
           scope.onClickCancel()
         )
         return
-  )
+  ])
 
-  .directive('memberNotification', ($location, API, $stateParams)->
+  .directive('memberNotification', ['$location', 'API', '$stateParams',
+  ($location, API, $stateParams)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-member-notification', _template
     link: (scope, element, attr)->
-  )
+  ])
 
   #自动完成
-  .directive('membersLookup', ($stateParams, API, STORE)->
+  .directive('membersLookup', ['$stateParams', 'API', 'STORE',
+  ($stateParams, API, STORE)->
     restrict: 'AC'
     link: (scope, element, attrs)->
       $this = $(element)
@@ -177,9 +181,10 @@ define [
       )
       #进入的时候初始化lookup
       initLookup()
-  )
+  ])
+
   # 添加项目成员
-  .directive('memberCreatorModel', ($location, API)->
+  .directive('memberCreatorModel', ['$location', 'API', ($location, API)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-member-creator', _template
@@ -191,9 +196,10 @@ define [
         $o.modal showClose: false
       scope.$on 'member:creator:hide', ()->
         $.modal.close()
-  )
+  ])
+
   #项目成员item project-member-item #api/project/39/member/1
-  .directive('projectMemberItem', ($stateParams, API)->
+  .directive('projectMemberItem', ['$stateParams', 'API', ($stateParams, API)->
     restrict: 'AE'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-member-item', _template
@@ -201,10 +207,10 @@ define [
       scope.removeProjectMember = (member)->
         API.project($stateParams.project_id).member(member.member_id).delete().then ()->
           scope.$emit 'project:member:request'
-  )
+  ])
 
   #项目成员角色 project-member-item #api/project/39/member/1/
-  .directive('projectMemberRoleDropdown', ($stateParams, API)->
+  .directive('projectMemberRoleDropdown', ['$stateParams', 'API', ($stateParams, API)->
     restrict: 'AE'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-member-role-dropdown', _template
@@ -213,10 +219,10 @@ define [
         if 'project-member-item' is name
           API.project($stateParams.project_id).member(scope.member.member_id).update(role: value).then ()->
             scope.$emit 'project:member:request'
-  )
+  ])
 
   #读取用户的消息
-  .directive('memberMessageNotifier', ($stateParams, API)->
+  .directive('memberMessageNotifier', ['$stateParams', 'API', ($stateParams, API)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-member-message-notifier', _template
@@ -246,5 +252,7 @@ define [
         API.message().retrieve(pageSize: 10, status: 'new').then (result)->
           scope.message = result
 
+      #加载用户离线通知的事件
+      scope.$on 'member:message:reload', -> loadMessage()
       loadMessage()
-  )
+  ])

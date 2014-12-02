@@ -5,7 +5,8 @@ define [
 ], (_module, _utils, _template) ->
 
   _module.controllerModule
-  .controller('issueListController', ($scope, $stateParams, API, $state, $location)->
+  .controller('issueListController', ['$scope', '$stateParams', 'API', '$state', '$location',
+  ($scope, $stateParams, API, $state, $location)->
     #搜索issue
     searchIssue = (condition)->
       #搜索条件
@@ -64,4 +65,4 @@ define [
       searchIssue keyword: keyword
 
     searchIssue()
-  )
+  ])

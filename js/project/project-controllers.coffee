@@ -7,7 +7,9 @@ define [
   '../utils'
 ], (_module, _moment, _, _utils) ->
   _module.controllerModule.
-  controller('projectController', ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
+  controller('projectController', ['$rootScope', '$scope',
+  '$routeParams', '$location', '$stateParams', 'API', 'STORE',
+  ($rootScope, $scope, $routeParams, $location, $stateParams, API, STORE)->
     projectAPI = API.project($stateParams.project_id)
 
     #更新项目信息
@@ -65,4 +67,4 @@ define [
     updateProjectCategory()
     updateProject()
     updateProjectVersion()
-  )
+  ])

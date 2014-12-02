@@ -6,7 +6,8 @@ define [
 ], (_module, _utils, _) ->
 
   _module.controllerModule.
-  controller('assetsListController', ($scope, $stateParams, API)->
+  controller('assetsListController', ['$scope', '$stateParams', 'API',
+  ($scope, $stateParams, API)->
     $scope.condition = {}
 
     searchAssets = (query)->
@@ -21,7 +22,7 @@ define [
       searchAssets keyword: keyword
 
     searchAssets()
-  )
+  ])
 
   .controller('assetsDetailsController', ['$scope', '$stateParams', '$filter', 'API',
   ($scope, $stateParams, $filter, API)->
