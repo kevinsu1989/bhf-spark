@@ -15,6 +15,7 @@ require.config
     'simditor-mention': 'vendor/simditor-mention'
     'simditor-marked': 'vendor/simditor-marked'
   shim:
+    'v/jquery.noty': 'jquery'
     'simditor-marked': ['marked', 'v/simditor']
     'simditor-mention': ['v/simditor']
     'notify': ['jquery', 'v/jquery.noty']

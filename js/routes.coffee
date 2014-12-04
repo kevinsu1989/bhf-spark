@@ -18,7 +18,7 @@ define [
 
   _app.config(['$routeProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider',
   ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
-    $locationProvider.html5Mode true
+    $locationProvider.html5Mode enabled: true, requireBase: false
 
     blankDetailsView =
       template: _utils.extractTemplate '#tmpl-global-blank-page', _tmplGlobal
@@ -45,6 +45,17 @@ define [
 
     documentViews =
       listPanel: documentListOnly['listPanel@project']
+      'detailsPanel@project': issueViews['detailsPanel@project']
+
+    #测试相关
+    testListOnly =
+      'listPanel@project':
+        template: _utils.extractTemplate '#tmpl-test-list', _tmplIssue
+        controller: 'testListController'
+      'detailsPanel': blankDetailsView
+
+    testViews =
+      listPanel: testListOnly['listPanel@project']
       'detailsPanel@project': issueViews['detailsPanel@project']
 
     #讨论
@@ -106,6 +117,7 @@ define [
     wikiListOnly =
       'listPanel': wikiViews.listPanel
       'detailsPanel@wiki': blankDetailsView
+
 
 #    $urlRouterProvider.otherwise('/')
 
@@ -293,6 +305,21 @@ define [
       views: documentViews
     )
 
+    #====================================测试=======================================
+
+    .state('project.test',
+      url: '/test'
+      views: testListOnly
+    ).state('project.version.test',
+      url: '/test'
+      views: testListOnly
+    ).state('project.version.test.details',
+      url: '/:issue_id'
+      views: testViews
+    ).state('project.test.details',
+      url: '/:issue_id'
+      views: testViews
+    )
 
     #素材
     .state('project.assets',

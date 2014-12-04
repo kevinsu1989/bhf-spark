@@ -75,12 +75,9 @@
 
                 <!--标题部分-->
                 <div class="issue panel" ng-click="onClickIssue($event)">
-                    <div class="title">
-                        <div class="issue-status"
-                             dropdown data-selected="{{issue.status}}"
-                             data-name="issue:status">
+                    <div class="title" issue-status-dropdown-action>
+                        <div class="issue-status" ng-click="onClickStatus($event, issue)">
                             <i class="issue-status icon small" ng-class="issue.status"></i>
-                            <issue-status-dropdown ng-hide="articleOnly"></issue-status-dropdown>
                         </div>
                         <input type="text" class="text" ng-show="editing" ng-model="issue.title" />
                         <h3 ng-show="!editing">{{issue.title | removeCommand | removeTag}}</h3>
@@ -89,6 +86,7 @@
                             <a ng-click="onClickEdit($event, data)" href="javascript:void(0)" class="edit">编辑</a>
                             <a ng-click="onClickDelete($event, data)" href="javascript:void(0)" class="delete">删除</a>
                         </div>
+                        <issue-status-dropdown></issue-status-dropdown>
                     </div>
                     <div class="sub-title">
                         <span class="creator">{{issue.creator_name || '创建者'}}</span> 创建于

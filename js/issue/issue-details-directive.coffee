@@ -25,6 +25,10 @@ define [
           #刷新评论数据
           scope.$broadcast 'comment:list:reload'
 
+      scope.onClickStatus = (event, issue)->
+        scope.$emit 'issue:status-dropdown:show', event, issue
+        return
+
       #关闭asset的预览
       scope.onClickCloseAssetPreviewer = ->
         scope.assetPreviewer.show = false
@@ -62,8 +66,8 @@ define [
             field = 'category_id' if ~~value isnt scope.issue.category_id
           when 'issue:version'
             field = 'version_id' if ~~value isnt scope.issue.version_id
-          when 'issue:status'
-            field = 'status' if ~~value isnt scope.issue.status
+#          when 'issue:status'
+#            field = 'status' if ~~value isnt scope.issue.status
 
         return if not field
         data = {}
@@ -71,6 +75,16 @@ define [
         issueAPI.update(data).then ->
           scope.issue[field] = value
           $rootScope.$broadcast 'issue:list:reload'
+
+
+      #更改状态
+      scope.$on 'issue:status:change', (event, issue_id, oldStatus, newStatus)->
+        return if oldStatus is newStatus
+
+        issueAPI.update(status: newStatus).then ()->
+          scope.issue.status = newStatus
+          $rootScope.$broadcast 'issue:list:reload'
+
 
       #保存修改时间
       scope.$on 'datetime:change', (event, name, date)->

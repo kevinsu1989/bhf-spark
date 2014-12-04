@@ -5,6 +5,7 @@ define [
 ], (_module, _utils, _template) ->
 
   _module.controllerModule
+  #任务列表
   .controller('issueListController', ['$scope', '$stateParams', 'API', '$state', '$location',
   ($scope, $stateParams, API, $state, $location)->
     #搜索issue
@@ -50,9 +51,9 @@ define [
       issueAPI.retrieve(_.extend({status: 'done', pageSize: 20}, params))
       .then (result)-> $scope.doneIssues = result
     #          scope.$apply()
-
-      issueAPI.retrieve(_.extend({status: 'testing', pageSize: 9999}, params))
-      .then (result)-> $scope.testingIssues = result
+#
+#      issueAPI.retrieve(_.extend({status: 'testing', pageSize: 9999}, params))
+#      .then (result)-> $scope.testingIssues = result
 
     #强制重新加载数据
     $scope.$on 'issue:list:reload', (event)-> searchIssue()
@@ -61,8 +62,51 @@ define [
 
     $scope.$on 'instant-search:change', (event, keyword)->
       return if $scope.condition.keyword is keyword
-
       searchIssue keyword: keyword
+
+    #更改状态
+    $scope.$on 'issue:status:change', (event, issue_id, oldStatus, newStatus)->
+      return if oldStatus is newStatus
+      API.project($stateParams.project_id).issue(issue_id)
+      .update(status: newStatus).then ()-> searchIssue()
+
+    searchIssue()
+  ])
+
+  #测试任务列表
+  .controller('testListController', ['$scope', '$stateParams', 'API', '$state', '$location',
+  ($scope, $stateParams, API, $state, $location)->
+    $scope.condition = {}
+    issueAPI = API.project($stateParams.project_id).issue()
+
+    searchIssue = (condition)->
+      params = _.extend tag: 'test', condition
+      #测试中
+      issueAPI.retrieve(_.extend(status: ['doing', 'repaired', 'pause'], params)).then (result)->
+        $scope.doing = result
+
+      #修复中
+      issueAPI.retrieve(_.extend(status: 'repairing', params)).then (result)->
+        $scope.repairing = result
+
+      #获取测试已审的
+      issueAPI.retrieve(_.extend(status: 'reviewing', params)).then (result)->
+        $scope.reviewing = result
+
+      #已完成
+      issueAPI.retrieve(_.extend(status: 'done', params)).then (result)->
+        $scope.done = result
+
+#    实时搜索
+    $scope.$on 'instant-search:change', (event, keyword)->
+      return if $scope.condition.keyword is keyword
+      $scope.condition.keyword = keyword
+      searchIssue keyword: keyword
+
+    $scope.$on 'issue:status:change', (event, issue_id, oldStatus, newStatus)->
+      return if oldStatus is newStatus
+      API.project($stateParams.project_id).issue(issue_id)
+      .update(status: newStatus).then ()-> searchIssue()
 
     searchIssue()
   ])

@@ -92,7 +92,7 @@ define [
   #根据url构建项目中间的链接
   .filter('projectLink', ['$stateParams', '$state', ($stateParams, $state)->
     (data, type)->
-      hasVersion = type in ['issue', 'normal']
+      hasVersion = type in ['issue', 'normal', 'test']
       hasCategory = type is 'issue'
 
       #这里的逻辑有点罗，整个project link相关的代码都考虑要修改
@@ -120,6 +120,8 @@ define [
       if type is 'issue' and $stateParams.myself
         parts.push('issue')
         parts.push('myself')
+
+      parts.push('test') if type is 'test'
 
       if hasCategory and $stateParams.category_id
         parts.push('category')
