@@ -12,6 +12,11 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-list-cell', _template
     link: (scope, element, attrs)->
+      #点击状态
+      scope.onClickStatus = (event, issue)->
+        scope.$emit 'issue:status-dropdown:show', event, issue
+        return
+
       scope.getDelayClass = (issue)->
         if issue.plan_finish_time and
           issue.status isnt 'done' and
@@ -46,13 +51,67 @@ define [
     link: (scope, element, attrs)->
   ])
 
-  #issue 状态下拉列表
+  #issue的下拉列表
   .directive('issueStatusDropdown',[()->
     restrict: 'E'
     replace: true
+    scope: {}
     template: _utils.extractTemplate '#tmpl-issue-status-dropdown', _template
     link: (scope, element, attrs)->
-      scope.$on 'dropdown:selected', ->
+
+  ])
+
+  #issue 状态下拉列表，下拉列表必需已经存在容器内容，并且可以通过find('div.dropdown.status')找得到
+  .directive('issueStatusDropdownAction',[()->
+    restrict: 'A'
+    replace: false
+#    scope: {}
+#    template: _utils.extractTemplate '#tmpl-issue-status-dropdown', _template
+    link: (scope, element, attrs)->
+      $dropdown = null
+      currentIssue = null
+
+      scope.$on 'issue:status-dropdown:show', (ngEvent, event, issue)->
+        event.stopPropagation()
+        currentIssue = issue
+        statusVisibility issue
+
+        $this = $(event.target)
+        position = $this.position()
+        position.top += $this.height()
+        position.left -= 6;
+        $dropdown.css(position).fadeIn()
+        $('body').one 'click', -> $dropdown.fadeOut()
+        return
+
+      initDropdown = ()->
+        return if $dropdown
+
+        $dropdown = element.find 'div.dropdown.status'
+        $dropdown.bind 'mouseleave', -> $dropdown.fadeOut()
+        $dropdown.find('a').bind 'click', ()->
+          $this = $(this)
+          value = $this.attr 'data-value'
+          scope.$emit 'issue:status:change', currentIssue.id, currentIssue.status, value
+
+      #设置状态是否可视
+      statusVisibility = (issue)->
+        isTest = issue.tag is 'test'
+        displayRules =
+          doing: true
+          pause: issue.status isnt 'done'
+          repaired: isTest and issue.status is 'repairing'
+          repairing: isTest and issue.status in ['doing', 'reviewing', 'repaired']
+          reviewing: isTest and issue.status in ['doing', 'repairing', 'repaired']
+          done: not isTest and issue.status isnt 'done'
+          reviewed: isTest and issue.status is 'reviewing'
+
+
+        initDropdown()
+        $dropdown.find('li').each ()->
+          $this = $(this)
+          value = $this.attr('data-status')
+          $this.toggle displayRules[value]
 
   ])
 
@@ -67,6 +126,7 @@ define [
         issue: '任务'
         document: '文档'
         discussion: '讨论'
+        test: '测试'
 
       #跳转到具体的issue
       gotoIssue = (issue_id)->
@@ -122,4 +182,22 @@ define [
     template: _utils.extractTemplate '#tmpl-issue-tag-dropdown', _template
     link: (scope, element, attrs)->
 
+  ])
+
+  #issue列表
+  .directive('issuePlainList', [->
+    restrict: 'E'
+    replace: true
+#    scope: source: '@', title: '@'
+    scope: title: '@', emptyMemo: '@'
+    template: _utils.extractTemplate '#tmpl-issue-plain-list', _template
+    link: (scope, element, attrs)->
+#      scope.$watch 'source', ()->
+#        return if not scope.source
+#        scope.source = JSON.parse(scope.source)
+
+      attrs.$observe('source', ->
+        return if not attrs.source
+        scope.source = JSON.parse(attrs.source)
+      )
   ])
