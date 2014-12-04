@@ -23,27 +23,35 @@
 
 .project-list-panel {
   .row {
-    .info {
-      display: none;
-    }
-    &:hover {
-      .info {
-        display: block;
-        cursor: pointer;
-      }
-      .role{
-        cursor: pointer;
+    &:hover{
+      a.remove{
+        visibility: visible;
       }
     }
+
     .email{
-      position: absolute;
-      left: 23%;
+      color: #CCC;
+      margin-left: 20px;
     }
+
+    .control{
+      float: right;
+      vertical-align: top;
+    }
+
+    a.remove{
+      visibility: hidden;
+      cursor: pointer;
+      color: @link-color;
+    }
+
     .role{
-      position: absolute;
-      right: 50px;
+      display: inline-block;
+      cursor: pointer;
+      vertical-align: baseline;
+      margin-left: 10px;
       .icon{
-        float: right;
+        vertical-align: top;
         background-position:-115px -393px;
       }
     }
