@@ -89,6 +89,11 @@ define [
   .filter('wikiLink', ['$stateParams', ($stateParams)->
     (data, type)-> ['wiki', $stateParams.project_id].join('/')
   ])
+
+  .filter('isActiveIssue', ['$stateParams', ($stateParams)->
+    (issue)-> $stateParams.issue_id is String(issue.id)
+  ])
+
   #根据url构建项目中间的链接
   .filter('projectLink', ['$stateParams', '$state', ($stateParams, $state)->
     (data, type)->

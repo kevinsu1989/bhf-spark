@@ -69,7 +69,7 @@
             </div>
 
             <ul class="details">
-                <li ng-repeat="item in discussion.items" class="row">
+                <li ng-repeat="item in discussion.items" class="row" ng-class="{'active': (item | isActiveIssue)}">
                     <a href="/{{item | projectLink: 'normal'}}/discussion/{{item.id}}">
                         <span class="badge gray small">{{item.comment_count}}</span>
 
@@ -161,7 +161,7 @@
             </div>
 
             <ul class="details">
-                <li ng-repeat="item in document.items" class="row">
+                <li ng-repeat="item in document.items" class="row" ng-class="{'active': (item | isActiveIssue)}">
                     <a href="/{{item | projectLink: 'normal'}}/document/{{item.id}}">
                         <span class="title">{{item.title}}</span>
                     </a>
@@ -204,7 +204,7 @@
                 <h3>{{title}}<span class="badge">({{source.pagination.recordCount}})</span></h3>
             </header>
             <ul class="details">
-                <li ng-repeat="issue in source.items" class="row" id="issue-list-{{issue.id}}">
+                <li ng-repeat="issue in source.items" class="row" id="issue-list-{{issue.id}}" ng-class="{'active': (issue | isActiveIssue)}">
                     <issue-list-cell></issue-list-cell>
                 </li>
             </ul>
