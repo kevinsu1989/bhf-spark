@@ -24,7 +24,7 @@
             <div class="create">
                 <input type="text" placeholder="请输入您将要创建的任务，支持指令" autofocus issue-quick-editor ng-keydown="onKeyDown($event)" data-category="1" ng-show="showQuickEditor" data-tag="issue" />
                 <div ng-show="!showQuickEditor" class="empty">
-                    您需要切换到具体任务分类下才能创建任务
+                    您需要切换到具体任务分类下才能创建任务，<a href="/wiki/17/category/89/issue/2956" class="stubborn">这是什么意思？</a>
                 </div>
             </div>
 
@@ -33,7 +33,6 @@
                 <issue-plain-list data-source="{{undoneIssues}}" data-title="未完成"></issue-plain-list>
                 <issue-plain-list
                         data-source="{{doneIssues}}"
-                        data-empty-memo="还没有任何任务哦，快去创建一个吧"
                         data-title="已经完成"></issue-plain-list>
             </div>
 

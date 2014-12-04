@@ -196,6 +196,8 @@ define [
 #        return if not scope.source
 #        scope.source = JSON.parse(scope.source)
 
+      scope.emptyMemo = scope.emptyMemo || "#{scope.title}的任务为空"
+
       attrs.$observe('source', ->
         return if not attrs.source
         scope.source = JSON.parse(attrs.source)
