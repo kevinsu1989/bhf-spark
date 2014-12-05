@@ -39,7 +39,7 @@ define [
       #注册
       scope.onClickSignUp = ->
         return scope.error = '请输入您的真实姓名' if not scope.model.realname
-        return scope.error = '密码必需输入哦' if not scope.model.password
+        return scope.error = '密码没有输入或者密码太短' if not scope.model.password
         return scope.error = '您两次的密码输入不一致' if scope.model.password isnt scope.model.confirmPassword
 
         API.member().create(model).then ()->
@@ -61,13 +61,14 @@ define [
       scope.onClickSwitchPanel('-350px') if $stateParams.token
   ])
 
-  .directive('inviteMember', ['$stateParams', 'NOTIFY', 'API',
-  ($stateParams, NOTIFY, API)->
+  .directive('inviteMember', ['$location', '$stateParams', 'NOTIFY', 'API', 'HOST',
+  ($location, $stateParams, NOTIFY, API, HOST)->
     restrict: 'E'
     replace: true
     scope: {}
     template: _utils.extractTemplate '#tmpl-member-invite', _template
     link: (scope, element, attrs)->
+      scope.host = HOST
       inviteAPI = API.project($stateParams.project_id).member().invite()
 
       loadInvitedMember = (cb)->
