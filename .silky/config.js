@@ -77,7 +77,7 @@ module.exports = {
             //编译js目录
             "js": {
                 //不编译直接复制的文件
-                copy: [/\.min\.js$/i, /^vendor/i]
+                copy: [/\.min\.js$/i, /\/vendor\//i]
             },
             //编译css目录
             "css": {
