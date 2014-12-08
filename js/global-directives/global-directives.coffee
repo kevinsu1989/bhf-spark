@@ -7,7 +7,6 @@ define [
   't!/views/global-all.html'
   't!/views/project/project-all.html'
   'v/keyboard'
-  'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
 ], (_module, _utils, _, _tmplGlobal, _template, _keybroad) ->
 
@@ -46,20 +45,18 @@ define [
       dateOpt.autoclose = true
       if formart then dateOpt.formart = formart
 
-      $this = $(element);
-      $this.datetimepicker(dateOpt)
+      #延时加载datepicker
+      require ['datepicker'], ->
+        $this = $(element);
+        $this.datetimepicker(dateOpt)
 
-      $this.on 'changeDate', (ev)->
-        scope.$emit 'datetime:change', name, ev.date.valueOf()
+        $this.on 'changeDate', (ev)->
+          scope.$emit 'datetime:change', name, ev.date.valueOf()
 
-      $this.on 'show', ()->
-        current = attrs.date
-        current = new Date(Number(current)) if current
-        $this.datetimepicker 'setDate', current || new Date()
-#      scope.$on '$destroy', ->
-#        alert('a')
-#        $this.datepicker 'destroy'
-
+        $this.on 'show', ()->
+          current = attrs.date
+          current = new Date(Number(current)) if current
+          $this.datetimepicker 'setDate', current || new Date()
 
   )
 

@@ -14,6 +14,8 @@ require.config
     marked: 'vendor/marked'
     'simditor-mention': 'vendor/simditor-mention'
     'simditor-marked': 'vendor/simditor-marked'
+    highlight: '/package/highlight/highlight.pack'
+    datepicker: '/package/datetime/datetimepicker'
   shim:
     'v/jquery.noty': 'jquery'
     'simditor-marked': ['marked', 'v/simditor']

@@ -4,10 +4,8 @@ define [
   '_'
   'marked'
   't!/views/assets/assets-all.html'
-  'v/FileAPI.html5'
-  'pkg/highlight/highlight.pack'
   'pkg/colorbox/jquery.colorbox'
-], (_module, _utils, _, _marked, _template, _FileAPI) ->
+], (_module, _utils, _, _marked, _template) ->
 
   _module.directiveModule
   #上传素材
@@ -61,10 +59,12 @@ define [
             $progress.text percent.toFixed(2) + '%'
             $percent.css('width', percent + '%')
 
-      target = element[0]
-      FileAPI.event.on target, 'change', (event)->
-        files = FileAPI.getFiles(event)
-        FileAPI.filterFiles files, filterFn, uploadFn
+      #延时加载上传文件
+      require ['v/FileAPI.html5'], ->
+        target = element[0]
+        FileAPI.event.on target, 'change', (event)->
+          files = FileAPI.getFiles(event)
+          FileAPI.filterFiles files, filterFn, uploadFn
   ])
 
   #素材的缩略图列表
@@ -120,9 +120,11 @@ define [
         scope.markdownContent = _marked(content)
 
       formatCode = (content)->
-        obj = element.find('code')
-        obj.text content
-        hljs.highlightBlock obj[0]
+        #延时加载h
+        require ['highlight'], ->
+          obj = element.find('code')
+          obj.text content
+          hljs.highlightBlock obj[0]
 
       loadAsset = ()->
 #        API.project($stateParams.project_id).assets($stateParams.asset_id).file().

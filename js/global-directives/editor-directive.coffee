@@ -2,10 +2,7 @@ define [
   '../ng-module'
   'utils'
   'v/store2'
-  'simditor-marked'
-  'simditor-mention'
 ], (_module, _utils, _store) ->
-
   _module.directiveModule.directive('editor', ['$location', '$timeout', 'STORE',
   ($location, $timeout, STORE)->
     restrict: 'E'
@@ -16,26 +13,16 @@ define [
       simditor = null
       currentUUID = null
 
-      #获取缓存的key
-      getCacheKey = (name, uuid)-> "#{name}_#{uuid}"
-      #检查是否有缓存的内容
-      getCache = (name, uuid)-> _store.get getCacheKey(name, uuid)
-      #设置缓存
-      setCache = (name, uuid, content)-> _store.set getCacheKey(name, uuid), content
-      #删除缓存
-      removeCache = (name, uuid)-> _store.remove getCacheKey(name, uuid)
+      #初始化编辑器
+      ensureEditor = (cb)->
+        return cb(simditor) if simditor
 
-      initEditor = (name, uploadUrl)->
-#        用于设置返回的host，不设则为根目录
-        host = "#{$location.protocol()}://#{$location.host()}:#{$location.port()}"
         options =
           textarea: element.find('textarea')
           pasteImage: true
-#          defaultImage: 'images/image.png'
+  #          defaultImage: 'images/image.png'
           params: {}
           upload:
-            url: uploadUrl
-            params: host: host
             connectionCount: 3
             leaveConfirm: '正在上传文件，如果离开上传会自动取消'
           tabIndent: true
@@ -66,43 +53,54 @@ define [
             items: STORE.projectMemberList.data
             nameKey: "username"
 
-        editor = new Simditor options
+        #延时加载
+        require ['simditor-marked', 'simditor-mention'], ->
+          simditor = new Simditor options
+          simditor.on 'valuechanged', (e, src)->
+            content = e.currentTarget.getValue()
+            setCache attrs.name, currentUUID, content
 
-        editor.on 'valuechanged', (e, src)->
-          content = e.currentTarget.getValue()
-          setCache attrs.name, currentUUID, content
+          cb simditor
 
-        editor
+      #获取缓存的key
+      getCacheKey = (name, uuid)-> "#{name}_#{uuid}"
+      #检查是否有缓存的内容
+      getCache = (name, uuid)-> _store.get getCacheKey(name, uuid)
+      #设置缓存
+      setCache = (name, uuid, content)-> _store.set getCacheKey(name, uuid), content
+      #删除缓存
+      removeCache = (name, uuid)-> _store.remove getCacheKey(name, uuid)
 
       scope.showAlwaysTop = attrs.showAlwaysTop in [true, 'true']
+
       scope.$on 'editor:content', ($event, name, uuid, content, uploadUrl)->
         #如果有设定name，且当前name和设定的name不一致，则不处理
         return if attrs.name and attrs.name isnt name
         currentUUID = uuid
 
-        if not simditor then simditor = initEditor(name, uploadUrl)
-
-        simditor.setValue getCache(name, uuid) || content
-        #第二打开评论编辑器，如果有focus会报错，暂是不使用这个
-        #simditor.focus()
-        return
+        #editor可能还没有初始化
+        ensureEditor ()->
+          simditor.setValue getCache(name, uuid) || content
+          return
 
       #收到cancel的请求
       scope.$on 'editor:will:cancel', (event, name)->
-        #name不一致不处理
-        return if attrs.name isnt name
+        #name不一致或者simditor没有初化，都不处理
+        return if attrs.name isnt name or not simditor
+
         #如果是从外部传到的取消请求，则再保存一次数据
         setCache attrs.name, currentUUID, simditor.getValue()
-
         scope.$emit 'editor:cancel', attrs.name
 
       scope.onClickCancel = ->
         #用户自主点击取消的，要移除缓存
         removeCache attrs.name, currentUUID
-
         scope.$emit 'editor:cancel', attrs.name
 
       scope.onClickSubmit = ->
+        #simditor是延时加载的，所以有可能提交按钮已经出现，但simditor没有加载下来的极端情况
+        return if not simditor
+
         data =
           content: simditor.getValue()
           always_top: scope.always_top
