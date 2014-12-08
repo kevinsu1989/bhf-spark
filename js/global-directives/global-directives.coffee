@@ -7,7 +7,6 @@ define [
   't!/views/global-all.html'
   't!/views/project/project-all.html'
   'v/keyboard'
-  'pkg/webuploader/webuploader.html5only'
   'pkg/datetime/datetimepicker'
   'plugin/jquery.honey.simple-tab'
 ], (_module, _utils, _, _tmplGlobal, _template, _keybroad) ->
