@@ -3,7 +3,7 @@ define [
   '../utils'
   '_'
   'marked'
-  't!/views/assets/assets-all.html'
+  't!../../views/assets/assets-all.html'
   'pkg/colorbox/jquery.colorbox'
 ], (_module, _utils, _, _marked, _template) ->
 

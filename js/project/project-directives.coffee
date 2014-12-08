@@ -3,8 +3,8 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/project/project-all.html'
-  't!/views/project/project-editors.html'
+  't!../../views/project/project-all.html'
+  't!../../views/project/project-editors.html'
   'v/circles'
 ], (_module,_utils, _tmplAll, _tmplEditors) ->
 

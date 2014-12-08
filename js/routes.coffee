@@ -3,15 +3,15 @@ define [
   "ng"
   "app"
   'utils'
-  't!/views/issue/issue-all.html'
-  't!/views/member/member-all.html'
-  't!/views/commit/commit-all.html'
-  't!/views/assets/assets-all.html'
-  't!/views/project/project-all.html'
-  't!/views/report/report-all.html'
-  't!/views/global-all.html'
-  't!/views/member/authority.html'
-  't!/views/wiki/wiki-all.html'
+  't!../views/issue/issue-all.html'
+  't!../views/member/member-all.html'
+  't!../views/commit/commit-all.html'
+  't!../views/assets/assets-all.html'
+  't!../views/project/project-all.html'
+  't!../views/report/report-all.html'
+  't!../views/global-all.html'
+  't!../views/member/authority.html'
+  't!../views/wiki/wiki-all.html'
 ], (_ng, _app, _utils, _tmplIssue, _tmplMember,
     _tmplCommit, _tmplAssets, _tmplProject,
     _tmplReport, _tmplGlobal, _tmplAuthority, _tmplWiki) ->

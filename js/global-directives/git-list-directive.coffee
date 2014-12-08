@@ -4,7 +4,7 @@ define [
   '../ng-module'
   '../utils'
   '_'
-  't!/views/global-all.html'
+  't!../../views/global-all.html'
 ], (_module, _utils, _, _tmplGlobal) ->
 
   _module.directiveModule.directive('gitListEditor', ['NOTIFY', (NOTIFY)->

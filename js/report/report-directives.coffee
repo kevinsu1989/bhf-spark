@@ -3,7 +3,7 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/report/report-all.html'
+  't!../../views/report/report-all.html'
 ], (_module,_utils, _template) ->
 
   _module.directiveModule

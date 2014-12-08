@@ -1,7 +1,7 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/member/authority.html'
+  't!../../views/member/authority.html'
 ], (_module, _utils, _template) ->
 
   _module.directiveModule

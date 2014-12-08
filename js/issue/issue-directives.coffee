@@ -1,7 +1,7 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/issue/issue-all.html'
+  't!../../views/issue/issue-all.html'
   'v/jquery.transit'
 ], (_module,_utils, _template) ->
 

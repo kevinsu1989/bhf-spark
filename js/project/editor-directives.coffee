@@ -3,7 +3,7 @@
 define [
   '../ng-module'
   '../utils'
-  't!/views/project/project-editors.html'
+  't!../../views/project/project-editors.html'
 ], (_module, _utils, _tmplEditors) ->
 
   _module.directiveModule

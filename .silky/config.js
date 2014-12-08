@@ -55,16 +55,16 @@ module.exports = {
         //是否压缩
         compress: {
             //压缩js，包括coffee
-            js: true,
+            js: false,
             //压缩css，包括less
-            css: true,
+            css: false,
             //压缩html
             html: false,
             //是否压缩internal的js
             internal: false
         },
         //将要复制的文件目录，直接复制到目标
-        copy: ["images", "package", "fonts", "blog"],
+        copy: ["images", "package", "fonts", "blog", "build.js"],
         //将要编译处理的目录，如果存在less/coffee，则会直接编译
         compile: {
             //将template直接输出到目标目录下

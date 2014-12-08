@@ -4,8 +4,8 @@ define [
   './../ng-module'
   '../utils'
   '_'
-  't!/views/global-all.html'
-  't!/views/project/project-all.html'
+  't!../../views/global-all.html'
+  't!../../views/project/project-all.html'
   'v/keyboard'
   'plugin/jquery.honey.simple-tab'
 ], (_module, _utils, _, _tmplGlobal, _template, _keybroad) ->

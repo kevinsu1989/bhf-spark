@@ -1,7 +1,7 @@
 define [
   '../ng-module'
   'utils'
-  't!/views/commit/commit-all.html'
+  't!../../views/commit/commit-all.html'
 ], (_module, _utils, _template)->
 
   _module.directiveModule
