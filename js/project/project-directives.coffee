@@ -9,7 +9,7 @@ define [
 ], (_module,_utils, _tmplAll, _tmplEditors) ->
 
   _module.directiveModule
-  .directive('projectMenu', ['$rootScope', '$stateParams', ($rootScope, $stateParams)->
+  .directive('projectMenu', ['$rootScope', '$stateParams', 'API', ($rootScope, $stateParams, API)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-menu', _tmplAll
@@ -20,6 +20,11 @@ define [
         parts.push $stateParams.version_id
 
       scope.baseLink = parts.join('/')
+
+      #获取测试任务的统计
+      API.project($stateParams.project_id)
+      .issue().stat().test().retrieve().then (result)->
+        scope.testStat = result
 
       scope.onClickInvite = -> $rootScope.$broadcast 'member:invite:show'
   ])

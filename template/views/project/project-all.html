@@ -24,6 +24,7 @@
                         <label>
                             <a href="/{{baseLink}}/test">测试专区</a>
                         </label>
+                        <span class="badge small gray stat">{{testStat.undone || 0}}/{{testStat.all || 0}}</span>
                     </div>
                 </li>
                 <li class="issue-category">
@@ -149,7 +150,7 @@
         <ul class="sub-menu">
             <li ng-repeat="item in projectCategory">
                 <a href="/{{item | projectLink: 'normal'}}/category/{{item.id}}/issue?title={{item.title}}" class="text-overflow">{{item.title}}</a>
-                <span class="badge small gray">{{item.issue_undone_total}}/{{item.issue_total}}</span>
+                <span class="badge small gray stat">{{item.issue_undone_total}}/{{item.issue_total}}</span>
             </li>
         </ul>
     </textarea>

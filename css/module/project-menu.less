@@ -12,6 +12,12 @@
     }
   }
 
+  .badge.stat{
+    float: right;
+    width: auto;
+    padding: 0px 6px;
+  }
+
   .master-menu>li{
     overflow: hidden;
 
@@ -50,17 +56,6 @@
       overflow: hidden;
       clear: both;
 
-      span{
-        display: block;
-        float: left;
-
-        &.badge{
-          float: right;
-          width: auto;
-          padding: 0px 6px;
-        }
-      }
-
       a{
         display: inline-block;
         width: 100px;
@@ -79,6 +74,10 @@
   }
 
   .test {
+    .badge.stat{
+      margin-right: 20px;
+    }
+
     .icon{
       background-position: -40px -680px;
     }

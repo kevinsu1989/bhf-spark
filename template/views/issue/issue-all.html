@@ -80,7 +80,7 @@
                         <span class="date memo">{{item.timestamp | date}}</span>
                     </div>
                     <p class="summary" ng-show="item.content">
-                        {{item.content | rawText}}
+                        {{item.content | rawText | limitTo: 40}}
                     </p>
                 </li>
             </ul>

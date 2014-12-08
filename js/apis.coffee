@@ -352,4 +352,13 @@ define [], ->
         "patch": false
       }
     }
+
+    {
+      "url": "project/:project_id/issue/stat/test"
+      "method": {
+        "post": false,
+        "delete": false,
+        "patch": false
+      }
+    }
 ]

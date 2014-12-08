@@ -76,8 +76,10 @@ module.exports = {
             },
             //编译js目录
             "js": {
+                ignore: /\/vendor\-original\//i,
                 //不编译直接复制的文件
                 copy: [/\.min\.js$/i, /\/vendor\//i]
+                // 忽略vendor：/\/vendor.+\.js/i
             },
             //编译css目录
             "css": {
