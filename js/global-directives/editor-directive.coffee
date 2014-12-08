@@ -14,15 +14,17 @@ define [
       currentUUID = null
 
       #初始化编辑器
-      ensureEditor = (cb)->
+      ensureEditor = (uploadUrl, cb)->
         return cb(simditor) if simditor
 
         options =
           textarea: element.find('textarea')
-          pasteImage: true
+          pasteImage: true 
   #          defaultImage: 'images/image.png'
           params: {}
           upload:
+            params: host: "#{$location.protocol()}://#{$location.host()}:#{$location.port()}"
+            url: uploadUrl
             connectionCount: 3
             leaveConfirm: '正在上传文件，如果离开上传会自动取消'
           tabIndent: true
@@ -79,7 +81,7 @@ define [
         currentUUID = uuid
 
         #editor可能还没有初始化
-        ensureEditor ()->
+        ensureEditor uploadUrl, ()->
           simditor.setValue getCache(name, uuid) || content
           return
 
