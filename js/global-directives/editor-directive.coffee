@@ -19,7 +19,7 @@ define [
 
         options =
           textarea: element.find('textarea')
-          pasteImage: true 
+          pasteImage: true
   #          defaultImage: 'images/image.png'
           params: {}
           upload:
@@ -60,7 +60,8 @@ define [
           simditor = new Simditor options
           simditor.on 'valuechanged', (e, src)->
             content = e.currentTarget.getValue()
-            setCache attrs.name, currentUUID, content
+#            临时不用cache
+#            setCache attrs.name, currentUUID, content
 
           cb simditor
 
@@ -82,7 +83,8 @@ define [
 
         #editor可能还没有初始化
         ensureEditor uploadUrl, ()->
-          simditor.setValue getCache(name, uuid) || content
+          simditor.setValue content
+#          simditor.setValue getCache(name, uuid) || content
           return
 
       #收到cancel的请求
