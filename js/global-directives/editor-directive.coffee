@@ -53,7 +53,7 @@ define [
           maxImageWidth: 2000
           mention:
             items: STORE.projectMemberList.data
-            nameKey: "username"
+            nameKey: "realname"
 
         #延时加载
         require ['simditor-marked', 'simditor-mention'], ->
