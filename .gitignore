@@ -11,7 +11,7 @@ pids
 logs
 results
 .git
-
+build
 npm-debug.log
 node_modules
 template/views/comment/list.html
