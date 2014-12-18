@@ -149,8 +149,30 @@ a.stubborn{
 
     //列表
     .list{
-      h3{
-        padding: 10px 0;
+      header{
+        h3{
+          padding: 10px 0;
+        }
+
+        .toggle{
+          float: right;
+          position: relative;
+          margin-top: -25px;
+          height: 40px;
+          width: 60px;
+          cursor: pointer;
+          text-align: center;
+
+          .icon{
+            background-position: -120px -120px;
+            width: 16px;
+            height: 8px;
+          }
+
+          &.collapse .icon{
+            transform:rotate(-180deg);
+          }
+        }
       }
 
       .create{
@@ -173,6 +195,7 @@ a.stubborn{
         padding: 20px 0;
         color: #CCC;
       }
+
 
       .details{
         li.row {

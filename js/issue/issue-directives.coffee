@@ -189,7 +189,7 @@ define [
     restrict: 'E'
     replace: true
 #    scope: source: '@', title: '@'
-    scope: title: '@', emptyMemo: '@'
+    scope: title: '@', emptyMemo: '@', showDetails: '@'
     template: _utils.extractTemplate '#tmpl-issue-plain-list', _template
     link: (scope, element, attrs)->
 #      scope.$watch 'source', ()->
@@ -197,6 +197,8 @@ define [
 #        scope.source = JSON.parse(scope.source)
 
       scope.emptyMemo = scope.emptyMemo || "#{scope.title}的任务为空"
+
+      scope.onClickToggle = ()-> scope.showDetails = !scope.showDetails
 
       attrs.$observe('source', ->
         return if not attrs.source

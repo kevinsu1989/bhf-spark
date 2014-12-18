@@ -33,7 +33,8 @@
                 <issue-plain-list data-source="{{undoneIssues}}" data-title="未完成"></issue-plain-list>
                 <issue-plain-list
                         data-source="{{doneIssues}}"
-                        data-title="已经完成"></issue-plain-list>
+                        data-title="已经完成"
+                        data-show-details="false"></issue-plain-list>
             </div>
 
             <issue-status-dropdown></issue-status-dropdown>
@@ -201,9 +202,15 @@
     <textarea id="tmpl-issue-plain-list">
         <div class="list">
             <header>
-                <h3>{{title}}<span class="badge">({{source.pagination.recordCount}})</span></h3>
+                <h3>
+                    {{title}}
+                    <span class="badge">({{source.pagination.recordCount}})</span>
+                </h3>
+                <div class="toggle" ng-class="{'collapse': showDetails}" ng-click="onClickToggle()">
+                    <i class="icon small"></i>
+                </div>
             </header>
-            <ul class="details">
+            <ul class="details" ng-hide="showDetails">
                 <li ng-repeat="issue in source.items" class="row" id="issue-list-{{issue.id}}" ng-class="{'active': (issue | isActiveIssue)}">
                     <issue-list-cell></issue-list-cell>
                 </li>
@@ -231,7 +238,7 @@
                 <!--产品审核-->
                 <issue-plain-list data-source="{{reviewing}}" data-title="产品审核" data-name="reviewing"></issue-plain-list>
                 <!--已经完成-->
-                <issue-plain-list data-source="{{done}}" data-title="已完成" data-name="done"></issue-plain-list>
+                <issue-plain-list data-source="{{done}}" data-title="已完成" data-name="done" data-show-details="false"></issue-plain-list>
             </div>
 
             <issue-status-dropdown></issue-status-dropdown>
