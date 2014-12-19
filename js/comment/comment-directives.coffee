@@ -48,7 +48,7 @@ define [
   ])
 
   #评论的编辑框
-  .directive('commentEditor', ['API', (API)->
+  .directive('commentEditor', ['$timeout', 'API', ($timeout, API)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -84,5 +84,7 @@ define [
       #调整编辑器的大小
       $(window).on 'onResizeEx', resizeCommentEditor
       scope.$on '$destroy', -> $(window).off 'onResizeEx', resizeCommentEditor
-      resizeCommentEditor()
+
+      #立即监控resize会有问题，暂时用这种方式解决，未来需要调整
+      $timeout(resizeCommentEditor, 1000)
   ])
