@@ -125,6 +125,7 @@ define [
         newData = _.pick(scope.issue, ['content', 'title'])
         issueAPI.update(newData).then((result)->
           NOTIFY.success('更新成功')
+          $rootScope.$broadcast 'issue:list:reload'
         )
 
       scope.$on 'editor:cancel', (event, name)->
