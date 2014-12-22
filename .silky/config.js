@@ -47,7 +47,7 @@ module.exports = {
       'css': false,
       'html': false,
       'internal': false,
-      'ignore': [/\.min\.js$/, "js/vendor"]
+      'ignore': [/\.min\.js$/, "js/vendor", "blog", "build"]
     },
     'copy': ["images", "package", "fonts", "blog", "build.js"],
     'ignore': [
