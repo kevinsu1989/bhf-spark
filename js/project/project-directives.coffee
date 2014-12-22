@@ -106,6 +106,9 @@ define [
 
         searchProject keyword: keyword
 
+      #项目被改变的消息
+      scope.$on 'project:change', (event)-> searchProject keyword: condition.keyword
+
       #查询项目
       searchProject = (cond)->
         params =
