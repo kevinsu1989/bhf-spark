@@ -183,7 +183,7 @@ define [
 #      console.log $stateParams
   ])
 
-  .directive('projectMenuBar', ['$rootScope', ($rootScope)->
+  .directive('projectMenuBar', ['$rootScope', '$stateParams', ($rootScope, $stateParams)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-menu-bar', _tmplAll
@@ -193,6 +193,7 @@ define [
         switch value
           when 'category' then $rootScope.$broadcast 'issue-category:editor:show'
           when 'version' then $rootScope.$broadcast 'project:version:editor:show'
+          when 'project' then $rootScope.$broadcast 'project:editor:show', $stateParams.project_id
   ])
 
   .directive('projectProcessing', ['$timeout', ($timeout)->
