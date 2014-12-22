@@ -1,12 +1,12 @@
 <div>
     <!--单个issue-->
     <textarea id="tmpl-issue-list-cell">
-        <div class="row" ng-class="getDelayClass(issue)">
+        <div class="row" ng-class="getDelayClass(issue)" ng-click="onClickIssue($event, issue)">
             <div class="issue-status" data-selected="{{issue.status}}" data-name="issue:status" ng-click="onClickStatus($event, issue)">
                 <i class="icon small" ng-class="issue.status" ng-click="clickStatus()"></i>
             </div>
             <i class="priority" ng-class="'priority-' + issue.priority" ng-click="clickPriority()"></i>
-            <a class="title" href="/{{issue | projectLink: issue.tag}}/{{issue.id}}"
+            <a class="title"
                     ng-bind-html="issue.title | removeCommand | removeTag | highlightKeyword: condition.keyword | unsafe"></a>
             <span class="issue-id memo">#{{issue.id}}</span>
             <div class="info">

@@ -6,12 +6,17 @@ define [
 ], (_module,_utils, _template) ->
 
   _module.directiveModule
-  .directive('issueListCell', ['API', (API)->
+  .directive('issueListCell', ['$location', '$filter', 'API', ($location, $filter, API)->
     restrict: 'E'
 #    scope: data: '='
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-list-cell', _template
     link: (scope, element, attrs)->
+
+      scope.onClickIssue = (event, issue)->
+        baseUrl = $filter('projectLink')(issue, issue.tag)
+        $location.path "#{baseUrl}/#{issue.id}"
+
       #点击状态
       scope.onClickStatus = (event, issue)->
         scope.$emit 'issue:status-dropdown:show', event, issue
