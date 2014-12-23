@@ -165,12 +165,13 @@ a.stubborn{
 
           .icon{
             background-position: -120px -120px;
+            transform:rotate(-180deg);
             width: 16px;
             height: 8px;
           }
 
           &.collapse .icon{
-            transform:rotate(-180deg);
+            transform:rotate(0deg);
           }
         }
       }
@@ -206,7 +207,7 @@ a.stubborn{
 //          position: relative;
           border-bottom: @normal-border;
           cursor: pointer;
-          
+
           p.summary{
             overflow: hidden;
             color: #CCC;
