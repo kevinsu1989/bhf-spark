@@ -34,6 +34,9 @@ define [
 
       scope.onClickSave = ()->
         scope.profile.gits = scope.gits
+        return NOTIFY.warn '请输入您的邮箱' if not scope.profile.email
+        return NOTIFY.warn '用户名必需输入' if not scope.profile.username
+
         if attr.action is 'account-profile'
           API.account().profile().update(scope.profile).then(()->
             NOTIFY.success '保存成功！'
