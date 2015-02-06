@@ -27,7 +27,7 @@ define [
       days = {}
       total = endTime.diff startTime, 'days'
       for index in [0..total]
-        days[startTime.add(1, 'days').format('YYYY-w')] = 0
+        days[startTime.add(1, 'days').format('YYYY-ww')] = 0
 
       days
 
@@ -75,6 +75,7 @@ define [
       colors = ['#2f91da', '#f5ae46', '#6cbf3d', '#eeeb2c', '#a14ad9', '#f6bd0e']
 
       series = (@getSeries(item, colors[index]) for item, index in data)
+
       xAxis = [
         type: 'category'
         data: _.keys originDays
