@@ -36,7 +36,7 @@
 
     <!--用户登录-->
     <textarea id="tmpl-member-signin">
-        <form ng-submit="onClickSignIn()">
+        <form ng-submit="onSubmitSignIn()">
             <ul>
                 <li class="error">
                     <span>{{error}}</span>
@@ -51,7 +51,7 @@
                     <label>
                         <input type="checkbox"  ng-model="model.remember" />记住密码
                     </label>
-                    <a href="javascript:alert('请联系管理员，谢谢~')">忘记密码</a>
+                    <a href="javascript:void(0)" ng-click="onClickResetPassword()">忘记密码</a>
                 </li>
                 <li>
                     <button>登&nbsp;&nbsp;&nbsp;&nbsp;录

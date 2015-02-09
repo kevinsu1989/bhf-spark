@@ -235,6 +235,15 @@ define [], ->
       }
     },
     {
+      "url": "account/reset-password",
+      "methods": {
+        "post": false,
+        "delete": false,
+        "put": false,
+        "patch": false
+      }
+    },
+    {
       "url": "member/role",
       "methods": {
         "post": false,

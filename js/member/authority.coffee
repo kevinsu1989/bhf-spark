@@ -13,7 +13,7 @@ define [
     link: (scope, element, attr)->
       scope.model = {}
 
-      scope.onClickSignIn = ()->
+      scope.onSubmitSignIn = ()->
         return scope.error = '请输入您的E-mail或者用户名' if not scope.model.account
         return scope.error = '请输入您的密码' if not scope.model.password
 
@@ -21,6 +21,12 @@ define [
           #跳到首页
           $location.path $state.params.next || '/'
         )
+
+      #点击忘记密码
+      scope.onClickResetPassword = ->
+        return alert('请输入您的帐号或者E-mail') if not scope.model.account
+        API.account().resetPassword().retrieve(account: scope.model.account).then ->
+          alert("您的密码已经被重置，请检查您的邮箱\n如果没有找到，请检查垃圾箱")
   ])
   #注册
   .directive('signUp', ['$stateParams', 'API', 'NOTIFY', ($stateParams, API, NOTIFY)->
