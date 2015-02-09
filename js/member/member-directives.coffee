@@ -156,7 +156,7 @@ define [
             result = _.findIndex(projectMemberList, (pItem)->
               item.id is pItem.member_id) >= 0
             if not result
-              item.value = item.realname
+              item.value = "#{item.realname} -> #{item.username || '未设置'} -> #{item.email}"
               item.data = item.id
               delete item.realname
               delete item.username

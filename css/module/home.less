@@ -63,17 +63,29 @@
       color: #FFF;
       font-size: 20px;
     }
-    .display-flex();
+
+    @media all and (min-width: 1024px) {
+      .display-flex();
+    }
+
     height: 100%;
+    overflow: scroll;
 
     div.half-view{
-      width: 50%;
+      @media all and (min-width: 1024px) {
+        width: 100%;
+      }
+
       padding: 0 20px;
       box-sizing: border-box;
     }
   }
 
   .chart-view{
+    @media all and (min-width: 1024px) {
+      margin-bottom: 100px;
+    }
+
     .chart-box{
       box-sizing: border-box;
       width: 100%;
