@@ -5,7 +5,7 @@ define [
 ], (_module, _utils, _template) ->
 
   _module.directiveModule
-  .directive('signIn', ['$location', '$state', 'API', ($location, $state, API)->
+  .directive('signIn', ['$location', '$state', 'API', 'NOTIFY', ($location, $state, API, NOTIFY)->
     restrict: 'E'
     replace: true
     scope: true
@@ -24,9 +24,13 @@ define [
 
       #点击忘记密码
       scope.onClickResetPassword = ->
-        return alert('请输入您的帐号或者E-mail') if not scope.model.account
-        API.account().resetPassword().retrieve(account: scope.model.account).then ->
-          alert("您的密码已经被重置，请检查您的邮箱\n如果没有找到，请检查垃圾箱")
+        return scope.error = '请输入您的E-mail或者用户名' if not scope.model.account
+        API.account().resetPassword().retrieve(account: scope.model.account).then (result)->
+          email = result.email.replace(/(.)(.+)(@.+)/i, (text, first, middle, last) ->
+            first + _.repeat('*', middle.length) + last
+          )
+
+          NOTIFY.success("您的密码已经被重置，新密码已经发送至：#{email}", timeout: 60000)
   ])
   #注册
   .directive('signUp', ['$stateParams', 'API', 'NOTIFY', ($stateParams, API, NOTIFY)->
