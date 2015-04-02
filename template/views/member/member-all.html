@@ -140,12 +140,19 @@
 
                 <div class="row">
                     <label class="caption">
-                        邮箱
+                        <a href="http://git.hunantv.com/profile/account"
+                           target="_blank" title="gitlab的个人密钥，用于BHF创建项目时自动新建git仓库. 点击查看自己的token">Git Token</a>
                     </label>
-                    <input class="medium text" type="text" placeholder="用于接收邮件通知"
-                           ng-model="profile.email"/>
+                    <input class="medium text" type="text" placeholder="用于创建项目自动新建git仓库"
+                           ng-model="profile.gitlab_token"/>
                 </div>
-
+                <div class="row">
+                  <label class="caption">
+                    邮箱
+                  </label>
+                  <input class="medium text" type="text" placeholder="用于接收邮件通知"
+                         ng-model="profile.email"/>
+                </div>
                 <div class="row">
                     <label class="caption">
                         Git帐号

@@ -57,7 +57,7 @@ define [
           scope.data =
             status: 'active'
             gits: []
-
+            gitlabStatus: 'relevance'
           #新建项目，直接显示弹窗
           return $element.modal(showClose: false) if not project_id
 

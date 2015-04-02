@@ -39,8 +39,21 @@
                                 </label>
                             </div>
                         </div>
+                      <div class="row">
+                        <label class="caption">
+                          git仓库
+                        </label>
+                        <div class="inline">
+                          <label>
+                            <input type="radio" name="gitlab" value="relevance" ng-model="data.gitlabStatus" />手动关联
+                          </label>
 
-                        <div class="row">
+                          <label>
+                            <input type="radio" name="gitlab" value="autoCreate" ng-model="data.gitlabStatus"/>自动创建
+                          </label>
+                        </div>
+                      </div>
+                        <div class="row" ng-if="data.gitlabStatus === 'relevance'">
                             <label class="caption">
                                 GitLab
                             </label>
