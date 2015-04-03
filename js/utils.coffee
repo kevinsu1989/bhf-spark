@@ -14,6 +14,12 @@ define [
   extractTemplate: (expr, text)->
     $(text).find(expr).val()
 
+  formTemplate: (expr,text)->
+    html=$(text).find('#temp-form-head').val()
+    html+=$(text).find(expr).val()
+    html+=$(text).find('#temp-form-foot').val()
+    return html
+
   hex2rgba: (hex)->
     `
     var rgba = {r: 0, g: 0, b: 0, a: 0}

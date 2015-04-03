@@ -12,8 +12,13 @@ require.config
     utils: 'utils'
     pkg:'/package'
     marked: 'vendor/marked'
+    simditor:'vendor/simditor'
     'simditor-mention': 'vendor/simditor-mention'
     'simditor-marked': 'vendor/simditor-marked'
+    'simditor-fullscreen': 'vendor/simditor-fullscreen'
+    'simple-module': 'vendor/simditor-module'
+    'simple-uploader': 'vendor/simditor-uploader'
+    'simple-hotkeys': 'vendor/simditor-hotkeys'
     highlight: '/package/highlight/highlight.pack'
     datepicker: '/package/datetime/datetimepicker'
   shim:

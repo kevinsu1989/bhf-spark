@@ -78,3 +78,10 @@ define [
 
   ])
 
+  #表单
+  # .controller('formController', ['$scope', '$stateParams', 'API',
+  # ($scope, $stateParams, API)->
+  #   $scope.template=$stateParams.template
+    
+  # ])
+

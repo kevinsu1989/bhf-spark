@@ -119,7 +119,7 @@ define [
       'detailsPanel@wiki': blankDetailsView
 
 
-#    $urlRouterProvider.otherwise('/')
+    $urlRouterProvider.otherwise('/home')
 
     $stateProvider
     .state('home',
