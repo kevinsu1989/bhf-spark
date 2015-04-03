@@ -39,20 +39,38 @@
                                 </label>
                             </div>
                         </div>
-                      <div class="row">
-                        <label class="caption">
-                          git仓库
-                        </label>
-                        <div class="inline">
-                          <label>
-                            <input type="radio" name="gitlab" value="relevance" ng-model="data.gitlabStatus" />手动关联
-                          </label>
 
-                          <label>
-                            <input type="radio" name="gitlab" value="autoCreate" ng-model="data.gitlabStatus"/>自动创建
+                        <div class="row" ng-if="editor_title == '新建'">
+                          <label class="caption">
+                            git仓库
                           </label>
+                          <div class="inline">
+                            <label>
+                              <input type="radio" name="gitlab" value="relevance" ng-model="data.gitlabStatus" />手动关联
+                            </label>
+
+                            <label>
+                              <input type="radio" name="gitlab" value="autoCreate" ng-model="data.gitlabStatus"/>自动创建
+                            </label>
+
+                            <label >
+
+                            </label>
+                          </div>
                         </div>
-                      </div>
+                        <div class="row" ng-if="showGitlabStatusMsg()">
+                          <label class="caption"></label>
+                          <label style="font-size: 12px; color: #ff0000">{{gitlabTokenStatusMsg}}</label>
+                        </div>
+
+                        <div class="row" ng-if="data.gitlabStatus === 'autoCreate'">
+                          <label class="caption">
+                            git仓库名称
+                          </label>
+                          <input class="medium text" type="text" placeholder="需要新建的git仓库名称（English）" ng-model="data.gitProjectName"/>
+                          <label><a href="" ng-click="checkGitlabProjectIsExist()">检测</a></label>
+                        </div>
+
                         <div class="row" ng-if="data.gitlabStatus === 'relevance'">
                             <label class="caption">
                                 GitLab

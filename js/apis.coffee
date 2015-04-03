@@ -47,6 +47,14 @@ define [], ->
       }
     },
     {
+      "url": "project/git",
+      "methods": {
+        "delete": false,
+        "patch": false,
+        "put": false
+      }
+    },
+    {
       "url": "git/commit",
       "methods": {
         "get": false,
