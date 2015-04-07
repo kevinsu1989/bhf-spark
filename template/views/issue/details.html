@@ -95,7 +95,7 @@
                         <span class="timestamp" ng-show="issue.plan_finish_time">计划完成：{{issue.plan_finish_time | date}}</span>
                         <span class="timestamp" ng-show="issue.finish_time">实际完成：{{issue.finish_time | date}}</span>
                     </div>
-                    <div ng-show="issue.tag!='form'" class="content row editor-style" ng-bind-html="issue.content | unsafe" ng-show="!editing" full-size-image-previewer></div>
+                    <div ng-if="issue.tag!='form'" class="content row editor-style" ng-bind-html="issue.content | unsafe" ng-show="!editing" full-size-image-previewer></div>
                     <div ng-show="editing">
                         <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}" data-upload-url="{{uploadUrl}}"></editor>
                     </div>

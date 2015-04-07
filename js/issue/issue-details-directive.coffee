@@ -105,7 +105,7 @@ define [
           $rootScope.$broadcast 'issue:change'
 
       scope.onClickEdit = ()->
-        console.log scope.issue.tag
+        # console.log scope.issue.tag
         # 当类型为表单时弹出表单窗口，其他的则显示富文本编辑器
         if scope.issue.tag isnt 'form'
         #延时让页面先显示出来，然后初始化editor(仅在第一次初始化)，避免editor获取不到宽度

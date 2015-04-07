@@ -55,8 +55,8 @@ define [
             items: STORE.projectMemberList.data
             nameKey: "realname"
 
-        #延时加载
-        require ['simditor-marked', 'simditor-mention'], ->
+        #延时加载 
+        require ['simditor-marked'], ->
           simditor = new Simditor options
           simditor.on 'valuechanged', (e, src)->
             content = e.currentTarget.getValue()
