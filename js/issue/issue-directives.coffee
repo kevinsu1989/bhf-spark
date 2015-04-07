@@ -167,7 +167,7 @@ define [
       scope.createForm = (form)->
         # console.log $scope
         form=$stateParams.category_id
-        $rootScope.$broadcast 'issue:form:show', -1, form
+        scope.$broadcast 'issue:form:show', -1, form
   ])
 
 
@@ -192,7 +192,6 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-tag-dropdown', _template
     link: (scope, element, attrs)->
-
   ])
 
   #issue列表
@@ -225,7 +224,6 @@ define [
       replace: true
       scope: type: '@',issue: '@',editflag: '@',change:'@'
       link: (scope, element, attrs)->
-
         #  scope.issue等于-1时，是新建表单
         if scope.issue isnt -1 and $stateParams.issue_id isnt null
           API.project($stateParams.project_id).issue($stateParams.issue_id).retrieve().then (result)->
@@ -247,21 +245,9 @@ define [
         else
           scope.edit=true;      
 
-        # # 表单提交
-        # scope.onClickSubmit = ()->
-        #   # scope.entity.uuid
 
-
-        # scope.onClickCancel = ()->
-        #   scope.$emit 'issue:form:hide'
-
-        # # 编辑表单
-        # scope.onClickEdit = ()->
-        #    $rootScope.$broadcast 'issue:form:show', $stateParams.issue_id, scope.entity.uuid
-
-
-        # 相应父级保存按钮
-        $rootScope.$on 'issue:form:submit', (event)->
+        # 响应父级保存按钮
+        scope.$on 'issue:form:submit', (event)->
           if (!scope.myForm.$valid)
             NOTIFY.error "请检查必填项是否漏填！"
             return
@@ -281,7 +267,7 @@ define [
               scope.$emit 'issue:form:hide'
 
         # 弹窗触发事件
-        $rootScope.$on 'issue:form:change', (event,issueId,index)->
+        scope.$on 'issue:form:change', (event,issueId,index)->
           # 如果不是弹窗则返回
           return if scope.change is '-1'            
           # 处理编辑状态
@@ -313,20 +299,20 @@ define [
 
         # 表单提交
         scope.onClickSubmit = ()->
-          $rootScope.$broadcast 'issue:form:submit'
+          scope.$broadcast 'issue:form:submit'
 
         scope.onClickCancel = ()->
           $.modal.close()
 
         #接收事件后，加载数据并显示
-        $rootScope.$on 'issue:form:show', (event, issueId, index)->
+        scope.$on 'issue:form:show', (event, issueId, index)->
           # console.log 'receive'
           scope.activeIndex = index
           scope.issueId=issueId
           # scope.title='表单'        
           $o = $(element)
           $timeout (-> $o.modal showClose: false), 200
-          $rootScope.$broadcast 'issue:form:change',issueId,index
+          scope.$broadcast 'issue:form:change',issueId,index
         scope.$on 'issue:form:hide', (event)->
           $.modal.close()
   ])

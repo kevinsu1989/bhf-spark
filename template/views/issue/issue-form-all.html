@@ -15,7 +15,7 @@
 		-->
 	</li>
 	<li class="input"> <b>协办人：</b>
-		<input type="text" ng-disabled="!edit" required ng-model="entity.assname"/>	
+		<input type="text" ng-disabled="!edit" ng-model="entity.assname"/>	
 		<!-- <span ng-show="!edit">{{entity.assname}}</span>
 		-->
 	</li>
@@ -164,12 +164,12 @@
 	<mtitle>申请原因</mtitle>
 
 	<li class="textarea">
-	<b><i>*&nbsp;</i>详细说明变更需求:</b>
+	<b><i>*&nbsp;</i>详细说明变更需求：</b>
 	&lt;textarea ng-disabled="!edit" ng-model="entity.detail" &gt;&lt;/textarea&gt;
 	</li>
 
 	<li class="textarea">
-	<b><i>*&nbsp;</i>申请原因及用途:</b>
+	<b><i>*&nbsp;</i>申请原因及用途：</b>
 	&lt;textarea ng-disabled="!edit" ng-model="entity.reason" &gt;&lt;/textarea&gt;
 	</li>
 
@@ -237,23 +237,23 @@
 			<th>名称</th><th>CPU</th><th>内存</th><th>硬盘</th><th>RAID</th><th>网口数量</th><th>外网</th><th>机架高度</th><th>电源模块</th><th>功耗</th><th>数量</th>
 		</tr>
 		<tr class="cel">
-			<td>负载均衡</td><td>E3-1220<br/>4核</td><td>4*8G</td><td>2*500G</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input ng-model="entity.num1"/></td>
+			<td>负载均衡</td><td>E3-1220<br/>4核</td><td>4*8G</td><td>2*500G</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num1"/></td>
 		</tr>
 
 		<tr>
-			<td>web层</td><td>2*E5-2420<br/>6核</td><td>4*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input ng-model="entity.num2"/></td>
+			<td>web层</td><td>2*E5-2420<br/>6核</td><td>4*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num2"/></td>
 		</tr>
 
 		<tr class="cel">
-			<td>缓存层</td><td>2*E5-2420<br/>6核</td><td>8*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input ng-model="entity.num3"/></td>
+			<td>缓存层</td><td>2*E5-2420<br/>6核</td><td>8*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num3"/></td>
 		</tr>
 
 		<tr>
-			<td>负载均衡</td><td>2*E5-2420<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input ng-model="entity.num4"/></td>
+			<td>负载均衡</td><td>2*E5-2420<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num4"/></td>
 		</tr>
 
 		<tr class="cel">
-			<td>负载均衡</td><td>2*E5-2620<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>12*4T(数据)</td><td>RAID1(系统)<br/>RAID0(数据)</td><td>千兆*4</td><td>有</td><td>2U</td><td>双电源冗余</td><td>750W</td><td><input ng-model="entity.num5"/></td>
+			<td>负载均衡</td><td>2*E5-2620<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>12*4T(数据)</td><td>RAID1(系统)<br/>RAID0(数据)</td><td>千兆*4</td><td>有</td><td>2U</td><td>双电源冗余</td><td>750W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num5"/></td>
 		</tr>
 	</table>
 	<li class="tip">
@@ -294,7 +294,7 @@
 <form name="myForm">
 	<mtitle>基本信息</mtitle>
 	<li class="input"> <b><i>*&nbsp;</i>标题：</b>
-		<input name="title" required ng-disabled="!edit" type="text" ng-model="entity.title"></li>
+		<input name="title" ng-model="entity.title" required ng-disabled="!edit" type="text"></li>
 	<li class="input"> <b><i>*&nbsp;</i>申请部门：</b>
 		<select required ng-disabled="!edit" ng-model="entity.department">
 			<option value="1">平台部</option>
@@ -308,8 +308,6 @@
 	<li class="input">
 		<b><i>*&nbsp;</i>申请人：</b>
 		<input name="name" required type="text" ng-disabled="!edit" ng-model="entity.name"/>
-		<!-- <span ng-show="!edit">{{entity.name}}</span>
-	-->
 	</li>
 </textarea>
 
