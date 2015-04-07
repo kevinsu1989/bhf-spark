@@ -41,23 +41,6 @@ define [
           return NOTIFY.error('项目名称必需输入') if not scope.data.title
           method = if scope.data.id then 'update' else 'create'
 
-          if method isnt 'create'
-            return submitData(method)
-
-          #当git token不存在 并且 填写了 git 仓库名称的时候，给出警告提醒.
-          checkGitlabProjectIsExist((gitProjectNameVerifyPass)->
-            if not scope.gitTokenVerifyPass and scope.data.gitProjectName
-              return if not confirm("没有token，本项目无法自动创建仓库, 是否继续？")
-              delete scope.data.gitProjectName
-            if scope.gitTokenVerifyPass and not gitProjectNameVerifyPass
-              return if not confirm("git项目已存在，无法重复创建仓库, 是否继续？")
-              delete scope.data.gitProjectName
-
-            submitData(method)
-          )
-
-
-        submitData = (method)->
           API.project(scope.data.id)[method](scope.data).then (result)->
             NOTIFY.success '项目信息保存成功'
             $.modal.close()
@@ -76,7 +59,6 @@ define [
             status: 'active'
             gits: []
             gitlabStatus: 'relevance'
-          vertifyGitToken()
           #新建项目，直接显示弹窗
           return $element.modal(showClose: false) if not project_id
 
@@ -95,27 +77,6 @@ define [
               gitlabStatus: 'relevance'
 
             $element.modal(showClose: false)
-
-
-        #校验git token 是否存在
-        vertifyGitToken = ->
-          #检查git token是否存在
-          API.account().profile().retrieve().then((data)->
-            if not data.gitlab_token or data.gitlab_token.length is 0
-              scope.gitTokenVerifyPass = false
-            else
-              scope.gitTokenVerifyPass = true
-          )
-
-        #检测git项目是否存在在自己的仓库里
-        checkGitlabProjectIsExist = (cb)->
-          #如果token校验没通过
-          return cb and cb() if not scope.gitTokenVerifyPass
-          #如果git项目没有名称,则默认通过
-          return cb and cb(true) if not scope.data.gitProjectName
-          API.project().git().retrieve(name: scope.data.gitProjectName).then((data)->
-            cb and cb(!Boolean(data.exist))
-          )
 
         scope.$on 'project:editor:hide', -> $model.close()
   ])
