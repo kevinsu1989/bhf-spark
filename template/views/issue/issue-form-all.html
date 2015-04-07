@@ -1,21 +1,21 @@
 <!-- 表单 -->
 <div>
-<textarea id="tmpl-issue-form-207">
+<textarea id="tmpl-issue-form-234">
 	<btname>申请</btname>
 	<li class="input"> <b>协办部门：</b>
-		<select ng-disabled="!edit" class="form-control" ng-model="entity.assdepartment">
-			<option value="1">平台部</option>
-			<option value="2">平台运营部</option>
-			<option value="3">运营支撑部</option>
-			<option value="4">芒果OTT部</option>
-			<option value="5">芒果MPP部</option>
-			<option value="6">综合事务部</option>
+		<select ng-disabled="!editable" class="form-control" ng-model="entity.assdepartment">
+			<option value="平台部">平台部</option>
+			<option value="平台运营部">平台运营部</option>
+			<option value="运营支撑部">运营支撑部</option>
+			<option value="芒果OTT部">芒果OTT部</option>
+			<option value="芒果MPP部">芒果MPP部</option>
+			<option value="综合事务部">综合事务部</option>
 		</select>
 		<!-- <span ng-show="!edit">{{entity.assdepartment}}</span>
 		-->
 	</li>
 	<li class="input"> <b>协办人：</b>
-		<input type="text" ng-disabled="!edit" ng-model="entity.assname"/>	
+		<input type="text" ng-disabled="!editable" ng-model="entity.assname"/>	
 		<!-- <span ng-show="!edit">{{entity.assname}}</span>
 		-->
 	</li>
@@ -26,19 +26,19 @@
 	<b>设备管理： <font color="#ef6559"></font></b>  <font color="#ef6559"></font>
 	<div class="line">
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value1" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value1" ng-true-value="1" ng-false-value="0"/>	
 			设备上架
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value2" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value2" ng-true-value="1" ng-false-value="0"/>	
 			设备下架
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value3" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value3" ng-true-value="1" ng-false-value="0"/>	
 			设备入机房
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value4" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value4" ng-true-value="1" ng-false-value="0"/>	
 			设备出机房
 		</div>
 	</div>
@@ -47,27 +47,27 @@
 	<b>系统操作：</b>
 	<div class="line">
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value5" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value5" ng-true-value="1" ng-false-value="0"/>	
 			系统安装
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value6" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value6" ng-true-value="1" ng-false-value="0"/>	
 			登录密码更改
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value7" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value7" ng-true-value="1" ng-false-value="0"/>	
 			软件安装
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value8" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value8" ng-true-value="1" ng-false-value="0"/>	
 			权限申请
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value9" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value9" ng-true-value="1" ng-false-value="0"/>	
 			来路限制
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value10" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value10" ng-true-value="1" ng-false-value="0"/>	
 			端口配置
 		</div>
 	</div>
@@ -77,27 +77,27 @@
 	<b>业务系统：</b>
 	<div class="line">
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value11" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value11" ng-true-value="1" ng-false-value="0"/>	
 			系统配置更改
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value12" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value12" ng-true-value="1" ng-false-value="0"/>	
 			业务系统上线
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value13" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value13" ng-true-value="1" ng-false-value="0"/>	
 			系统维护割接
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value14" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value14" ng-true-value="1" ng-false-value="0"/>	
 			版本升级
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value15" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value15" ng-true-value="1" ng-false-value="0"/>	
 			服务安装
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value16" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value16" ng-true-value="1" ng-false-value="0"/>	
 			版本更新
 		</div>
 	</div>
@@ -108,15 +108,15 @@
 	<div class="line">
 
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value17" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value17" ng-true-value="1" ng-false-value="0"/>	
 			数据库备份
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value18" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value18" ng-true-value="1" ng-false-value="0"/>	
 			数据库密码更改
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value19" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value19" ng-true-value="1" ng-false-value="0"/>	
 			数据库割接
 		</div>
 	</div>
@@ -126,15 +126,15 @@
 	<b>网络配置：</b>
 	<div class="line">
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value20" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value20" ng-true-value="1" ng-false-value="0"/>	
 			服务器IP更改
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value21" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value21" ng-true-value="1" ng-false-value="0"/>	
 			路由器配置
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value22" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value22" ng-true-value="1" ng-false-value="0"/>	
 			交换机配置
 		</div>
 	</div>
@@ -143,41 +143,41 @@
 	<b>负载均衡配置：</b>
 	<div class="line">
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value25" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value25" ng-true-value="1" ng-false-value="0"/>	
 			流量控制配置
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value26" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value26" ng-true-value="1" ng-false-value="0"/>	
 			VPN权限配置
 		</div>
 		<div class="check">
-			<input type="checkbox" ng-disabled="!edit" ng-model="entity.ckbox_value27" ng-true-value="1" ng-false-value="0"/>	
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value27" ng-true-value="1" ng-false-value="0"/>	
 			设备密码更改
 		</div>
 	</div>
 	</li>
 	<li class="textarea">
 	<b>其他配置：</b>
-	&lt;textarea ng-disabled="!edit" ng-model="entity.other" &gt;&lt;/textarea&gt;
+	&lt;textarea ng-disabled="!editable" ng-model="entity.other" &gt;&lt;/textarea&gt;
 	</li>
 
 	<mtitle>申请原因</mtitle>
 
 	<li class="textarea">
 	<b><i>*&nbsp;</i>详细说明变更需求：</b>
-	&lt;textarea ng-disabled="!edit" ng-model="entity.detail" &gt;&lt;/textarea&gt;
+	&lt;textarea ng-disabled="!editable" ng-model="entity.detail" &gt;&lt;/textarea&gt;
 	</li>
 
 	<li class="textarea">
 	<b><i>*&nbsp;</i>申请原因及用途：</b>
-	&lt;textarea ng-disabled="!edit" ng-model="entity.reason" &gt;&lt;/textarea&gt;
+	&lt;textarea ng-disabled="!editable" ng-model="entity.reason" &gt;&lt;/textarea&gt;
 	</li>
 
 </textarea>
 <textarea id="tmpl-issue-form-233">
 	<btname>上线</btname>
 	<li class='input'><b><i>*&nbsp;</i>项目名称：</b>
-		<input type="text" required ng-disabled="!edit" ng-model="entity.pname"/>
+		<input type="text" required ng-disabled="!editable" ng-model="entity.pname"/>
 	</li>
 
 	<li class='input'> <b>上线类型：</b>
@@ -188,7 +188,7 @@
 	</li>
 
 	<li class='input'><b>上线时间：</b>
-		<input type="text" datetype="datetime" datetime-picker format="yyyy年mm月dd日 hh:ii:ss" required ng-disabled="!edit" ng-model="entity.time"/>
+		<input type="text" datetype="datetime" datetime-picker format="yyyy年mm月dd日 hh:ii:ss" required ng-disabled="!editable" ng-model="entity.time"/>
 	</li>
 
 	<li class='input'><b>紧急程度：</b>
@@ -201,14 +201,14 @@
 	</li>
 
 	<li class="textarea" style="height:120px;"><b>上线描述：</b>
-		&lt;textarea rows="10" placeholder="对上线内容进行清晰描述，着重描述功能点和影响范围。（内容可直接让产品人员提供）" style="height:200px;" ng-disabled="!edit" ng-model="entity.details" &gt;&lt;/textarea&gt;
+		&lt;textarea rows="10" placeholder="对上线内容进行清晰描述，着重描述功能点和影响范围。（内容可直接让产品人员提供）" style="height:200px;" ng-disabled="!editable" ng-model="entity.details" &gt;&lt;/textarea&gt;
 	</li>
 <!-- 	<li class="tip">
 		<tip></tip>
 	</li>
  -->
 	<li class="textarea" style="height:120px;"><b>上线重点：</b>
-		&lt;textarea rows="10" placeholder="对本次上线可能造成的影响范围，以便上线后重点关注。" style="height:200px;" ng-disabled="!edit" ng-model="entity.importance" &gt;&lt;/textarea&gt;
+		&lt;textarea rows="10" placeholder="对本次上线可能造成的影响范围，以便上线后重点关注。" style="height:200px;" ng-disabled="!editable" ng-model="entity.importance" &gt;&lt;/textarea&gt;
 	</li>
 <!-- 	<li class="tip">
 		<tip></tip>
@@ -216,18 +216,18 @@
  -->
 </textarea>
 
-<textarea id="tmpl-issue-form-234">
+<textarea id="tmpl-issue-form-207">
 	<btname>变更</btname>
 	<li class='input'> <b><i>*&nbsp;</i>签呈时间：</b>
-		<input type="text" ng-disabled="!edit" datetype="date" datetime-picker format="yyyy年mm月dd日" ng-model="entity.time"/>
+		<input type="text" ng-disabled="!editable" datetype="date" datetime-picker format="yyyy年mm月dd日" ng-model="entity.time"/>
 	</li>
 
 	<li class='input'> <b><i>*&nbsp;</i>业务模块：</b>
-		<input type="text" required ng-disabled="!edit" ng-model="entity.model"/>
+		<input type="text" required ng-disabled="!editable" ng-model="entity.model"/>
 	</li>
 
 	<li class='textarea'> <b>功能描述：</b>
-		&lt;textarea ng-disabled="!edit" ng-model="entity.detail" &gt;&lt;/textarea&gt;
+		&lt;textarea ng-disabled="!editable" ng-model="entity.detail" &gt;&lt;/textarea&gt;
 	</li>
 
 	<mtitle>资源配置</mtitle>
@@ -263,15 +263,15 @@
 	<mtitle>环境说明</mtitle>
 
 	<li class='input'> <b><i>*&nbsp;</i>部署环境：</b>
-		<input type="text" required ng-disabled="!edit" ng-model="entity.env"/>
+		<input type="text" required ng-disabled="!editable" ng-model="entity.env"/>
 	</li>
 
 	<li class='input'> <b>监控内容：</b>
-		<input type="text" ng-disabled="!edit" ng-model="entity.content"/>
+		<input type="text" ng-disabled="!editable" ng-model="entity.content"/>
 	</li>
 
 	<li class='textarea'> <b>备注：</b>
-		&lt;textarea rows="10" ng-disabled="!edit" ng-model="entity.ext" &gt;&lt;/textarea&gt;
+		&lt;textarea rows="10" ng-disabled="!editable" ng-model="entity.ext" &gt;&lt;/textarea&gt;
 	</li>
   
 	<li class='tip'> <b>域名：</b>
@@ -294,20 +294,20 @@
 <form name="myForm">
 	<mtitle>基本信息</mtitle>
 	<li class="input"> <b><i>*&nbsp;</i>标题：</b>
-		<input name="title" ng-model="entity.title" required ng-disabled="!edit" type="text"></li>
+		<input name="title" ng-model="entity.title" required ng-disabled="!editable" type="text"></li>
 	<li class="input"> <b><i>*&nbsp;</i>申请部门：</b>
-		<select required ng-disabled="!edit" ng-model="entity.department">
-			<option value="1">平台部</option>
-			<option value="2">平台运营部</option>
-			<option value="3">运营支撑部</option>
-			<option value="4">芒果OTT部</option>
-			<option value="5">芒果MPP部</option>
-			<option value="6">综合事务部</option>
+		<select required ng-disabled="!editable" ng-model="entity.department">
+			<option value="平台部">平台部</option>
+			<option value="平台运营部">平台运营部</option>
+			<option value="运营支撑部">运营支撑部</option>
+			<option value="芒果OTT部">芒果OTT部</option>
+			<option value="芒果MPP部">芒果MPP部</option>
+			<option value="综合事务部">综合事务部</option>
 		</select>
 	</li>
 	<li class="input">
 		<b><i>*&nbsp;</i>申请人：</b>
-		<input name="name" required type="text" ng-disabled="!edit" ng-model="entity.name"/>
+		<input name="name" required type="text" ng-disabled="!editable" ng-model="entity.name"/>
 	</li>
 </textarea>
 
@@ -316,7 +316,7 @@
 </textarea>
 
 <textarea id="tmpl-issue-form-window">
-	<div class="inner form">
+	<div class="inner issue-form">
 		<div class='title'>
 			<span>申请表单</span>
 		</div>

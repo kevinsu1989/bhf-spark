@@ -231,20 +231,14 @@ define [
             scope.entity=JSON.parse(result.content)
             scope.title=result.title
             type=scope.entity.uuid
-              # 207
             # 动态加载表单
-            temp = _utils.formTemplate "#tmpl-issue-form-#{type}", _templateForm
-            temp += _utils.extractTemplate "#tmpl-issue-buttons", _templateForm
+            temp =  _utils.extractTemplate ["#temp-form-head", "#tmpl-issue-form-#{type}", "#temp-form-foot","#tmpl-issue-buttons"], _templateForm
             temp = temp.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
             element.html temp
             $compile(element.contents())(scope)
 
         #  表单可编辑状态
-        if scope.editflag is '-1'
-          scope.edit=false;
-        else
-          scope.edit=true;      
-
+        scope.editable = scope.editflag isnt '-1'
 
         # 响应父级保存按钮
         scope.$on 'issue:form:submit', (event)->
@@ -253,30 +247,41 @@ define [
             return
           params =
             tag: "form"
+            title: scope.entity.name+'-'+scope.entity.department+'-'+scope.entity.title
+            category_id: $stateParams.category_id
             content: JSON.stringify(scope.entity)
+
           # issue等于-1的时候为新增
-          if scope.issue == '-1'
-            params.title = scope.entity.name+'-'+scope.entity.department+'-'+scope.entity.title
-            API.project($stateParams.project_id).issue().create(params).then (result)->
-              NOTIFY.success "创建#{params.title}成功"
-              scope.$emit 'issue:form:hide'
-          else
-            params.title = scope.title
-            API.project($stateParams.project_id).issue($stateParams.issue_id).update(params).then (result)->
-              NOTIFY.success "修改#{params.title}成功"
-              scope.$emit 'issue:form:hide'
+          isEdit = scope.issue is '-1'
+          issueAPI = API.project($stateParams.project_id).issue(if isEdit then '' else $stateParams.issue_id)
+          method = if isEdit then 'create' else 'update'
+          issueAPI[method](params).then ->
+             NOTIFY.success "保存#{params.title}成功"
+             scope.$emit 'issue:form:hide'
+
+          # if scope.issue == '-1'
+          #   params.title = scope.entity.name+'-'+scope.entity.department+'-'+scope.entity.title
+          #   params.category_id = $stateParams.category_id
+          #   API.project($stateParams.project_id).issue().create(params).then (result)->
+          #     NOTIFY.success "创建#{params.title}成功"
+          #     scope.$emit 'issue:form:hide'
+          # else
+          #   params.title = scope.title
+          #   params.category_id = $stateParams.category_id
+          #   API.project($stateParams.project_id).issue($stateParams.issue_id).update(params).then (result)->
+          #     NOTIFY.success "修改#{params.title}成功"
+          #     scope.$emit 'issue:form:hide'
 
         # 弹窗触发事件
         scope.$on 'issue:form:change', (event,issueId,index)->
           # 如果不是弹窗则返回
           return if scope.change is '-1'            
           # 处理编辑状态
-          scope.edit = scope.editflag isnt '-1'
-          temp = _utils.formTemplate "#tmpl-issue-form-#{index}", _templateForm
-          temp += _utils.extractTemplate "#tmpl-issue-buttons", _templateForm
+          scope.editable = scope.editflag isnt '-1'
+          temp = _utils.extractTemplate ["#temp-form-head", "#tmpl-issue-form-#{index}", "#temp-form-foot", "#tmpl-issue-buttons"], _templateForm
           temp = temp.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
           element.html temp
-          scope.entity=new Object()                 
+          scope.entity = {}                 
           if issueId isnt -1
             API.project($stateParams.project_id).issue($stateParams.issue_id).retrieve().then (result)->
               scope.entity=JSON.parse(result.content)
@@ -302,7 +307,7 @@ define [
           scope.$broadcast 'issue:form:submit'
 
         scope.onClickCancel = ()->
-          $.modal.close()
+          scope.$emit 'issue:form:hide'
 
         #接收事件后，加载数据并显示
         scope.$on 'issue:form:show', (event, issueId, index)->
