@@ -16,10 +16,6 @@ define [
       template: _utils.extractTemplate '#tmpl-project-editor', _tmplEditors
       link: (scope, element, attrs)->
         $element = $(element)
-        #git token 是否存在
-        gitTokenExists = false
-        #git 项目是否存在
-        gitProjectExists = false
 
         #加载项目信息
         loadProject = (project_id)->
@@ -45,38 +41,27 @@ define [
           return NOTIFY.error('项目名称必需输入') if not scope.data.title
           method = if scope.data.id then 'update' else 'create'
 
-          #当git token不存在 并且 填写了 git 仓库名称的时候，给出警告提醒.
-          if method is 'create'
-            if not gitTokenExists and scope.data.gitProjectName
-              return if not confirm("没有token，本项目无法自动创建仓库, 是否继续？")
-              delete scope.data.gitProjectName
-            if gitTokenExists and gitProjectExists
-              return if not confirm("git项目已存在，无法重复创建仓库, 是否继续？")
-              delete scope.data.gitProjectName
+          if method isnt 'create'
+            return submitData(method)
 
+          #当git token不存在 并且 填写了 git 仓库名称的时候，给出警告提醒.
+          scope.checkGitlabProjectIsExist(->
+            if not scope.gitTokenVerifyPass and scope.data.gitProjectName
+              return if not confirm("没有token，本项目无法自动创建仓库, 是否继续？")
+            if scope.gitTokenVerifyPass and not scope.gitProjectNameVerifyPass
+              return if not confirm("git项目已存在，无法重复创建仓库, 是否继续？")
+            #删除存储的git 项目名字
+            delete scope.data.gitProjectName
+            submitData(method)
+          )
+
+
+        submitData = (method)->
           API.project(scope.data.id)[method](scope.data).then (result)->
             NOTIFY.success '项目信息保存成功'
             $.modal.close()
             #通知项目被改变
             $rootScope.$broadcast 'project:change', method, scope.data.id || result.id
-
-        #是否展示git相关提示信息
-        scope.showGitlabStatusMsg = ->
-          return false if not scope.data
-          if scope.data.gitlabStatus is 'autoCreate' and scope.gitlabTokenStatusMsg?.length
-            return true
-          return false if scope.data.gitlabStatus is 'relevance'
-          return false
-
-        #检测git项目是否存在在自己的仓库里
-        scope.checkGitlabProjectIsExist = ->
-          return if not gitTokenExists
-          return scope.gitlabTokenStatusMsg = "请输入仓库名称" if not scope.data.gitProjectName
-          API.project().git().retrieve(name: scope.data.gitProjectName).then((data)->
-            gitProjectExists = Boolean(data.exist)
-            return scope.gitlabTokenStatusMsg = "仓库已存在, 请重新输入!" if data.exist
-            scope.gitlabTokenStatusMsg = "仓库可用"
-          )
 
         scope.onClickCancel = ->
           $.modal.close()
@@ -85,13 +70,12 @@ define [
         scope.$on "project:editor:show", (event, project_id)->
           #初始化项目数据
           scope.editor_title = '新建'
-          gitProjectExists = false
           scope.contextName = 'project'
           scope.data =
             status: 'active'
             gits: []
             gitlabStatus: 'relevance'
-
+          vertifyGitToken()
           #新建项目，直接显示弹窗
           return $element.modal(showClose: false) if not project_id
 
@@ -111,14 +95,33 @@ define [
 
             $element.modal(showClose: false)
 
-        #检查git token是否存在
-        API.account().profile().retrieve().then((data)->
-          if not data.gitlab_token or data.gitlab_token.length is 0
-            gitTokenExists = false
-            scope.gitlabTokenStatusMsg = "没有git token无法自动创建，请在个人资料填写"
-          else
-            gitTokenExists = true
-        )
+
+        #校验git token 是否存在
+        vertifyGitToken = ->
+          #检查git token是否存在
+          API.account().profile().retrieve().then((data)->
+            if not data.gitlab_token or data.gitlab_token.length is 0
+              scope.gitTokenVerifyPass = false
+            else
+              scope.gitTokenVerifyPass = true
+          )
+
+
+        #检测git项目是否存在在自己的仓库里
+        scope.checkGitlabProjectIsExist = (cb)->
+          #如果token校验没通过
+          return cb and cb() if not scope.gitTokenVerifyPass
+          #如果git项目
+
+          if not scope.data.gitProjectName
+            scope.gitProjectNameVerifyPass = false
+            return cb and cb()
+
+          API.project().git().retrieve(name: scope.data.gitProjectName).then((data)->
+            #不能省写, 相关模板中使用了严格判断模式
+            scope.gitProjectNameVerifyPass = if data.exist then false else true
+            cb and cb()
+          )
 
         scope.$on 'project:editor:hide', -> $model.close()
   ])
