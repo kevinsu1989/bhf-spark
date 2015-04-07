@@ -97,8 +97,8 @@ define [
   #根据url构建项目中间的链接
   .filter('projectLink', ['$stateParams', '$state', ($stateParams, $state)->
     (data, type)->
-      hasVersion = type in ['issue', 'normal', 'test']
-      hasCategory = type is 'issue'
+      hasVersion = type in ['issue', 'normal', 'test', 'form']
+      hasCategory = type in ['issue', 'form']
 
       #这里的逻辑有点罗，整个project link相关的代码都考虑要修改
 
