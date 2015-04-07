@@ -181,7 +181,7 @@
 	</li>
 
 	<li class='input'> <b>上线类型：</b>
-		<select required ng-model="entity.type">
+		<select required ng-disabled="!editable" ng-model="entity.type">
 			<option value="1">小型</option>
 			<option value="2">中大型</option>
 		</select>
@@ -192,7 +192,7 @@
 	</li>
 
 	<li class='input'><b>紧急程度：</b>
-		<select required ng-model="entity.j">
+		<select required ng-disabled="!editable" ng-model="entity.j">
 			<option value="1">高</option>
 			<option value="2">中</option>
 			<option value="3">低</option>
@@ -200,15 +200,15 @@
 
 	</li>
 
-	<li class="textarea" style="height:120px;"><b>上线描述：</b>
-		&lt;textarea rows="10" placeholder="对上线内容进行清晰描述，着重描述功能点和影响范围。（内容可直接让产品人员提供）" style="height:200px;" ng-disabled="!editable" ng-model="entity.details" &gt;&lt;/textarea&gt;
+	<li class="textarea bigger"><b >上线描述：</b>
+		&lt;textarea rows="10" placeholder="对上线内容进行清晰描述，着重描述功能点和影响范围。（内容可直接让产品人员提供）" ng-disabled="!editable" ng-model="entity.details" &gt;&lt;/textarea&gt;
 	</li>
 <!-- 	<li class="tip">
 		<tip></tip>
 	</li>
  -->
-	<li class="textarea" style="height:120px;"><b>上线重点：</b>
-		&lt;textarea rows="10" placeholder="对本次上线可能造成的影响范围，以便上线后重点关注。" style="height:200px;" ng-disabled="!editable" ng-model="entity.importance" &gt;&lt;/textarea&gt;
+	<li class="textarea bigger"><b>上线重点：</b>
+		&lt;textarea rows="10" placeholder="对本次上线可能造成的影响范围，以便上线后重点关注。" ng-disabled="!editable" ng-model="entity.importance" &gt;&lt;/textarea&gt;
 	</li>
 <!-- 	<li class="tip">
 		<tip></tip>
@@ -249,11 +249,11 @@
 		</tr>
 
 		<tr>
-			<td>负载均衡</td><td>2*E5-2420<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num4"/></td>
+			<td>数据层</td><td>2*E5-2420<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num4"/></td>
 		</tr>
 
 		<tr class="cel">
-			<td>负载均衡</td><td>2*E5-2620<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>12*4T(数据)</td><td>RAID1(系统)<br/>RAID0(数据)</td><td>千兆*4</td><td>有</td><td>2U</td><td>双电源冗余</td><td>750W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num5"/></td>
+			<td>CDN</td><td>2*E5-2620<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>12*4T(数据)</td><td>RAID1(系统)<br/>RAID0(数据)</td><td>千兆*4</td><td>有</td><td>2U</td><td>双电源冗余</td><td>750W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num5"/></td>
 		</tr>
 	</table>
 	<li class="tip">

@@ -122,7 +122,7 @@ define [
         parts.push('version')
         parts.push($stateParams.version_id)
 
-      if type is 'issue' and $stateParams.myself
+      if type in ['issue','form'] and $stateParams.myself
         parts.push('issue')
         parts.push('myself')
 
@@ -133,7 +133,7 @@ define [
         parts.push($stateParams.category_id)
 
       #非myself的issue，在后面添加issue目录
-      if type is 'issue' and not $stateParams.myself
+      if type in ['issue','form'] and not $stateParams.myself
         parts.push('issue')
 
       parts.join('/')

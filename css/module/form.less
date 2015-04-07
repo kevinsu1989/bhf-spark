@@ -108,8 +108,16 @@
 		height:60px;
 		b{
 			height:41px;
-			padding-top: 20px;
 			line-height: 20px;
+		}
+		&.bigger{
+			height:135px;
+			b{
+				line-height: 20px;
+			}
+			textarea{
+				height:120px;
+			}
 		}
 	}
 	b{
@@ -196,37 +204,34 @@
 .issue-form.view{
 	width: 700px;
 	display: block;
-	background:#efefef;
+	background:#f5f5f5;
+	max-height: 2000px;
+	padding:0px 5px 20px 5px;
 	.main{	
 		width:530px;
 	}
 	.line{
-		width:550px;
+		width:650px;
 		min-height: 30px;
 	}
 	li.input{
-		width:250px;
-	}
-	li.textarea{
-		line-height: 20px;
-		height:40px;
-		padding-top: 10px;
+		width:300px;
 	}
 	li.tip{
 		display:none;
 	}
 	select{
-		width:140px;
+		width:173px;
 	}
 	input[type=text],span{
-		width:120px;
+		width:165px;
 		height:27px;
 	}
 	span.textarea{
 		width: 440px;
 		margin-left: 10px;
 		b{
-			height:42px;
+			height:62px;
 		}
 	}
 	textarea{
@@ -240,6 +245,10 @@
 	}	
 	table{
 		width:634px;
+	}
+	mtitle{
+		width:700px;
+		border-top: 0px solid #ccc;
 	}
 }
 
