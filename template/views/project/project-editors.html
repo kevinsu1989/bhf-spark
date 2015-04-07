@@ -54,26 +54,12 @@
                             </label>
                           </div>
                         </div>
-                        <!--token校验没通过 提示信息提示-->
-                        <div class="row" ng-if="gitTokenVerifyPass === false && data.gitlabStatus == 'autoCreate'">
-                          <label class="caption"></label>
-                          <label style="font-size: 12px; color: #ff0000" ng-show="!gitTokenVerifyPass">
-                            没有git token无法自动创建仓库，请在个人资料填写
-                          </label>
-                        </div>
-                        <!--token校验通过 提示信息提示-->
-                        <div class="row" ng-if="gitTokenVerifyPass && data.gitlabStatus == 'autoCreate' &&  gitProjectNameVerifyPass != null">
-                          <label class="caption"></label>
-                          <label style="font-size: 12px; color: #45ff26" ng-if="gitProjectNameVerifyPass === true">git仓库名可用</label>
-                          <label style="font-size: 12px; color: #ff0000" ng-if="gitProjectNameVerifyPass === false">git仓库名已存在，请重新输入！</label>
-                        </div>
 
                         <div class="row" ng-if="data.gitlabStatus === 'autoCreate'">
                           <label class="caption">
                             git仓库名称
                           </label>
                           <input class="medium text" type="text" placeholder="需要新建的git仓库名称（English）" ng-model="data.gitProjectName"/>
-                          <label><a href="" ng-click="checkGitlabProjectIsExist()">检测</a></label>
                         </div>
 
                         <div class="row" ng-if="data.gitlabStatus === 'relevance'">

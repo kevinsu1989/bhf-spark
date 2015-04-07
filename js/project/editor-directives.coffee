@@ -45,13 +45,14 @@ define [
             return submitData(method)
 
           #当git token不存在 并且 填写了 git 仓库名称的时候，给出警告提醒.
-          scope.checkGitlabProjectIsExist(->
+          checkGitlabProjectIsExist((gitProjectNameVerifyPass)->
             if not scope.gitTokenVerifyPass and scope.data.gitProjectName
               return if not confirm("没有token，本项目无法自动创建仓库, 是否继续？")
-            if scope.gitTokenVerifyPass and not scope.gitProjectNameVerifyPass
+              delete scope.data.gitProjectName
+            if scope.gitTokenVerifyPass and not gitProjectNameVerifyPass
               return if not confirm("git项目已存在，无法重复创建仓库, 是否继续？")
-            #删除存储的git 项目名字
-            delete scope.data.gitProjectName
+              delete scope.data.gitProjectName
+
             submitData(method)
           )
 
@@ -106,21 +107,14 @@ define [
               scope.gitTokenVerifyPass = true
           )
 
-
         #检测git项目是否存在在自己的仓库里
-        scope.checkGitlabProjectIsExist = (cb)->
+        checkGitlabProjectIsExist = (cb)->
           #如果token校验没通过
           return cb and cb() if not scope.gitTokenVerifyPass
-          #如果git项目
-
-          if not scope.data.gitProjectName
-            scope.gitProjectNameVerifyPass = false
-            return cb and cb()
-
+          #如果git项目没有名称,则默认通过
+          return cb and cb(true) if not scope.data.gitProjectName
           API.project().git().retrieve(name: scope.data.gitProjectName).then((data)->
-            #不能省写, 相关模板中使用了严格判断模式
-            scope.gitProjectNameVerifyPass = if data.exist then false else true
-            cb and cb()
+            cb and cb(!Boolean(data.exist))
           )
 
         scope.$on 'project:editor:hide', -> $model.close()
