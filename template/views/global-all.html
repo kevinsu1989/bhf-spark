@@ -18,7 +18,7 @@
                 </button>
             </li>
             <li class="create">
-                <input type="text" class="text medium" placeholder="输入git地址后回车" class="medium" ng-keypress="onKeypressAdd($event)"/>
+                <input type="text" class="text medium" placeholder="输入git地址后回车" class="medium" ng-keypress="onKeypressAdd($event)" ng-blur="onKeyupAddLastItem($event)" ng-model="currentText"/>
             </li>
         </ul>
     </textarea>

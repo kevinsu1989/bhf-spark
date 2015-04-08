@@ -158,10 +158,10 @@
                         Git帐号
                     </label>
                     <div class="inline">
-                        <git-list-editor
-                                data-name="{{contextName}}"
-                                data-max-count="5"
-                                data-gits="{{gits}}"></git-list-editor>
+                        <git-list-editor  bean="bean"
+                                          max-count="5"
+                                          expression="^git@git\.hunantv\.com:.+\/.+\.git$">
+                        </git-list-editor>
                     </div>
                 </div>
 
