@@ -1,0 +1,336 @@
+<!-- 表单 -->
+<div>
+<textarea id="tmpl-issue-form-234">
+	<li class="input"> <b>协办部门：</b>
+		<select ng-disabled="!editable" class="form-control" ng-model="entity.assdepartment">
+			<option value="平台部">平台部</option>
+			<option value="平台运营部">平台运营部</option>
+			<option value="运营支撑部">运营支撑部</option>
+			<option value="芒果OTT部">芒果OTT部</option>
+			<option value="芒果MPP部">芒果MPP部</option>
+			<option value="综合事务部">综合事务部</option>
+		</select>
+		<!-- <span ng-show="!edit">{{entity.assdepartment}}</span>
+		-->
+	</li>
+	<li class="input"> <b>协办人：</b>
+		<input type="text" ng-disabled="!editable" ng-model="entity.assname"/>	
+		<!-- <span ng-show="!edit">{{entity.assname}}</span>
+		-->
+	</li>
+
+	<mtitle>设备变更</mtitle>
+
+	<li>
+	<b>设备管理：</b> 
+	<div class="line">
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value1" ng-true-value="1" ng-false-value="0"/>	
+			设备上架
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value2" ng-true-value="1" ng-false-value="0"/>	
+			设备下架
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value3" ng-true-value="1" ng-false-value="0"/>	
+			设备入机房
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value4" ng-true-value="1" ng-false-value="0"/>	
+			设备出机房
+		</div>
+	</div>
+	</li>
+	<li>
+	<b>系统操作：</b>
+	<div class="line">
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value5" ng-true-value="1" ng-false-value="0"/>	
+			系统安装
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value6" ng-true-value="1" ng-false-value="0"/>	
+			登录密码更改
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value7" ng-true-value="1" ng-false-value="0"/>	
+			软件安装
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value8" ng-true-value="1" ng-false-value="0"/>	
+			权限申请
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value9" ng-true-value="1" ng-false-value="0"/>	
+			来路限制
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value10" ng-true-value="1" ng-false-value="0"/>	
+			端口配置
+		</div>
+	</div>
+	</li>
+
+	<li>
+	<b>业务系统：</b>
+	<div class="line">
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value11" ng-true-value="1" ng-false-value="0"/>	
+			系统配置更改
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value12" ng-true-value="1" ng-false-value="0"/>	
+			业务系统上线
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value13" ng-true-value="1" ng-false-value="0"/>	
+			系统维护割接
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value14" ng-true-value="1" ng-false-value="0"/>	
+			版本升级
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value15" ng-true-value="1" ng-false-value="0"/>	
+			服务安装
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value16" ng-true-value="1" ng-false-value="0"/>	
+			版本更新
+		</div>
+	</div>
+	</li>
+
+	<li>
+	<b>数据库：</b>
+	<div class="line">
+
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value17" ng-true-value="1" ng-false-value="0"/>	
+			数据库备份
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value18" ng-true-value="1" ng-false-value="0"/>	
+			数据库密码更改
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value19" ng-true-value="1" ng-false-value="0"/>	
+			数据库割接
+		</div>
+	</div>
+	</li>
+
+	<li>
+	<b>网络配置：</b>
+	<div class="line">
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value20" ng-true-value="1" ng-false-value="0"/>	
+			服务器IP更改
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value21" ng-true-value="1" ng-false-value="0"/>	
+			路由器配置
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value22" ng-true-value="1" ng-false-value="0"/>	
+			交换机配置
+		</div>
+	</div>
+	</li>
+	<li>
+	<b>负载均衡配置：</b>
+	<div class="line">
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value25" ng-true-value="1" ng-false-value="0"/>	
+			流量控制配置
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value26" ng-true-value="1" ng-false-value="0"/>	
+			VPN权限配置
+		</div>
+		<div class="check">
+			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value27" ng-true-value="1" ng-false-value="0"/>	
+			设备密码更改
+		</div>
+	</div>
+	</li>
+	<li class="textarea">
+	<b>其他配置：</b>
+	&lt;textarea ng-disabled="!editable" ng-model="entity.other" &gt;&lt;/textarea&gt;
+	</li>
+
+	<mtitle>申请原因</mtitle>
+
+	<li class="textarea">
+	<b><i>*&nbsp;</i>详细说明变更需求：</b>
+	&lt;textarea ng-disabled="!editable" ng-model="entity.detail" &gt;&lt;/textarea&gt;
+	</li>
+
+	<li class="textarea">
+	<b><i>*&nbsp;</i>申请原因及用途：</b>
+	&lt;textarea ng-disabled="!editable" ng-model="entity.reason" &gt;&lt;/textarea&gt;
+	</li>
+
+</textarea>
+<textarea id="tmpl-issue-form-233">
+	<li class='input'><b><i>*&nbsp;</i>项目名称：</b>
+		<input type="text" required ng-disabled="!editable" ng-model="entity.pname"/>
+	</li>
+
+	<li class='input'> <b>上线类型：</b>
+		<select required ng-disabled="!editable" ng-model="entity.type">
+			<option value="1">小型</option>
+			<option value="2">中大型</option>
+		</select>
+	</li>
+
+	<li class='input'><b>上线时间：</b>
+		<input type="text" datetype="datetime" datetime-picker format="yyyy年mm月dd日 hh:ii:ss" required ng-disabled="!editable" ng-model="entity.time"/>
+	</li>
+
+	<li class='input'><b>紧急程度：</b>
+		<select required ng-disabled="!editable" ng-model="entity.j">
+			<option value="1">高</option>
+			<option value="2">中</option>
+			<option value="3">低</option>
+		</select>
+
+	</li>
+
+	<li class="textarea bigger"><b >上线描述：</b>
+		&lt;textarea rows="10" placeholder="对上线内容进行清晰描述，着重描述功能点和影响范围。（内容可直接让产品人员提供）" ng-disabled="!editable" ng-model="entity.details" &gt;&lt;/textarea&gt;
+	</li>
+<!-- 	<li class="tip">
+		<tip></tip>
+	</li>
+ -->
+	<li class="textarea bigger"><b>上线重点：</b>
+		&lt;textarea rows="10" placeholder="对本次上线可能造成的影响范围，以便上线后重点关注。" ng-disabled="!editable" ng-model="entity.importance" &gt;&lt;/textarea&gt;
+	</li>
+<!-- 	<li class="tip">
+		<tip></tip>
+	</li>
+ -->
+</textarea>
+
+<textarea id="tmpl-issue-form-207">
+	<li class='input'> <b><i>*&nbsp;</i>签呈时间：</b>
+		<input type="text" ng-disabled="!editable" datetype="date" datetime-picker format="yyyy年mm月dd日" ng-model="entity.time"/>
+	</li>
+
+	<li class='input'> <b><i>*&nbsp;</i>业务模块：</b>
+		<input type="text" required ng-disabled="!editable" ng-model="entity.model"/>
+	</li>
+
+	<li class='textarea'> <b>功能描述：</b>
+		&lt;textarea ng-disabled="!editable" ng-model="entity.detail" &gt;&lt;/textarea&gt;
+	</li>
+
+	<mtitle>资源配置</mtitle>
+
+	<table>
+		<tr>
+			<th>名称</th><th>CPU</th><th>内存</th><th>硬盘</th><th>RAID</th><th>网口数量</th><th>外网</th><th>机架高度</th><th>电源模块</th><th>功耗</th><th>数量</th>
+		</tr>
+		<tr class="cel">
+			<td>负载均衡</td><td>E3-1220<br/>4核</td><td>4*8G</td><td>2*500G</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num1"/></td>
+		</tr>
+
+		<tr>
+			<td>web层</td><td>2*E5-2420<br/>6核</td><td>4*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num2"/></td>
+		</tr>
+
+		<tr class="cel">
+			<td>缓存层</td><td>2*E5-2420<br/>6核</td><td>8*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num3"/></td>
+		</tr>
+
+		<tr>
+			<td>数据层</td><td>2*E5-2420<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num4"/></td>
+		</tr>
+
+		<tr class="cel">
+			<td>CDN</td><td>2*E5-2620<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>12*4T(数据)</td><td>RAID1(系统)<br/>RAID0(数据)</td><td>千兆*4</td><td>有</td><td>2U</td><td>双电源冗余</td><td>750W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num5"/></td>
+		</tr>
+	</table>
+	<li class="tip">
+		<tip>说明：以上为推荐配置，如有其他需求请按照格式在备注中填写。</tip>
+	</li>
+
+	<mtitle>环境说明</mtitle>
+
+	<li class='input'> <b><i>*&nbsp;</i>部署环境：</b>
+		<input type="text" required ng-disabled="!editable" ng-model="entity.env"/>
+	</li>
+
+	<li class='input'> <b>监控内容：</b>
+		<input type="text" ng-disabled="!editable" ng-model="entity.content"/>
+	</li>
+
+	<li class='textarea'> <b>备注：</b>
+		&lt;textarea rows="10" ng-disabled="!editable" ng-model="entity.ext" &gt;&lt;/textarea&gt;
+	</li>
+  
+	<li class='tip'> <b>域名：</b>
+		<span class="text">如有需要请到备注说明。</span>
+	</li>
+
+</textarea>
+
+<textarea id="tmpl-issue-buttons">
+<!-- 	<div class="control" ng-show="edit">
+		<div class="right">
+			<button class="primary default" ng-click="onClickSubmit()">提&nbsp;&nbsp;交</button>
+
+			<button class="cancel default" ng-click="onClickCancel()">取&nbsp;&nbsp;消</button>
+		</div>
+	</div>
+ -->
+</textarea>
+<textarea id="temp-form-head">
+<form name="myForm">
+	<mtitle>基本信息</mtitle>
+	<li class="input"> <b><i>*&nbsp;</i>标题：</b>
+		<input name="title" ng-model="entity.title" required ng-disabled="!editable" type="text"></li>
+	<li class="input"> <b><i>*&nbsp;</i>申请部门：</b>
+		<select required ng-disabled="!editable" ng-model="entity.department">
+			<option value="平台部">平台部</option>
+			<option value="平台运营部">平台运营部</option>
+			<option value="运营支撑部">运营支撑部</option>
+			<option value="芒果OTT部">芒果OTT部</option>
+			<option value="芒果MPP部">芒果MPP部</option>
+			<option value="综合事务部">综合事务部</option>
+		</select>
+	</li>
+	<li class="input">
+		<b><i>*&nbsp;</i>申请人：</b>
+		<input name="name" required type="text" ng-disabled="!editable" ng-model="entity.name"/>
+	</li>
+</textarea>
+
+<textarea id="temp-form-foot">
+</form>
+</textarea>
+
+<textarea id="tmpl-issue-form-modal">
+	
+		<div class="inner issue-form">
+			<div class='title'>
+				<span>申请表单</span>
+			</div>
+			<a class="close-modal" rel="modal:close"> <i class="icon"></i>
+			</a>
+			<div class="main">
+				<div class="simple-tab" simple-tab="" data-active-index="0">
+					<issue-form data-type='{{activeIndex}}' data-issue='{{issueId}}'></issue-form>
+				</div>
+			</div>
+			<div class="right footer">
+				<button class="primary default" ng-click="onClickSubmit()">提&nbsp;&nbsp;交</button>
+
+				<button class="cancel default" ng-click="onClickCancel()">取&nbsp;&nbsp;消</button>
+			</div>
+		</div>
+</textarea>
+
+</div>

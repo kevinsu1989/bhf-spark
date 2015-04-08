@@ -11,8 +11,14 @@ define [
     text.replace /\{(\d+)\}/g, (m, i) -> args[i]
 
   #提取text中包括规则的模板html，即包含在textarea中的
+  #现支持多模版拼接，expr为array时根据先后顺序拼接模版   by:sk--20150407
   extractTemplate: (expr, text)->
-    $(text).find(expr).val()
+    if typeof(expr) is 'string'
+      return $(text).find(expr).val() 
+    else if expr instanceof Array
+      html = ""
+      html += $(text).find(ids).val() for ids in expr
+      return html
 
   hex2rgba: (hex)->
     `

@@ -2,12 +2,12 @@
 define [
   '../ng-module'
   '../utils'
-], (_module, _utils, _template) ->
+], (_module, _utils) ->
 
   _module.controllerModule
   #任务列表
-  .controller('issueListController', ['$scope', '$stateParams', 'API', '$state', '$location',
-  ($scope, $stateParams, API, $state, $location)->
+  .controller('issueListController', ['$rootScope', '$scope', '$stateParams', 'API', '$state', '$location',
+  ($rootScope, $scope, $stateParams, API, $state, $location)->
     #搜索issue
     searchIssue = (condition)->
       #搜索条件
@@ -69,6 +69,9 @@ define [
       return if oldStatus is newStatus
       API.project($stateParams.project_id).issue(issue_id)
       .update(status: newStatus).then ()-> searchIssue()
+
+    # $rootScope.$on 'project:loaded', (event,result)->
+    #   $scope.project = result
 
     searchIssue()
   ])

@@ -17,23 +17,23 @@ define [
     restrict: 'AC'
     link: (scope, element, attrs)->
       dateOpt =
-        format: 'yyyy-MM-dd'
+        format: 'yyyy-mm-dd'
         startView: 2
         minView: 2
 
       timeOpt =
-        format: 'hh:mm:ss'
+        format: 'hh:ii:ss'
         startView: 1
         minView: 0
         maxView: 1
 
       dateTimeOpt =
-        format: 'yyyy-MM-dd HH:mm:ss'
+        format: 'yyyy-mm-dd hh:ii:ss'
         startView: 2
 
       name = attrs.name
-      type = attrs.type
-      formart = attrs.formart
+      type = attrs.datetype
+      format = attrs.format
 
       #判断类型
       switch type
@@ -43,7 +43,7 @@ define [
       #设定默认值
       dateOpt.showMeridian = true
       dateOpt.autoclose = true
-      if formart then dateOpt.formart = formart
+      if format then dateOpt.format = format
 
       #延时加载datepicker
       require ['datepicker'], ->

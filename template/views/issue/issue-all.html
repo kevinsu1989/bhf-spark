@@ -20,8 +20,10 @@
     <!--列表显示issue-->
     <textarea id="tmpl-issue-list">
         <div class="issue-list list" issue-status-dropdown-action style="position: relative;">
-            <h3>{{title}}</h3>
-            <div class="create">
+            <h3>{{title}}
+                <button issue-form-button class='primary default' style="float:right;margin-bottom:5px;" ng-show='project.flag==2&&showQuickEditor' ng-click='createForm()'>申请</button>
+            </h3>
+            <div class="create" ng-show="project.flag!=2">
                 <input type="text" placeholder="请输入您将要创建的任务，支持指令" autofocus issue-quick-editor ng-keydown="onKeyDown($event)" data-category="1" ng-show="showQuickEditor" data-tag="issue" />
                 <div ng-show="!showQuickEditor" class="empty">
                     您需要切换到具体任务分类下才能创建任务，<a href="/wiki/17/category/89/issue/2956" class="stubborn">这是什么意思？</a>
@@ -38,6 +40,10 @@
             </div>
 
             <issue-status-dropdown></issue-status-dropdown>
+
+            <issue-form-modal></issue-form-modal>
+
+
         </div>
     </textarea>
 
@@ -228,6 +234,12 @@
             <h3>测试任务</h3>
             <div class="create">
                 <input type="text" placeholder="请输入您将要创建的测试任务" autofocus issue-quick-editor ng-keydown="onKeyDown($event)" data-category="1" data-tag="test" />
+ <!--                <button ng-click="createForm(1)">表单1</button>            
+
+                <button ng-click="createForm(2)">表单2</button>            
+
+                <button ng-click="createForm(3)">表单3</button>             -->
+
             </div>
 
             <div>
@@ -243,5 +255,8 @@
 
             <issue-status-dropdown></issue-status-dropdown>
         </div>
+        <div>
+    </div>
     </textarea>
+
 </div>

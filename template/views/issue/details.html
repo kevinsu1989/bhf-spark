@@ -17,7 +17,7 @@
         </div>
 
         <div ng-show="!notFound" class="full">
-            <div style="overflow: auto; height: 100%; position:relative;">
+            <div style=" height: 100%; position:relative;">
                 <!--展示一个issue的所有内容-->
                 <header>
                     <div class="project-name">
@@ -95,10 +95,12 @@
                         <span class="timestamp" ng-show="issue.plan_finish_time">计划完成：{{issue.plan_finish_time | date}}</span>
                         <span class="timestamp" ng-show="issue.finish_time">实际完成：{{issue.finish_time | date}}</span>
                     </div>
-                    <div class="content row editor-style" ng-bind-html="issue.content | unsafe" ng-show="!editing" full-size-image-previewer></div>
+                    <div ng-if="issue.tag!='form'" class="content row editor-style" ng-bind-html="issue.content | unsafe" ng-show="!editing" full-size-image-previewer></div>
                     <div ng-show="editing">
                         <editor data-name="issue" data-show-always-top="{{showAlwaysTop}}" data-upload-url="{{uploadUrl}}"></editor>
                     </div>
+                    
+                    <issue-form ng-if="issue.tag=='form'" class="issue-form view" data-type='1' data-editflag='-1' data-change='-1'></issue-form>
                 </div>
 
                 <!--附件-->

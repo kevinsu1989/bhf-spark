@@ -2,11 +2,11 @@ define [
   '../ng-module'
   '../utils'
   't!../../views/issue/issue-all.html'
-  'v/jquery.transit'
-], (_module,_utils, _template) ->
+  't!../../views/issue/issue-form.html'
+], (_module,_utils, _template,_templateForm) ->
 
   _module.directiveModule
-  .directive('issueListCell', ['$location', '$filter', 'API', ($location, $filter, API)->
+  .directive('issueListCell', ['$rootScope','$location', '$filter', 'API', ($rootScope,$location, $filter, API)->
     restrict: 'E'
 #    scope: data: '='
     replace: true
@@ -121,8 +121,8 @@ define [
   ])
 
   #快速编辑的功能
-  .directive('issueQuickEditor', ['$state', '$stateParams', '$location', '$timeout', '$rootScope', 'API', 'NOTIFY',
-  ($state, $stateParams, $location, $timeout, $rootScope, API, NOTIFY)->
+  .directive('issueQuickEditor', ['$rootScope', '$state', '$stateParams', '$location', '$timeout',  'API', 'NOTIFY',
+  ($rootScope, $state, $stateParams, $location, $timeout, API, NOTIFY)->
     restrict: 'A'
     replace: true
     link: (scope, element, attrs)->
@@ -162,6 +162,12 @@ define [
           scope.$emit 'issue:change', {status: 'new', tag: attrs.tag, id: result.id}
           #跳转
           gotoIssue result.id
+
+
+      scope.createForm = (form)->
+        # console.log $scope
+        form=$stateParams.category_id
+        scope.$broadcast 'issue:form:show', -1, form
   ])
 
 
@@ -186,7 +192,6 @@ define [
     replace: true
     template: _utils.extractTemplate '#tmpl-issue-tag-dropdown', _template
     link: (scope, element, attrs)->
-
   ])
 
   #issue列表
@@ -210,3 +215,125 @@ define [
         scope.source = JSON.parse(attrs.source)
       )
   ])
+
+# $compile(element.contents())(scope);
+
+  # 表单
+  .directive('issueForm', ['$rootScope', '$stateParams', '$compile', 'API', 'NOTIFY', ($rootScope, $stateParams, $compile, API, NOTIFY)->
+      restrict: 'E'
+      replace: true
+      scope: type: '@',issue: '@',editflag: '@',change:'@'
+      link: (scope, element, attrs)->
+        #  scope.issue等于-1时，是新建表单；其他的是预览已存在的表单；
+        if scope.issue isnt -1 and $stateParams.issue_id isnt null
+          API.project($stateParams.project_id).issue($stateParams.issue_id).retrieve().then (result)->
+            return if result.tag isnt "form"
+            scope.entity=JSON.parse(result.content)
+            scope.title=result.title
+            type=scope.entity.uuid
+            # 动态加载表单
+            temp =  _utils.extractTemplate ["#temp-form-head", "#tmpl-issue-form-#{type}", "#temp-form-foot","#tmpl-issue-buttons"], _templateForm
+            temp = temp.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+            element.html temp
+            $compile(element.contents())(scope)
+
+        #  表单可编辑状态
+        scope.editable = scope.editflag isnt '-1'
+
+        # 响应父级保存按钮
+        scope.$on 'issue:form:submit', (event)->
+          if !scope.myForm.$valid
+            NOTIFY.error "请检查必填项是否漏填！"
+            return
+          params =
+            tag: "form"
+            title: scope.entity.name+'-'+scope.entity.department+'-'+scope.entity.title
+            category_id: $stateParams.category_id
+            content: JSON.stringify(scope.entity)
+
+          # issue等于-1的时候为新增
+          isEdit = scope.issue is '-1'
+          issueAPI = API.project($stateParams.project_id).issue(if isEdit then '' else $stateParams.issue_id)
+          method = if isEdit then 'create' else 'update'
+          issueAPI[method](params).then ->
+             NOTIFY.success "保存#{params.title}成功"
+             scope.$emit 'issue:form:hide'
+
+          # if scope.issue == '-1'
+          #   params.title = scope.entity.name+'-'+scope.entity.department+'-'+scope.entity.title
+          #   params.category_id = $stateParams.category_id
+          #   API.project($stateParams.project_id).issue().create(params).then (result)->
+          #     NOTIFY.success "创建#{params.title}成功"
+          #     scope.$emit 'issue:form:hide'
+          # else
+          #   params.title = scope.title
+          #   params.category_id = $stateParams.category_id
+          #   API.project($stateParams.project_id).issue($stateParams.issue_id).update(params).then (result)->
+          #     NOTIFY.success "修改#{params.title}成功"
+          #     scope.$emit 'issue:form:hide'
+
+        # 弹窗触发事件
+        scope.$on 'issue:form:change', (event,issueId,index)->
+          # 如果不是弹窗则返回
+          return if scope.change is '-1'            
+          # 处理编辑状态
+          scope.editable = scope.editflag isnt '-1'
+          temp = _utils.extractTemplate ["#temp-form-head", "#tmpl-issue-form-#{index}", "#temp-form-foot", "#tmpl-issue-buttons"], _templateForm
+          temp = temp.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+          element.html temp
+          scope.entity = {}                 
+          if issueId isnt -1
+            API.project($stateParams.project_id).issue($stateParams.issue_id).retrieve().then (result)->
+              scope.entity=JSON.parse(result.content)
+              scope.title=result.title
+          else
+            scope.entity.uuid = index   
+          $compile(element.contents())(scope)
+
+  ])
+
+
+  .directive('issueFormModal', ['$rootScope', '$stateParams', '$compile', '$timeout', 'API', ($rootScope, $stateParams, $compile, $timeout, API)->
+      restrict: 'E'
+      replace: true
+      template: _utils.extractTemplate "#tmpl-issue-form-modal", _templateForm 
+      scope:{}
+      link: (scope, element, attrs)->
+        scope.btname=1;
+        scope.issueId=-1
+
+        # 表单提交
+        scope.onClickSubmit = ()->
+          scope.$broadcast 'issue:form:submit'
+
+        scope.onClickCancel = ()->
+          scope.$emit 'issue:form:hide'
+
+        #接收事件后，加载数据并显示
+        scope.$on 'issue:form:show', (event, issueId, index)->
+          # console.log 'receive'
+          scope.activeIndex = index
+          scope.issueId=issueId
+          # scope.title='表单'        
+          $o = $(element)
+          $timeout (-> $o.modal showClose: false), 200
+          scope.$broadcast 'issue:form:change',issueId,index
+        scope.$on 'issue:form:hide', (event)->
+          $.modal.close()
+  ])
+
+  # .directive('issueFormButton',['$stateParams',($stateParams)->
+  #   restrict: 'A'
+  #   replace: false
+  #   template:'<span>{{btname}}</span>'
+  #   scope:{}
+  #   link: (scope, element, attrs)->
+  #     scope.btname=$(_utils.extractTemplate "#tmpl-issue-form-#{$stateParams.category_id}", _templateForm).eq(0).html() 
+  # ])
+
+
+
+    
+
+
+    

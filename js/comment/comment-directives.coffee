@@ -59,7 +59,7 @@ define [
 
       #重设编辑器的大小
       resizeCommentEditor = ()->
-        element.css('width', element.parent().width()) if element.parent()
+        element.css('width', element.parent().css('width')) if element.parent()
 
 
       #focus后，弹出大的编辑器
