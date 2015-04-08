@@ -26,10 +26,9 @@ define [
 
           deferred.promise
 
-        scope.$on 'gitList:update', (event, name, data)->
-          return if name isnt scope.contextName
-          event.preventDefault()
-          scope.data.gits = data
+        scope.bean =
+          setGits: (data)->
+            scope.data.gits = data
 
         scope.onClickDelete = (event, project_id)->
           return if not confirm('您确定将要删除这个项目吗？')
@@ -60,7 +59,9 @@ define [
             gits: []
             gitlabStatus: 'relevance'
           #新建项目，直接显示弹窗
-          return $element.modal(showClose: false) if not project_id
+          if not project_id
+            scope.$broadcast("gitList:load", [])
+            return $element.modal(showClose: false)
 
           #加载项目资料
           loadProject(project_id).then (result)->
@@ -75,6 +76,8 @@ define [
               description: result.description
               status: result.status
               gitlabStatus: 'relevance'
+
+            scope.$broadcast("gitList:load", scope.data.gits)
 
             $element.modal(showClose: false)
 

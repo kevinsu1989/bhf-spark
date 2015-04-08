@@ -27,10 +27,12 @@ define [
   ($location, API, NOTIFY, $rootScope)->
     restrict: 'E'
     replace: true
+    scope: {}
     template: _utils.extractTemplate '#tmpl-member-profile', _template
     link: (scope, element, attr)->
       #定义下属组件的上下文名称
       scope.contextName = 'memberProfile'
+      scope.bean = setGits: (data)-> scope.gits = data
 
       scope.onClickSave = ()->
         scope.profile.gits = scope.gits
@@ -60,16 +62,11 @@ define [
         scope.$emit 'member:setting:hide'
         return
 
-      scope.$on 'gitList:update', (event, name, data)->
-        return if name isnt scope.contextName
-        event.preventDefault()
-        scope.gits = data
-
       scope.$on 'member:setting:bindAll', ()->
         API.account().profile().retrieve().then((result)->
           scope.profile = result
-          scope.gits = _.map result.gits, (item)->
-            item.git
+          scope.gits = _.map(result.gits, (item)-> item.git)
+          scope.$broadcast("gitList:load", scope.gits)
         )
 
       scope.$on('member:creator:bindAll', (event, data)->
