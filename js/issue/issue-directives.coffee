@@ -2,7 +2,7 @@ define [
   '../ng-module'
   '../utils'
   't!../../views/issue/issue-all.html'
-  't!../../views/issue/issue-form-all.html'
+  't!../../views/issue/issue-form.html'
 ], (_module,_utils, _template,_templateForm) ->
 
   _module.directiveModule
@@ -224,7 +224,7 @@ define [
       replace: true
       scope: type: '@',issue: '@',editflag: '@',change:'@'
       link: (scope, element, attrs)->
-        #  scope.issue等于-1时，是新建表单
+        #  scope.issue等于-1时，是新建表单；其他的是预览已存在的表单；
         if scope.issue isnt -1 and $stateParams.issue_id isnt null
           API.project($stateParams.project_id).issue($stateParams.issue_id).retrieve().then (result)->
             return if result.tag isnt "form"
@@ -242,7 +242,7 @@ define [
 
         # 响应父级保存按钮
         scope.$on 'issue:form:submit', (event)->
-          if (!scope.myForm.$valid)
+          if !scope.myForm.$valid
             NOTIFY.error "请检查必填项是否漏填！"
             return
           params =
@@ -293,10 +293,10 @@ define [
   ])
 
 
-  .directive('issueFormWindow', ['$rootScope', '$stateParams', '$compile', '$timeout', 'API', ($rootScope, $stateParams, $compile, $timeout, API)->
+  .directive('issueFormModal', ['$rootScope', '$stateParams', '$compile', '$timeout', 'API', ($rootScope, $stateParams, $compile, $timeout, API)->
       restrict: 'E'
       replace: true
-      template: _utils.extractTemplate "#tmpl-issue-form-window", _templateForm 
+      template: _utils.extractTemplate "#tmpl-issue-form-modal", _templateForm 
       scope:{}
       link: (scope, element, attrs)->
         scope.btname=1;

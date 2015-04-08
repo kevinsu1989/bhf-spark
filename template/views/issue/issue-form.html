@@ -1,7 +1,6 @@
 <!-- 表单 -->
 <div>
 <textarea id="tmpl-issue-form-234">
-	<btname>申请</btname>
 	<li class="input"> <b>协办部门：</b>
 		<select ng-disabled="!editable" class="form-control" ng-model="entity.assdepartment">
 			<option value="平台部">平台部</option>
@@ -23,7 +22,7 @@
 	<mtitle>设备变更</mtitle>
 
 	<li>
-	<b>设备管理： <font color="#ef6559"></font></b>  <font color="#ef6559"></font>
+	<b>设备管理：</b> 
 	<div class="line">
 		<div class="check">
 			<input type="checkbox" ng-disabled="!editable" ng-model="entity.ckbox_value1" ng-true-value="1" ng-false-value="0"/>	
@@ -175,7 +174,6 @@
 
 </textarea>
 <textarea id="tmpl-issue-form-233">
-	<btname>上线</btname>
 	<li class='input'><b><i>*&nbsp;</i>项目名称：</b>
 		<input type="text" required ng-disabled="!editable" ng-model="entity.pname"/>
 	</li>
@@ -217,7 +215,6 @@
 </textarea>
 
 <textarea id="tmpl-issue-form-207">
-	<btname>变更</btname>
 	<li class='input'> <b><i>*&nbsp;</i>签呈时间：</b>
 		<input type="text" ng-disabled="!editable" datetype="date" datetime-picker format="yyyy年mm月dd日" ng-model="entity.time"/>
 	</li>
@@ -315,22 +312,24 @@
 </form>
 </textarea>
 
-<textarea id="tmpl-issue-form-window">
-	<div class="inner issue-form">
-		<div class='title'>
-			<span>申请表单</span>
-		</div>
-		<a class="close-modal" rel="modal:close"> <i class="icon"></i>
-		</a>
-		<div class="main">
-			<div class="simple-tab" simple-tab="" data-active-index="0">
-				<issue-form data-type='{{activeIndex}}' data-issue='{{issueId}}'></issue-form>
+<textarea id="tmpl-issue-form-modal">
+	<div class="modal">
+		<div class="inner issue-form">
+			<div class='title'>
+				<span>申请表单</span>
 			</div>
-		</div>
-		<div class="right footer">
-			<button class="primary default" ng-click="onClickSubmit()">提&nbsp;&nbsp;交</button>
+			<a class="close-modal" rel="modal:close"> <i class="icon"></i>
+			</a>
+			<div class="main">
+				<div class="simple-tab" simple-tab="" data-active-index="0">
+					<issue-form data-type='{{activeIndex}}' data-issue='{{issueId}}'></issue-form>
+				</div>
+			</div>
+			<div class="right footer">
+				<button class="primary default" ng-click="onClickSubmit()">提&nbsp;&nbsp;交</button>
 
-			<button class="cancel default" ng-click="onClickCancel()">取&nbsp;&nbsp;消</button>
+				<button class="cancel default" ng-click="onClickCancel()">取&nbsp;&nbsp;消</button>
+			</div>
 		</div>
 	</div>
 </textarea>
