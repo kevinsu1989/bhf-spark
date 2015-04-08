@@ -1,10 +1,9 @@
 define [
   '../ng-module'
   'utils'
-  'v/store2'
-], (_module, _utils, _store) ->
-  _module.directiveModule.directive('editor', ['$location', '$timeout', 'STORE',
-  ($location, $timeout, STORE)->
+], (_module, _utils) ->
+  _module.directiveModule.directive('editor', ['$location', '$timeout', 'STORE','EDITORSTORE',
+  ($location, $timeout, STORE,EDITORSTORE)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -20,7 +19,7 @@ define [
         options =
           textarea: element.find('textarea')
           pasteImage: true
-  #          defaultImage: 'images/image.png'
+  #       defaultImage: 'images/image.png'
           params: {}
           upload:
             params: host: "#{$location.protocol()}://#{$location.host()}:#{$location.port()}"
@@ -46,6 +45,7 @@ define [
             'indent'         # 向右缩进
             'outdent'        # 向左缩进
             'marked'         # Markdown
+            'fullscreen'
           ]
           toolbarFloat: false
           pasteImage: true
@@ -55,24 +55,25 @@ define [
             items: STORE.projectMemberList.data
             nameKey: "realname"
 
-        #延时加载 
-        require ['simditor-marked'], ->
+        #延时加载
+        require ['simditor-marked', 'simditor-mention', 'simditor-fullscreen'], ->
           simditor = new Simditor options
           simditor.on 'valuechanged', (e, src)->
             content = e.currentTarget.getValue()
-#            临时不用cache
-#            setCache attrs.name, currentUUID, content
+            #临时不用cache
+            setCache attrs.name, currentUUID, content
 
           cb simditor
+
 
       #获取缓存的key
       getCacheKey = (name, uuid)-> "#{name}_#{uuid}"
       #检查是否有缓存的内容
-      getCache = (name, uuid)-> _store.get getCacheKey(name, uuid)
+      getCache = (name, uuid)-> EDITORSTORE.get getCacheKey(name, uuid)
       #设置缓存
-      setCache = (name, uuid, content)-> _store.set getCacheKey(name, uuid), content
+      setCache = (name, uuid, content)-> EDITORSTORE.set getCacheKey(name, uuid), content
       #删除缓存
-      removeCache = (name, uuid)-> _store.remove getCacheKey(name, uuid)
+      removeCache = (name, uuid)-> EDITORSTORE.remove getCacheKey(name, uuid)
 
       scope.showAlwaysTop = attrs.showAlwaysTop in [true, 'true']
 
@@ -83,8 +84,9 @@ define [
 
         #editor可能还没有初始化
         ensureEditor uploadUrl, ()->
-          simditor.setValue content
-#          simditor.setValue getCache(name, uuid) || content
+          #simditor.setValue content
+          #console.log "getCache"
+          simditor.setValue getCache(name, uuid) || content
           return
 
       #收到cancel的请求
@@ -100,7 +102,6 @@ define [
         #用户自主点击取消的，要移除缓存
         removeCache attrs.name, currentUUID
         scope.$emit 'editor:cancel', attrs.name
-
       scope.onClickSubmit = ->
         #simditor是延时加载的，所以有可能提交按钮已经出现，但simditor没有加载下来的极端情况
         return if not simditor
@@ -108,7 +109,6 @@ define [
         data =
           content: simditor.getValue()
           always_top: scope.always_top
-
         removeCache attrs.name, currentUUID
         scope.$emit 'editor:submit', attrs.name, data
   ])

@@ -219,7 +219,7 @@ define [
 # $compile(element.contents())(scope);
 
   # 表单
-  .directive('issueForm', ['$rootScope', '$stateParams', '$compile', 'API', 'NOTIFY', ($rootScope, $stateParams, $compile, API, NOTIFY)->
+  .directive('issueForm', ['$rootScope', '$stateParams', '$compile', 'API', 'NOTIFY','STORE', ($rootScope, $stateParams, $compile, API, NOTIFY,STORE)->
       restrict: 'E'
       replace: true
       scope: type: '@',issue: '@',editflag: '@',change:'@'
@@ -287,7 +287,8 @@ define [
               scope.entity=JSON.parse(result.content)
               scope.title=result.title
           else
-            scope.entity.uuid = index   
+            scope.entity.uuid = index 
+            # scope.entity.name   
           $compile(element.contents())(scope)
 
   ])
