@@ -48,7 +48,6 @@ define [
         account = _utils.trim event.currentTarget.value
 
         return if account is ''
-        console.log account, testExpr.test(account), testExpr
         #检测用户输入是否合法
         return NOTIFY.error('您输入的内容不合法') if not testExpr.test(account)
 
@@ -64,8 +63,7 @@ define [
         bindDataForInput ''
         nowEditingIndex = -1
         return
-      #记录时间间隔
-      nowTime = new Date().getTime()
+
       scope.onKeyupAddLastItem = (event)->
         return if event.keyCode is 13
         return if nowEditingIndex isnt -1
