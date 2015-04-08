@@ -40,6 +40,7 @@ define [
         scope.onClickSave = ->
           return NOTIFY.error('项目名称必需输入') if not scope.data.title
           method = if scope.data.id then 'update' else 'create'
+
           API.project(scope.data.id)[method](scope.data).then (result)->
             NOTIFY.success '项目信息保存成功'
             $.modal.close()
@@ -57,7 +58,7 @@ define [
           scope.data =
             status: 'active'
             gits: []
-
+            gitlabStatus: 'relevance'
           #新建项目，直接显示弹窗
           return $element.modal(showClose: false) if not project_id
 
@@ -73,9 +74,9 @@ define [
               title: result.title
               description: result.description
               status: result.status
+              gitlabStatus: 'relevance'
 
             $element.modal(showClose: false)
-
 
         scope.$on 'project:editor:hide', -> $model.close()
   ])

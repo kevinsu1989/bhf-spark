@@ -40,7 +40,29 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row" ng-if="editor_title == '新建'">
+                          <label class="caption">
+                            git仓库
+                          </label>
+                          <div class="inline">
+                            <label>
+                              <input type="radio" name="gitlab" value="relevance" ng-model="data.gitlabStatus" />手动关联
+                            </label>
+
+                            <label>
+                              <input type="radio" name="gitlab" value="autoCreate" ng-model="data.gitlabStatus"/>自动创建
+                            </label>
+                          </div>
+                        </div>
+
+                        <div class="row" ng-if="data.gitlabStatus === 'autoCreate'">
+                          <label class="caption">
+                            git仓库名称
+                          </label>
+                          <input class="medium text" type="text" placeholder="需要新建的git仓库名称（English）" ng-model="data.gitProjectName"/>
+                        </div>
+
+                        <div class="row" ng-if="data.gitlabStatus === 'relevance'">
                             <label class="caption">
                                 GitLab
                             </label>
