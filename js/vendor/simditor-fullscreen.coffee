@@ -9,9 +9,13 @@
       @isExpand = false
       super
 
+    _init: ->
+      @shortcut = 'esc'
+      super
+      @setIcon("expand")
+
     name: 'fullscreen'
-    title: 'full=screen'
-    icon: 'expand'
+    title: 'full-screen'
 
     #保存expand之前的状态
     saveStatus: ->
@@ -34,9 +38,6 @@
           maxHeight: body.css("maxHeight")
           overflow: body.css("overflow")
 
-
-      console.log @cssStatus
-
     setIcon: (icon)->
       @el.find("span").removeClass().addClass("fa fa-#{icon}")
 
@@ -50,11 +51,12 @@
     #全屏
     doFullScreen: ->
       #外部simditor
-      @editor.el.css('position', 'absolute')
+      @editor.el.css('position', 'fixed')
         .css('left', "9px")
         .css('right', "9px")
         .css('top', "9px")
         .css('bottom', "9px")
+        .css('z-index',"10000")
 
       @editor.wrapper.css("height", "100%")
 
@@ -67,7 +69,7 @@
         .css("maxHeight", wrapperHeight-toolbarHeight - 70 + "px")
         .css("overflow", "auto")
 
-    command: ()->
+    command: ->
       #如果已经处于全屏状态
       if @isExpand
         @setIcon('expand')
@@ -79,8 +81,6 @@
       @saveStatus()
       @isExpand = true
       @doFullScreen()
-
-
 
   Simditor.Toolbar.addButton(FullScreenButton)
 )
