@@ -2,7 +2,7 @@ module.exports = {
   'port': 14422,
   'proxy': {
     'forward': {
-      '/api': "http://192.168.8.103:8003/api"
+      '/api': "http://127.0.0.1:8001/api"
     }
   },
   'routers': [{

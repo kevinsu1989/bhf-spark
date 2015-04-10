@@ -185,10 +185,6 @@
 		</select>
 	</li>
 
-	<li class='input'><b>上线时间：</b>
-		<input type="text" datetype="datetime" datetime-picker format="yyyy年mm月dd日 hh:ii:ss" required ng-disabled="!editable" ng-model="entity.time"/>
-	</li>
-
 	<li class='input'><b>紧急程度：</b>
 		<select required ng-disabled="!editable" ng-model="entity.j">
 			<option value="1">高</option>
@@ -196,6 +192,13 @@
 			<option value="3">低</option>
 		</select>
 
+	</li>
+
+	<li class='input'><b>上线时间：</b>
+		<input type="text" datetype="datetime" placeholder="开始时间，精确到小时" ng-disabled="!editable" ng-model="entity.time"/>
+	</li>
+	<li class='input'><b>上线时间：</b>
+		<input type="text" datetype="datetime" placeholder="结束时间，精确到小时" ng-disabled="!editable" ng-model="entity.endtime"/>
 	</li>
 
 	<li class="textarea bigger"><b >上线描述：</b>

@@ -287,7 +287,8 @@ define [
               scope.entity=JSON.parse(result.content)
               scope.title=result.title
           else
-            scope.entity.uuid = index   
+            scope.entity.uuid = index 
+            # scope.entity.name   
           $compile(element.contents())(scope)
 
   ])
