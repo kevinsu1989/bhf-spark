@@ -56,7 +56,7 @@ define [
             nameKey: "realname"
 
         #延时加载
-        require ['simditor-marked', 'simditor-mention', 'simditor-fullscreen'], ->
+        require ['simditor-marked', 'simditor-fullscreen'], ->
           simditor = new Simditor options
           simditor.on 'valuechanged', (e, src)->
             content = e.currentTarget.getValue()
@@ -86,7 +86,7 @@ define [
         ensureEditor uploadUrl, ()->
           #simditor.setValue content
           #console.log "getCache"
-          simditor.setValue getCache(name, uuid) || content
+          # simditor.setValue getCache(name, uuid) || content
           return
 
       #收到cancel的请求
@@ -95,12 +95,13 @@ define [
         return if attrs.name isnt name or not simditor
 
         #如果是从外部传到的取消请求，则再保存一次数据
-        setCache attrs.name, currentUUID, simditor.getValue()
+        # setCache attrs.name, currentUUID, simditor.getValue()
         scope.$emit 'editor:cancel', attrs.name
 
       scope.onClickCancel = ->
         #用户自主点击取消的，要移除缓存
-        removeCache attrs.name, currentUUID
+        # removeCache attrs.name, currentUUID
+        simditor.setValue ''
         scope.$emit 'editor:cancel', attrs.name
       scope.onClickSubmit = ->
         #simditor是延时加载的，所以有可能提交按钮已经出现，但simditor没有加载下来的极端情况
@@ -109,6 +110,7 @@ define [
         data =
           content: simditor.getValue()
           always_top: scope.always_top
-        removeCache attrs.name, currentUUID
+        # removeCache attrs.name, currentUUID
+        simditor.setValue ''
         scope.$emit 'editor:submit', attrs.name, data
   ])
