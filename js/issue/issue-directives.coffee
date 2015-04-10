@@ -219,7 +219,7 @@ define [
 # $compile(element.contents())(scope);
 
   # 表单
-  .directive('issueForm', ['$rootScope', '$stateParams', '$compile', 'API', 'NOTIFY','STORE', ($rootScope, $stateParams, $compile, API, NOTIFY,STORE)->
+  .directive('issueForm', ['$rootScope', '$stateParams', '$compile', 'API', 'NOTIFY', ($rootScope, $stateParams, $compile, API, NOTIFY)->
       restrict: 'E'
       replace: true
       scope: type: '@',issue: '@',editflag: '@',change:'@'
