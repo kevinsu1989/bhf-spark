@@ -2,7 +2,7 @@
 <div>
 <textarea id="tmpl-issue-form-234">
 	<li class="input"> <b>协办部门：</b>
-		<select ng-disabled="!editable" class="form-control" ng-model="entity.assdepartment">
+		<select ng-show="editable" class="form-control" ng-model="entity.assdepartment">
 			<option value="平台部">平台部</option>
 			<option value="平台运营部">平台运营部</option>
 			<option value="运营支撑部">运营支撑部</option>
@@ -12,11 +12,16 @@
 		</select>
 		<!-- <span ng-show="!edit">{{entity.assdepartment}}</span>
 		-->
+
+		<input type="text" ng-show="!editable" ng-model="entity.assdepartment"/>
 	</li>
 	<li class="input"> <b>协办人：</b>
 		<input type="text" ng-disabled="!editable" ng-model="entity.assname"/>	
 		<!-- <span ng-show="!edit">{{entity.assname}}</span>
 		-->
+	</li>
+
+	<li class='input'> 		
 	</li>
 
 	<mtitle>设备变更</mtitle>
@@ -179,19 +184,20 @@
 	</li>
 
 	<li class='input'> <b>上线类型：</b>
-		<select required ng-disabled="!editable" ng-model="entity.type">
-			<option value="1">小型</option>
-			<option value="2">中大型</option>
+		<select required ng-show="editable" ng-model="entity.type">
+			<option value="小型">小型</option>
+			<option value="中大型">中大型</option>
 		</select>
+		<input type="text" ng-show="!editable" ng-model="entity.type"/>
 	</li>
 
 	<li class='input'><b>紧急程度：</b>
-		<select required ng-disabled="!editable" ng-model="entity.j">
-			<option value="1">高</option>
-			<option value="2">中</option>
-			<option value="3">低</option>
+		<select required ng-show="editable" ng-model="entity.j">
+			<option value="高">高</option>
+			<option value="中">中</option>
+			<option value="低">低</option>
 		</select>
-
+		<input type="text" ng-show="!editable" ng-model="entity.j"/>
 	</li>
 
 	<li class='input'><b>上线时间：</b>
@@ -224,6 +230,8 @@
 
 	<li class='input'> <b><i>*&nbsp;</i>业务模块：</b>
 		<input type="text" required ng-disabled="!editable" ng-model="entity.model"/>
+	</li>	
+	<li class='input'> 		
 	</li>
 
 	<li class='textarea'> <b>功能描述：</b>
@@ -296,7 +304,7 @@
 	<li class="input"> <b><i>*&nbsp;</i>标题：</b>
 		<input name="title" ng-model="entity.title" required ng-disabled="!editable" type="text"></li>
 	<li class="input"> <b><i>*&nbsp;</i>申请部门：</b>
-		<select required ng-disabled="!editable" ng-model="entity.department">
+		<select required ng-show="editable" ng-model="entity.department">
 			<option value="平台部">平台部</option>
 			<option value="平台运营部">平台运营部</option>
 			<option value="运营支撑部">运营支撑部</option>
@@ -304,6 +312,9 @@
 			<option value="芒果MPP部">芒果MPP部</option>
 			<option value="综合事务部">综合事务部</option>
 		</select>
+
+		<input type="text" ng-show="!editable" ng-model="entity.department"/>
+
 	</li>
 	<li class="input">
 		<b><i>*&nbsp;</i>申请人：</b>
