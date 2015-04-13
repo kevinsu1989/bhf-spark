@@ -184,7 +184,7 @@
 	</li>
 
 	<li class='input'> <b>上线类型：</b>
-		<select required ng-show="editable" ng-model="entity.type">
+		<select ng-show="editable" ng-model="entity.type">
 			<option value="小型">小型</option>
 			<option value="中大型">中大型</option>
 		</select>
@@ -192,7 +192,7 @@
 	</li>
 
 	<li class='input'><b>紧急程度：</b>
-		<select required ng-show="editable" ng-model="entity.j">
+		<select ng-show="editable" ng-model="entity.j">
 			<option value="高">高</option>
 			<option value="中">中</option>
 			<option value="低">低</option>
