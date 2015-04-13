@@ -56,7 +56,7 @@
         .css('right', "9px")
         .css('top', "9px")
         .css('bottom', "9px")
-        .css('z-index',"10000")
+        .css('z-index',"9999")
 
       @editor.wrapper.css("height", "100%")
 

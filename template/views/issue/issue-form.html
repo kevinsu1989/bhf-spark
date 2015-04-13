@@ -2,7 +2,7 @@
 <div>
 <textarea id="tmpl-issue-form-234">
 	<li class="input"> <b>协办部门：</b>
-		<select ng-disabled="!editable" class="form-control" ng-model="entity.assdepartment">
+		<select ng-show="editable" class="form-control" ng-model="entity.assdepartment">
 			<option value="平台部">平台部</option>
 			<option value="平台运营部">平台运营部</option>
 			<option value="运营支撑部">运营支撑部</option>
@@ -12,11 +12,16 @@
 		</select>
 		<!-- <span ng-show="!edit">{{entity.assdepartment}}</span>
 		-->
+
+		<input type="text" ng-show="!editable" ng-model="entity.assdepartment"/>
 	</li>
 	<li class="input"> <b>协办人：</b>
 		<input type="text" ng-disabled="!editable" ng-model="entity.assname"/>	
 		<!-- <span ng-show="!edit">{{entity.assname}}</span>
 		-->
+	</li>
+
+	<li class='input'> 		
 	</li>
 
 	<mtitle>设备变更</mtitle>
@@ -179,19 +184,20 @@
 	</li>
 
 	<li class='input'> <b>上线类型：</b>
-		<select required ng-disabled="!editable" ng-model="entity.type">
-			<option value="1">小型</option>
-			<option value="2">中大型</option>
+		<select required ng-show="editable" ng-model="entity.type">
+			<option value="小型">小型</option>
+			<option value="中大型">中大型</option>
 		</select>
+		<input type="text" ng-show="!editable" ng-model="entity.type"/>
 	</li>
 
 	<li class='input'><b>紧急程度：</b>
-		<select required ng-disabled="!editable" ng-model="entity.j">
-			<option value="1">高</option>
-			<option value="2">中</option>
-			<option value="3">低</option>
+		<select required ng-show="editable" ng-model="entity.j">
+			<option value="高">高</option>
+			<option value="中">中</option>
+			<option value="低">低</option>
 		</select>
-
+		<input type="text" ng-show="!editable" ng-model="entity.j"/>
 	</li>
 
 	<li class='input'><b>上线时间：</b>
@@ -224,6 +230,8 @@
 
 	<li class='input'> <b><i>*&nbsp;</i>业务模块：</b>
 		<input type="text" required ng-disabled="!editable" ng-model="entity.model"/>
+	</li>	
+	<li class='input'> 		
 	</li>
 
 	<li class='textarea'> <b>功能描述：</b>
@@ -237,23 +245,23 @@
 			<th>名称</th><th>CPU</th><th>内存</th><th>硬盘</th><th>RAID</th><th>网口数量</th><th>外网</th><th>机架高度</th><th>电源模块</th><th>功耗</th><th>数量</th>
 		</tr>
 		<tr class="cel">
-			<td>负载均衡</td><td>E3-1220<br/>4核</td><td>4*8G</td><td>2*500G</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num1"/></td>
+			<td>负载均衡</td><td>E3-1220<br/>4核</td><td>4*8G</td><td>2*500G</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input ng-disabled="!editable" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num1"/></td>
 		</tr>
 
 		<tr>
-			<td>web层</td><td>2*E5-2420<br/>6核</td><td>4*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num2"/></td>
+			<td>web层</td><td>2*E5-2420<br/>6核</td><td>4*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input ng-disabled="!editable" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num2"/></td>
 		</tr>
 
 		<tr class="cel">
-			<td>缓存层</td><td>2*E5-2420<br/>6核</td><td>8*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num3"/></td>
+			<td>缓存层</td><td>2*E5-2420<br/>6核</td><td>8*8G</td><td>2*1T</td><td>RAID1</td><td>千兆*2</td><td>有</td><td>1U</td><td>单电源冗余</td><td>550W</td><td><input ng-disabled="!editable" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num3"/></td>
 		</tr>
 
 		<tr>
-			<td>数据层</td><td>2*E5-2420<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num4"/></td>
+			<td>数据层</td><td>2*E5-2420<br/>6核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input ng-disabled="!editable" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num4"/></td>
 		</tr>
 
 		<tr class="cel">
-			<td>CDN</td><td>2*E5-2620<br/>4核</td><td>8*8G</td><td>2*300G(系统)<br/>12*4T(数据)</td><td>RAID1(系统)<br/>RAID0(数据)</td><td>千兆*4</td><td>有</td><td>2U</td><td>双电源冗余</td><td>750W</td><td><input onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num5"/></td>
+			<td>CDN</td><td>2*E5-2620<br/>6核</td><td>8*8G</td><td>2*300G(系统)<br/>12*4T(数据)</td><td>RAID1(系统)<br/>RAID0(数据)</td><td>千兆*4</td><td>有</td><td>2U</td><td>双电源冗余</td><td>750W</td><td><input ng-disabled="!editable" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num5"/></td>
 		</tr>
 	</table>
 	<li class="tip">
@@ -296,7 +304,7 @@
 	<li class="input"> <b><i>*&nbsp;</i>标题：</b>
 		<input name="title" ng-model="entity.title" required ng-disabled="!editable" type="text"></li>
 	<li class="input"> <b><i>*&nbsp;</i>申请部门：</b>
-		<select required ng-disabled="!editable" ng-model="entity.department">
+		<select required ng-show="editable" ng-model="entity.department">
 			<option value="平台部">平台部</option>
 			<option value="平台运营部">平台运营部</option>
 			<option value="运营支撑部">运营支撑部</option>
@@ -304,6 +312,9 @@
 			<option value="芒果MPP部">芒果MPP部</option>
 			<option value="综合事务部">综合事务部</option>
 		</select>
+
+		<input type="text" ng-show="!editable" ng-model="entity.department"/>
+
 	</li>
 	<li class="input">
 		<b><i>*&nbsp;</i>申请人：</b>
