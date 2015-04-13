@@ -86,7 +86,9 @@ define [
         ensureEditor uploadUrl, ()->
           #simditor.setValue content
           #console.log "getCache"
-          # simditor.setValue getCache(name, uuid) || content
+          return if !content
+          #simditor.setValue getCache(name, uuid) || content
+          simditor.setValue content
           return
 
       #收到cancel的请求

@@ -257,6 +257,7 @@ define [
           method = if isEdit then 'create' else 'update'
           issueAPI[method](params).then ->
              NOTIFY.success "保存#{params.title}成功"
+             scope.$emit 'issue:list:reload'
              scope.$emit 'issue:form:hide'
 
           # if scope.issue == '-1'
