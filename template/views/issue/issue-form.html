@@ -10,15 +10,11 @@
 			<option value="芒果MPP部">芒果MPP部</option>
 			<option value="综合事务部">综合事务部</option>
 		</select>
-		<!-- <span ng-show="!edit">{{entity.assdepartment}}</span>
-		-->
-
 		<input type="text" ng-show="!editable" ng-model="entity.assdepartment"/>
 	</li>
 	<li class="input"> <b>协办人：</b>
-		<input type="text" ng-disabled="!editable" ng-model="entity.assname"/>	
-		<!-- <span ng-show="!edit">{{entity.assname}}</span>
-		-->
+		<input type="text" ng-show="editable" ng-model="entity.assname"/>	
+		<span ng-show="!editable">{{entity.assname}}</span>
 	</li>
 
 	<li class='input'> 		
@@ -161,26 +157,30 @@
 	</div>
 	</li>
 	<li class="textarea">
-	<b>其他配置：</b>
-	&lt;textarea ng-disabled="!editable" ng-model="entity.other" &gt;&lt;/textarea&gt;
+		<b>其他配置：</b>
+		&lt;textarea ng-show="editable" ng-model="entity.other" &gt;&lt;/textarea&gt;
+		<label ng-show="!editable">{{entity.other}}</label>
 	</li>
 
 	<mtitle>申请原因</mtitle>
 
 	<li class="textarea">
-	<b><i>*&nbsp;</i>详细说明变更需求：</b>
-	&lt;textarea ng-disabled="!editable" ng-model="entity.detail" &gt;&lt;/textarea&gt;
+		<b><i>*&nbsp;</i>详细说明变更需求：</b>
+		&lt;textarea ng-show="editable" ng-model="entity.detail" &gt;&lt;/textarea&gt;
+		<label ng-show="!editable">{{entity.detail}}</label>
 	</li>
 
 	<li class="textarea">
-	<b><i>*&nbsp;</i>申请原因及用途：</b>
-	&lt;textarea ng-disabled="!editable" ng-model="entity.reason" &gt;&lt;/textarea&gt;
+		<b><i>*&nbsp;</i>申请原因及用途：</b>
+		&lt;textarea ng-show="editable" ng-model="entity.reason" &gt;&lt;/textarea&gt;
+		<label ng-show="!editable">{{entity.reason}}</label>
 	</li>
 
 </textarea>
 <textarea id="tmpl-issue-form-233">
 	<li class='input'><b><i>*&nbsp;</i>项目名称：</b>
-		<input type="text" required ng-disabled="!editable" ng-model="entity.pname"/>
+		<input type="text" required ng-show="editable" ng-model="entity.pname"/>
+		<span ng-show="!editable">{{entity.pname}}</span>
 	</li>
 
 	<li class='input'> <b>上线类型：</b>
@@ -201,21 +201,25 @@
 	</li>
 
 	<li class='input'><b>上线时间：</b>
-		<input type="text" datetype="datetime" placeholder="开始时间，精确到小时" ng-disabled="!editable" ng-model="entity.time"/>
+		<input type="text" datetype="datetime" placeholder="开始时间，精确到小时" ng-show="editable" ng-model="entity.time"/>
+		<span ng-show="!editable">{{entity.time}}</span>
 	</li>
 	<li class='input'><b>上线时间：</b>
-		<input type="text" datetype="datetime" placeholder="结束时间，精确到小时" ng-disabled="!editable" ng-model="entity.endtime"/>
+		<input type="text" datetype="datetime" placeholder="结束时间，精确到小时" ng-show="editable" ng-model="entity.endtime"/>
+		<span ng-show="!editable">{{entity.endtime}}</span>
 	</li>
 
 	<li class="textarea bigger"><b >上线描述：</b>
-		&lt;textarea rows="10" placeholder="对上线内容进行清晰描述，着重描述功能点和影响范围。（内容可直接让产品人员提供）" ng-disabled="!editable" ng-model="entity.details" &gt;&lt;/textarea&gt;
+		&lt;textarea rows="10" placeholder="对上线内容进行清晰描述，着重描述功能点和影响范围。（内容可直接让产品人员提供）" ng-show="editable" ng-model="entity.details" &gt;&lt;/textarea&gt;
+		<label ng-show="!editable">{{entity.details}}</label>
 	</li>
 <!-- 	<li class="tip">
 		<tip></tip>
 	</li>
  -->
 	<li class="textarea bigger"><b>上线重点：</b>
-		&lt;textarea rows="10" placeholder="对本次上线可能造成的影响范围，以便上线后重点关注。" ng-disabled="!editable" ng-model="entity.importance" &gt;&lt;/textarea&gt;
+		&lt;textarea rows="10" placeholder="对本次上线可能造成的影响范围，以便上线后重点关注。" ng-show="editable" ng-model="entity.importance" &gt;&lt;/textarea&gt;
+		<label ng-show="!editable">{{entity.importance}}</label>
 	</li>
 <!-- 	<li class="tip">
 		<tip></tip>
@@ -225,17 +229,20 @@
 
 <textarea id="tmpl-issue-form-207">
 	<li class='input'> <b><i>*&nbsp;</i>签呈时间：</b>
-		<input type="text" ng-disabled="!editable" datetype="date" datetime-picker format="yyyy年mm月dd日" ng-model="entity.time"/>
+		<input type="text" ng-show="editable" datetype="date" datetime-picker format="yyyy年mm月dd日" ng-model="entity.time"/>
+		<span ng-show="!editable">{{entity.time}}</span>
 	</li>
 
 	<li class='input'> <b><i>*&nbsp;</i>业务模块：</b>
-		<input type="text" required ng-disabled="!editable" ng-model="entity.model"/>
+		<input type="text" required ng-show="editable" ng-model="entity.model"/>
+		<span ng-show="!editable">{{entity.model}}</span>
 	</li>	
 	<li class='input'> 		
 	</li>
 
 	<li class='textarea'> <b>功能描述：</b>
-		&lt;textarea ng-disabled="!editable" ng-model="entity.detail" &gt;&lt;/textarea&gt;
+		&lt;textarea ng-show="editable" ng-model="entity.detail" &gt;&lt;/textarea&gt;
+		<label ng-show="!editable">{{entity.detail}}</label>
 	</li>
 
 	<mtitle>资源配置</mtitle>
@@ -257,7 +264,7 @@
 		</tr>
 
 		<tr>
-			<td>数据层</td><td>2*E5-2420<br/>6核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input ng-disabled="!editable" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num4"/></td>
+			<td>数据层</td><td>2*E5-2440<br/>8核</td><td>8*8G</td><td>2*300G(系统)<br/>4*600G(数据)</td><td>RAID5</td><td>千兆*2</td><td>无</td><td>1U</td><td>双电源冗余</td><td>550W</td><td><input ng-disabled="!editable" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" ng-model="entity.num4"/></td>
 		</tr>
 
 		<tr class="cel">
@@ -271,15 +278,18 @@
 	<mtitle>环境说明</mtitle>
 
 	<li class='input'> <b><i>*&nbsp;</i>部署环境：</b>
-		<input type="text" required ng-disabled="!editable" ng-model="entity.env"/>
+		<input type="text" required ng-show="editable" ng-model="entity.env"/>
+		<span ng-show="!editable">{{entity.env}}</span>
 	</li>
 
 	<li class='input'> <b>监控内容：</b>
-		<input type="text" ng-disabled="!editable" ng-model="entity.content"/>
+		<input type="text" ng-show="editable" ng-model="entity.content"/>
+		<span ng-show="!editable">{{entity.content}}</span>
 	</li>
 
 	<li class='textarea'> <b>备注：</b>
-		&lt;textarea rows="10" ng-disabled="!editable" ng-model="entity.ext" &gt;&lt;/textarea&gt;
+		&lt;textarea rows="10" ng-show="editable" ng-model="entity.ext" &gt;&lt;/textarea&gt;
+		<label ng-show="!editable">{{entity.ext}}</label>
 	</li>
   
 	<li class='tip'> <b>域名：</b>
@@ -302,7 +312,9 @@
 <form name="myForm">
 	<mtitle>基本信息</mtitle>
 	<li class="input"> <b><i>*&nbsp;</i>标题：</b>
-		<input name="title" ng-model="entity.title" required ng-disabled="!editable" type="text"></li>
+		<input name="title" ng-model="entity.title" required ng-show="editable" type="text"/>
+		<span ng-show="!editable">{{entity.title}}</span>
+	</li>
 	<li class="input"> <b><i>*&nbsp;</i>申请部门：</b>
 		<select required ng-show="editable" ng-model="entity.department">
 			<option value="平台部">平台部</option>
@@ -318,7 +330,8 @@
 	</li>
 	<li class="input">
 		<b><i>*&nbsp;</i>申请人：</b>
-		<input name="name" required type="text" ng-disabled="!editable" ng-model="entity.name"/>
+		<input name="name" required type="text" ng-show="editable" ng-model="entity.name"/>
+		<span ng-show="!editable">{{entity.name}}</span>
 	</li>
 </textarea>
 
