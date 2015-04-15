@@ -63,9 +63,9 @@ define [
         when 'project:version' then projectVersionSelected value
 
     win=1
-    $scope.needchange=(document.body.clientWidth < 1400)
+    $scope.needchange=(document.body.clientWidth < 1200)
     _windowChange = (event,id)->
-      $scope.needchange=(document.body.clientWidth < 1400)
+      $scope.needchange=(document.body.clientWidth < 1200)
       if !$scope.needchange
         $scope.leftViewStyle={'width':'40%','display':'block'}
         $scope.rightViewStyle={'display':'block'}
