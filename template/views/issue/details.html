@@ -61,7 +61,9 @@
                         <label class="display text-overflow">选择版本</label>
                         <project-version-dropdown data-show-more="false"></project-version-dropdown>
                     </div>
-                    <!--
+
+                    
+                                        <!--
                     <div class="assets">
                         <i class="icon small cell"></i>
                         <label>附件</label>
@@ -94,6 +96,7 @@
                         <span class="id">#{{issue.id}}</span>
                         <span class="timestamp" ng-show="issue.plan_finish_time">计划完成：{{issue.plan_finish_time | date}}</span>
                         <span class="timestamp" ng-show="issue.finish_time">实际完成：{{issue.finish_time | date}}</span>
+                        <window-change-button ng-show="needchange"></window-change-button>
                     </div>
                     <div ng-if="issue.tag!='form'" class="content row editor-style" ng-bind-html="issue.content | unsafe" ng-show="!editing" full-size-image-previewer></div>
                     <div ng-show="editing">

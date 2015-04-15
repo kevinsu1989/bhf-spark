@@ -280,7 +280,7 @@
     <!--项目布局-->
     <textarea id="tmpl-project-layout">
         <div class="frame project-view">
-            <global-message></global-message>
+            <global-message ng-show="false"></global-message>
             <project-header></project-header>
             <div class="container">
                 <!--左栏-->
@@ -290,9 +290,10 @@
 
                 <div class="salve-panel">
                     <!--第二栏-->
-                    <div class="list-panel" ui-view="listPanel"></div>
-                    <!--第三栏-->
-                    <div class="details-panel full" ui-view="detailsPanel"></div>
+                    <div class="list-panel" ui-view="listPanel" ng-style="leftViewStyle"></div>
+                 <!--    <div style="width:5px;float:left;background:#ddd;" ng-show="needchange" ng-click="windowChange()"></div>
+ -->                    <!--第三栏-->
+                    <div class="details-panel full" ui-view="detailsPanel" ng-style="rightViewStyle"></div>
                 </div>
             </div>
         </div>

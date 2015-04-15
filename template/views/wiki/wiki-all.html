@@ -2,7 +2,7 @@
     <!--wiki类型的布局，其实也是从项目中衍生出来的-->
     <textarea id="tmpl-wiki-layout">
         <div class="frame project-view wiki-view">
-            <global-message></global-message>
+            <global-message ng-show="false"></global-message>
             <project-header></project-header>
             <div class="container">
                 <!--左栏-->
@@ -27,9 +27,9 @@
 
                 <div class="salve-panel">
                     <!--第二栏-->
-                    <div class="list-panel" ui-view="listPanel"></div>
+                    <div class="list-panel" ui-view="listPanel" ng-style="leftViewStyle"></div>
                     <!--第三栏-->
-                    <div class="details-panel full" ui-view="detailsPanel"></div>
+                    <div class="details-panel full" ui-view="detailsPanel" ng-style="rightViewStyle"></div>
                 </div>
             </div>
         </div>
