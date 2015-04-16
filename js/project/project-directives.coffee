@@ -168,12 +168,12 @@ define [
 
   ])
 
-  .directive('projectSalvePanel', ['STORE', ()->
+  .directive('projectSalvePanel', ['$stateParams', ($stateParams)->
     restrict: 'E'
     replace: true
     template: _utils.extractTemplate '#tmpl-project-salve-panel', _tmplAll
     link: (scope, element, attrs)->
-      showWindowFlag = 1
+      # showWindowFlag = 1
       _windowChange = (event,showWindow)->
         # 如果有传入窗口
         if showWindow then showWindowFlag = showWindow
@@ -199,7 +199,10 @@ define [
       scope.$on "project:window:change", (event, showWindow)-> 
         _windowChange event, showWindow  
 
-      _windowChange(null,null)  
+      if $stateParams.issue_id
+        _windowChange(null,2) 
+      else
+        _windowChange(null,1)  
   ])
 
   .directive('projectVersionDropdown', ['STORE', ()->
