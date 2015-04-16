@@ -41,6 +41,9 @@
                 <li class="error">
                     <span>{{error}}</span>
                 </li>
+                <li ng-show="model.openid_token">
+                    <span>这是您第一次使用openid登录<br/>请登录您的BHF账号来进行绑定</span>
+                </li>
                 <li>
                     <input type="text" autofocus="true" ng-model="model.account" class="text" placeholder="E-mail或者用户名">
                 </li>

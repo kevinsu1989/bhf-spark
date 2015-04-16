@@ -12,11 +12,10 @@ define [
     template: _utils.extractTemplate '#tmpl-member-signin', _template
     link: (scope, element, attr)->
       scope.model = {}
-
+      scope.model.openid_token = $location.$$search.openid_token if $location.$$search.openid_token
       scope.onSubmitSignIn = ()->
         return scope.error = '请输入您的E-mail或者用户名' if not scope.model.account
         return scope.error = '请输入您的密码' if not scope.model.password
-
         API.session().create(scope.model).then((result)->
           #跳到首页
           $location.path $state.params.next || '/'
