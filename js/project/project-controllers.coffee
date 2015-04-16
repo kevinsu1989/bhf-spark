@@ -62,30 +62,6 @@ define [
       switch type
         when 'project:version' then projectVersionSelected value
 
-    win=1
-    $scope.needchange=(document.body.clientWidth < 1200)
-    _windowChange = (event,id)->
-      $scope.needchange=(document.body.clientWidth < 1200)
-      if !$scope.needchange
-        $scope.leftViewStyle={'width':'40%','display':'block'}
-        $scope.rightViewStyle={'display':'block'}
-        win = 1
-        return
-      if id then win = id
-      if win is 1
-        $scope.leftViewStyle={'width':'100%'}
-        $scope.rightViewStyle={'display':'none'}
-        win = 2
-      else if win is 2
-        $scope.leftViewStyle={'display':'none'}
-        $scope.rightViewStyle={'width':'100%'}
-        win = 1
-
-    if $scope.needchange then _windowChange(null,null)
-    $scope.windowChange = ()->
-      _windowChange(null,null)
-    $scope.$on "project:window:change", (event, id)-> 
-      _windowChange event,id
 
 
     updateProjectMember()

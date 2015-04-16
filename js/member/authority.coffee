@@ -30,6 +30,9 @@ define [
           )
 
           NOTIFY.success("您的密码已经被重置，新密码已经发送至：#{email}", timeout: 60000)
+
+      scope.openidLogin = ->
+        window.location = "http://openids.intra.hunantv.com/oauth/login/?return_to=http://#{window.location.host}/api/member/git-token&days=7"
   ])
   #注册
   .directive('signUp', ['$stateParams', 'API', 'NOTIFY', ($stateParams, API, NOTIFY)->
