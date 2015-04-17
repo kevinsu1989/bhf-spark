@@ -1,7 +1,8 @@
 define [
   '../ng-module'
   'utils'
-], (_module, _utils) ->
+  'simditor'
+], (_module, _utils, _simditor) ->
   _module.directiveModule.directive('editor', ['$location', '$timeout', 'STORE','EDITORSTORE',
   ($location, $timeout, STORE,EDITORSTORE)->
     restrict: 'E'
@@ -56,14 +57,14 @@ define [
             nameKey: "realname"
 
         #延时加载
-        require ['simditor-marked', 'simditor-fullscreen'], ->
-          simditor = new Simditor options
-          simditor.on 'valuechanged', (e, src)->
-            content = e.currentTarget.getValue()
-            #临时不用cache
-            setCache attrs.name, currentUUID, content
+        # require ['simditor-marked', 'simditor-fullscreen'], ->
+        simditor = new Simditor options
+        simditor.on 'valuechanged', (e, src)->
+          content = e.currentTarget.getValue()
+          #临时不用cache
+          #setCache attrs.name, currentUUID, content
 
-          cb simditor
+        cb simditor
 
 
       #获取缓存的key
