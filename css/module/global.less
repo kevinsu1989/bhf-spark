@@ -715,3 +715,39 @@ input:required:invalid, input:focus:invalid {
   white-space: nowrap;
   overflow: hidden;
 }
+
+pagination{
+  text-align: right;
+  float: right;
+  margin-top: 10px;
+  .pagination{
+    color: #000;
+    text-align: right;
+    li{
+      float: left;
+      background: #fff;
+      padding:5px 10px;
+      margin-left: -1px;
+      border:1px solid #ddd;
+      a{
+        color: #4fbbf1;
+      }
+      &.active{
+        background: #4fbbf1;    
+        a{
+          color: #fff;
+        }
+      }
+      &.disabled{
+        background: #eee;
+        a{
+          color: #777;
+        }
+      }
+    }
+  }
+}
+
+
+
+

@@ -36,7 +36,7 @@
                 <issue-plain-list
                         data-source="{{doneIssues}}"
                         data-title="已经完成"
-                        data-show-details="false"></issue-plain-list>
+                        data-show-details="false" data-need-pagination="true" data-uuid="1"></issue-plain-list>
             </div>
 
             <issue-status-dropdown></issue-status-dropdown>
@@ -221,10 +221,10 @@
                     <issue-list-cell></issue-list-cell>
                 </li>
             </ul>
-
             <div ng-show="source.items.length == 0" class="empty">
                 {{emptyMemo || '太棒了，所有的任务都已经完成了'}}
             </div>
+            <pagination ng-if="needPagination" ng-hide="showDetails" data-uuid="{{uuid}}" data-paginations={{source.pagination}}></pagination>
         </div>
     </textarea>
 
@@ -234,12 +234,6 @@
             <h3>测试任务</h3>
             <div class="create">
                 <input type="text" placeholder="请输入您将要创建的测试任务" autofocus issue-quick-editor ng-keydown="onKeyDown($event)" data-category="1" data-tag="test" />
- <!--                <button ng-click="createForm(1)">表单1</button>            
-
-                <button ng-click="createForm(2)">表单2</button>            
-
-                <button ng-click="createForm(3)">表单3</button>             -->
-
             </div>
 
             <div>

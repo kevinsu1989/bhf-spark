@@ -48,10 +48,46 @@ define [
 
       $scope.showQuickEditor = Boolean(cond.category_id)
       #加载已经完成
-      issueAPI.retrieve(_.extend({status: 'done', pageSize: 20}, params))
+      issueAPI.retrieve(_.extend({status: 'done', pageSize: 10}, params))
       .then (result)-> $scope.doneIssues = result
-    #          scope.$apply()
-#
+
+
+
+    $rootScope.$on 'pagination:change',(event, page, uuid, cb)->
+      return if parseInt(uuid) isnt 1
+      #搜索条件
+      cond = $scope.condition
+
+      params = {}
+
+      if cond.keyword #搜索
+        $scope.title = "搜索：#{cond.keyword}"
+        params.keyword = cond.keyword
+      else if $stateParams.myself
+        #获取用户自己的任务
+        $scope.title = "我相关的任务"
+        params.myself = true
+      else if cond.category_id
+        $scope.title = $location.$$search.title
+      else
+        $scope.title = "所有任务"
+
+      $scope.condition = cond
+
+      #指定分类id
+      params.category_id = $state.params.category_id
+      #指定版本
+      params.version_id = $state.params.version_id
+      
+      issueAPI = API.project($stateParams.project_id).issue()
+      
+      issueAPI.retrieve(_.extend({status: 'done', pageSize: 10, pageIndex: page}, params))
+      .then (result)-> 
+        $scope.doneIssues = result
+
+
+
+#      scope.$apply()
 #      issueAPI.retrieve(_.extend({status: 'testing', pageSize: 9999}, params))
 #      .then (result)-> $scope.testingIssues = result
 

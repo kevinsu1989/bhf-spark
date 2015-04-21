@@ -200,7 +200,7 @@ define [
     restrict: 'E'
     replace: true
 #    scope: source: '@', title: '@'
-    scope: title: '@', emptyMemo: '@', showDetails: '@'
+    scope: title: '@', emptyMemo: '@', showDetails: '@', needPagination: "@", uuid: "@"
     template: _utils.extractTemplate '#tmpl-issue-plain-list', _template
     link: (scope, element, attrs)->
 #      scope.$watch 'source', ()->
