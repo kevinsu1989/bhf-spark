@@ -160,12 +160,6 @@ define [
     # scope: uuid: '@'
     template: _utils.extractTemplate('#tmpl-pagination', _tmplGlobal)
     link: (scope, element, attrs)->
-
-      attrs.$observe 'paginations', ->
-        return if not attrs.paginations
-        pagination = JSON.parse attrs.paginations
-        bindPage(pagination)
-
       makePage = (number, text, isActive)->
         {
           number: number
@@ -217,7 +211,10 @@ define [
       scope.noNext = ()->
         scope.page is scope.totalPages
 
-      scope.selectPage 1
+      attrs.$observe 'paginations', ->
+        return if not attrs.paginations
+        pagination = JSON.parse attrs.paginations
+        bindPage(pagination)
    ])
 
 
