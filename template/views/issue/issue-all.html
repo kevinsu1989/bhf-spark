@@ -224,7 +224,7 @@
             <div ng-show="source.items.length == 0" class="empty">
                 {{emptyMemo || '太棒了，所有的任务都已经完成了'}}
             </div>
-            <pagination ng-if="needPagination" ng-hide="showDetails" data-uuid="{{uuid}}" data-paginations={{source.pagination}}></pagination>
+            <pagination ng-if="needPagination" ng-hide="showDetails||source.pagination.pageCount<2" data-uuid="{{uuid}}" data-paginations={{source.pagination}}></pagination>
         </div>
     </textarea>
 
