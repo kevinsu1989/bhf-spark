@@ -36,7 +36,7 @@
 
     <!--用户登录-->
     <textarea id="tmpl-member-signin">
-        <form ng-submit="onSubmitSignIn()">
+        <form>
             <ul>
                 <li class="error">
                     <span>{{error}}</span>
@@ -57,14 +57,15 @@
                     <a href="javascript:void(0)" ng-click="onClickResetPassword()">忘记密码</a>
                 </li>
                 <li>
-                    <button>登&nbsp;&nbsp;&nbsp;&nbsp;录
+                    <button ng-click="onSubmitSignIn()">登&nbsp;&nbsp;&nbsp;&nbsp;录
                     </button>
                 </li>
 
-                <li>
-                    <button ng-click="openidLogin()">用openid账号登录
+  <!--               <li>
+                    <button ng-click="openidLogin()">OpenId登录
                     </button>
-                </li>
+                </li> -->
+                
                 <!--暂不允许用户主动注册-->
                 <!--
                 <li class="right additional">
