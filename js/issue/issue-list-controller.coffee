@@ -17,27 +17,9 @@ define [
           category_id: $state.params.category_id
         }, condition
 
-
-      params = {}
-
-      if cond.keyword #搜索
-        $scope.title = "搜索：#{cond.keyword}"
-        params.keyword = cond.keyword
-      else if $stateParams.myself
-        #获取用户自己的任务
-        $scope.title = "我相关的任务"
-        params.myself = true
-      else if cond.category_id
-        $scope.title = $location.$$search.title
-      else
-        $scope.title = "所有任务"
-
       $scope.condition = cond
 
-      #指定分类id
-      params.category_id = $state.params.category_id
-      #指定版本
-      params.version_id = $state.params.version_id
+      params = getSearchIssueParams(cond)
 
       #待办中
       issueAPI = API.project($stateParams.project_id).issue()
@@ -51,13 +33,7 @@ define [
       issueAPI.retrieve(_.extend({status: 'done', pageSize: 10}, params))
       .then (result)-> $scope.doneIssues = result
 
-
-
-    $rootScope.$on 'pagination:change',(event, page, uuid, cb)->
-      return if parseInt(uuid) isnt 1
-      #搜索条件
-      cond = $scope.condition
-
+    getSearchIssueParams = (cond)->
       params = {}
 
       if cond.keyword #搜索
@@ -72,12 +48,18 @@ define [
       else
         $scope.title = "所有任务"
 
-      $scope.condition = cond
 
       #指定分类id
       params.category_id = $state.params.category_id
       #指定版本
       params.version_id = $state.params.version_id
+
+      return params
+
+    $rootScope.$on 'pagination:change',(event, page, uuid, cb)->
+      return if uuid isnt 'done_issues'
+      #搜索条件
+      params = getSearchIssueParams($scope.condition)
       
       issueAPI = API.project($stateParams.project_id).issue()
       

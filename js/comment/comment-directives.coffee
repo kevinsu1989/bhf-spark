@@ -28,7 +28,7 @@ define [
       scope.$on 'comment:list:reload', -> searchComment(1,null)
 
       $rootScope.$on 'pagination:change',(event, page, uuid, cb)->
-        return if parseInt(uuid) isnt 2
+        return if uuid isnt 'comment_list'
         searchComment(page)
 
       searchComment()

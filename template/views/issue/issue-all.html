@@ -36,7 +36,7 @@
                 <issue-plain-list
                         data-source="{{doneIssues}}"
                         data-title="已经完成"
-                        data-show-details="false" data-need-pagination="true" data-uuid="1"></issue-plain-list>
+                        data-show-details="false" data-need-pagination="true" data-uuid="done_issues"></issue-plain-list>
             </div>
 
             <issue-status-dropdown></issue-status-dropdown>
@@ -235,6 +235,7 @@
             <div class="create">
                 <input type="text" placeholder="请输入您将要创建的测试任务" autofocus issue-quick-editor ng-keydown="onKeyDown($event)" data-category="1" data-tag="test" />
             </div>
+
 
             <div>
                 <!--测试中-->
