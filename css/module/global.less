@@ -1,10 +1,11 @@
 @text-color: #333;
-@link-color: #336699;
+@link-color: #4298BA;
 @normal-border: 1px solid #e9e9e7;
 @default-border-radius: 4px;
 @project-header-height: 40px;
 @global-message-height: 34px;
 @show-global-message: true;
+@normal-active-color: #e9ebf0;
 
 h1,h2,h3,h4,h5,h6{
   margin: 0;
@@ -218,7 +219,7 @@ a.stubborn{
           }
 
           &.active, &:hover {
-            background-color: #e9ebf0;
+            background-color: @normal-active-color;
           }
 
           a {
@@ -510,7 +511,7 @@ input.text{
       }
 
       &:hover{
-        background-color: #e9ebf0;
+        background-color: @normal-active-color;
       }
     }
   }
@@ -522,11 +523,11 @@ input.text{
   }
 
   thead{
-    background-color: #e9ebf0;
+    background-color: @normal-active-color;
   }
 
   tr:hover{
-    background-color: #e9ebf0;
+    background-color: @normal-active-color;
   }
 
   &.simple-line{
@@ -715,3 +716,55 @@ input:required:invalid, input:focus:invalid {
   white-space: nowrap;
   overflow: hidden;
 }
+
+
+.pagination{
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+
+  ul{
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  li{
+    float: left;
+    background: #fff;
+    border: @normal-border;
+    border-right-width: 0;
+
+    &:last-child{
+      border-right-width: 1px;
+      .border-radius(0 6px 6px 0);
+    }
+
+    a{
+      padding: 8px 12px;
+      display: inline-block;
+    }
+
+    &:first-child{
+      .border-radius(6px 0 0 6px);
+    }
+
+    &.active{
+      background: @normal-active-color;
+    }
+
+    a:link, a:visited{
+      color: @link-color;
+    }
+
+    &.disabled{
+      background: #eee;
+      a{
+        color: #777;
+      }
+    }
+  }
+}
+
+
+
+
