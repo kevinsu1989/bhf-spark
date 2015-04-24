@@ -16,6 +16,7 @@ define [
       scope.onClickIssue = (event, issue)->
         baseUrl = $filter('projectLink')(issue, issue.tag)
         $location.path "#{baseUrl}/#{issue.id}"
+        scope.$emit "project:window:change",2
 
       #点击状态
       scope.onClickStatus = (event, issue)->
@@ -199,7 +200,7 @@ define [
     restrict: 'E'
     replace: true
 #    scope: source: '@', title: '@'
-    scope: title: '@', emptyMemo: '@', showDetails: '@'
+    scope: title: '@', emptyMemo: '@', showDetails: '@', needPagination: "@", uuid: "@"
     template: _utils.extractTemplate '#tmpl-issue-plain-list', _template
     link: (scope, element, attrs)->
 #      scope.$watch 'source', ()->
@@ -295,7 +296,7 @@ define [
   ])
 
 
-  .directive('issueFormModal', ['$rootScope', '$stateParams', '$compile', '$timeout', 'API', ($rootScope, $stateParams, $compile, $timeout, API)->
+  .directive('issueFormModal', ['$timeout', ($timeout)->
       restrict: 'E'
       replace: true
       template: _utils.extractTemplate "#tmpl-issue-form-modal", _templateForm 
@@ -323,6 +324,18 @@ define [
         scope.$on 'issue:form:hide', (event)->
           $.modal.close()
   ])
+
+  .directive('windowChangeButton', ['$rootScope', '$stateParams', '$compile', 'API', 'NOTIFY', ($rootScope, $stateParams, $compile, API, NOTIFY)->
+      restrict: 'E'
+      replace: true
+      template: "<button class='cancel default' ng-click='windowChange()'>返回列表</button>"
+      scope:{}
+      link: (scope, element, attrs)->
+
+        scope.windowChange = ()->
+          scope.$emit "project:window:change",1
+  ])
+
 
   # .directive('issueFormButton',['$stateParams',($stateParams)->
   #   restrict: 'A'

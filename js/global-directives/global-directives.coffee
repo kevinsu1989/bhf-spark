@@ -155,5 +155,67 @@ define [
         link = $this.attr('src')
         window.open link
   ])
+  .directive('pagination', ["$rootScope", ($rootScope)->
+    restrict: 'EA'
+    replace: true
+    # scope: uuid: '@'
+    template: _utils.extractTemplate('#tmpl-pagination', _tmplGlobal)
+    link: (scope, element, attrs)->
+      makePage = (number, text, isActive)->
+        {
+          number: number
+          text: text
+          active: isActive
+        }
+      
+      getPages = (currentPage, totalPages)->
+        startPage = 1
+        endPage = totalPages
+        maxSize = 6
+        isMaxSized = maxSize < totalPages
+
+        if isMaxSized
+          startPage = Math.max(currentPage - Math.floor(maxSize/2), 1)
+          endPage   = startPage + maxSize - 1
+          if endPage > totalPages
+            endPage   = totalPages
+            startPage = endPage - maxSize + 1
+
+        if endPage > totalPages 
+          endPage   = totalPages
+          startPage = endPage - maxSize + 1
+        pages = []
+        pages.push makePage(i,i,i is currentPage) for i in [startPage..endPage]
+        pages.unshift makePage(startPage - 1, '...', false)  if startPage > 1  
+        pages.push makePage(endPage + 1, '...', false)  if endPage < totalPages
+        return pages
+
+      bindPage = (pagination)->
+        scope.currentPage = pagination.pageIndex
+        scope.totalPages = pagination.pageCount
+        scope.pages = getPages(pagination.pageIndex, pagination.pageCount)
+
+      scope.selectPage = (page)->
+        $rootScope.$broadcast 'pagination:change', page, attrs.uuid, (pagination)->
+          bindPage(pagination)
+
+      scope.nextPage = ()->
+        return if scope.currentPage + 1 > scope.totalPages
+        scope.selectPage(scope.currentPage + 1)
+
+      scope.previousPage = ()->
+        return if scope.currentPage is 1
+        scope.selectPage(scope.currentPage - 1)
+
+      scope.noPrevious = ()->
+        scope.page is 1
+      scope.noNext = ()->
+        scope.page is scope.totalPages
+
+      attrs.$observe 'paginations', ->
+        return if not attrs.paginations
+        pagination = JSON.parse attrs.paginations
+        bindPage(pagination)
+   ])
 
 

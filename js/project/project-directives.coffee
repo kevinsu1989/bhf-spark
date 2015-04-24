@@ -168,6 +168,43 @@ define [
 
   ])
 
+  .directive('projectSalvePanel', ['$stateParams', ($stateParams)->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-project-salve-panel', _tmplAll
+    link: (scope, element, attrs)->
+      # showWindowFlag = 1
+      _windowChange = (event,showWindow)->
+        # 如果有传入窗口
+        if showWindow then showWindowFlag = showWindow
+        scope.needchange = (document.body.clientWidth < 1280)
+        # 宽度够则同时显示list和preview
+        if !scope.needchange
+          scope.leftViewStyle = {'width':'40%','display':'block'}
+          scope.rightViewStyle = {'display':'block'}
+          showWindowFlag = 1
+          return
+
+        if showWindowFlag is 1
+          scope.leftViewStyle = {'width':'100%'}
+          scope.rightViewStyle = {'display':'none'}
+          showWindowFlag = 2
+        else if showWindowFlag is 2
+          scope.leftViewStyle = {'display':'none'}
+          scope.rightViewStyle = {'width':'100%'}
+          showWindowFlag = 1
+
+      scope.windowChange = ()->
+        _windowChange(null, null)
+      scope.$on "project:window:change", (event, showWindow)-> 
+        _windowChange event, showWindow  
+
+      if $stateParams.issue_id
+        _windowChange(null,2) 
+      else
+        _windowChange(null,1)  
+  ])
+
   .directive('projectVersionDropdown', ['STORE', ()->
     restrict: 'E'
     replace: true

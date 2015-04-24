@@ -6,23 +6,30 @@ define [
 
   _module.directiveModule
   #评论列表
-  .directive('commentList', ['$stateParams', 'API', ($stateParams, API)->
+  .directive('commentList', ['$rootScope', '$stateParams', 'API', ($rootScope, $stateParams, API)->
     restrict: 'E'
     scope: data: '='
     replace: true
     template: _utils.extractTemplate '#tmpl-comment-list', _template
     link: (scope, element, attr)->
-      searchComment = ()->
+      searchComment = (pageIndex, cb)->
         API.project($stateParams.project_id)
         .issue($stateParams.issue_id)
         .comment()
-        .retrieve(pageSize: 20)
+        .retrieve({
+          pageSize: 5
+          pageIndex: pageIndex
+        })
         .then((result)->
           scope.comments = result
         )
 
       #收到重新加载评论列表的事件
-      scope.$on 'comment:list:reload', -> searchComment()
+      scope.$on 'comment:list:reload', -> searchComment(1,null)
+
+      $rootScope.$on 'pagination:change',(event, page, uuid, cb)->
+        return if uuid isnt 'comment_list'
+        searchComment(page)
 
       searchComment()
   ])

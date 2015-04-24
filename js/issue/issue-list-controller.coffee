@@ -17,7 +17,23 @@ define [
           category_id: $state.params.category_id
         }, condition
 
+      $scope.condition = cond
 
+      params = getSearchIssueParams(cond)
+
+      #待办中
+      issueAPI = API.project($stateParams.project_id).issue()
+
+      issueAPI.retrieve(_.extend({status: 'undone', pageSize: 9999}, params))
+      .then (result)-> $scope.undoneIssues = result
+      #          scope.$apply()
+
+      $scope.showQuickEditor = Boolean(cond.category_id)
+      #加载已经完成
+      issueAPI.retrieve(_.extend({status: 'done', pageSize: 10}, params))
+      .then (result)-> $scope.doneIssues = result
+
+    getSearchIssueParams = (cond)->
       params = {}
 
       if cond.keyword #搜索
@@ -32,26 +48,28 @@ define [
       else
         $scope.title = "所有任务"
 
-      $scope.condition = cond
 
       #指定分类id
       params.category_id = $state.params.category_id
       #指定版本
       params.version_id = $state.params.version_id
 
-      #待办中
+      return params
+
+    $rootScope.$on 'pagination:change',(event, page, uuid, cb)->
+      return if uuid isnt 'done_issues'
+      #搜索条件
+      params = getSearchIssueParams($scope.condition)
+      
       issueAPI = API.project($stateParams.project_id).issue()
+      
+      issueAPI.retrieve(_.extend({status: 'done', pageSize: 10, pageIndex: page}, params))
+      .then (result)-> 
+        $scope.doneIssues = result
 
-      issueAPI.retrieve(_.extend({status: 'undone', pageSize: 9999}, params))
-      .then (result)-> $scope.undoneIssues = result
-      #          scope.$apply()
 
-      $scope.showQuickEditor = Boolean(cond.category_id)
-      #加载已经完成
-      issueAPI.retrieve(_.extend({status: 'done', pageSize: 20}, params))
-      .then (result)-> $scope.doneIssues = result
-    #          scope.$apply()
-#
+
+#      scope.$apply()
 #      issueAPI.retrieve(_.extend({status: 'testing', pageSize: 9999}, params))
 #      .then (result)-> $scope.testingIssues = result
 

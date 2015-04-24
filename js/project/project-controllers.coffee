@@ -63,6 +63,7 @@ define [
         when 'project:version' then projectVersionSelected value
 
 
+
     updateProjectMember()
     updateProjectCategory()
     updateProject()
