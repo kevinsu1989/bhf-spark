@@ -325,15 +325,15 @@ define [
           $.modal.close()
   ])
 
-  .directive('windowChangeButton', ['$rootScope', '$stateParams', '$compile', 'API', 'NOTIFY', ($rootScope, $stateParams, $compile, API, NOTIFY)->
+  .directive('windowChangeButton', [->
       restrict: 'E'
       replace: true
-      template: "<button class='cancel default' ng-click='windowChange()'>返回列表</button>"
+      template: "<button class='primary default' ng-click='windowChange()'>返回列表</button>"
       scope:{}
       link: (scope, element, attrs)->
 
         scope.windowChange = ()->
-          scope.$emit "project:window:change",1
+          scope.$emit "project:window:change", 1
   ])
 
 
