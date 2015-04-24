@@ -604,11 +604,15 @@ input.text{
 
   .search{
     @media all and (max-width: 1440px) {
-      width: 300px;
+      width: 160px;
     }
 
     width: 400px;
     input.text{
+      @media all and (max-width: 1440px) {
+        width: 80%;
+      }
+
       height: 20px;
       width: 50%;
       transition-property: opacity width;
