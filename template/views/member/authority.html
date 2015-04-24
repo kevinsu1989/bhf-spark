@@ -36,11 +36,14 @@
 
     <!--用户登录-->
     <textarea id="tmpl-member-signin">
-        <form ng-submit="onSubmitSignIn()">
+        <form>
             <ul>
                 <li class="error">
                     <span>{{error}}</span>
                 </li>
+         <!--        <li ng-show="model.openid_token">
+                    <span>这是您第一次使用openid登录<br/>请登录您的BHF账号来进行绑定</span>
+                </li> -->
                 <li>
                     <input type="text" autofocus="true" ng-model="model.account" class="text" placeholder="E-mail或者用户名">
                 </li>
@@ -54,9 +57,15 @@
                     <a href="javascript:void(0)" ng-click="onClickResetPassword()">忘记密码</a>
                 </li>
                 <li>
-                    <button>登&nbsp;&nbsp;&nbsp;&nbsp;录
+                    <button ng-click="onSubmitSignIn()">登&nbsp;&nbsp;&nbsp;&nbsp;录
                     </button>
                 </li>
+
+  <!--               <li>
+                    <button ng-click="openidLogin()">OpenId登录
+                    </button>
+                </li> -->
+                
                 <!--暂不允许用户主动注册-->
                 <!--
                 <li class="right additional">

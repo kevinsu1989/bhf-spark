@@ -12,11 +12,11 @@ define [
     template: _utils.extractTemplate '#tmpl-member-signin', _template
     link: (scope, element, attr)->
       scope.model = {}
-
+      scope.model.openid_token = $location.$$search.openid_token if $location.$$search.openid_token
+      alert "这是您第一次使用openid登录请登录您的BHF账号来进行绑定" if scope.model.openid_token
       scope.onSubmitSignIn = ()->
         return scope.error = '请输入您的E-mail或者用户名' if not scope.model.account
         return scope.error = '请输入您的密码' if not scope.model.password
-
         API.session().create(scope.model).then((result)->
           #跳到首页
           $location.path $state.params.next || '/'
@@ -31,6 +31,9 @@ define [
           )
 
           NOTIFY.success("您的密码已经被重置，新密码已经发送至：#{email}", timeout: 60000)
+
+      scope.openidLogin = ->
+        window.location = "http://openids.intra.hunantv.com/oauth/login/?return_to=http://#{window.location.host}/api/member/git-token&days=7"
   ])
   #注册
   .directive('signUp', ['$stateParams', 'API', 'NOTIFY', ($stateParams, API, NOTIFY)->

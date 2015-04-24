@@ -20,8 +20,9 @@
         <div>
             <div ng-repeat="comment in comments.items">
                 <!--一个完整的评论-->
-                <comment-cell data="comment" $index="$index"></comment-cell>
+                <comment-cell data="comment" $index="$index+comments.pagination.limit*(comments.pagination.pageIndex-1)"></comment-cell>
             </div>
+            <pagination data-uuid="comment_list" ng-hide="comments.pagination.pageCount<2" data-paginations="{{comments.pagination}}"></pagination>
         </div>
     </textarea>
 

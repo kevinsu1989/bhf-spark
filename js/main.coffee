@@ -23,7 +23,7 @@ require.config
     datepicker: '/package/datetime/datetimepicker'
   shim:
     'v/jquery.noty': 'jquery'
-    'simditor-marked': ['marked', 'v/simditor']
+    'simditor': ['v/simditor', 'vendor/simditor-module', 'vendor/simditor-marked', 'vendor/simditor-fullscreen', 'vendor/simditor-hotkeys','vendor/simditor-uploader']
     'simditor-mention': ['v/simditor']
     'notify': ['jquery', 'v/jquery.noty']
     ng: exports : 'angular'
