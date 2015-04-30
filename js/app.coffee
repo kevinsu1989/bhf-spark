@@ -11,6 +11,7 @@ define [
   './commit/index'
   './assets/index'
   './report/index'
+  './team/index'
   'angularRoute'
   'v/ui-router'
   './global-directives/index'

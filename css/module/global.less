@@ -153,6 +153,19 @@ a.stubborn{
       header{
         h3{
           padding: 10px 0;
+          a{
+              color: #4298ba;
+              font-size: 14px;
+              font-weight: normal;
+              float: right;
+              margin-left: 10px;
+              display: none;
+          }
+        }
+        h3:hover{
+          a{
+            display: block;
+          }
         }
 
         .toggle{
@@ -345,6 +358,18 @@ a.stubborn{
           position: relative;
           margin-top: 10px;
         }
+      }
+    }
+    &.title{
+      float: left;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+      height: 38px;
+      margin-bottom: 10px;
+      span{
+        margin: 10px 0 10px 10px;
+        display: block;
       }
     }
     .clearfix()

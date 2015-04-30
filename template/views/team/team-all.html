@@ -1,0 +1,128 @@
+<div>
+    <textarea id="tmpl-team-layout">
+        <div class="frame project-view team-view">
+            <global-message ng-show="false"></global-message>
+            <project-header></project-header>
+            <div class="container">
+                <!--左栏-->
+                <div class="master-panel">
+                    <!--兼容project的布局-->
+                    <div class="project-menu">
+                        <ul class="master-menu" project-menu-highlight>
+                            <li class="issue-category">
+                                <div class="inner">
+                                    <div class="title">
+                                        <label>
+                                            <a href="/{{project | projectLink}}/issue">全部</a>
+                                        </label>
+                                    </div>
+                                    <team-category-menu></team-category-menu>
+                                </div>
+                            </li>
+                        </ul>
+                        <team-menu-bar></team-menu-bar>
+                    </div>
+                </div>
+
+
+                <project-salve-panel></project-salve-panel>
+            </div>
+        </div>
+    </textarea>    
+
+
+    <!--我的团队列表-->
+    <textarea id="tmpl-team-menu-category">
+        <ul class="sub-menu">
+            <li ng-repeat="item in teamCategory">
+                <a href="/team/{{item.team_id}}/list?title={{item.name}}" class="text-overflow">{{item.name}}</a>
+            </li>
+        </ul>
+    </textarea>
+
+
+    <!--团队成员列表-->
+    <textarea id="tmpl-team-member-list">
+        <member-creator-model></member-creator-model>
+        <div class="list project-list-panel member-list">
+            <header ng-show="title">
+                <h3>
+                    {{title}}-团队成员 
+                    <a class="edit" ng-if="teamRole=='l'" ng-click="editTeam()">编辑</a>
+                </h3>
+            </header>
+            <div class="create">
+                <input type="text" placeholder="请输入将要添加的组名" ng-if="team_id==-1" team-create/>
+            </div>
+            <div class="create">
+                <input type="text" placeholder="请输入将要添加用户的姓名" ng-if="team_id>0" members-lookup autofocus />
+            </div>
+            <ul class="details">
+                <team-member-item></team-member-item>
+            </ul>
+
+            <team-setting></team-setting>
+        </div>
+    </textarea>
+
+
+            <!--项目的menu bar-->
+    <textarea id="tmpl-team-menu-bar">
+        <div>
+            <div class="menu-bar">
+                <div class="create item">
+                    <a href="/team/-1/list">
+                        <i class="icon create"></i>
+                        <span>新增</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </textarea>
+
+
+
+    <textarea id="tmpl-team-setting">
+        <div class="modal">
+            <div class="inner">
+                <a class="close-modal" rel="modal:close"><i class="icon"></i></a>
+                <div class="simple-tab" simple-tab="" data-active-index="0">
+                    <div class="nav title" data-field="nav">
+                        <span>编辑团队</span>
+                    </div>
+                </div>
+                <div class="content" data-field="content">
+                    <div class="panel">
+                        <form class="standard-form">
+                            
+                            <div class="row">
+                                <label class="caption">
+                                    团队名：
+                                </label>
+                                <input class="medium text" type="text" 
+                                       ng-model="profile.teamName" required/>
+                            </div>
+                            <div class="row">
+                                <label class="caption">
+                                    注意事项：
+                                </label>
+                                删除团队后，团队的成员关系将不复存在，请慎重操作！
+                            </div>
+
+                            <div class="row control">
+                                <button class="primary default" ng-click="onClickSave()">保存</button>
+                                <button class="cancel default" ng-click="onClickDelete()">删除</button>
+                                <button class="cancel default" ng-click="onClickCancel()">取消</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </textarea>
+
+</div>
+
+
+
+

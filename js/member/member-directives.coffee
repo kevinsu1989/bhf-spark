@@ -116,7 +116,8 @@ define [
     restrict: 'AC'
     link: (scope, element, attrs)->
       $this = $(element)
-      memberAPI = API.project($stateParams.project_id).member()
+      memberAPI = API.project($stateParams.project_id).member() if $stateParams.project_id
+      memberAPI = API.team($stateParams.team_id).member() if $stateParams.team_id
       # API.get "project/#{$stateParams.project_id}"/member (result)->
 
       #保存成员
@@ -125,7 +126,8 @@ define [
         memberAPI.create(data).then ()->
           $this.val("")
           scope.selectSuggestion = ""
-          scope.$emit 'project:member:request'
+          scope.$emit 'project:member:request' if $stateParams.project_id
+          scope.$emit 'team:member:request' if $stateParams.team_id
           initLookup()
 
       #创建成员
@@ -219,6 +221,31 @@ define [
         if 'project-member-item' is name
           API.project($stateParams.project_id).member(scope.member.member_id).update(role: value).then ()->
             scope.$emit 'project:member:request'
+  ])  
+
+
+
+  #团队成员item team-member-item #api/project/39/member/1
+  .directive('teamMemberItem', ['$stateParams', 'API', ($stateParams, API)->
+    restrict: 'AE'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-team-member-item', _template
+    link:(scope,element,attr)->
+      scope.removeTeamMember = (member)->
+        API.team($stateParams.team_id).member(member.member_id).delete().then ()->
+          scope.$emit 'team:member:request'
+  ])
+
+  #团队成员角色 team-member-item #api/project/39/member/1/
+  .directive('teamMemberRoleDropdown', ['$stateParams', 'API', ($stateParams, API)->
+    restrict: 'AE'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-team-member-role-dropdown', _template
+    link:(scope,element,attr)->
+      scope.$on 'dropdown:selected', (event,name,value)->
+        if 'team-member-item' is name
+          API.team($stateParams.team_id).member(scope.member.member_id).update(role: value).then ()->
+            scope.$emit 'team:member:request'
   ])
 
   #读取用户的消息

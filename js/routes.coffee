@@ -12,9 +12,10 @@ define [
   't!../views/global-all.html'
   't!../views/member/authority.html'
   't!../views/wiki/wiki-all.html'
+  't!../views/team/team-all.html'
 ], (_ng, _app, _utils, _tmplIssue, _tmplMember,
     _tmplCommit, _tmplAssets, _tmplProject,
-    _tmplReport, _tmplGlobal, _tmplAuthority, _tmplWiki) ->
+    _tmplReport, _tmplGlobal, _tmplAuthority, _tmplWiki, _tmplTeam) ->
 
   _app.config(['$routeProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider',
   ($routeProvider, $locationProvider, $stateProvider, $urlRouterProvider) ->
@@ -118,6 +119,15 @@ define [
       'listPanel': wikiViews.listPanel
       'detailsPanel@wiki': blankDetailsView
 
+
+    # 团队相关
+    teamMemberListOnly =
+      'listPanel':
+        template: _utils.extractTemplate('#tmpl-team-member-list', _tmplTeam)
+      detailsPanel: blankDetailsView
+
+
+    
 
     $urlRouterProvider.otherwise('/')
 
@@ -369,6 +379,21 @@ define [
       url: '/{issue_id:\\d+}'
       data: wiki: true, articleOnly: true
       views: wikiViews
+    )    
+
+    #team类
+    #====================================team=======================================
+    .state('team',
+      abstract: true
+      url: '/team/:team_id'
+      template: _utils.extractTemplate '#tmpl-team-layout', _tmplTeam
+      controller: 'teamController'
+    )
+
+    .state('team.list',
+      url: '/list'
+      data: wiki: true
+      views: teamMemberListOnly
     )
 
   ])

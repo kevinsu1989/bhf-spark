@@ -335,7 +335,7 @@ define [], ->
         "delete": false,
         "patch": false
       }
-    }
+    },
     {
       "url": "report/weekly",
       "methods": {
@@ -349,7 +349,7 @@ define [], ->
     {
       "url": "project/:project_id/member/invite",
       "methods": {}
-    }
+    },
 
     {
       "url": "project/:project_id/assets/:asset_id/unwind",
@@ -359,7 +359,7 @@ define [], ->
         "patch": false,
         "put": false
       }
-    }
+    },
 
     {
       "url": "message/:message_id",
@@ -368,13 +368,19 @@ define [], ->
         "delete": false,
         "patch": false
       }
-    }
+    },
 
     {
       "url": "project/:project_id/issue/stat/test"
       "method": {
         "post": false,
         "delete": false,
+        "patch": false
+      }
+    },
+    {
+      "url": "team/:team_id/member/:member_id"
+      "method": {
         "patch": false
       }
     }

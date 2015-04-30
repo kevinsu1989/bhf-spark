@@ -158,7 +158,8 @@ define [
     template: _utils.extractTemplate '#tmpl-project-menu-category', _tmplAll
     link: (scope, element, attrs)->
 
-  ])
+  ])  
+
 
   .directive('projectCategoryDropdown', ['STORE', ()->
     restrict: 'E'

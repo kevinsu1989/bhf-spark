@@ -20,6 +20,14 @@ define [
         g: '客人'
         t: '测试'
       }[role]
+  )  
+
+  .filter('teamMemberRole', ()->
+    (role)->
+      {
+        m: '成员'
+        l: 'Leader'
+      }[role]
   )
 
   #根据扩展名，返回对应的图片

@@ -30,5 +30,7 @@ define [
     service.session = new CacheData()
     service.projectCategory = new CacheData()
     service.projectVersion = new CacheData()
+    service.teamMemberList = new CacheData()
+    service.teamCategory = new CacheData()
     return service
   ])

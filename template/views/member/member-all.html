@@ -82,6 +82,34 @@
         </div>
     </textarea>
 
+
+
+    <!--团队成员列表 item -->
+    <textarea id="tmpl-team-member-item">
+        <li ng-repeat="member in teamMember" class="row">
+            <span class="name">{{member.realname}}</span>
+            <span class="email">{{member.email}}</span>
+
+            <div class="control">
+                <a class="remove" ng-click="removeTeamMember(member)">删除</a>
+                <div class="role" dropdown data-name="team-member-item">
+                    {{ member.role | teamMemberRole }}
+                    <i class="small icon cell"></i>
+                    <team-member-role-dropdown></team-member-role-dropdown>
+                </div>
+            </div>
+        </li>
+    </textarea>
+    <!--团队成员角色 dropdown -->
+    <textarea id="tmpl-team-member-role-dropdown">
+        <div class="dropdown dropdown-tip">
+            <ul class="dropdown-menu">
+                <li><a data-value="m">成员</a></li>
+                <li><a data-value="l">Leader</a></li>
+            </ul>
+        </div>
+    </textarea>
+
     <!--修改密码-->
     <textarea id="tmpl-member-change-password">
         <div class="panel">
