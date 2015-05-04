@@ -81,6 +81,9 @@ define [
       scope.onClickSetting = (target)->
         $rootScope.$emit 'member:setting:show', target
 
+      scope.onClickTeam = ()->
+        $location.url("/team/0/list")
+
       scope.onClickLogout = ()->
         API.session().delete().then -> $location.path('/login')
   ])
