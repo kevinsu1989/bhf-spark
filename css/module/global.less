@@ -575,6 +575,13 @@ input.text{
     display: inline-block;
   }
 
+  span{
+    color: #fff;
+    display: block;
+    float: right;
+    line-height: 20px;
+  }
+
   .message-list{
     position: absolute;
     width: 380px;
@@ -632,7 +639,7 @@ input.text{
       width: 160px;
     }
 
-    width: 400px;
+    width: 300px;
     input.text{
       @media all and (max-width: 1440px) {
         width: 80%;
@@ -652,11 +659,13 @@ input.text{
   .menu{
     margin-right: 20px;
     margin-top: 5px;
-    width: 140px;
+    width: 280px;
     >*{
       display: inline-block;
     }
-
+    div{
+      cursor: pointer;
+    }
     i{
       margin-left: 10px;
       cursor: pointer;
@@ -665,7 +674,7 @@ input.text{
     .notify{
       i{
         position: relative;
-        background-position: -120px -320px;
+        background-position: -80px -717px;
       }
 
       .badge{
@@ -675,40 +684,52 @@ input.text{
         cursor: pointer;
       }
     }
-    .server{
+    .more{
       i{
-        background-position: -120px -678px;
+        background-position: -160px -717px;
+      }
+      .dropdown{
+        &:before{
+          left: 105px;
+        }
+
+        &:after{
+          left: 104px;
+        }
+        right: 5px;
       }
     }
     .help{
       i{
-        background-position: -40px -320px;
+        background-position: -120px -717px;
       }
 
       .dropdown{
         &:before{
-          left: 89px;
+          left: 73px;
         }
 
         &:after{
-          left: 88px;
+          left: 72px;
         }
+        right: 35px;
       }
     }
 
     .profile{
       i{
-        background-position: -80px -320px;
+        background-position: -40px -717px;
       }
 
       .dropdown{
         &:before{
-          left: 129px;
+          left: 73px;
         }
 
         &:after{
-          left: 128px;
+          left: 72px;
         }
+        right: 160px;
       }
     }
   }

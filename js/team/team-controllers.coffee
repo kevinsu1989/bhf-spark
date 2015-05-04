@@ -17,7 +17,6 @@ define [
     #更新项目成员
     updateTeamMember = ->
       teamAPI.member().retrieve().then (result)->
-        console.log result
         $scope.teamMember = result.members
         $scope.teamRole = result.role
         STORE.teamMemberList.data = result
@@ -44,6 +43,8 @@ define [
         window.location.href = "/team/0/list"
 
 
+    $scope.createTeam = ()->
+      $scope.$broadcast 'team:setting:show'
     $scope.editTeam = ()->
       $scope.$broadcast 'team:setting:show', $scope.title, $scope.team_id
         

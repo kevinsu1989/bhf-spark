@@ -219,3 +219,13 @@ define [
    ])
 
 
+  .directive('headerGlobal', ()->
+    restrict: 'E'
+    replace: true
+    template: _utils.extractTemplate '#tmpl-header', _tmplGlobal
+    link: (scope, element, attrs)->
+      scope.project = attrs.project if attrs.project
+      scope.projectVersion = attrs.projectVersion if attrs.projectVersion
+  )
+
+

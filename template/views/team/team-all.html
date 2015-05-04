@@ -2,7 +2,7 @@
     <textarea id="tmpl-team-layout">
         <div class="frame project-view team-view">
             <global-message ng-show="false"></global-message>
-            <project-header></project-header>
+            <header-global></header-global>
             <div class="container">
                 <!--左栏-->
                 <div class="master-panel">
@@ -71,9 +71,9 @@
         <div>
             <div class="menu-bar">
                 <div class="create item">
-                    <a href="/team/-1/list">
+                    <a ng-click="createTeam()" class="team">
                         <i class="icon create"></i>
-                        <span>新增</span>
+                        <span>创建团队</span>
                     </a>
                 </div>
             </div>
@@ -106,12 +106,13 @@
                                 <label class="caption">
                                     注意事项：
                                 </label>
-                                删除团队后，团队的成员关系将不复存在，请慎重操作！
+                                <span ng-show="!isEdit">请在保存后继续添加团队成员！</span>
+                                <span ng-show="isEdit">删除团队后，团队的成员关系将不复存在，请慎重操作！</span>
                             </div>
 
                             <div class="row control">
                                 <button class="primary default" ng-click="onClickSave()">保存</button>
-                                <button class="cancel default" ng-click="onClickDelete()">删除</button>
+                                <button class="delete default" ng-click="onClickDelete()" ng-show="isEdit">删除</button>
                                 <button class="cancel default" ng-click="onClickCancel()">取消</button>
                             </div>
                         </form>

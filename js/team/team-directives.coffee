@@ -33,7 +33,7 @@ define [
         if event.keyCode is 13 and $this.val() then addTeam()	
   ])
 				
-  .directive('teamSetting', ['API', 'NOTIFY', (API, NOTIFY)->
+  .directive('teamSetting', ['$location', 'API', 'NOTIFY', ($location, API, NOTIFY)->
     restrict: 'E'
     replace: true
     scope: {}
@@ -43,25 +43,28 @@ define [
       #接收事件后，加载数据并显示
       scope.$on 'team:setting:show', (event, name, id)->
         $o.modal showClose: false
+        scope.isEdit = name || id
         scope.profile = 
           teamName: name
           team_id: id
-        console.log scope.profile
       scope.$on 'team:setting:hide', ()->
         $.modal.close()
 
 
       scope.onClickCancel = ()->
-        $.modal.close()
+        scope.$emit "team:setting:hide"
 
       scope.onClickSave = ()->
         return if scope.profile.teamName is scope.title
         entity =
           name: scope.profile.teamName
-        API.team(scope.profile.team_id).update(entity).then (result)->
-          NOTIFY.success '修改成功！'
+        method = "create"
+        method = "update" if scope.isEdit
+        API.team(scope.profile.team_id)[method](entity).then (result)->
+          NOTIFY.success '保存成功！'
           scope.profile = {}
           $.modal.close()
+          $location.url("/team/#{result.id}/list?title=#{result.name}") if result.id
 
       scope.onClickDelete = ()->
         scope.$emit "team:remove" if confirm "要不要再考虑一下呢？" if confirm "你真的确定要删除该团队了吗？" if confirm "删除团队后，团队的成员关系将不复存在，请慎重操作！"

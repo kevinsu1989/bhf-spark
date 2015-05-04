@@ -169,9 +169,8 @@
         </ul>
     </textarea>
 
-    <textarea id="tmpl-project-header">
+<!--     <textarea id="tmpl-project-header">
         <header>
-            <!--项目信息-->
             <div class="overview">
                 <a href="/" class="home">
                     <i class="icon small"></i>
@@ -194,10 +193,9 @@
             <div class="logo">
                 <i class="icon"></i>
             </div>
-            <!--右边的boolbar-->
             <header-toolbar></header-toolbar>
         </header>
-    </textarea>
+    </textarea> -->
 
     <!--项目成员的下拉-->
     <textarea id="tmpl-project-member-dropdown">
@@ -291,7 +289,7 @@
     <textarea id="tmpl-project-layout">
         <div class="frame project-view">
             <global-message ng-show="false"></global-message>
-            <project-header></project-header>
+            <header-global data-project="project" data-projectVersion="{{projectVersion}}"></header-global>
             <div class="container">
                 <!--左栏-->
                 <div class="master-panel">

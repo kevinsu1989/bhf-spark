@@ -29,13 +29,13 @@ define [
       scope.onClickInvite = -> $rootScope.$broadcast 'member:invite:show'
   ])
 
-  .directive('projectHeader', ()->
-    restrict: 'E'
-    replace: true
-    template: _utils.extractTemplate '#tmpl-project-header', _tmplAll
-    link: (scope, element, attrs)->
+  # .directive('projectHeader', ()->
+  #   restrict: 'E'
+  #   replace: true
+  #   template: _utils.extractTemplate '#tmpl-project-header', _tmplAll
+  #   link: (scope, element, attrs)->
 
-  )
+  # )
 
   #项目成员的下拉列表
   .directive('projectMemberDropdown', ()->
