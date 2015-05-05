@@ -84,6 +84,9 @@ define [
       scope.onClickTeam = ()->
         $location.url("/team/0/list")
 
+      scope.onClickByUrl = (url)->
+        $location.url(url)
+
       scope.onClickLogout = ()->
         API.session().delete().then -> $location.path('/login')
   ])
