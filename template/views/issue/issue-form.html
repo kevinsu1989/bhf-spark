@@ -507,57 +507,32 @@
 
 
 <textarea id="temp-form-head">
-<form name="myForm">
-<!-- 	<mtitle>基本信息</mtitle>
-	<li class="input"> <b><i>*&nbsp;</i>标题：</b>
-		<input name="title" ng-model="entity.title" required ng-show="editable" type="text"/>
-		<span ng-show="!editable">{{entity.title}}</span>
-	</li>
-	<li class="input"> <b><i>*&nbsp;</i>申请部门：</b>
-		<select required ng-show="editable" ng-model="entity.department">
-			<option value="平台部">平台部</option>
-			<option value="平台运营部">平台运营部</option>
-			<option value="运营支撑部">运营支撑部</option>
-			<option value="芒果OTT部">芒果OTT部</option>
-			<option value="芒果MPP部">芒果MPP部</option>
-			<option value="综合事务部">综合事务部</option>
-		</select>
-
-		<input type="text" ng-show="!editable" ng-model="entity.department"/>
-
-	</li>
-	<li class="input">
-		<b><i>*&nbsp;</i>申请人：</b>
-		<input name="name" required type="text" ng-show="editable" ng-model="entity.name"/>
-		<span ng-show="!editable">{{entity.name}}</span>
-	</li> -->
-	<table class="body">
-
+	<form name="myForm">
+		<table class="body">
 </textarea>
 
 <textarea id="temp-form-foot">
-</form>
+	</form>
 </textarea>
 
 <textarea id="tmpl-issue-form-modal">
-	
-		<div class="inner issue-form">
-			<div class='title'>
-				<span>申请表单</span>
-			</div>
-			<a class="close-modal" rel="modal:close"> <i class="icon"></i>
-			</a>
-			<div class="main">
-				<div class="simple-tab" simple-tab="" data-active-index="0">
-					<issue-form data-type='{{activeIndex}}' data-issue='{{issueId}}'></issue-form>
-				</div>
-			</div>
-			<div class="right footer">
-				<button class="primary default" ng-click="onClickSubmit()">提&nbsp;&nbsp;交</button>
-
-				<button class="cancel default" ng-click="onClickCancel()">取&nbsp;&nbsp;消</button>
+	<div class="inner issue-form">
+		<div class='title'>
+			<span>申请表单</span>
+		</div>
+		<a class="close-modal" rel="modal:close"> <i class="icon"></i>
+		</a>
+		<div class="main">
+			<div class="simple-tab" simple-tab="" data-active-index="0">
+				<issue-form data-type='{{activeIndex}}' data-issue='{{issueId}}'></issue-form>
 			</div>
 		</div>
+		<div class="right footer">
+			<button class="primary default" ng-click="onClickSubmit()">提&nbsp;&nbsp;交</button>
+
+			<button class="cancel default" ng-click="onClickCancel()">取&nbsp;&nbsp;消</button>
+		</div>
+	</div>
 </textarea>
 
 </div>
