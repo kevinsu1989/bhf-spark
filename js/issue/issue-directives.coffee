@@ -233,7 +233,7 @@ define [
             scope.title=result.title
             type=scope.entity.uuid
             # 动态加载表单
-            temp =  _utils.extractTemplate ["#temp-form-head", "#tmpl-issue-form-#{type}", "#temp-form-foot","#tmpl-issue-buttons"], _templateForm
+            temp =  _utils.extractTemplate ["#temp-form-head", "#tmpl-issue-form-#{type}", "#temp-form-foot"], _templateForm
             temp = temp.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
             element.html temp
             $compile(element.contents())(scope)
@@ -280,7 +280,7 @@ define [
           return if scope.change is '-1'            
           # 处理编辑状态
           scope.editable = scope.editflag isnt '-1'
-          temp = _utils.extractTemplate ["#temp-form-head", "#tmpl-issue-form-#{index}", "#temp-form-foot", "#tmpl-issue-buttons"], _templateForm
+          temp = _utils.extractTemplate ["#temp-form-head", "#tmpl-issue-form-#{index}", "#temp-form-foot"], _templateForm
           temp = temp.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
           element.html temp
           scope.entity = {}                 

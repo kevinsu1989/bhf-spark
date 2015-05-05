@@ -10,6 +10,7 @@ define [
   ($rootScope, $scope, $stateParams, API, $state, $location)->
     #搜索issue
     searchIssue = (condition)->
+      $scope.$parent.$broadcast "project:window:change", 1
       #搜索条件
       cond =
         _.extend {
@@ -90,7 +91,6 @@ define [
 
     # $rootScope.$on 'project:loaded', (event,result)->
     #   $scope.project = result
-
     searchIssue()
   ])
 

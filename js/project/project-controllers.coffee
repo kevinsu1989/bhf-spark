@@ -61,8 +61,7 @@ define [
     $scope.$on 'dropdown:selected', (event, type, value)->
       switch type
         when 'project:version' then projectVersionSelected value
-
-
+    
 
     updateProjectMember()
     updateProjectCategory()
